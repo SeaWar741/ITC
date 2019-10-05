@@ -4,6 +4,7 @@ if(lados[0]==lados[1] and lados[1]==lados[2]):
 elif(lados[0]==lados[1] or lados[0]==lados[2] or lados[1]==lados[2]):
     print("ISOCELES")
 elif (lados[0]!=lados[1] or lados[0]!=lados[2] or lados[1]!=lados[2]):
-    print("ESCALENO")
-else:
-    print("RECTANGULO")
+    if 
+        print("RECTANGULO")
+    else:
+        print("ESCALENO")
