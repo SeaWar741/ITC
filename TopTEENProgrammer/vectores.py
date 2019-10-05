@@ -1,0 +1,5 @@
+rows = int(raw_input())
+vec1=list(map(int,raw_input().split()))
+vec2=list(map(int,raw_input().split()))
+suma = list(map(lambda x,y: x+y, vec1,vec2))
+print(' '.join(map(str, suma)))
