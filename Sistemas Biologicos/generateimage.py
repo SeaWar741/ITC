@@ -20,7 +20,7 @@ def get_data():
     train = pd.read_csv(train_data_path)
     
     #get test data
-    test_data_path ='lung_cancer_examples.csv'
+    test_data_path ='lung_cancer_test.csv'
     test = pd.read_csv(test_data_path)
     
     return train , test
@@ -136,6 +136,7 @@ checkpoint = ModelCheckpoint(checkpoint_name, monitor='val_loss', verbose = 1, s
 callbacks_list = [checkpoint]
 
 NN_model.fit(train, target, epochs=500, batch_size=32, validation_split = 0.2, callbacks=callbacks_list)
+
 
 # Load wights file of the best model :
 wights_file = 'Weights-478--18738.19831.hdf5' # choose the best checkpoint 
