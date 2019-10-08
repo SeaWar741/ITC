@@ -1,0 +1,1 @@
+userinput = list(map(int,raw_input().split()))
