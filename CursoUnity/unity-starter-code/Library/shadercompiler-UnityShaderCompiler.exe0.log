@@ -1,0 +1,131 @@
+Base path: D:/Program Files/Unity/2018.1.1f1/Editor/Data
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: preprocess
+  insize=2348 outsize=632 ok=1
+Cmd: preprocess
+  insize=3115 outsize=305 ok=1
+Cmd: preprocess
+  insize=6536 outsize=3109 ok=1
+Cmd: preprocess
+  insize=3183 outsize=321 ok=1
+Cmd: preprocessCompute
+  insize=2053 outsize=2059 ok=1
+Cmd: preprocess
+  insize=2627 outsize=295 ok=1
+Cmd: preprocess
+  insize=2691 outsize=393 ok=1
+Cmd: preprocess
+  insize=11491 outsize=934 ok=1
+Cmd: preprocess
+  insize=1521 outsize=219 ok=1
+Cmd: preprocessCompute
+  insize=1170 outsize=1176 ok=1
+Cmd: preprocessCompute
+  insize=2774 outsize=2780 ok=1
+Cmd: preprocessCompute
+  insize=10871 outsize=10881 ok=1
+Cmd: preprocess
+  insize=1181 outsize=305 ok=1
+Cmd: preprocess
+  insize=12339 outsize=531 ok=1
+Cmd: preprocess
+  insize=1802 outsize=304 ok=1
+Cmd: preprocessCompute
+  insize=4837 outsize=4845 ok=1
+Cmd: preprocess
+  insize=2476 outsize=831 ok=1
+Cmd: preprocessCompute
+  insize=3390 outsize=3396 ok=1
+Cmd: preprocess
+  insize=5962 outsize=1841 ok=1
+Cmd: preprocess
+  insize=6092 outsize=364 ok=1
+Cmd: preprocess
+  insize=597 outsize=216 ok=1
+Cmd: preprocess
+  insize=1656 outsize=351 ok=1
+Cmd: preprocessCompute
+  insize=18277 outsize=18299 ok=1
+Cmd: preprocess
+  insize=32239 outsize=1540 ok=1
+Cmd: preprocess
+  insize=3209 outsize=790 ok=1
+Cmd: preprocess
+  insize=2724 outsize=1368 ok=1
+Cmd: preprocessCompute
+  insize=5431 outsize=5435 ok=1
+Cmd: preprocess
+  insize=7323 outsize=839 ok=1
+Cmd: preprocess
+  insize=7150 outsize=398 ok=1
+Cmd: preprocess
+  insize=983 outsize=298 ok=1
+Cmd: preprocess
+  insize=6814 outsize=496 ok=1
+Cmd: preprocess
+  insize=2404 outsize=1061 ok=1
+Cmd: preprocess
+  insize=17408 outsize=14743 ok=1
+Cmd: preprocessCompute
+  insize=2861 outsize=2867 ok=1
+Cmd: preprocess
+  insize=11666 outsize=680 ok=1
+Cmd: preprocessCompute
+  insize=1800 outsize=1806 ok=1
+Cmd: preprocess
+  insize=1606 outsize=221 ok=1
+Cmd: preprocess
+  insize=5627 outsize=2667 ok=1
+Cmd: preprocess
+  insize=3571 outsize=223 ok=1
+Cmd: preprocess
+  insize=11969 outsize=996 ok=1
+Cmd: preprocess
+  insize=6257 outsize=1253 ok=1
+Cmd: preprocess
+  insize=1133 outsize=389 ok=1
+Cmd: preprocess
+  insize=3437 outsize=244 ok=1
+Cmd: preprocess
+  insize=3070 outsize=1373 ok=1
+Cmd: preprocess
+  insize=3632 outsize=364 ok=1
+Cmd: preprocessCompute
+  insize=1448 outsize=1454 ok=1
+Cmd: preprocessCompute
+  insize=2341 outsize=2343 ok=1
+Cmd: preprocessCompute
+  insize=2038 outsize=2044 ok=1
+Cmd: preprocess
+  insize=3433 outsize=1527 ok=1
+Cmd: preprocess
+  insize=2270 outsize=638 ok=1
+Cmd: preprocess
+  insize=1978 outsize=955 ok=1
+Cmd: preprocess
+  insize=4041 outsize=374 ok=1
+Cmd: preprocess
+  insize=2609 outsize=220 ok=1
+Cmd: preprocess
+  insize=1979 outsize=735 ok=1
+Cmd: preprocess
+  insize=1344 outsize=291 ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: compileSnippet
+  api=4 type=0 insize=1564 outsize=1626 kw=UNITY_PASS_FORWARDBASE DIRECTIONAL FOG_EXP2 _SPECULARHIGHLIGHTS_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=1564 outsize=4958 kw=UNITY_PASS_FORWARDBASE DIRECTIONAL FOG_EXP2 _SPECULARHIGHLIGHTS_OFF pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
+Cmd: initializeCompiler
