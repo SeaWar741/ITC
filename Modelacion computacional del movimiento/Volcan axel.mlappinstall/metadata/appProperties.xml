@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<appProperties xmlns="http://schemas.mathworks.com/matlab/app/2012/appProperties" signature="D732DDD79377879A0FF8A5F72727144992FB4351">
+
+  <entryPoint>Volcancopia2</entryPoint>
+
+  <name>Volcan axel</name>
+
+  <version>1.0</version>
+
+  <createdByMATLABRelease>(R2019b)</createdByMATLABRelease>
+
+  <GUID>4deff7a3-79ab-4c6f-9ec4-bb4de466f51f</GUID>
+
+  <supportedPlatforms/>
+
+  <requiredProducts/>
+
+  <numFiles>2</numFiles>
+
+  <created>2019-10-17T23:58:05Z</created>
+
+  <appEntries>
+    <appFile>/volcan 2.png</appFile>
+    <appFile>/Volcancopia2.mlapp</appFile>
+  </appEntries>
+
+</appProperties>

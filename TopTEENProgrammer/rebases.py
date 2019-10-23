@@ -9,4 +9,3 @@ for i in range(0, len(cars)):
             cars[j] = temp;
             counter+=1
 print(counter)
-

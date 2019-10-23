@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - ordenado",
+            "request": "launch",
+            "mainClass": "topteen.ordenado"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - SubSet_sum_problem",
+            "request": "launch",
+            "mainClass": "topteen.SubSet_sum_problem"
+        },
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

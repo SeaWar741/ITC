@@ -27,9 +27,11 @@ arr=list(map(int,raw_input().split()))
 num = [2] 
 n = len(arr) 
 m = len(num) 
-   
-if(checkArray(arr, num, n, m)): 
-    print("felizmil") 
-else: 
-    print("tristemil") 
+if 0 in arr:
+    print("tristemil")
+else:
+    if(checkArray(arr, num, n, m)): 
+        print("felizmil") 
+    else: 
+        print("tristemil") 
   
