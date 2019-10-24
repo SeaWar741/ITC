@@ -41,4 +41,4 @@ Then the data is exported as an Excel file and opened to be further examined by 
 
 
 ### Download MATLAB App
-[Download](Simulador_de_proyectiles_volcanicos/Simulador_de_proyectiles_volcanicos.mlappinstall.mlappinstall)
+[Download](Simulador_de_proyectiles_volcanicos/Simulador_de_proyectiles_volcanicos.mlappinstall)
