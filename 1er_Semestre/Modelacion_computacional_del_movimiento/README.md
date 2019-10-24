@@ -32,5 +32,13 @@ Then the data is exported as an Excel file and opened to be further examined by 
 ### Academic paper
 [Download](Reporte_Reto.pdf)
 
+### Team
+- Abraham Cepeda Oseguera
+- Alejandro Daniel González Carrillo
+- Axel Giovanni Villanueva Cuéllar
+- Hernan Salinas Ibarra
+- Juan Carlos Garfias Tovar
+
+
 ### Download MATLAB App
 [Download](Simulador_de_proyectiles_volcanicos/Simulador_de_proyectiles_volcanicos.mlappinstall.mlappinstall)
