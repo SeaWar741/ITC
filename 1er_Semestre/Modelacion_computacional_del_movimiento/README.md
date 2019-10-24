@@ -1,6 +1,6 @@
 ## Modelacion computacional del movimiento
 
-![alt text](demo_image.png)
+![alt text](https://github.com/SeaWar741/ITC/blob/master/1er_Semestre/Modelacion_computacional_del_movimiento/demo_image.PNG?raw=true)
 
 ### Challenge
 
@@ -21,7 +21,7 @@ Afterwards the program executes Euler formula to calculate the position from a g
 
 The program then calculates the max height, impact velocity and distance traveled in x axis
 <p align="center">
-<img src="demo_image2.png" width="300">
+<img src="https://github.com/SeaWar741/ITC/blob/master/1er_Semestre/Modelacion_computacional_del_movimiento/demo_image2.PNG?raw=true" width="300">
 </p>
 Then the data is exported as an Excel file and opened to be further examined by the user
 
