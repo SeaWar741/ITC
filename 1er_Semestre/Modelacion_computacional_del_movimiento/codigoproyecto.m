@@ -97,7 +97,6 @@ set(app.UITable,'Data',[])
                 ay5 =0;
             
             %CON FRICCION
-
                 %Proyectil 1 y 2
                 vx2 = vx0;
                 vy2 = vy0;
@@ -142,6 +141,10 @@ set(app.UITable,'Data',[])
                 fya6 = fy6;
                 vx6a = vx6;
                 vy6a = vy6;
+
+            
+            
+            
 
             %Inicia el ploteo y calculo de datos    
             while graphc
@@ -337,6 +340,7 @@ set(app.UITable,'Data',[])
                      AlturaMaxima3 =y6;
                  end
 
+                
                 data=get(app.UITable, 'data'); % Get data as a string
                 data(end+1,:)=[i x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 vx1 vy1 vx2 vy2 vx3 vy3 vx4 vy4 vx5 vy5 vx6 vy6]; % Add new row of 0's as a cell type
                 set(app.UITable, 'data', data);
