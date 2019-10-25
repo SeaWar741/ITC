@@ -17,4 +17,4 @@ def factors(n):
             break
 
         for factor in factors(360):
-            print factor
+            print(factor)
