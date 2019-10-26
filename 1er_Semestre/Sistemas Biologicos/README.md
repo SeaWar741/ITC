@@ -16,7 +16,7 @@ precision the tendency of a patient to
 suffer from lung cancer. This was done due to the direct and linear correlation of the variables.
 
 <p align="center">
-<img src="./heatmap.png" width="300">
+<img src="./heatmap.PNG" width="300">
 </p>
 
 
@@ -38,7 +38,7 @@ It outputs a binary result
 The dataset used for this classifier is called Lung cancer DataSet from Yusuf Dede (
 2018-12-01)</br>
 <p align="center">
-<img src="./graphs.png" width="350">
+<img src="./graphs.PNG" width="350">
 </p>
 
 It can be download with the following addition to the code:
