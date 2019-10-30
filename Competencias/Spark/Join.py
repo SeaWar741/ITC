@@ -16,4 +16,7 @@ print(df)
 monthly=df.resample('M', how='mean')
 #df.groupby(df.index.Date).mean()
 print(monthly)
+
+df['T.Media'] = df.apply(lambda row: ((row.TMAX + row.TMIN)/2), axis = 1) 
+
 df.to_csv(r'./Data_retreived.csv')
