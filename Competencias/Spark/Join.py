@@ -18,8 +18,9 @@ for filen in glob.glob("./"+'*.csv'):
     print("Replacing nan")
     df.fillna(df.mean(), inplace=True)
     print(df)
-    monthly=df.resample('M', how='mean')
-    #df.groupby(df.index.Date).mean()
+    print("Starting monthly average")
+    monthly=df.resample('M').mean()
+    #monthly =df.groupby(df.index.Date).mean()
     print(monthly)
 
     df['T.Media'] = df.apply(lambda row: ((row.TMAX + row.TMIN)/2), axis = 1) 
