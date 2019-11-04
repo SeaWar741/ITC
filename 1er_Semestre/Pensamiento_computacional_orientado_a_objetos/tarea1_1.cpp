@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cmath>
+#include <math.h>
 using namespace std;
 
 double gradosf(){
@@ -36,24 +36,26 @@ int seriearitmetica(){ //Arreglar
 
 void mediageometricaarmonica(){
     double mgeometrica,marmonica,numb;
-    int counter;
+    double counter = 0;
     bool continueop = true;
-    while (continueop){
+    mgeometrica = 1;
+    cout<<"Ingresar valores, en caso de desear salir escribir 0"<<endl;
+    while(continueop){
         cout<<"Ingresar numero: >";cin>>numb;
         if (numb !=0){
-            mgeometrica *=numb;
-            marmonica += (1/numb);
-            counter+=1;    
+            mgeometrica = mgeometrica *numb;
+            marmonica += (1.0/numb);
+            counter++;    
         }
         else{
             continueop = false;
         }
     }
-    mgeometrica = pow(mgeometrica,(1/counter));
+    mgeometrica = pow(mgeometrica,(double)(1.0/counter));
     marmonica = counter/marmonica;
-    cout<<"El resultado de la media geometrica es: >";
+    cout<<"\nEl resultado de la media geometrica es: > ";
     cout<<mgeometrica<<endl;
-    cout<<"El resultado de la media armonica es: >";
+    cout<<"El resultado de la media armonica es: > ";
     cout<<marmonica<<endl;
 }
 
@@ -82,6 +84,7 @@ int main(){
             cout<< seriearitmetica()<<endl;
             break;
         case 'c':
+            mediageometricaarmonica();
             break;
         case 'd':
             break;
