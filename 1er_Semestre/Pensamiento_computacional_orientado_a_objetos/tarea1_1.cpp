@@ -3,34 +3,44 @@
 #include <math.h>
 using namespace std;
 
-double gradosf(){
-    double gradosc,gradosf;
+void gradosf(){
+    double gradosc,gradosf,increment;
+    int conversions;
     bool continueask = true;
-    while (continueask == true){
-        cout<< "Ingresar temperatura en grados C: ";cin>>gradosc;
-        if (gradosc>=0){
-            gradosf = ((9.0/5.0)*gradosc)+32;
+    while(continueask){
+        cout<<"Ingresar temperatura inicial en grados C: ";cin>>gradosc;
+        cout<<"Ingresar numero de conversiones: ";cin>>conversions;
+        cout<<"Ingresar el valor del incremento: ";cin>>increment;
+        if (gradosc>=0 && conversions >0 && conversions <10000 && increment>=2 && increment<=10){
             continueask = false;
         }
         else{
-            cout<<"No se pudo convertir\nIngresar otro valor"<<endl;
+            cout<<"Valores no validos"<<endl;
         }
     }
-    return gradosf;
+    cout<<"\nConversion de grados Celsius a Farenheit"<<endl;
+    for (int i = 0; i < conversions; i++){
+        gradosf = ((9.0/5.0)*gradosc)+32;  
+        cout<<"FARENHEIT        CELSIUS"<<endl;
+        cout<<gradosf;
+        cout.width(17);cout<<gradosc<<endl;
+        gradosc+=increment;
+    }
+
 }
 
-int seriearitmetica(){ //Arreglar
+int seriearitmetica(){
     int a,d,n,numb,sum;
     a = 1;
     d = 3;
     n = 25;
     numb = a;
     for(int i=0;i<n;i++){
-        cout<< numb << " ";
-        numb +=d;
-        sum +=numb;
+        numb = 3*i+a;
+        cout<< "Termino "<< i+1 <<": "<<numb<<endl;
     }
-    cout<<"\nEl termino i es: > ";  
+    sum = ((a+numb)/2)*n;
+    cout<<"\nValor total de la serie: > ";  
     return sum;
 }
 
@@ -60,36 +70,40 @@ void mediageometricaarmonica(){
 }
 
 void menu(){
-    cout<< "-*-*-*-*-*-*-*-*-*-*=Menu=*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+    cout<< "\n-*-*-*-*-*-*-*-*-*-*=Menu=*-*-*-*-*-*-*-*-*-*-*-"<<endl;
     cout<< "Selecciona una opcion:"<<endl;
     cout<< "a) Conversion Celsius Farenheit"<<endl;
     cout<< "b) Serie numerica"<<endl;
-    cout<< "c) Medias geometrica armonica"<<endl;
+    cout<< "c) Media geometrica y armonica"<<endl;
     cout<< "d) Cerrar programa\n"<<endl;
 }
 
 int main(){
     char option;
+    bool continuem = true;
     cout<<"Bienvenid@ a la tarea de estatutos condicionales"<<endl;
-    menu();
-    cout<<"> ";cin>>option;
-    option = tolower(option);
-
-    switch (option){
-        case 'a':
-            cout<< "La temperatura en grados F es: >";
-            cout<< gradosf()<<endl;
-            break;
-        case 'b':
-            cout<< seriearitmetica()<<endl;
-            break;
-        case 'c':
-            mediageometricaarmonica();
-            break;
-        case 'd':
-            break;
-        default:
-            break;
-    }    
+    while(continuem){
+        menu();
+        cout<<"> ";cin>>option;
+        option = tolower(option);
+        switch (option){
+            case 'a':
+                gradosf();
+                break;
+            case 'b':
+                cout<< seriearitmetica()<<endl;
+                break;
+            case 'c':
+                mediageometricaarmonica();
+                break;
+            case 'd':
+                cout<<"\nGracias por utilizar la herramienta!"<<endl;
+                continuem = false;
+                break;
+            default:
+                cout<<"\nNo es una opcion valida, intenta de nuevo\n"<<endl;
+                break;
+        }    
+    }
     return 0;
 }
