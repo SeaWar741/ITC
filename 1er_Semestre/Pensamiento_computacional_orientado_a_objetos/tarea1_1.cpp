@@ -19,9 +19,9 @@ void gradosf(){
         }
     }
     cout<<"\nConversion de grados Celsius a Farenheit"<<endl;
+    cout<<"FARENHEIT        CELSIUS"<<endl;
     for (int i = 0; i < conversions; i++){
         gradosf = ((9.0/5.0)*gradosc)+32;  
-        cout<<"FARENHEIT        CELSIUS"<<endl;
         cout<<gradosf;
         cout.width(17);cout<<gradosc<<endl;
         gradosc+=increment;
