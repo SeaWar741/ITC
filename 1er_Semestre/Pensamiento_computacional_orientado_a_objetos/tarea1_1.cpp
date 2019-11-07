@@ -44,7 +44,6 @@ void Gradosf(){
     }
 
 }
-
 //Nombre: Seriearitmetica
 //Descripcion: Metodo para obtener la serie aritmetica a partir de el valor inicial(1),diferencia entre valores(3) y posicion/numero(25) 
 //Entrada:
