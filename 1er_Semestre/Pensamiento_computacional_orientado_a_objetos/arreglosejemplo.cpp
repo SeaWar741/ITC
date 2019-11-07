@@ -38,6 +38,8 @@ int menu(){
     "\n15. Inversa"<<
 	"\n16. Despliega"<<
 	"\n17. Leer" <<
+    "\n18. Despliega A"<<
+    "\n19. Despliega Guisados"<<
     "\n0. Salir"<<
     "\nTeclea la opcion:";
     cin >> iOp;
@@ -122,7 +124,9 @@ void inicializaRandom(int iArrA[], int iS){
     srand(time(NULL));
 }
 void despliegaArreglo(string sArrA[], int iSize){
-
+    for (int iR = 0; iR < iSize; iR++){
+        cout << "iArr[" << iR << "]=" << sArrA[iR] << endl;
+    }
 }
 //Aqui se ve que el paso de parametro del arreglo
 //es por Referencia
@@ -467,10 +471,14 @@ int main(){
 				cout<<"😊 Arreglo A 🤗\n";
                 despliega(iArrA, 10);
 				break; 
+            case 19:
+                cout<<"Arreglo de strings 🐍"<<endl;
+                despliegaArreglo(sArrGuisados,15);
+                break;
             default:
                 break;
         }
     }while (iOpcion!= 0);
-    
+
     return 0;
 }
