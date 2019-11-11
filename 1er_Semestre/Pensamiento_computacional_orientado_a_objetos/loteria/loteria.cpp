@@ -18,13 +18,13 @@ using namespace std;
 //          array de dimension n
 //Salida:
 //          imprime n numero de elementos
-void PrintA(int arry[]){ //formato estilo array to string
-    cout<<"[";
-    for (int i=0; i<54; i++) {
+void PrintA(int arry[]){ 
+    cout<<"["; //imprime corchetes entre todos los elementos
+    for (int i=0; i<54; i++) {//formato estilo array to string
         if(i != 53){
             cout<<arry[i]<<",";
         }
-        else{
+        else{ //si el elemento es el ultimo omite la coma
             cout<<arry[i];
         }
     }
@@ -38,12 +38,12 @@ void PrintA(int arry[]){ //formato estilo array to string
 //Salida:
 //          imprime n numero de elementos
 void PrintA(string arry[]){
-    cout<<"[";
+    cout<<"[";//imprime corchetes entre todos los elementos
     for (int i=0; i<54; i++) { //formato estilo array to string
         if(i != 53){
             cout<<arry[i]<<",";
         }
-        else{
+        else{//si el elemento es el ultimo omite la coma
             cout<<arry[i];
         }
     }
@@ -83,20 +83,20 @@ void Openimage(string name){
     name = name.substr(1, name.size() - 2);
     string str = "\"./loteria_img/"+name+".jpg\"";
     const char *cstr = str.c_str(); //se convierte a un char para ser utilizado por CMD
-    system(cstr);
+    system(cstr); //ejecuta el comando de sistema
 }
 
 int main(){
     int card[54]; //se inicializa un array de 54 elementos para las cartas
-    string carta,jugar,jugar2;
-    bool continueg = false;
+    string carta,jugar,jugar2; //variables para nombre de carta, input de continuacion 1 e input de continuacion 2
+    bool continueg = false; //variable controladora del loop 
     string nombres_cartas[] = {"'El gallo'", "'El diablito'", "'La dama'", "'El catrin'", "'El paraguas'", "'La sirena'", "'La escalera'", "'La botella'", "'El barril'", "'El arbol'", "'El melon'", "'El valiente'", "'El gorrito'",
     "'La muerte'", "'La pera'", "'La bandera'", "'El bandolon'", "'El violoncello'", "'La garza'", 
     "'El pajaro'", "'La mano'", "'La bota'", "'La luna'", "'El cotorro'", "'El borracho'", "'El negrito'",
     "'El corazon'", "'La sandia'", "'El tambor'", "'El camaron'", "'Las jaras'", "'El musico'", "'La arana'", "'El soldado'", "'La estrella'", "'El cazo'", "'El mundo'", "'El apache'", "'El nopal'",
     "'El alacran'", "'La rosa'", "'La calavera'", "'La campana'", "'El cantarito'", "'El venado'", "'El sol'", "'La corona'", "'La chalupa'", "'El pino'", "'El pescado'", "'La palma'", "'La maceta'",
     "'El arpa'", "'La rana'"};
-    cout<<"-*-*-*-*-*-*-*-*-*-*-*-=Bienvenid@ a loteria=-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+    cout<<"\n-*-*-*-*-*-*-*-*-*-*-*-=Bienvenid@ a loteria=-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
     cout<<"Las cartas:"<<endl;
     PrintA(nombres_cartas);
     cout<<"\nQuieres jugar? (si/no) >";cin>>jugar;cout<<endl;
