@@ -135,7 +135,6 @@ int main(){
             PrintA(card);
             cout<<"\n";   
         }
-        
     }
     cout<<"\nHasta luego!"<<endl; //se imprime una despedida y termina el programa
     return 0;
