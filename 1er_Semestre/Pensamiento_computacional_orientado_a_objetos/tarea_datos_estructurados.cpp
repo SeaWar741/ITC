@@ -15,8 +15,19 @@
 #include <sstream>
 using namespace std;
 
-const int N = 10; //
+const int N = 10;
 const int M = 8;
+
+void despliegaMatriz(int arry[][M]){
+    cout<<endl;
+    for (int i = 0; i < M; i++){
+        for (int j = 0; j < N; j++){
+            cout<<arry[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+    cout<<endl;
+}
 
 void llenaConArchivo(int arry[][M],string txt){
     cout<<endl;
@@ -35,7 +46,6 @@ void llenaConArchivo(int arry[][M],string txt){
         int readn[80] ={0};
         while (std::getline(inFile, str) && ncounter <=80) {
             std::istringstream iss (str);
-            cout<<number<<endl;
             iss >> number;
             readn[ncounter] = number;
             ncounter++;
@@ -75,6 +85,18 @@ void sumaMatrices(int arry[][M], int arry2[][M],int sum[][M]){
             sum[i][j] = arry[i][j] + arry2[i][j];
         }
     }
+    fstream myfile;
+    myfile.open("salida.txt",fstream::app);
+    for (int i=0; i< M;i++){        
+        for (int j=0; j<N;j++){                      
+            myfile << sum[i][j] <<"\t";
+        }
+        myfile<<std::endl;
+    }
+    myfile.close();
+    cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+    cout<<"Se guardo la suma en salida.txt exitosamente"<<endl;
+    cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
 }
 
 void despliegaDiagonal(int arry[][M]){
@@ -115,28 +137,25 @@ void intercambioaRenglonColumna(int arry[][M]){
     }
 }
 
-void despliegaMatriz(int arry[][M]){
-    cout<<endl;
-    for (int i = 0; i < M; i++){
-        for (int j = 0; j < N; j++){
-            cout<<arry[i][j]<<" ";
-        }
-        cout<<endl;
-    }
-    cout<<endl;
-}
-
 char selection(){
     char selection;
-    cout<<"Ingresar letra de matriz(a/b): >";cin>>selection;
+    cout<<"Ingresar letra de matriz(a/b/c): >";cin>>selection;
     selection = tolower(selection);
     cout<<endl;
     return selection;
 }
 
+void copyMatrix(int arry[][M], int arry2[][M]){ 
+    for (int i = 0; i < M; i++){
+        for (int j = 0; j < N; j++){
+            arry[i][j]=arry2[i][j];
+        }
+    }
+}
+
 int main(){
     int matrizA[N][M] ={0},matrizB[N][M]={0},matrizC[N][M]={0},sum[N][M]={0};
-    char option;
+    char option,keep,matrixsave,suboption,matrixa,matrixb;
     string txt;
     bool continueg = true;
     cout<<endl;
@@ -150,61 +169,127 @@ int main(){
         cout<<"f) Salir"<<endl;
         cout<<endl;
         cout<<"Matrices:"<<endl;
-        cout<<"Matriz A:"<<endl;
+        cout<<"Matriz A:";
         despliegaMatriz(matrizA);
-        cout<<"Matriz B:"<<endl;
+        cout<<"Matriz B:";
         despliegaMatriz(matrizB);
+        cout<<"Matriz C:";
+        despliegaMatriz(matrizC);
         cout<<endl;
         cout<<"Ingresa una opcion del menu: >";cin>>option;
         switch (option){
             case 'a':
                 cout<<"\nIngresa el nombre del archivo: >";cin>>txt;
                 cout<<endl;
-                if(selection() == 'a'){
+                suboption = selection();
+                if(suboption == 'a'){
                     llenaConArchivo(matrizA,txt);
                 }
-                else{
+                else if(suboption == 'b'){
                     llenaConArchivo(matrizB,txt);
                 }
+                else{
+                    llenaConArchivo(matrizC,txt);
+                }
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             case 'b':
-                if(selection() == 'a'){
+                suboption = selection();
+                if(suboption == 'a'){
                     llenaConAleatorios(matrizA);
                 }
-                else{
+                else if(suboption == 'b'){
                     llenaConAleatorios(matrizB);
                 }
+                else{
+                    llenaConAleatorios(matrizC);
+                }
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             case 'c':
-                sumaMatrices(matrizA,matrizB,sum);
+                matrixa=selection();
+                matrixb=selection();
+                if(matrixa == 'a' &&matrixb=='b'|| matrixa == 'b' &&matrixb=='a'){
+                    sumaMatrices(matrizA,matrizB,sum);
+                }
+                else if(matrixa == 'a' &&matrixb=='c'||matrixa == 'c' &&matrixb=='a'){
+                    sumaMatrices(matrizA,matrizC,sum);
+                }
+                else if(matrixa == 'b' &&matrixb=='c'||matrixa == 'c' &&matrixb=='b'){
+                    sumaMatrices(matrizB,matrizC,sum);
+                }
+                else if(matrixa == 'a' && matrixb=='a'){
+                    sumaMatrices(matrizA,matrizA,sum);
+                }
+                else if(matrixa == 'b' && matrixb=='b'){
+                    sumaMatrices(matrizB,matrizB,sum);
+                }
+                else if(matrixa == 'c' && matrixb=='c'){
+                    sumaMatrices(matrizC,matrizC,sum);
+                }
+                else{
+                    cout<<"No se selecciono una combinacion valida, sumando matriz A con matriz B"<<endl;
+                    sumaMatrices(matrizA,matrizB,sum);
+                }
+
                 cout<<"\nLa suma de las matrices es:"<<endl;
                 despliegaMatriz(sum);
+                cout<<"Desea guardar la matriz en otra? (s/n): >";cin>>keep;cout<<endl;
+                if(tolower(keep)=='s'){
+                    matrixsave = selection();
+                    switch (matrixsave){
+                    case 'a':
+                        copyMatrix(matrizA,sum);
+                        break;
+                    case 'b':
+                        copyMatrix(matrizB,sum);
+                        break;
+                    case 'c':
+                        copyMatrix(matrizC,sum);
+                        break;
+                    default:
+                        copyMatrix(matrizA,sum);
+                        cout<<"Se guardo en la matriz a\n";
+                    }
+                }
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             case 'd':
                 cout<<endl;
-                if(selection() == 'a'){
+                suboption = selection();
+                if(suboption == 'a'){
                     despliegaDiagonal(matrizA);
                 }
-                else{
+                else if(suboption =='b'){
                     despliegaDiagonal(matrizB);
                 }
+                else{
+                    despliegaDiagonal(matrizC);
+                }
                 cout<<endl;
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             case 'e':
-                if(selection() == 'a'){
+                suboption = selection();
+                if(suboption == 'a'){
                     intercambioaRenglonColumna(matrizA);
                 }
-                else{
+                else if(suboption=='b'){
                     intercambioaRenglonColumna(matrizB);
                 }
+                else{
+                    intercambioaRenglonColumna(matrizC);
+                }
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             case 'f':
                 continueg = false;
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
             default:
                 cout<<"\nOpcion no valida, intentar de nuevo"<<endl;
+                cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
                 break;
-            cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
         }
     }
     cout<<"\nHasta luego!\n";
