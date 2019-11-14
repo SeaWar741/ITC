@@ -92,23 +92,27 @@ void despliegaDiagonal(int arry[][M]){
 }
 
 void intercambioaRenglonColumna(int arry[][M]){
-    /*Solicita al usuario el valor de un renglón i y de una
-    columna j. Valida que ambos valores estén dentro del rango válido para la matriz. Si no
-    lo están, despliega en pantalla el mensaje de "renglón o columna fuera de rango" según
-    sea el caso. Si los valores son correctos, realiza el intercambio de los valores de las
-    celdas, es decir, intercambia los datos del i-ésimo renglón con los datos de la j-ésima
-    columna. Este método no muestra la matriz resultante. */
-    int row,col;
-    int rowd[M],cold[M];
+    int row,col,rowd,cold;
     cout<<"\nIngresa el numero de renglon: >";cin>>row;cout<<endl;
     cout<<"\nIngresa el numero de columna: >";cin>>col;cout<<endl;
-    for(int i=0; i<M;i++){
-        rowd[i] = arry[row][i];
-        cout<<rowd[i];
-        cold[i] = arry[i][col];
-        cout<<cold[i];
+    if(row<=M&&col<=N && row>=1&&col>=1){
+        for(int i=0; i<M;i++){
+            rowd = arry[row-1][i];
+            cold = arry[i][col-1];
+            
+            arry[row-1][i]=cold;
+            arry[i][col-1]=rowd;
+        }
+        cout<<"\nSe realizo el intercambio!"<<endl;
     }
-    
+    else{
+        if(row>M||row<1){
+            cout<<"Renglon fuera de rango\n";
+        }
+        if(col>N||col<1){
+            cout<<"Columna fuera de rango\n";
+        }
+    }
 }
 
 void despliegaMatriz(int arry[][M]){
