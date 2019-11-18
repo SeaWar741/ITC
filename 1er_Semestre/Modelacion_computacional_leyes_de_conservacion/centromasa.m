@@ -1,4 +1,4 @@
-clc
+tivclc
 close all
 clear all
 A = rgb2gray(imread('./car.jpg'));  %para este caso, poner fondo blanco en la imagen
