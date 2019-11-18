@@ -15,7 +15,7 @@ public:
     int getHora();
     int getMin();
 
-    void muestra();
+    void desplegar();
     void incrementaMinutos();
 };
 
@@ -52,10 +52,22 @@ int RelojD::getMin(){
     return iMin;
 }
 
-void RelojD::muestra(){
-    cout<<iHr<<":"<<iMin<<endl;
+void RelojD::desplegar(){
+    cout<<iHr<<":"<<iMin<<"\n"<<endl;
 }
 void RelojD::incrementaMinutos(){
-    
+    if(iMin==59){
+        if(iHr ==23){
+            iHr =0;
+            iMin=0;
+        }
+        else{
+            iHr++;
+            iMin =0;
+        }
+    }
+    else{
+        iMin++;
+    }
 }
 
