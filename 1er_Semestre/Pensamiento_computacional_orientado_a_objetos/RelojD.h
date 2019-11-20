@@ -7,10 +7,10 @@ private:
     int iHr,iMin;
 public:
     RelojD();
-    RelojD(int iHr,int iMin);
+    RelojD(int iHri,int iMini);
 
-    void setHora(int iHr);
-    void setMin(int iMin);
+    void setHora(int iHri);
+    void setMin(int iMini);
     
     int getHora();
     int getMin();
@@ -53,7 +53,21 @@ int RelojD::getMin(){
 }
 
 void RelojD::desplegar(){
-    cout<<iHr<<":"<<iMin<<"\n"<<endl;
+    string hour,minute;
+    stringstream ss;
+    if(iHr<10){
+        hour = "0"+to_string(iHr);
+    }
+    else{
+        hour = to_string(iHr);
+    }
+    if(iMin<10){
+        minute = "0"+to_string(iMin);
+    }
+    else{
+        minute = to_string(iMin);
+    }
+    cout<<hour<<":"<<minute<<"\n"<<endl;
 }
 void RelojD::incrementaMinutos(){
     if(iMin==59){
