@@ -39,7 +39,9 @@ for i=100:1:2800
     p = ((fxl)^(2/3)) / (diff(fxd));
     psub = subs(p,x,i);
     rval(1,i) = psub;
-    %%fprintf("Radio: %.6f\n",psub);
+    if(psub<=150&&psub>=0)
+        fprintf("Radio: %.6f\n",psub);
+    end
     %fprintf("El radio de curvatura es: \n");
 end
-disp(rval);
+%disp(rval);
