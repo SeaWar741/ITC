@@ -3,12 +3,14 @@ syms a0 a1 a2 a3 x
 %%obtener funcion
 x1=100;
 x2=2800;
-x3=967;
-x4=1933.33333;
-
 y1=500;
 y2=200;
-y3=0;
+
+%x3=967;
+x3=1000;
+y3=-500;
+%x4=1933.33333;
+x4=2000;
 y4=1000;
 
 eq1= a3*x1^3+a2*x1^2+a1*x1+a0==y1;
@@ -22,7 +24,7 @@ v2=double(sol.a1);
 v3=double(sol.a2);
 v4=double(sol.a3);
 %%
-%%radio de curvatura
+%%longitud de curvatura
 
 fx=v4*x^3+v3*x^2+v2*x+v1;
 fxd=diff(fx);
@@ -39,9 +41,10 @@ for i=100:1:2800
     p = ((fxl)^(2/3)) / (diff(fxd));
     psub = subs(p,x,i);
     rval(1,i) = psub;
-    if(psub<=150&&psub>=0)
+    if(psub<=270&&psub>=0)
         fprintf("Radio: %.6f\n",psub);
     end
     %fprintf("El radio de curvatura es: \n");
 end
+
 %disp(rval);
