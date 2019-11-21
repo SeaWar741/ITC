@@ -54,7 +54,6 @@ int RelojD::getMin(){
 
 void RelojD::desplegar(){
     string hour,minute;
-    stringstream ss;
     if(iHr<10){
         hour = "0"+to_string(iHr);
     }
@@ -67,7 +66,7 @@ void RelojD::desplegar(){
     else{
         minute = to_string(iMin);
     }
-    cout<<hour<<":"<<minute<<"\n"<<endl;
+    cout<<"\n"<<hour<<":"<<minute<<"\n"<<endl;
 }
 void RelojD::incrementaMinutos(){
     if(iMin==59){

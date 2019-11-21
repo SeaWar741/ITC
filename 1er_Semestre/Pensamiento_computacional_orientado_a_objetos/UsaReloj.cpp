@@ -11,7 +11,8 @@ void menu(){
     cout<<"5)getMinutos"<<endl;
     cout<<"6)incrementaMinutos"<<endl;
     cout<<"7)desplegar"<<endl;
-    cout<<"8)salir\n"<<endl;
+    cout<<"8)salir"<<endl;
+    cout<<"9)incrementar\n"<<endl;
 }
 
 int main(){
@@ -19,51 +20,57 @@ int main(){
     bool continueg = true;
     string separator = "-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-";
     cout<<"-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-=Bienvenid@ al Reloj=-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-"<<endl;
+    //RelojD RelojD;
     RelojD RelojD;
     while (continueg){    
         menu();
         cout<<"Ingresa una opcion del menu: >";cin>>selection;
-        switch (selection){
-            case 1:
-                cout<<"\nSe creo el objeto con exito!"<<endl;
-                cout<<separator<<endl;
-                break;
-            case 2:
-                cout<<"\nIngresa la hora: >";cin>>hour;
-                RelojD.setHora(hour);
-                cout<<separator<<endl;
-                break;
-            case 3:
+        if(selection==1){
+            class RelojD RelojD1;
+            cout<<"\nSe creo el objeto con exito!"<<endl;
+            cout<<separator<<endl;
+        }
+        else if(selection ==2){
+            cout<<"\nIngresa la hora: >";cin>>hour;
+            RelojD.setHora(hour);
+            cout<<separator<<endl;
+        }
+        else if(selection ==3){
                 cout<<"\nIngresa los minutos: >";cin>>min;
                 RelojD.setMin(min);
                 cout<<separator<<endl;
-                break;
-            case 4:
+        }
+        else if(selection ==4){
                 cout<<"\nLa hora es: "<<RelojD.getHora()<<endl;
                 cout<<separator<<endl;
-                break;
-            case 5:
+        }
+        else if(selection ==5){
                 cout<<"\nLos minutos son: "<<RelojD.getMin()<<endl;
                 cout<<separator<<endl;
-                break;
-            case 6:
+        }
+        else if(selection ==6){
                 RelojD.incrementaMinutos();
                 cout<<"\nSe ha incrementado la hora en un minuto exitosamente!"<<endl;
                 cout<<separator<<endl;
-                break;
-            case 7:
+        }
+        else if(selection ==7){
                 RelojD.desplegar();
                 cout<<separator<<endl;
-                break;
-            case 8:
+        }
+        else if(selection ==8){
                 continueg = false;
                 cout<<separator<<endl;
                 cout<<"\nHasta luego!"<<endl;
-                break;
-            default:
-                cout<<"\nOpcion no valida, volver a intentar"<<endl;
-                cout<<separator<<endl;
-                break;
+        }
+        else if(selection ==9){
+            for (int iK = 0; iK <= 1000; iK++){
+                RelojD.desplegar();
+                RelojD.incrementaMinutos();
+            }
+        }
+        else{
+            cout<<"\nOpcion no valida, volver a intentar"<<endl;
+            cout<<separator<<endl;
         }
     }
     return 0;
