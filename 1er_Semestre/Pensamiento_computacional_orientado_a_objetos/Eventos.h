@@ -58,5 +58,9 @@ string Eventos::getAsunto(){
     return sAsunto;
 }
 void Eventos::print(){
+    cout<<"Hora:";
     hr.desplegar();
+    cout<<" Duracion:";
+    cout<<to_string(iDuracionMin);
+    cout<<" Asunto:"+sAsunto;
 }
