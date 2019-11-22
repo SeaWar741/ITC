@@ -23,8 +23,8 @@ void menu(){
     cout<<"5)getMinutos"<<endl;
     cout<<"6)incrementaMinutos"<<endl;
     cout<<"7)desplegar"<<endl;
-    cout<<"8)salir"<<endl;
-    cout<<"9)incrementar\n"<<endl;
+    cout<<"8)salir\n"<<endl;
+    
 }
 
 int main(){
