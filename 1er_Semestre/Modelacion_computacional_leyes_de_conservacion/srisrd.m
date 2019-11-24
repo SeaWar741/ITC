@@ -1,6 +1,7 @@
 syms x
 
 fun = exp(-x.^2).*log(x).^2;%Funcion
+
 inf=1;%Valor Inferior (A)
 sup=20;%Valor Superior (B)
 n=50;%Numero de trapecios
@@ -12,7 +13,7 @@ q= int(fun,x,[inf,sup]);
 fprintf("Integral: %0.4f\n\n",q);
 
 %integral/area trapecios
-qtrap = trapecio(ecuacion,inf,sup,n);
+qtrap = trapecio(fun,inf,sup,n);
 fprintf("Integral trapecios: %0.4f\n\n",qtrap);
 
 %integral/area rieman izquierda
@@ -79,8 +80,8 @@ function [res]=srm(fun,sup,nr,inf,dx)%%Checar esta formula
     syms x
     res=0;
     for i=1:dx:nr
-        valx=inf+((sup-inf)/nr)*i;
-        res = res+(subs(fun,{x},valx/2)*dx);
+        valx=inf+((sup-inf)/nr)*i/2;
+        res = res+(subs(fun,{x},valx)*dx);
     end
 end
 
