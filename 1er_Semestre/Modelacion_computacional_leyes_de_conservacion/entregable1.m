@@ -12,11 +12,11 @@ eq1= a3*x1^3+a2*x1^2+a1*x1+a0==y1;
 eq2= a3*x2^3+a2*x2^2+a1*x2+a0==y2;
 
 %Editables
-x3=1000;
-y3=0;
+x3=2600;
+y3=2000;
 
-x4=2000;
-y4=1500;
+x4=1000;
+y4=700;
 
 eq3= a3*x3^3+a2*x3^2+a1*x3+a0==y3;
 eq4= a3*x4^3+a2*x4^2+a1*x4+a0==y4;
@@ -162,10 +162,19 @@ plot(xgrada1_i,ygrada1_f,'o','color',[.79 .5 .181]);
 hold on
 plot(xgrada1_f,ygrada1_f,'o','color',[.79 .5 .181]);
 hold on
+plot(xgrada1_i,ygrada1_f-20,'o','color',[.79 .5 .181]);
+hold on
+plot(xgrada1_f,ygrada1_f-20,'o','color',[.79 .5 .181]);
+hold on
 %gradas 2
 plot(xgrada2_i,ygrada2_f,'o','color',[.79 .5 .181]);
 hold on
 plot(xgrada2_f,ygrada2_f,'o','color',[.79 .5 .181]);
+hold on
+plot(xgrada2_i,ygrada2_f+20,'o','color',[.79 .5 .181]);
+hold on
+plot(xgrada2_f,ygrada2_f+20,'o','color',[.79 .5 .181]);
+
 %plot(xlim, ygrada2_f*[xgrada2_i xgrada2_f]);
 hold on
 
