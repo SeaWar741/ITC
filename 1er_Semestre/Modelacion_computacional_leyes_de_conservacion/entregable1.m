@@ -143,8 +143,8 @@ fder = diff(fx);
 fder = simplify(fder);
 crit_p = solve(fder);
 %Puntos de inflexion
+fder = diff(diff(fx));
 inflec_pt = solve(fder,'MaxDegree',3);
-double(inflec_pt)
 idx = imag(double(inflec_pt)) == 0;
 inflec_pt = inflec_pt(idx);
 
@@ -169,9 +169,10 @@ plot(double(crit_p), double(subs(fx,crit_p)),'rx');
 hold on
 
 %Punto inflexion
-plot(double(inflec_pt), double(subs(fx,inflec_pt)),'rx')
+plot(double(inflec_pt), double(subs(fx,inflec_pt)),'bx');
     %text(-7,1,'Punto infexion')
 hold on
+
 
 %tangente punto minimo1 radio
 fplot(y2t,[x1 x2], '--','color',[.32 .133 .9]);
@@ -179,7 +180,6 @@ hold on
 %tangente punto minimo2 radio
 fplot(y2t_2,[x1 x2], '--','color',[.32 .133 .9]);
 hold on
-
 
 
 %%gradas1
