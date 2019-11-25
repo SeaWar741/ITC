@@ -12,11 +12,11 @@ eq1= a3*x1^3+a2*x1^2+a1*x1+a0==y1;
 eq2= a3*x2^3+a2*x2^2+a1*x2+a0==y2;
 
 %Editables
-x3=711.834;
-y3=1959.914;
+x3=1000;
+y3=0;
 
-x4=2250.763;
-y4=2140.823;
+x4=2000;
+y4=1500;
 
 eq3= a3*x3^3+a2*x3^2+a1*x3+a0==y3;
 eq4= a3*x4^3+a2*x4^2+a1*x4+a0==y4;
@@ -93,12 +93,12 @@ y2t = y2f;
 fprintf("La funcion es: y=");
 disp(y2t);
 if(m>0)
-    f1 = sqrt( (x-puntox)^2 + (y-puntoy) )==20;
+    f1 =-20;
 else
-    f1 = sqrt( (x-puntox)^2 + (y-puntoy) )==-20;
+    f1 =20;
 end
-x2f= puntox+20*sqrt(1/(1+m^2));
-y2f= puntoy+m*20*sqrt(1/(1+m^2));
+x2f= puntox+f1*sqrt(1/(1+m^2));
+y2f= puntoy+m*f1*sqrt(1/(1+m^2));
 fprintf("Puntos: (%.9f,%.9f)\n",x2f,y2f);
 %%Tangente y punto medio de la grada2
 y_2=fx;
@@ -113,12 +113,12 @@ y2t_2 = y2f_2;
 fprintf("La funcion es: y=");
 disp(y2t_2);
 if(m_2>0)
-    f1_2 = sqrt( (x-puntox_2)^2 + (y-puntoy_2) )==20;
+    f1_2 =20;
 else
-    f1_2 = sqrt( (x-puntox_2)^2 + (y-puntoy_2) )==-20;
+    f1_2 =-20;
 end
-x2f_2= puntox_2+20*sqrt(1/(1+m_2^2));
-y2f_2= puntoy_2+m_2*20*sqrt(1/(1+m_2^2));
+x2f_2= puntox_2+f1_2*sqrt(1/(1+m_2^2));
+y2f_2= puntoy_2+m_2*f1_2*sqrt(1/(1+m_2^2));
 fprintf("Puntos: (%.9f,%.9f)\n",x2f_2,y2f_2);
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 %obtener puntos de la barrera1
@@ -142,47 +142,46 @@ fprintf("Coordenadas barrera2: (%.9f,%.9f),(%.9f,%.9f)\n",xgrada2_i,ygrada2_i,xg
 %Plot graph
 
 %punto inicial
-plot(x1,y1,'x');
+plot(x1,y1,'or');
 hold on
 %punto final
-plot(x2,y2,'x');
+plot(x2,y2,'ob');
 hold on
 %funcion general
-fplot(fx,[x1,x2]);
+fplot(fx,[x1,x2],'color',[0 0 0]);
 hold on
 %tangente punto minimo1
-fplot(y2t,[x1 x2],  '--r')
+fplot(y2t,[x1 x2], '--','color',[.32 .133 .9]);
 hold on
 %tangente punto minimo2
-fplot(y2t_2,[x1 x2],  '--r')
+fplot(y2t_2,[x1 x2], '--','color',[.32 .133 .9]);
 hold on
 
 %%gradas1
-plot(xgrada1_i,ygrada1_f,'o');
+plot(xgrada1_i,ygrada1_f,'o','color',[.79 .5 .181]);
 hold on
-plot(xgrada1_f,ygrada1_f,'o');
-%plot(xlim, ygrada1_f*[xgrada1_i xgrada1_f]);
+plot(xgrada1_f,ygrada1_f,'o','color',[.79 .5 .181]);
 hold on
 %gradas 2
-plot(xgrada2_i,ygrada2_f,'o');
+plot(xgrada2_i,ygrada2_f,'o','color',[.79 .5 .181]);
 hold on
-plot(xgrada2_f,ygrada2_f,'o');
+plot(xgrada2_f,ygrada2_f,'o','color',[.79 .5 .181]);
 %plot(xlim, ygrada2_f*[xgrada2_i xgrada2_f]);
 hold on
 
 %punto1 radio<=100
-plot(puntox, puntoy, 'o');
+plot(puntox, puntoy, 'or');
 hold on
 
 %punto2 radio<=100
-plot(puntox_2, puntoy_2, 'o');
+plot(puntox_2, puntoy_2, 'or');
 hold on
 
 %punto1 gradas
-plot(x2f, y2f, 'o');
+plot(x2f, y2f, 'o', 'color',[.79 .5 .181]);
 hold on
 
 %punto2 gradas
-plot(x2f_2, y2f_2, 'o');
+plot(x2f_2, y2f_2, 'o','color',[.79 .5 .181]);
 hold on
 

@@ -92,10 +92,13 @@ y2f=m*x-m*puntox+puntoy;
 y2t = y2f;
 fprintf("La funcion es: y=");
 disp(y2t);
-if()
-f1 = sqrt( (x-puntox)^2 + (y-puntoy) )==20;
-x2f= puntox+20*sqrt(1/(1+m^2));
-y2f= puntoy+m*20*sqrt(1/(1+m^2));
+if(m>0)
+    f1 =-20;
+else
+    f1 =20;
+end
+x2f= puntox+f1*sqrt(1/(1+m^2));
+y2f= puntoy+m*f1*sqrt(1/(1+m^2));
 fprintf("Puntos: (%.9f,%.9f)\n",x2f,y2f);
 %%Tangente y punto medio de la grada2
 y_2=fx;
@@ -110,12 +113,12 @@ y2t_2 = y2f_2;
 fprintf("La funcion es: y=");
 disp(y2t_2);
 if(m_2>0)
-    f1_2 = sqrt( (x-puntox_2)^2 + (y-puntoy_2) )==20;
+    f1_2 =20;
 else
-    f1_2 = sqrt( (x-puntox_2)^2 + (y-puntoy_2) )==-20;
+    f1_2 =-20;
 end
-x2f_2= puntox_2+20*sqrt(1/(1+m_2^2));
-y2f_2= puntoy_2+m_2*20*sqrt(1/(1+m_2^2));
+x2f_2= puntox_2+f1_2*sqrt(1/(1+m_2^2));
+y2f_2= puntoy_2+m_2*f1_2*sqrt(1/(1+m_2^2));
 fprintf("Puntos: (%.9f,%.9f)\n",x2f_2,y2f_2);
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 %obtener puntos de la barrera1
@@ -139,13 +142,13 @@ fprintf("Coordenadas barrera2: (%.9f,%.9f),(%.9f,%.9f)\n",xgrada2_i,ygrada2_i,xg
 %Plot graph
 
 %punto inicial
-plot(x1,y1,'x');
+plot(x1,y1,'or');
 hold on
 %punto final
-plot(x2,y2,'x');
+plot(x2,y2,'ob');
 hold on
 %funcion general
-fplot(fx,[x1,x2]);
+fplot(fx,[x1,x2],'color',[0 0 0]);
 hold on
 %tangente punto minimo1
 fplot(y2t,[x1 x2],  '--r')
@@ -158,7 +161,6 @@ hold on
 plot(xgrada1_i,ygrada1_f,'o');
 hold on
 plot(xgrada1_f,ygrada1_f,'o');
-%plot(xlim, ygrada1_f*[xgrada1_i xgrada1_f]);
 hold on
 %gradas 2
 plot(xgrada2_i,ygrada2_f,'o');
@@ -168,18 +170,18 @@ plot(xgrada2_f,ygrada2_f,'o');
 hold on
 
 %punto1 radio<=100
-plot(puntox, puntoy, 'o');
+plot(puntox, puntoy, 'or');
 hold on
 
 %punto2 radio<=100
-plot(puntox_2, puntoy_2, 'o');
+plot(puntox_2, puntoy_2, 'or');
 hold on
 
 %punto1 gradas
-plot(x2f, y2f, 'o');
+plot(x2f, y2f, 'o',c);
 hold on
 
 %punto2 gradas
-plot(x2f_2, y2f_2, 'o');
+plot(x2f_2, y2f_2, 'om');
 hold on
 
