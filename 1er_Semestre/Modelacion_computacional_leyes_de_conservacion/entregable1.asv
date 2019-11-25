@@ -139,14 +139,11 @@ ygrada2_f=y2f_2;
 fprintf("Coordenadas barrera2: (%.9f,%.9f),(%.9f,%.9f)\n",xgrada2_i,ygrada2_i,xgrada2_f,ygrada2_f);
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 %Puntos criticos
+
+%Puntos minimos
 fder = diff(fx);
 fder = simplify(fder);
 crit_p = solve(fder);
-%Puntos de inflexion
-inflec_pt = solve(fder,'MaxDegree',3);
-double(inflec_pt)
-idx = imag(double(inflec_pt)) == 0;
-inflec_pt = inflec_pt(idx);
 
 
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
@@ -161,17 +158,10 @@ hold on
 %funcion general
 fplot(fx,[x1,x2],'color',[0 0 0]);
 hold on
-
 %Puntos criticos
-plot(double(crit_p), double(subs(fx,crit_p)),'rx');
-    %text(-4.8,5.5,'Minimo Local');
-    %text(-2,4,'Maximo Local');
-hold on
-
-%Punto inflexion
-plot(double(inflec_pt), double(subs(fx,inflec_pt)),'rx')
-    %text(-7,1,'Punto infexion')
-hold on
+plot(double(crit_p), double(subs(f,crit_p)),'ro')
+text(-4.8,5.5,'Minimo Local')
+text(-2,4,'Max')
 
 %tangente punto minimo1 radio
 fplot(y2t,[x1 x2], '--','color',[.32 .133 .9]);
