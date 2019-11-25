@@ -164,13 +164,12 @@ hold on
 
 %Puntos criticos
 plot(double(crit_p), double(subs(fx,crit_p)),'rx');
-    %text(-4.8,5.5,'Minimo Local');
-    %text(-2,4,'Maximo Local');
+text(double(crit_p), double(subs(fx,crit_p))+30,'Minimo/Maximo Local');
 hold on
 
 %Punto inflexion
 plot(double(inflec_pt), double(subs(fx,inflec_pt)),'bx');
-    %text(-7,1,'Punto infexion')
+text(double(inflec_pt)+30, double(subs(fx,inflec_pt)),'Punto inflexion')
 hold on
 
 
