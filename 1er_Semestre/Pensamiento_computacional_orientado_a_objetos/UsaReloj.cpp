@@ -66,7 +66,7 @@ int main(){
                 cout<<separator<<endl;
         }
         else if(selection ==7){
-                RelojD.desplegar();//se llama a la funcion del objeto que imprime la hora en formato especial
+                cout<<RelojD.muestra()<<endl;//se llama a la funcion del objeto que imprime la hora en formato especial
                 cout<<separator<<endl;
         }
         else if(selection ==8){

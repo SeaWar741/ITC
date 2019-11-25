@@ -16,3 +16,5 @@ f1 = sqrt( (x-puntox)^2 + (y-puntoy) )==20;
 x2= puntox+20*sqrt(1/(1+m^2));
 y2= puntoy+m*20*sqrt(1/(1+m^2));
 fprintf("Puntos: (%.9f,%.9f)\n",x2,y2);
+
+plot(xlim, 30*[1 1]);

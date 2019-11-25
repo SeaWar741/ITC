@@ -23,7 +23,7 @@ public:
     int getHora();//metodo para obtener la hora
     int getMin();//metodo para obtener los minutos
 
-    void desplegar();//metodo para desplegar la hora en formato especial
+    string muestra();//metodo para desplegar la hora en formato especial
     void incrementaMinutos();//metodo para incrementar los minutos
 };
 
@@ -112,7 +112,7 @@ int RelojD::getMin(){
 //          
 //Salida:
 //      imprime la hora en formato especial
-void RelojD::desplegar(){
+string RelojD::muestra(){
     string hour,minute;//variables para hora y minuto
     if(iHr<10){
         hour = "0"+to_string(iHr);//hora concatenada con 0 en caso de que sea menor a 10
@@ -126,7 +126,7 @@ void RelojD::desplegar(){
     else{
         minute = to_string(iMin);
     }
-    cout<<"\n"<<hour<<":"<<minute<<"\n"<<endl;//se imprime la hora y minutos
+    return hour+":"+minute+"\n";//se imprime la hora y minutos
 }
 void RelojD::incrementaMinutos(){
     if(iMin==59){//si son las 11pm con 59min se cambia a las 0:0
