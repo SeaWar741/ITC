@@ -40,6 +40,7 @@ fprintf("y=%.9fx^3+%.9fx^2+%.9fx+%.9f\n",v4,v3,v2,v1); %Se imprime la funcion
 fx=v4*x^3+v3*x^2+v2*x+v1;  %Funcion general 
 fxd=diff(fx);              %Derivada de la funcion
 fxl=sqrt(1+(fxd^2));       
+disp(simplify(diff(fx)));
 
 lg=int(fxl,x,[x1,x2]);     %Longitud de curva
 fprintf("Longitud de curva: %0.4f\n",lg);   %Se imprime la longitud
@@ -156,13 +157,16 @@ fprintf("Coordenadas barrera2: (%.9f,%.9f),(%.9f,%.9f)\n",xgrada2_i,ygrada2_i,xg
 fder = diff(fx);    %Se obtiene la derivada de la funcion
 fder = simplify(fder);  %Se simplifica la derivada de la funcion (a decimales)
 crit_p = solve(fder);   %Se aplica solucion lineal a la funcion, obteniendo los puntos minimos/maximos
+fprintf("Puntos Criticos: ");
+disp(crit_p);
 
 %Puntos de inflexion
 fder = diff(diff(fx));  %Se obtiene la segunda derivada
 inflec_pt = solve(fder,'MaxDegree',3);  %Se resuelve la segunda derivada donde cambia la concavidad de la funcion de 3 grado
 idx = imag(double(inflec_pt)) == 0;     %Se resuelve donde es 0 en la funcion
 inflec_pt = inflec_pt(idx);             %Se obtienen y almacenan las coordenadas del punto de inflexion
-
+fprintf("Puntos Inflexion: ");
+disp(inflec_pt);
 
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
