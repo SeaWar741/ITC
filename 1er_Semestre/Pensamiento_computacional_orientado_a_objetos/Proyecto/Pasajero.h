@@ -29,10 +29,81 @@ public:
     bool existeUsuario(string);
 };
 
-Pasajero::Pasajero(/* args */)
-{
+Pasajero::Pasajero(){
+    this -> sName = "ND";
+    this -> sCel = "ND";
+    this -> sEmail = "ND";
+    this -> sContra = "ND";
+    this -> iKm = 0;
 }
 
-Pasajero::~Pasajero()
-{
+Pasajero::Pasajero(string sNamei,string sCeli,string sEmaili,string sContrai,int iKmi){
+    sName = sNamei;
+    sCel = sCeli;
+    sEmail = sEmaili;
+    sContra = sContrai;
+    iKm = iKmi;
+}
+void Pasajero::setName(string sNamei){
+    sName =sNamei;
+}
+void Pasajero::setCel(string sCeli){
+    sCel = sCeli;
+}
+void Pasajero::setEmail(string sEmaili){
+    sEmail = sEmaili;
+}
+void Pasajero::setPassword(string sContrai){
+    sContra = sContrai;
+}
+void Pasajero::setKm(int iKmi){
+    iKm = iKmi;
+}
+
+string Pasajero::getName(){
+    return sName;
+}
+string Pasajero::getCel(){
+    return sCel;
+}
+string Pasajero::getEmail(){
+    return sEmail;
+}
+string Pasajero::getPassword(){
+    return sContra;
+}
+int Pasajero::getKm(){
+    return iKm;
+}
+
+string Pasajero::str(){
+
+}
+void Pasajero::incrementaKm(){
+    iKm++;
+}
+void Pasajero::decrementakm(){
+    int km = iKm;
+    if (km > 0){
+        iKm--;
+    }
+}
+bool Pasajero::validarCuenta(string sEmaili,string sContrai){
+    if(existeUsuario(sEmaili)){
+        if (sEmaili == sEmail && sContrai == sContra){
+            return true;
+        }
+    }
+    else{
+        return false;
+    }
+}
+bool Pasajero::existeUsuario(string sEmaili){
+    if (sEmaili == sEmail){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
 }
