@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 class Fecha{
 private:
     int iDia,iMes,iYear;
@@ -32,13 +33,13 @@ Fecha::Fecha(int iDiai,int iMesi,int iYeari){
     this ->iMes = iMesi;
     this ->iYear = iYeari;
 }
-Fecha::setDia(int day){
+void Fecha::setDia(int day){
     iDia = day;
 }
-Fecha::setMes(int month){
+void Fecha::setMes(int month){
     iMes = month;
 }
-Fecha::setYear(int year){
+void Fecha::setYear(int year){
     iYear = year;
 }
 int Fecha::getDia(){
@@ -49,4 +50,36 @@ int Fecha::getMes(){
 }
 int Fecha::getYear(){
     return iYear;
+}
+string Fecha::str(){
+    return to_string(iDia)+"/"+to_string(iMes)+"/"+to_string(iYear);
+}
+void Fecha::diaSiguiente(){
+    while ((1 + iDia) > diasMes()){
+        if (iMes == 12){
+            iMes = 0;
+            iYear++;
+        }   
+        iMes++;
+    }
+    iDia += 1;
+}
+int Fecha::diasMes(){
+    int month = iMes;
+	if(month==2){
+		if((iYear%400==0) || (iYear%4==0 && iYear%100!=0))	
+			return 29;
+		else	
+			return 28;
+	}
+	else if(month == 1 || month == 3 || month == 5 || month == 7 || month == 8||month == 10 || month==12){	
+		return 31;
+    }
+	else{ 		
+		return 30;
+    }
+}
+string Fecha::mes(){
+    string meses[12] ={"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+    return meses[iMes-1];
 }
