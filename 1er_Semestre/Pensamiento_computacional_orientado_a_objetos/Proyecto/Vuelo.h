@@ -14,6 +14,7 @@ private:
     string sAerolinea;
     int iKm,iAsientos;
     int matPasajeros[30][4];
+    Pasajero Pasajeros[30][4];
 public:
     Vuelo();
     Vuelo(Fecha,RelojD,int,string,string,int);
@@ -125,8 +126,10 @@ void Vuelo::incrementaAsientos(){
 void Vuelo::derementaAsientos(){
     iAsientos --;
 }
-void Vuelo::reservarAsiento(Pasajero,int,int){
-
+void Vuelo::reservarAsiento(Pasajero pass,int i,int j){
+    if (asientoDisponible(i,j)){
+        Pasajeros[i][j]=pass;
+    }
 }
 void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
     for (int i = 0; i < 30; i++){

@@ -12,40 +12,52 @@ vector<Vuelo> Vuelos;
 string jump="\n";
 
 void filldata(){
-    //Personas
+    //Variables Personas
     string myText;
     int km;
     int counter=0;
     Pasajero pasajero;
-    ifstream MyReadFile("pasajeros.txt");
-    while (getline (MyReadFile, myText)) {
-        istringstream ss(myText); 
-        do { 
-            string word; 
-            ss >> word; 
-            if(counter== 0){
-                pasajero.setName(word);
-            }
-            else if(counter== 1){
-                pasajero.setCel(word);
-            }
-            else if(counter== 2){
-                pasajero.setEmail(word);
-            }
-            else if(counter== 3){
-                pasajero.setPassword(word);
-            }
-            else if(counter== 4){
-                km = stoi(word);
-                pasajero.setKm(km);
-            }
-            counter++;
-        } while (ss);
-        Pasajeros.push_back(pasajero); 
-        counter=0;
-        cout<<jump;
-    }
-    MyReadFile.close();
+    //Variables Vuelo
+    Fecha fecha;
+    RelojD hora;
+    int iPrecio;
+    string sDestino;
+    string sAerolinea;
+    int iKm,iAsientos;
+    int matPasajeros[30][4];
+    Pasajero Pasajerosm[30][4];
+    //Personas
+        ifstream MyReadFile("pasajeros.txt");
+        while (getline (MyReadFile, myText)) {
+            istringstream ss(myText); 
+            do { 
+                string word; 
+                ss >> word; 
+                if(counter== 0){
+                    pasajero.setName(word);
+                }
+                else if(counter== 1){
+                    pasajero.setCel(word);
+                }
+                else if(counter== 2){
+                    pasajero.setEmail(word);
+                }
+                else if(counter== 3){
+                    pasajero.setPassword(word);
+                }
+                else if(counter== 4){
+                    km = stoi(word);
+                    pasajero.setKm(km);
+                }
+                counter++;
+            } while (ss);
+            Pasajeros.push_back(pasajero); 
+            counter=0;
+            cout<<jump;
+        }
+        MyReadFile.close();
+    //Vuelos
+    
 }
 
 void printdata(){
@@ -94,6 +106,9 @@ int login(){
     cout<<"Usuario no registrado"<<endl;
     return -1;
 }
+
+//Funciones Vuelos
+
 
 //Menus
     int menuPasajeros(){
