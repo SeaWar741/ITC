@@ -5,7 +5,7 @@ class Persona{
 	private:
 		string name,nation;
 		int age;
-		Cumpleanios cumple;
+		Cumpleanios cumple;// lee los parametros
 	public:
 		Persona();
 		//name, nation, age, cumple
@@ -22,7 +22,6 @@ class Persona{
 		string getCumpleanios();
         string display();
 };
-
 Persona::Persona(){
 	this->name="ND";
     this->nation="ND";
