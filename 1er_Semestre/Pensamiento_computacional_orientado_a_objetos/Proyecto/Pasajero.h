@@ -77,7 +77,8 @@ int Pasajero::getKm(){
 }
 
 string Pasajero::str(){
-
+    //sName,sCel,sEmail,sContra;int iKm;
+    return "Pasajero: "+sName+" Celular: "+sCel+" Email: "+sEmail+" Kilometros:"+to_string(iKm);
 }
 void Pasajero::incrementaKm(){
     iKm++;
@@ -89,10 +90,8 @@ void Pasajero::decrementakm(){
     }
 }
 bool Pasajero::validarCuenta(string sEmaili,string sContrai){
-    if(existeUsuario(sEmaili)){
-        if (sEmaili == sEmail && sContrai == sContra){
-            return true;
-        }
+    if(existeUsuario(sEmaili) && sContrai == sContra){
+        return true;
     }
     else{
         return false;

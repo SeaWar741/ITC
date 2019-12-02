@@ -1,7 +1,22 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <fstream>
 #include "Vuelo.h"
 using namespace std;
+
+vector<Pasajero> Pasajeros;
+vector<Vuelo> Vuelos;
+
+void filldata(){
+    string line;
+    ifstream myfile;
+    myfile.open("pasajeros.txt");
+    while(getline(myfile, line)) {
+     cout << line << endl;
+    }
+    myfile.close();
+}
 
 int menuPasajeros(){
     int iOpcion;
@@ -10,13 +25,13 @@ int menuPasajeros(){
     "\n*** Metodos Modificadores ***"<<
     "\n2) Cambiar nombre "<<
     "\n3) Cambiar celular "<<
-    "\n4) Cambiar contraseña "<<
+    "\n4) Cambiar contrasena "<<
     "\n*** Metodos de Acceso "<<
     "\n5) Obtener nombre "<<
     "\n6) Obtener celular "<<
     "\n7) Obtener Km "<<
     "\n8) Obtener email "<<
-    "\n9) Obtener contraseña "<<
+    "\n9) Obtener contrasena "<<
     "\n*** Otros Metodos *** "<<
     "\n10) Incrementa kilometros "<<
     "\n11) decrementa kilometros "<<
@@ -73,7 +88,77 @@ int menuPrincipal(){
     return iOpcion;
 }
 
+void pasajeros(int option){
+    bool continueg =true;
+    while (continueg){
+        switch (option){
+            case 1:
+                filldata();
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+            case 10:
+                break;
+            case 11:
+                break;
+            case 12:
+                break;
+            case 0:
+                continueg = false;
+                cout<<"Hasta luego!"<<endl;
+                break;
+            default:
+                cout<<"Opcion no valida, volver a intentar"<<endl;
+                break;
+        }
+    }
+}
+
+void vuelos(int option){
+    /*dasda*/
+}
+
 int main(){
-    
+    string jump="\n";
+    bool continueg = true;
+    int suboption1,suboption2;
+    while(continueg){
+        cout<<jump;
+        int option1 = menuPrincipal();
+        cout<<jump;
+        switch (option1){
+        case 1:
+            suboption1 = menuPasajeros();
+            pasajeros(suboption1);
+            break;
+        case 2:
+            suboption2 = menuVuelos();
+            break;
+        case 0:
+            continueg = false;
+            cout<<jump;
+            cout<<"Hasta luego!"<<endl;
+            break;
+        default:
+            cout<<jump;
+            cout<<"Opcion no valida, volver a intentar"<<endl;
+            break;
+        }
+    }
     return 0;
 }
+

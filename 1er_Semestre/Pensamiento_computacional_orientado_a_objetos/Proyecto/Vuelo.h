@@ -104,7 +104,7 @@ int Vuelo::getPasajero(int i,int j){
 }
 
 string Vuelo::str(){ /*Arreglar*/
-    cout<<"Vuelo de "<<sAerolinea<<"con destino a "<<sDestino<<endl;
+    return"Vuelo de "+sAerolinea+"con destino a "+sDestino;
 }
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
@@ -139,8 +139,10 @@ void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
 bool Vuelo::asientoDisponible(int i,int j){
     if (matPasajeros[i][j] == 0){
         cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
+        return false;
     }
     else{
         cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
+        return true;
     }
 }
