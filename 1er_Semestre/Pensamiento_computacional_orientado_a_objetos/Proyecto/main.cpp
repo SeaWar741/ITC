@@ -79,6 +79,22 @@ void crearUsuario(){
         cout<<"Este usuario ya esta registrado!"<<endl;
     }
 }
+int login(){
+    int userid;
+    string user,password;
+    cout<<"Ingresar email: >";cin>>user;
+    if(existeUsuario(user)){
+        cout<<"Ingresar contrasena: >";cin>>password;
+        for(int i=0; i<Pasajeros.size(); ++i){
+            if(Pasajeros[i].validarCuenta(user,password)){
+                return i;
+            }
+        }
+    }
+    cout<<"Usuario no registrado"<<endl;
+    return -1;
+}
+
 //Menus
     int menuPasajeros(){
         int iOpcion;
@@ -97,7 +113,8 @@ void crearUsuario(){
         "\n*** Otros Metodos *** "<<
         "\n10) Incrementa kilometros "<<
         "\n11) decrementa kilometros "<<
-        "\n12) Validar Cuenta "<<
+        //"\n12) Validar Cuenta "<<
+        "\n12) Imprimir Cuentas "<<
         "\n0) Terminar "<<
         "\nTeclea la opcion: >";
         cin>>iOpcion;
@@ -156,6 +173,8 @@ void crearUsuario(){
 void pasajeros(){
     bool continueg =true;
     int option;
+    int userid;
+    string nuser,celular,contrasena;
     while (continueg){
         option = menuPasajeros();
         cout<<jump;
@@ -164,27 +183,75 @@ void pasajeros(){
                 crearUsuario();
                 break;
             case 2:
-                printdata();
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Ingresar nuevo nombre: >";
+                    cin>>nuser;
+                    Pasajeros[userid].setName(nuser);
+                    cout<<"Nombre cambiado exitosamente!"<<endl;
+                }
                 break;
             case 3:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Ingresar nuevo celular: >";
+                    cin>>celular;
+                    Pasajeros[userid].setName(celular);
+                    cout<<"Celular cambiado exitosamente!"<<endl;
+                }
                 break;
             case 4:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Ingresar nueva contrasena: >";
+                    cin>>contrasena;
+                    Pasajeros[userid].setName(contrasena);
+                    cout<<"Contrasena cambiada exitosamente!"<<endl;
+                }
                 break;
             case 5:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Nombre: "<<Pasajeros[userid].getName()<<endl;
+                }
                 break;
             case 6:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Celular: "<<Pasajeros[userid].getCel()<<endl;
+                }
                 break;
             case 7:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Km: "<<Pasajeros[userid].getKm()<<endl;
+                }
                 break;
             case 8:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Email: "<<Pasajeros[userid].getEmail()<<endl;
+                }
                 break;
             case 9:
+                userid = login();
+                if(userid!=-1){
+                    cout<<"Contrasena: "<<Pasajeros[userid].getPassword()<<endl;
+                }
                 break;
             case 10:
+                userid = login();
+                if(userid!=-1){
+                    Pasajeros[userid].incrementaKm();
+                    cout<<"Se han añadido km a su cuenta exitosamente!"<<endl;
+                }
                 break;
             case 11:
+                    Pasajeros[userid].incrementaKm();
+                    cout<<"Se han decrementado km a su cuenta exitosamente!"<<endl;
                 break;
             case 12:
+                printdata();
                 break;
             case 0:
                 continueg = false;

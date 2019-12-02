@@ -78,7 +78,7 @@ int Pasajero::getKm(){
 
 string Pasajero::str(){
     //sName,sCel,sEmail,sContra;int iKm;
-    return "Pasajero: "+sName+" Celular: "+sCel+" Email: "+sEmail+" Kilometros:"+to_string(iKm);
+    return "Pasajero: "+sName+" Celular: "+sCel+"   Email: "+sEmail+"   Contrasena: "+sContra+"   Kilometros: "+to_string(iKm);
 }
 void Pasajero::incrementaKm(){
     iKm++;
