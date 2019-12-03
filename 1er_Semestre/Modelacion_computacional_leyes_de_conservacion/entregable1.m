@@ -175,7 +175,7 @@ disp(inflec_pt);
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 %Graficar funcion general
-
+figure(100);
 %Punto inicial
 plot(x1,y1,'or');
 hold on
@@ -273,3 +273,18 @@ plot([xgrada2_i, xgrada2_f], [ygrada2_f+10, ygrada2_f+10],'color',[0 0 0]) %Se g
 gx2_f=[xgrada2_f xgrada2_f];
 gy2_f=[ygrada2_f ygrada2_f+10];
 plot(gx2_f,gy2_f,'color',[0 0 0]); %Se grafica una linea vertical entre el punto derecho 1 y derecho 2
+
+%-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+%Graficar particula
+x = 100:.01:2800;
+y = -0.000002249*x.^3+0.010770716*x.^2-13.061982421*x+1700.740063337;
+px = 100;
+py = 500;
+for i=1:100
+    figure(100); %This is so it will replot over the previous figure, and not make a new one.
+    ph = plot(px, py,'o');
+    pause(0.1);
+    px = px+2800/100;
+    py = -0.000002249*px^3+0.010770716*px^2-13.061982421*px+1700.740063337;
+end

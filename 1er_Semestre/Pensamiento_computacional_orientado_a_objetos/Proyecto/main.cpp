@@ -18,12 +18,14 @@ void filldata(){
     int counter=0;
     Pasajero pasajero;
     //Variables Vuelo
-    Fecha fecha;
-    RelojD hora;
+    Vuelo Vuelo;
+    Fecha Fecha;
+    RelojD Hora;
     int iPrecio;
     string sDestino;
     string sAerolinea;
     int iKm,iAsientos;
+    int counter2=0;
     int matPasajeros[30][4];
     Pasajero Pasajerosm[30][4];
     //Personas
@@ -57,7 +59,73 @@ void filldata(){
         }
         MyReadFile.close();
     //Vuelos
-    
+        ifstream MyReadFile2("vuelos.txt");
+        while (getline (MyReadFile2, myText)) {
+            istringstream ss(myText); 
+            do { 
+                string word; 
+                ss >> word; 
+                if(counter== 0){//date
+                    vector<int> vect;
+                    stringstream ss(word);
+
+                    for (int i; ss >> i;) {
+                        vect.push_back(i);    
+                        if (ss.peek() == '/')
+                            ss.ignore();
+                    }
+
+                    for (size_t i = 0; i < vect.size(); i++){
+                        if (counter ==0){
+                            Fecha.setDia(vect[i]);
+                        }
+                        else if (counter ==1){
+                            Fecha.setMes(vect[i]);
+                        }
+                        else if (counter ==3){
+                            Fecha.setYear(vect[i]);
+                        }
+                    }
+                    counter2=0;
+                }
+                else if(counter== 1){//hour
+                    vector<int> vect;
+                    stringstream ss(word);
+
+                    for (int i; ss >> i;) {
+                        vect.push_back(i);    
+                        if (ss.peek() == ':')
+                            ss.ignore();
+                    }
+                    for (size_t i = 0; i < vect.size(); i++){
+                        if (counter ==0){
+                            Hora.setHoras(vect[i]);
+                        }
+                        else if (counter ==1){
+                            Hora.setMinutos(vect[i]);
+                        }
+                    }
+                    counter2=0;
+                }
+                else if(counter== 2){//price
+                    Vuelo.setPrecio(stoi(word));
+                }
+                else if(counter== 3){//destino
+                    Vuelo.setDestino(word);
+                }
+                else if(counter== 4){//aerolina
+                    Vuelo.setAerolinea(word);
+                }
+                else if(counter== 5){//km
+                    Vuelo.setKilometros(stoi(word));
+                }
+                counter++;
+            } while (ss);
+            Vuelos.push_back(Vuelo); 
+            counter=0;
+            cout<<jump;
+        }
+        MyReadFile.close();
 }
 
 void printdata(){
@@ -65,7 +133,11 @@ void printdata(){
         cout << Pasajeros[i].str()<<endl;
     }
 }
-
+void printdata2(){
+    for(int i=0; i<Vuelos.size(); ++i){
+        cout << Vuelos[i].str()<<endl;
+    }
+}
 //Funciones Pasajero
 bool existeUsuario(string user){
     for(int i=0; i<Pasajeros.size(); ++i){
@@ -288,7 +360,7 @@ int main(){
     bool continueg = true;
     int suboption2;
 
-    filldata(); //se lee todos los usuarios y se insertan en el vector
+    filldata(); //se lee todos los usuarios,vuelos y se insertan en el vector
 
     while(continueg){
         cout<<jump;
