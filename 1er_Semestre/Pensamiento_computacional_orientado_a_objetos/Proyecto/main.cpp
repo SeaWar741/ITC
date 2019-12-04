@@ -71,7 +71,7 @@ void filldata(){
 
                     for (int i; ss >> i;) {
                         vect.push_back(i);    
-                        if (ss.peek() == '/')
+                        if (ss.peek() != '/')
                             ss.ignore();
                     }
 
@@ -180,7 +180,42 @@ int login(){
 }
 
 //Funciones Vuelos
+void crearVuelo(){
+    Vuelo Vuelo;
+    int dia,mes,ano;
+    
+    int hora,minuto;
 
+    int iPrecio;
+    string sDestino;
+    string sAerolinea;
+    int iKm,iAsientos;
+    int matPasajeros[30][4];
+    Pasajero Pasajeros[30][4];
+
+    cout<<"Ingresa el dia: >";cin>>dia;
+    cout<<"Ingresa el mes: >";cin>>mes;
+    cout<<"Ingresa el ano: >";cin>>ano;
+    Fecha fecha(dia,mes,ano);
+
+    cout<<"Ingresa hora: >";cin>>hora;
+    cout<<"Ingresa minutos: >";cin>>minuto;
+    RelojD clock(hora,dia);
+
+    cout<<"Ingresa la aerolinea: >";cin>>sAerolinea;
+    cout<<"Ingresa el precio: >$";cin>>iPrecio;
+    cout<<"Ingresa el destino: >";cin>>sDestino;
+    cout<<"Ingresa el numero de kilometros: >";cin>>iKm;
+    
+    Vuelo.setFecha(fecha);
+    Vuelo.setHora(clock);
+    Vuelo.setPrecio(iPrecio);
+    Vuelo.setDestino(sDestino);
+    Vuelo.setAerolinea(sAerolinea);
+    Vuelo.setKilometros(iKm);
+
+    Vuelos.push_back(Vuelo);
+}
 
 //Menus
     int menuPasajeros(){
@@ -352,8 +387,61 @@ void pasajeros(){
     }
 }
 
-void vuelos(int option){
-    /*dasda*/
+void vuelos(){
+    bool continueg =true;
+    int option;
+    int userid;
+    string nuser,celular,contrasena;
+    while (continueg){
+        option = menuVuelos();
+        cout<<jump;
+        switch (option){
+            case 1:
+                crearVuelo();
+                break;
+            case 2:
+                printdata2();
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                
+                break;
+            case 7:
+                
+                break;
+            case 8:
+
+                break;
+            case 9:
+                
+                break;
+            case 10:
+                
+                break;
+            case 11:
+                
+                break;
+            case 12:
+                
+                break;
+            case 0:
+                continueg = false;
+                cout<<"Hasta luego!"<<endl;
+                break;
+            default:
+                cout<<"Opcion no valida, volver a intentar"<<endl;
+                break;
+        }
+        cout<<jump;
+    }
 }
 
 int main(){
@@ -370,7 +458,7 @@ int main(){
             pasajeros();
             break;
         case 2:
-            suboption2 = menuVuelos();
+            vuelos();
             break;
         case 0:
             continueg = false;

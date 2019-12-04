@@ -69,6 +69,6 @@ string RelojD::str(){
     else{
         minute = to_string(iMin);
     }
-    return hour+":"+minute+"\n";//se imprime la hora y minutos
+    return hour+":"+minute;//se imprime la hora y minutos
 }
 
