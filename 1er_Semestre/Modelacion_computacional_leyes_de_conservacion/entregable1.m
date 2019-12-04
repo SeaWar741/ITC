@@ -49,6 +49,7 @@ fprintf("Longitud de curva: %0.4f\n",lg);   %Se imprime la longitud
 %Obtener minimos del radio de curvatura
 
 %%Radio de curvatura 1
+
 min = 999999;
 for i=x1:1:x2/2     %Se evalua la longitud de curva en la primera mitad de la funcion
     p = ((fxl)^(2/3)) / (diff(fxd));
@@ -175,104 +176,10 @@ disp(inflec_pt);
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 %Graficar funcion general
-figure(100);
-%Punto inicial
-plot(x1,y1,'or');
-hold on
-%Punto final
-plot(x2,y2,'ob');
-hold on
-%Funcion general
-fplot(fx,[x1,x2],'color',[0 0 0]);
-hold on
-
-%-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-%Puntos criticos e inflexion
-
-%Puntos criticos
-plot(double(crit_p), double(subs(fx,crit_p)),'rx'); %Se grafican todos los puntos criticos/max/min de la funcion con una x en color rojo
-text(double(crit_p), double(subs(fx,crit_p)),'Minimo/Maximo Local');    %Se agrega texto sobre las coordenadas de los puntos
-hold on
-
-%Punto inflexion
-plot(double(inflec_pt), double(subs(fx,inflec_pt)),'bx');   %Se grafican los puntos de inflexion con una x en color azul
-text(double(inflec_pt), double(subs(fx,inflec_pt)),'Punto inflexion')   %Se agrega texto sobre las coordenadas de los puntos
-hold on
-
-%-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-%Tangentes
-
-%Tangente punto 1 minimo del radio
-fplot(y2t,[x1 x2], '--','color',[.32 .133 .9]); %Se grafica la funcion tangente del punto 1 minimo del radio 
-hold on
-%Tangente punto 2 minimo del radio
-fplot(y2t_2,[x1 x2], '--','color',[.32 .133 .9]);   %Se grafica la funcion tangente del punto 2 minimo del radio
-hold on
-
-%-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
-
-%Puntos con radio menor a 100
-
-%Punto 1 radio<=100
-plot(puntox, puntoy, 'or'); %Se grafica el punto 1 minimo del radio
-hold on
-
-%Punto 2 radio<=100
-plot(puntox_2, puntoy_2, 'or'); %Se grafica el punto 1 minimo del radio
-hold on
-
-%-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
 %Graficar gradas
+%figure(100);
 
-%Punto Central Gradas 1
-plot(x2f, y2f, 'o', 'color',[.79 .5 .181]); %Se grafica el punto central de la primer grada/barrera
-hold on
-
-%Punto Central Gradas 2
-plot(x2f_2, y2f_2, 'o','color',[.79 .5 .181]);  %Se grafica el punto central de la segunda grada/barrera
-hold on
-
-%%Grada 1
-plot(xgrada1_i,ygrada1_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la primer grada/barrera
-hold on
-plot(xgrada1_f,ygrada1_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la segunda grada/barrera
-plot([xgrada1_i, xgrada1_f], [ygrada1_f, ygrada1_f],'color',[0 0 0]);   %Se grafica una linea horizontal entre el izquierdo 1 y derecho 1
-gx1_i=[xgrada1_i xgrada1_i];   
-gy1_i=[ygrada1_f ygrada1_f-10];
-plot(gx1_i,gy1_i,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto izquierdo 1 e izquierdo 2
-
-hold on
-plot(xgrada1_i,ygrada1_f-10,'o','color',[0 0 0]);
-hold on
-plot(xgrada1_f,ygrada1_f-10,'o','color',[0 0 0]);
-plot([xgrada1_i, xgrada1_f], [ygrada1_f-10, ygrada1_f-10],'color',[0 0 0]); %Se grafica una linea horizontal entre el izquierdo 2 y derecho 2 
-gx1_f=[xgrada1_f xgrada1_f];
-gy1_f=[ygrada1_f ygrada1_f-10];
-plot(gx1_f,gy1_f,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto derecho 1 y derecho 2
-
-hold on
-
-%Gradas 2
-plot(xgrada2_i,ygrada2_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la primer grada/barrera
-hold on
-plot(xgrada2_f,ygrada2_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la segunda grada/barrera
-plot([xgrada2_i, xgrada2_f], [ygrada2_f, ygrada2_f],'color',[0 0 0]) %Se grafica una linea horizontal entre el izquierdo 1 y derecho 1 
-gx2_i=[xgrada2_i xgrada2_i];
-gy2_i=[ygrada2_f ygrada2_f+10];
-plot(gx2_i,gy2_i,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto izquierdo 1 e izquierdo 2
-
-hold on
-plot(xgrada2_i,ygrada2_f+10,'o','color',[0 0 0]);
-hold on
-plot(xgrada2_f,ygrada2_f+10,'o','color',[0 0 0]);
-plot([xgrada2_i, xgrada2_f], [ygrada2_f+10, ygrada2_f+10],'color',[0 0 0]) %Se grafica una linea horizontal entre el derecho 1 e izquierdo 2 
-
-gx2_f=[xgrada2_f xgrada2_f];
-gy2_f=[ygrada2_f ygrada2_f+10];
-plot(gx2_f,gy2_f,'color',[0 0 0]); %Se grafica una linea vertical entre el punto derecho 1 y derecho 2
 
 %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 
@@ -283,8 +190,105 @@ px = 100;
 py = 500;
 for i=1:100
     figure(100); %This is so it will replot over the previous figure, and not make a new one.
+    hold off
+    %Punto inicial
+    plot(x1,y1,'or');
+    hold on
+    %Punto final
+    plot(x2,y2,'ob');
+    hold on
+    %Funcion general
+    fplot(fx,[x1,x2],'color',[0 0 0]);
+    hold on
+
+    %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+    %Puntos criticos e inflexion
+
+    %Puntos criticos
+    plot(double(crit_p), double(subs(fx,crit_p)),'rx'); %Se grafican todos los puntos criticos/max/min de la funcion con una x en color rojo
+    text(double(crit_p), double(subs(fx,crit_p)),'Minimo/Maximo Local');    %Se agrega texto sobre las coordenadas de los puntos
+    hold on
+
+    %Punto inflexion
+    plot(double(inflec_pt), double(subs(fx,inflec_pt)),'bx');   %Se grafican los puntos de inflexion con una x en color azul
+    text(double(inflec_pt), double(subs(fx,inflec_pt)),'Punto inflexion')   %Se agrega texto sobre las coordenadas de los puntos
+    hold on
+
+    %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+    %Tangentes
+
+    %Tangente punto 1 minimo del radio
+    fplot(y2t,[x1 x2], '--','color',[.32 .133 .9]); %Se grafica la funcion tangente del punto 1 minimo del radio 
+    hold on
+    %Tangente punto 2 minimo del radio
+    fplot(y2t_2,[x1 x2], '--','color',[.32 .133 .9]);   %Se grafica la funcion tangente del punto 2 minimo del radio
+    hold on
+
+    %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+
+    %Puntos con radio menor a 100
+
+    %Punto 1 radio<=100
+    plot(puntox, puntoy, 'or'); %Se grafica el punto 1 minimo del radio
+    hold on
+
+    %Punto 2 radio<=100
+    plot(puntox_2, puntoy_2, 'or'); %Se grafica el punto 1 minimo del radio
+    hold on
+
+    %-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+    %Punto Central Gradas 1
+    plot(x2f, y2f, 'o', 'color',[.79 .5 .181]); %Se grafica el punto central de la primer grada/barrera
+    hold on
+
+    %Punto Central Gradas 2
+    plot(x2f_2, y2f_2, 'o','color',[.79 .5 .181]);  %Se grafica el punto central de la segunda grada/barrera
+    hold on
+
+    %%Grada 1
+    plot(xgrada1_i,ygrada1_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la primer grada/barrera
+    hold on
+    plot(xgrada1_f,ygrada1_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la segunda grada/barrera
+    plot([xgrada1_i, xgrada1_f], [ygrada1_f, ygrada1_f],'color',[0 0 0]);   %Se grafica una linea horizontal entre el izquierdo 1 y derecho 1
+    gx1_i=[xgrada1_i xgrada1_i];   
+    gy1_i=[ygrada1_f ygrada1_f-10];
+    plot(gx1_i,gy1_i,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto izquierdo 1 e izquierdo 2
+
+    hold on
+    plot(xgrada1_i,ygrada1_f-10,'o','color',[0 0 0]);
+    hold on
+    plot(xgrada1_f,ygrada1_f-10,'o','color',[0 0 0]);
+    plot([xgrada1_i, xgrada1_f], [ygrada1_f-10, ygrada1_f-10],'color',[0 0 0]); %Se grafica una linea horizontal entre el izquierdo 2 y derecho 2 
+    gx1_f=[xgrada1_f xgrada1_f];
+    gy1_f=[ygrada1_f ygrada1_f-10];
+    plot(gx1_f,gy1_f,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto derecho 1 y derecho 2
+
+    hold on
+
+    %Gradas 2
+    plot(xgrada2_i,ygrada2_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la primer grada/barrera
+    hold on
+    plot(xgrada2_f,ygrada2_f,'o','color',[0 0 0]);  %Se grafica el punto izquierdo de la segunda grada/barrera
+    plot([xgrada2_i, xgrada2_f], [ygrada2_f, ygrada2_f],'color',[0 0 0]) %Se grafica una linea horizontal entre el izquierdo 1 y derecho 1 
+    gx2_i=[xgrada2_i xgrada2_i];
+    gy2_i=[ygrada2_f ygrada2_f+10];
+    plot(gx2_i,gy2_i,'color',[0 0 0]);  %Se grafica una linea vertical entre el punto izquierdo 1 e izquierdo 2
+
+    hold on
+    plot(xgrada2_i,ygrada2_f+10,'o','color',[0 0 0]);
+    hold on
+    plot(xgrada2_f,ygrada2_f+10,'o','color',[0 0 0]);
+    plot([xgrada2_i, xgrada2_f], [ygrada2_f+10, ygrada2_f+10],'color',[0 0 0]) %Se grafica una linea horizontal entre el derecho 1 e izquierdo 2 
+
+    gx2_f=[xgrada2_f xgrada2_f];
+    gy2_f=[ygrada2_f ygrada2_f+10];
+    plot(gx2_f,gy2_f,'color',[0 0 0]); %Se grafica una linea vertical entre el punto derecho 1 y derecho 2
+    
     ph = plot(px, py,'o');
-    pause(0.1);
+    
+    %pause(0.1);
     px = px+2800/100;
     py = -0.000002249*px^3+0.010770716*px^2-13.061982421*px+1700.740063337;
 end
