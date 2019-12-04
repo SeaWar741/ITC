@@ -105,7 +105,7 @@ int Vuelo::getPasajero(int i,int j){
 }
 
 string Vuelo::str(){ /*Arreglar*/
-    return fecha.str()+"|"+hora.str()+"|Vuelo de "+sAerolinea+" con destino a "+sDestino;
+    return fecha.str()+"|"+hora.str()+"|"+sAerolinea+"|"+sDestino+"|"+to_string(iPrecio);
 }
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){

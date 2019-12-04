@@ -52,7 +52,20 @@ int Fecha::getYear(){
     return iYear;
 }
 string Fecha::str(){
-    return to_string(iDia)+"/"+to_string(iMes)+"/"+to_string(iYear);
+    string day,month;//variables para hora y minuto
+    if(iDia<10){
+        day = "0"+to_string(iDia);//hora concatenada con 0 en caso de que sea menor a 10
+    }
+    else{
+        day = to_string(iDia);
+    }
+    if(iMes<10){
+        month = "0"+to_string(iMes);//minutos concatenada con 0 en caso de que sea menor a 10
+    }
+    else{
+        month = to_string(iMes);
+    }
+    return day+"/"+month+"/"+to_string(iYear);//se imprime la hora y minutos
 }
 void Fecha::diaSiguiente(){
     while ((1 + iDia) > diasMes()){

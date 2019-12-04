@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream> 
+#include <cstring>
 #include "Vuelo.h"
 
 using namespace std;
@@ -66,29 +67,44 @@ void filldata(){
                 string word; 
                 ss >> word; 
                 if(counter== 0){//date
-                    vector<int> vect;
-                    stringstream ss(word);
+                    //12/04/2019
+                    int n = word.length(); 
+  
+                    // declaring character array 
+                    char char_array[10 + 1]; 
+                
+                    // copying the contents of the 
+                    // string to char array 
+                    strcpy(char_array, word.c_str()); 
+                    /*for (size_t i = 0; i < 11; i++){
+                        cout<<char_array[i]<<endl;
+                    }*/
 
-                    for (int i; ss >> i;) {
-                        vect.push_back(i);    
-                        if (ss.peek() != '/')
-                            ss.ignore();
-                    }
+                    string dia1(1,char_array[0]);
+                    string dia2(1,char_array[1]);
 
-                    for (size_t i = 0; i < vect.size(); i++){
-                        if (counter ==0){
-                            Fecha.setDia(vect[i]);
-                        }
-                        else if (counter ==1){
-                            Fecha.setMes(vect[i]);
-                        }
-                        else if (counter ==3){
-                            Fecha.setYear(vect[i]);
-                        }
-                    }
-                    counter2=0;
+                    string mes1(1,char_array[3]);
+                    string mes2(1,char_array[4]);
+
+                    string ano1(1,char_array[6]);
+                    string ano2(1,char_array[7]);
+                    string ano3(1,char_array[8]);
+                    string ano4(1,char_array[9]);
+
+                    //cout<<char_array[0]<<char_array[1]<<endl;
+                    //cout<<stoi(dia1+dia2)<<endl;
+
+                    Fecha.setDia(stoi(dia1+dia2));
+
+                    Fecha.setMes(stoi(mes1+mes2));
+    
+                    Fecha.setYear(stoi(ano1+ano2+ano3+ano4));
+                    
+                    Vuelo.setFecha(Fecha);
+                    //counter=0;
                 }
                 else if(counter== 1){//hour
+                    //12:59
                     vector<int> vect;
                     stringstream ss(word);
 
@@ -98,14 +114,15 @@ void filldata(){
                             ss.ignore();
                     }
                     for (size_t i = 0; i < vect.size(); i++){
-                        if (counter ==0){
+                        if (i ==0){
                             Hora.setHoras(vect[i]);
                         }
-                        else if (counter ==1){
+                        else if (i ==1){
                             Hora.setMinutos(vect[i]);
                         }
                     }
-                    counter2=0;
+                    Vuelo.setHora(Hora);
+                    //counter2=0;
                 }
                 else if(counter== 2){//price
                     Vuelo.setPrecio(stoi(word));
