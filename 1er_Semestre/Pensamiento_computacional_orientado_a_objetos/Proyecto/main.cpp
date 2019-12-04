@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream> 
 #include <cstring>
+#include <algorithm>
 #include "Vuelo.h"
 
 using namespace std;
@@ -148,6 +149,7 @@ void filldata(){
 void recordData(){
     string objectinfo;
     ofstream outfile;
+    //pasajeros
     outfile.open("test.txt");
     for (int i = 0; i < Pasajeros.size(); i++){
         objectinfo+=Pasajeros[i].getName()+" ";
@@ -159,8 +161,24 @@ void recordData(){
         outfile << objectinfo << endl;
         objectinfo ="";
     }
+    // close the opened file.
+    outfile.close();
+    //Vuelos
+    outfile.open("test2.txt");
+    for (int i = 0; i < Vuelos.size(); i++){
+        objectinfo+=Vuelos[i].getFecha().str()+" ";
+        objectinfo+=Vuelos[i].getHora().str()+" ";
+        objectinfo+=to_string(Vuelos[i].getPrecio())+" ";
+        objectinfo+=Vuelos[i].getDestino()+" ";
+        objectinfo+=Vuelos[i].getAerolinea()+" ";
+        objectinfo+=to_string(Vuelos[i].getKilometros())+" ";
+        // write inputted data into the file.
+        outfile << objectinfo << endl;
+        objectinfo ="";
+    }
    // close the opened file.
    outfile.close();
+
 }
 
 void printdata(){
@@ -211,6 +229,39 @@ int login(){
         }
     }
     cout<<"Usuario no registrado"<<endl;
+    return -1;
+}
+
+int loginVuelo(){
+    Fecha Fecha;
+    RelojD Hora;
+    string sDestino;
+    string sAerolinea;
+    int dia,mes,ano,hora,minuto;
+
+    cout<<"Ingresar dia: >";cin>>dia;
+    cout<<"Ingresar mes: >";cin>>mes;
+    cout<<"Ingresar ano: >";cin>>ano;
+
+    Fecha.setDia(dia);
+    Fecha.setMes(mes);
+    Fecha.setYear(ano);
+    
+    cout<<"Ingresar hora: >";cin>>hora;
+    cout<<"Ingresar minuto: >";cin>>minuto;
+
+    Hora.setHoras(hora);
+    Hora.setMinutos(minuto);
+
+    cout<<"Ingresar Aerolinea: >";cin>>sAerolinea;
+    cout<<"Ingresar Destino: >";cin>>sDestino;
+
+    for (size_t i = 0; i < Vuelos.size(); i++){
+        if (Vuelos[i].getFecha().str() == Fecha.str() && Vuelos[i].getHora().str() == Hora.str() && Vuelos[i].getAerolinea() == sAerolinea && Vuelos[i].getDestino() == sDestino){
+            return i;
+        }   
+    }
+    cout<<"Vuelo no registrado"<<endl;
     return -1;
 }
 
@@ -418,6 +469,7 @@ void pasajeros(){
                 cout<<"Opcion no valida, volver a intentar"<<endl;
                 break;
         }
+        recordData();
         cout<<jump;
     }
 }
@@ -425,8 +477,10 @@ void pasajeros(){
 void vuelos(){
     bool continueg =true;
     int option;
-    int userid;
-    string nuser,celular,contrasena;
+    int vueloid,dia,mes,ano,hora,minuto,iPrecio,ikm;
+    string iDestino,Aerolinea;
+    Fecha Fecha;
+    RelojD Hora;
     while (continueg){
         option = menuVuelos();
         cout<<jump;
@@ -435,22 +489,54 @@ void vuelos(){
                 crearVuelo();
                 break;
             case 2:
-                printdata2();
+                vueloid = loginVuelo();
+                cout<<"Ingresar Dia: >";cin>>dia;
+                cout<<"Ingresar Mes: >";cin>>mes;
+                cout<<"Ingresar Ano: >";cin>>ano;
+                if (vueloid !=-1){
+                    Fecha.setDia(dia);
+                    Fecha.setMes(dia);
+                    Fecha.setYear(ano);
+                    Vuelos[vueloid].setFecha(Fecha);
+                }
                 break;
             case 3:
-                
+                vueloid = loginVuelo();
+                cout<<"Ingresar Hora: >";cin>>hora;
+                cout<<"Ingresar Minuto: >";cin>>hora;
+                if (vueloid !=-1){
+                    Hora.setHoras(hora);
+                    Hora.setMinutos(minuto);
+                    Vuelos[vueloid].setHora(Hora);
+                }
                 break;
             case 4:
-                
+                vueloid = loginVuelo();
+                cout<<"Ingresar Precio: >$";cin>>iPrecio;
+                if (vueloid !=-1){
+                    Vuelos[vueloid].setPrecio(iPrecio);
+                }
                 break;
             case 5:
-                
+                vueloid = loginVuelo();
+                cout<<"Ingresar Destino: >";cin>>iDestino;
+                if (vueloid !=-1){
+                    Vuelos[vueloid].setDestino(iDestino);
+                }
                 break;
             case 6:
-                
+                vueloid = loginVuelo();
+                cout<<"Ingresar Aerolinea: >";cin>>Aerolinea;
+                if (vueloid !=-1){
+                    Vuelos[vueloid].setAerolinea(Aerolinea);
+                }
                 break;
             case 7:
-                
+                vueloid = loginVuelo();
+                cout<<"Establecer Km: >";cin>>Aerolinea;
+                if (vueloid !=-1){
+                    Vuelos[vueloid].setKilometros(Aerolinea);
+                }
                 break;
             case 8:
 
@@ -465,7 +551,7 @@ void vuelos(){
                 
                 break;
             case 12:
-                
+                printdata2();
                 break;
             case 0:
                 continueg = false;
@@ -475,6 +561,7 @@ void vuelos(){
                 cout<<"Opcion no valida, volver a intentar"<<endl;
                 break;
         }
+        recordData();
         cout<<jump;
     }
 }
@@ -483,9 +570,6 @@ int main(){
     bool continueg = true;
     int suboption2;
     filldata(); //se lee todos los usuarios,vuelos y se insertan en el vector
-    recordData();
-    /*
-
     while(continueg){
         cout<<jump;
         int option1 = menuPrincipal();
@@ -507,7 +591,7 @@ int main(){
             cout<<"Opcion no valida, volver a intentar"<<endl;
             break;
         }
-    }*/
+    }
     return 0;
 }
 
