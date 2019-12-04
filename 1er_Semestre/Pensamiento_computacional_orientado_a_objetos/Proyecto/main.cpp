@@ -359,7 +359,6 @@ void vuelos(int option){
 int main(){
     bool continueg = true;
     int suboption2;
-
     filldata(); //se lee todos los usuarios,vuelos y se insertan en el vector
 
     while(continueg){
