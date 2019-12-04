@@ -1,4 +1,4 @@
-04/10/2019    12:30   15000   New_York    American_Airlines   7000    0  vuelo0.txt
-11/10/2019    09:45   12000   San_Francisco    Aero_Mexico   1200    40  vuelo1.txt
-24/10/2019    23:00   10000   Miami    Jet_Blue   750    110  vuelo2.txt
-02/11/2019    05:15   55000   Marrakech    Delta_Airlines   15000    30  vuelo3.txt
+04/10/2019    12:30   15000   New_York    American_Airlines   7000    0
+11/10/2019    09:45   12000   San_Francisco    Aero_Mexico   1200    40
+24/10/2019    23:00   10000   Miami    Jet_Blue   750    110
+02/11/2019    05:15   55000   Marrakech    Delta_Airlines   15000    30

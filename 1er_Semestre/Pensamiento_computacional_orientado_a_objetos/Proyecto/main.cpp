@@ -145,6 +145,24 @@ void filldata(){
         MyReadFile.close();
 }
 
+void recordData(){
+    string objectinfo;
+    ofstream outfile;
+    outfile.open("test.txt");
+    for (int i = 0; i < Pasajeros.size(); i++){
+        objectinfo+=Pasajeros[i].getName()+" ";
+        objectinfo+=Pasajeros[i].getCel()+" ";
+        objectinfo+=Pasajeros[i].getEmail()+" ";
+        objectinfo+=Pasajeros[i].getPassword()+" ";
+        objectinfo+=to_string(Pasajeros[i].getKm());
+        // write inputted data into the file.
+        outfile << objectinfo << endl;
+        objectinfo ="";
+    }
+   // close the opened file.
+   outfile.close();
+}
+
 void printdata(){
     for(int i=0; i<Pasajeros.size(); ++i){
         cout << Pasajeros[i].str()<<endl;
@@ -465,6 +483,8 @@ int main(){
     bool continueg = true;
     int suboption2;
     filldata(); //se lee todos los usuarios,vuelos y se insertan en el vector
+    recordData();
+    /*
 
     while(continueg){
         cout<<jump;
@@ -487,7 +507,7 @@ int main(){
             cout<<"Opcion no valida, volver a intentar"<<endl;
             break;
         }
-    }
+    }*/
     return 0;
 }
 
