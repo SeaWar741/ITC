@@ -14,7 +14,6 @@ private:
     string sAerolinea;
     int iKm,iAsientos;
     int matPasajeros[30][4];
-    Pasajero Pasajeros[30][4];
 public:
     Vuelo();
     Vuelo(Fecha,RelojD,int,string,string,int);
@@ -25,7 +24,7 @@ public:
     void setDestino(string);
     void setAerolinea(string);
     void setKilometros(int);
-    void setReservaAsiento(int,int);
+    void setReservaAsiento(int,int,int);
 
     Fecha getFecha();
     RelojD getHora();
@@ -39,7 +38,7 @@ public:
     void muestraAsientosDisponibles();
     void incrementaAsientos();
     void derementaAsientos();
-    void reservarAsiento(Pasajero,int,int);
+    void reservarAsiento(int,int,int);
     void muestraListaPasajeros();
     bool asientoDisponible(int,int);
 };
@@ -78,8 +77,8 @@ void Vuelo::setAerolinea(string sAerolineai){
 void Vuelo::setKilometros(int iKmi){
     iKm = iKmi;
 }
-void Vuelo::setReservaAsiento(int i,int j){
-    matPasajeros[i][j] = 1000;
+void Vuelo::setReservaAsiento(int i,int j,int id){
+    matPasajeros[i][j] = id;
 }
 
 Fecha Vuelo::getFecha(){
@@ -110,7 +109,7 @@ string Vuelo::str(){ /*Arreglar*/
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
-            if(matPasajeros[i][j] !=0){
+            if(matPasajeros[i][j] !=-1){
                 cout<<matPasajeros[i][j]<<"\t";
             }
             else{
@@ -126,9 +125,9 @@ void Vuelo::incrementaAsientos(){
 void Vuelo::derementaAsientos(){
     iAsientos --;
 }
-void Vuelo::reservarAsiento(Pasajero pass,int i,int j){
+void Vuelo::reservarAsiento(int id,int i,int j){
     if (asientoDisponible(i,j)){
-        Pasajeros[i][j]=pass;
+        matPasajeros[i][j]=id;
     }
 }
 void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
@@ -141,11 +140,11 @@ void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
 }
 bool Vuelo::asientoDisponible(int i,int j){
     if (matPasajeros[i][j] == 0){
-        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
+        //cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
         return false;
     }
     else{
-        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
+        //cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
         return true;
     }
 }

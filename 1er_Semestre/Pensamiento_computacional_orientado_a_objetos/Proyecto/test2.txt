@@ -1,5 +1,0 @@
-04/10/2019 12:30 15000 New_York American_Airlines 7000 
-11/10/2019 09:45 12000 San_Francisco Aero_Mexico 1200 
-24/10/2019 23:00 10000 Miami Jet_Blue 750 
-02/11/2019 05:15 55000 Marrakech Delta_Airlines 15000 
-04/12/2019 03:04 7500 Monterrey American_Airlines 1200 
