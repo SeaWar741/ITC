@@ -1,0 +1,70 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="1382499079" file="D:\Ubuntu\Tec\ITC\1er_Semestre\Modelacion_computacional_leyes_de_conservacion\Simulador Pista Formula 1.prj" location="D:\Ubuntu\Tec\ITC\1er_Semestre\Modelacion_computacional_leyes_de_conservacion" name="Simulador Pista Formula 1" target="target.mlapps" target-name="Package App">
+    <param.appname>Simulador Pista Formula 1</param.appname>
+    <param.authnamewatermark>Juan Carlos Garfias Tovar</param.authnamewatermark>
+    <param.email>juanca741@gmail.com</param.email>
+    <param.company>Tecnologico de Monterrey</param.company>
+    <param.icon>${PROJECT_ROOT}\Simulador Pista Formula 1_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\Simulador Pista Formula 1_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\Simulador Pista Formula 1_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\Simulador Pista Formula 1_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Simulador de pista de carreras de Formula 1</param.summary>
+    <param.description>Abraham Cepeda Oseguera – A00827666
+Juan Carlos Garfias Tovar – A01652138
+Alejandro Daniel González Carrillo – A01570396
+Hernán Salinas Ibarra – A01570409 
+
+Proyecto para Modelación computacional aplicando leyes de conservación 2019
+Profesores
+Delia María Soledad Castro Rojas
+Alberto Uriel Rivera Ortega
+Eduardo Uresti Charre</param.description>
+    <param.screenshot>D:\AppData\Temp\tpb213c956_934c_4e3c_a581_a41dff98836e.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>99f0c7b0-4fd9-4a1b-ae1c-72028cf3c687</param.guid>
+    <unset>
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\App_Formula1_Final.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="D:\Ubuntu\Tec\ITC\1er_Semestre" name="Modelacion_computacional_leyes_de_conservacion" optional="false">D:\Ubuntu\Tec\ITC\1er_Semestre\Modelacion_computacional_leyes_de_conservacion</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>D:\Program Files\Matlab\R2019a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
