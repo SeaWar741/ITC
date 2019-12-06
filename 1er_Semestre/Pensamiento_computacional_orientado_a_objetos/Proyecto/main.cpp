@@ -565,7 +565,20 @@ void vuelos(){
                 cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Establecer asientos
                 break;
             case 9:
-                cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Todos los asientos Vacios
+                bool accept = false;
+                char accepting;
+                vueloid = loginVuelo();
+                if (vueloid !=-1){
+                    cout<<"Deseas eliminar a todos del vuelo? (s/n) >";
+                    cin>>accepting;
+                    if(accepting == 's'|| accepting =='S'){
+                        for(int i = 0;i<30;i++){
+                            for(int j = 0;j<4;j++){
+                                Vuelos[vueloid].setReservaAsiento(i,j,-1);
+                            }
+                        }
+                    }
+                }
                 break;
             case 10:
                 vueloid = loginVuelo();
