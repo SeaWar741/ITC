@@ -109,7 +109,7 @@ string Vuelo::str(){ /*Arreglar*/
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
-            if(matPasajeros[i][j] !=-1){
+            if(matPasajeros[i][j] != -1){
                 cout<<matPasajeros[i][j]<<"\t";
             }
             else{
@@ -127,7 +127,7 @@ void Vuelo::derementaAsientos(){
 }
 void Vuelo::reservarAsiento(int id,int i,int j){
     if (asientoDisponible(i,j)){
-        matPasajeros[i][j]=id;
+        setReservaAsiento(i,j,id);
     }
 }
 void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
@@ -140,11 +140,11 @@ void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
 }
 bool Vuelo::asientoDisponible(int i,int j){
     if (matPasajeros[i][j] == 0){
-        //cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
+        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
         return false;
     }
     else{
-        //cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
+        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
         return true;
     }
 }

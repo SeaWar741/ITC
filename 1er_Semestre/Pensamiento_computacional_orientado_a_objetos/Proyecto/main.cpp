@@ -15,7 +15,7 @@ string jump="\n";
 
 void filldata(){
     //Variables Personas
-    string myText;
+    string myText,myText2;
     int km;
     int counter=0;
     Pasajero pasajero;
@@ -61,7 +61,7 @@ void filldata(){
         MyReadFile.close();
     //Vuelos
         ifstream MyReadFile2("vuelos.txt");
-        int vueloid;
+        int vueloid = 0;
         while (getline (MyReadFile2, myText)) {
             istringstream ss(myText); 
             do { 
@@ -141,18 +141,20 @@ void filldata(){
             } while (ss);
 
             ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
+            cout<<"vuelo"+to_string(vueloid)+".txt"<<endl;
             int i=0,j=0;
-            while (getline (MyReadFile3, myText)) {
-                istringstream ss(myText); 
+            while (getline (MyReadFile3, myText2)) {
+                istringstream ss(myText2); 
                 do { 
                     string word; 
                     int value= 0;
                     ss >> word;
-                    matPasajeros[i][j] =stoi(word);
                     cout<<word<<endl;
-                    matPasajeros[i][j]=stoi(word);
+                    //matPasajeros[i][j]=stoi(word);
+                    Vuelo.setReservaAsiento(i,j,stoi(word));
                     j++;
-                } while (ss&&j<3);
+                } while (ss&&j<4);
+    
                 j=0;
                 i++;
             }
