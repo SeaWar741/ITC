@@ -113,10 +113,10 @@ void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
             if(matPasajeros[i][j] !=-1){
-                cout<<"O"<<"\t";
+                cout<<"ND"<<"\t";
             }
             else{
-                cout<<"-"<<"\t";
+                cout<<"--"<<"\t";
             }
         }
         cout<<endl;
@@ -136,11 +136,11 @@ void Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
 }
 void Vuelo::muestraListaPasajeros(vector <Pasajero> Pasajeros){ /*Arreglar*/
     int counter = 0;
-    string print;
+    string print="";
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
             if(matPasajeros[i][j] !=-1){
-                print = Pasajeros[matPasajeros[i][j]].getName()+"\n";
+                print += Pasajeros[matPasajeros[i][j]].getName()+"\n";
                 counter++;
             }
         }

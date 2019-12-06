@@ -158,7 +158,6 @@ void filldata(){
                 i++;
             }
             MyReadFile3.close();
-
             Vuelos.push_back(Vuelo); 
             vueloid++;
             counter=0;
