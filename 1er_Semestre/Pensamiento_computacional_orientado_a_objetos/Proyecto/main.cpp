@@ -62,7 +62,6 @@ void filldata(){
     //Vuelos
         ifstream MyReadFile2("vuelos.txt");
         int vueloid;
-
         while (getline (MyReadFile2, myText)) {
             istringstream ss(myText); 
             do { 
@@ -149,7 +148,7 @@ void filldata(){
                     string word; 
                     int value= 0;
                     ss >> word;
-                    //matPasajeros[i][j] =stoi(word);
+                    matPasajeros[i][j] =stoi(word);
                     cout<<word<<endl;
                     matPasajeros[i][j]=stoi(word);
                     j++;
