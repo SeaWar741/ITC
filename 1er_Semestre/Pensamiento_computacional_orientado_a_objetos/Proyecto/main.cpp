@@ -8,9 +8,9 @@
 #include "Vuelo.h"
 
 using namespace std;
-
 vector<Pasajero> Pasajeros;
 vector<Vuelo> Vuelos;
+
 string jump="\n";
 
 void filldata(){
@@ -152,7 +152,7 @@ void filldata(){
                     //matPasajeros[i][j]=stoi(word);
                     Vuelo.setReservaAsiento(i,j,stoi(word));
                     j++;
-                } while (ss&&j<4);
+                } while (j<4);
     
                 j=0;
                 i++;
@@ -605,7 +605,7 @@ void vuelos(){
                 }
                 break;
             case 16:
-                printdata2();
+                //OBTENER ASIENTOS
                 break;
             case 17:
                 vueloid = loginVuelo();
@@ -626,7 +626,6 @@ void vuelos(){
                 cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Decrementa asientos
                 break;
             case 21:
-                cout<<"FATLANTE"<<endl;
                 userid = login();
                 if(userid !=-1){
                     vueloid = loginVuelo();
@@ -638,7 +637,7 @@ void vuelos(){
             case 22:
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
-                    Vuelos[vueloid].muestraListaPasajeros();
+                    Vuelos[vueloid].muestraListaPasajeros(Pasajeros);
                 }
                 break;
             case 23:
@@ -647,6 +646,9 @@ void vuelos(){
                     vueloid = loginVuelo();
                     Vuelos[vueloid].asientoDisponible(fila,col);
                 }
+                break;
+            case 24:
+                printdata2();
                 break;
             case 0:
                 continueg = false;

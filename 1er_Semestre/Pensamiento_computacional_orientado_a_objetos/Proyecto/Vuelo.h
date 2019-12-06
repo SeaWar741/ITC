@@ -1,9 +1,12 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "Fecha.h"
 #include "RelojD.h"
 #include "Pasajero.h"
 using namespace std;
+
+
 
 class Vuelo{
 private:
@@ -39,7 +42,7 @@ public:
     void incrementaAsientos();
     void derementaAsientos();
     void reservarAsiento(Pasajero,int,int,int);
-    void muestraListaPasajeros();
+    void muestraListaPasajeros(vector <Pasajero>);
     bool asientoDisponible(int,int);
 };
 
@@ -103,20 +106,20 @@ int Vuelo::getPasajero(int i,int j){
     return matPasajeros[i][j];
 }
 
-string Vuelo::str(){ /*Arreglar*/
+string Vuelo::str(){ 
     return fecha.str()+"|"+hora.str()+"|"+sAerolinea+"|"+sDestino+"|"+to_string(iPrecio);
 }
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
-            if(matPasajeros[i][j] != -1){
-                cout<<"ND"<<"\t";
+            if(matPasajeros[i][j] !=-1){
+                cout<<"O"<<"\t";
             }
             else{
-                cout<<matPasajeros[i][j]<<"\t";
+                cout<<"-"<<"\t";
             }
         }
-        cout<<endl;  
+        cout<<endl;
     }
 }
 void Vuelo::incrementaAsientos(){
@@ -128,19 +131,30 @@ void Vuelo::derementaAsientos(){
 void Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
     if (asientoDisponible(i,j)){
         setReservaAsiento(i,j,id);
-        cout<<pass.getName<<" Se reservó con exito el asiento!"<<endl;
+        cout<<pass.getName()<<", se reservo con exito el asiento!"<<endl;
     }
 }
-void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
+void Vuelo::muestraListaPasajeros(vector <Pasajero> Pasajeros){ /*Arreglar*/
+    int counter = 0;
+    string print;
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
-            cout<<matPasajeros[i][j]<<"\t";
+            if(matPasajeros[i][j] !=-1){
+                print = Pasajeros[matPasajeros[i][j]].getName()+"\n";
+                counter++;
+            }
         }
-        cout<<endl;  
+    }
+    if(counter >0){
+        cout<<"-*-*-*-*-*-*-=Pasajeros en el vuelo ("+to_string(counter)+")=-*-*-*-*-*-*-"<<endl;
+        cout<<print<<endl;
+    }
+    else{
+        cout<<"No hay pasajeros registrados para el vuelo"<<endl;
     }
 }
 bool Vuelo::asientoDisponible(int i,int j){
-    if (matPasajeros[i][j] == 0){
+    if (matPasajeros[i][j] !=-1){
         cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
         return false;
     }
