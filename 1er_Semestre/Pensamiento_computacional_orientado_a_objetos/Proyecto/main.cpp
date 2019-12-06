@@ -80,7 +80,6 @@ void filldata(){
                     /*for (size_t i = 0; i < 11; i++){
                         cout<<char_array[i]<<endl;
                     }*/
-
                     string dia1(1,char_array[0]);
                     string dia2(1,char_array[1]);
 
@@ -141,7 +140,7 @@ void filldata(){
             } while (ss);
 
             ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
-            cout<<"vuelo"+to_string(vueloid)+".txt"<<endl;
+            //cout<<"vuelo"+to_string(vueloid)+".txt"<<endl;
             int i=0,j=0;
             while (getline (MyReadFile3, myText2)) {
                 istringstream ss(myText2); 
@@ -149,7 +148,7 @@ void filldata(){
                     string word; 
                     int value= 0;
                     ss >> word;
-                    cout<<word<<endl;
+                    //cout<<word<<endl;
                     //matPasajeros[i][j]=stoi(word);
                     Vuelo.setReservaAsiento(i,j,stoi(word));
                     j++;
@@ -382,6 +381,7 @@ void crearVuelo(){
         "\n21) Reservar Asiento "<<
         "\n22) Muestra lista de pasajeros del vuelo"<<
         "\n23) Verificar disponibilidad asiento "<<
+        "\n24) Imprimir Vuelos "<<
         "\n0) Terminar "<<
         "\nTeclea la opcion: >";
         cin>>iOpcion;
@@ -500,7 +500,7 @@ void pasajeros(){
 
 void vuelos(){
     bool continueg =true;
-    int option;
+    int option,userid,fila,col;
     int vueloid,dia,mes,ano,hora,minuto,iPrecio,ikm;
     string iDestino,Aerolinea;
     Fecha Fecha;
@@ -605,7 +605,7 @@ void vuelos(){
                 }
                 break;
             case 16:
-                cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Obtener asientos
+                printdata2();
                 break;
             case 17:
                 vueloid = loginVuelo();
@@ -626,7 +626,14 @@ void vuelos(){
                 cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Decrementa asientos
                 break;
             case 21:
-                cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Reservar asientos
+                cout<<"FATLANTE"<<endl;
+                userid = login();
+                if(userid !=-1){
+                    vueloid = loginVuelo();
+                    cout<<"Ingresar Fila: >";cin>>fila;
+                    cout<<"Ingresar Columna: >";cin>>col;
+                    Vuelos[vueloid].reservarAsiento(Pasajeros[userid],userid,fila,col);
+                }
                 break;
             case 22:
                 vueloid = loginVuelo();
@@ -635,10 +642,11 @@ void vuelos(){
                 }
                 break;
             case 23:
-                cout<<"FATLANTE"<<endl;//<---FALTA ESTO, Verificar disponibilidad asientos
-                break;
-            case 24:
-                printdata2();
+                userid = login();
+                if(userid !=-1){
+                    vueloid = loginVuelo();
+                    Vuelos[vueloid].asientoDisponible(fila,col);
+                }
                 break;
             case 0:
                 continueg = false;

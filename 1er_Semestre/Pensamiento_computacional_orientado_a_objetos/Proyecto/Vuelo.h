@@ -38,7 +38,7 @@ public:
     void muestraAsientosDisponibles();
     void incrementaAsientos();
     void derementaAsientos();
-    void reservarAsiento(int,int,int);
+    void reservarAsiento(Pasajero,int,int,int);
     void muestraListaPasajeros();
     bool asientoDisponible(int,int);
 };
@@ -110,10 +110,10 @@ void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
             if(matPasajeros[i][j] != -1){
-                cout<<matPasajeros[i][j]<<"\t";
+                cout<<"ND"<<"\t";
             }
             else{
-                cout<<"ND"<<"\t";
+                cout<<matPasajeros[i][j]<<"\t";
             }
         }
         cout<<endl;  
@@ -125,9 +125,10 @@ void Vuelo::incrementaAsientos(){
 void Vuelo::derementaAsientos(){
     iAsientos --;
 }
-void Vuelo::reservarAsiento(int id,int i,int j){
+void Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
     if (asientoDisponible(i,j)){
         setReservaAsiento(i,j,id);
+        cout<<pass.getName<<" Se reservó con exito el asiento!"<<endl;
     }
 }
 void Vuelo::muestraListaPasajeros(){ /*Arreglar*/
