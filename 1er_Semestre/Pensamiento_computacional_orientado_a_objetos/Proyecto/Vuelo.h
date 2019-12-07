@@ -38,6 +38,7 @@ public:
     int getKilometros();
     int getPasajero(int,int);
     int getAsientos();
+    string getmatPasajeros();
 
     string str();
     void muestraAsientosDisponibles();
@@ -113,6 +114,21 @@ int Vuelo::getPasajero(int i,int j){
 }
 int Vuelo::getAsientos(){
     return iAsientos;
+}
+string Vuelo::getmatPasajeros(){
+    string word="";
+    for (int i = 0; i < 30; i++){
+        for(int j=0;j<4;i++){
+            if(i<29){
+                word+=to_string(matPasajeros[i][j])+",";
+            }
+            else{
+                word+=to_string(matPasajeros[i][j]);
+            }
+        }
+    }
+    
+    return word;
 }
 
 string Vuelo::str(){ 

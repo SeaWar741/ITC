@@ -60,6 +60,7 @@ void filldata(){
             //cout<<jump;
         }
         MyReadFile.close();
+//**************************************************************************************
     //Vuelos
         ifstream MyReadFile2("vuelos.txt");
         int vueloid = 0;
@@ -67,20 +68,15 @@ void filldata(){
             istringstream ss(myText); 
             do { 
                 string word; 
-                ss >> word; 
+                ss >> word;
                 if(counter== 0){//date
                     //12/04/2019
                     int n = word.length(); 
   
                     // declaring character array 
                     char char_array[10 + 1]; 
-                
-                    // copying the contents of the 
-                    // string to char array 
+
                     strcpy(char_array, word.c_str()); 
-                    /*for (size_t i = 0; i < 11; i++){
-                        cout<<char_array[i]<<endl;
-                    }*/
                     string dia1(1,char_array[0]);
                     string dia2(1,char_array[1]);
 
@@ -91,9 +87,6 @@ void filldata(){
                     string ano2(1,char_array[7]);
                     string ano3(1,char_array[8]);
                     string ano4(1,char_array[9]);
-
-                    //cout<<char_array[0]<<char_array[1]<<endl;
-                    //cout<<stoi(dia1+dia2)<<endl;
 
                     Fecha.setDia(stoi(dia1+dia2));
 
@@ -107,7 +100,7 @@ void filldata(){
                 else if(counter== 1){//hour
                     //12:59
                     vector<int> vect;
-                    stringstream ss(word);
+                    istringstream ss(word);
 
                     for (int i; ss >> i;) {
                         vect.push_back(i);    
@@ -142,22 +135,21 @@ void filldata(){
                 }
                 counter++;
             } while (ss);
+            
+            
 
             ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
-            //cout<<"vuelo"+to_string(vueloid)+".txt"<<endl;
             int i=0,j=0;
-            while (getline (MyReadFile3, myText2)) {
-                istringstream ss(myText2); 
-                do { 
+            while (getline (MyReadFile3, myText2)&&i<30) {
+                stringstream ss(myText2); 
+                while(j<4){
                     string word; 
-                    int value= 0;
                     ss >> word;
                     //cout<<word<<endl;
                     //matPasajeros[i][j]=stoi(word);
                     Vuelo.setReservaAsiento(i,j,stoi(word));
                     j++;
-                } while (j<4);
-    
+                }
                 j=0;
                 i++;
             }
@@ -166,7 +158,6 @@ void filldata(){
             nVuelos++;
             vueloid++;
             counter=0;
-            //cout<<jump;
         }
         MyReadFile2.close();
 }
@@ -203,7 +194,28 @@ void recordData(){
     }
    // close the opened file.
    outfile.close();
+   //Asientos vuelos
+   string wordly="";
+   for (int i = 0; i < Vuelos.size(); i++){
+       outfile.open("vuelo"+to_string(i)+".txt");
 
+        wordly=Vuelos[i].getmatPasajeros();
+        vector<string> vect;
+        istringstream ss(wordly);
+        for (string i; ss >> i;) {
+            vect.push_back(i);    
+            if (ss.peek() == ',')
+                ss.ignore();
+        }
+        for (int i = 0; i < 30; i++){
+           for (int j = 0; j < 4; j++){
+               wordly=wordly+vect[i]+" ";
+           }
+           wordly=wordly+vect[i]+"\n";
+       }
+       outfile << wordly << endl;
+       outfile.close();
+   }
 }
 
 void printdata(){
@@ -756,4 +768,3 @@ int main(){
     }
     return 0;
 }
-
