@@ -198,7 +198,6 @@ void recordData(){
    outfile.close();
 
    //Asientos vuelos
-
    string wordly="";
    for (int i = 0; i < Vuelos.size(); i++){
         outfile.open("vuelo"+to_string(i)+".txt", std::ofstream::out | std::ofstream::trunc);
@@ -212,16 +211,36 @@ void recordData(){
         outfile.close();
    }
 }
+
 //IMPRIME DATOS
 void printdata(){
     for(int i=0; i<Pasajeros.size(); ++i){
         cout << Pasajeros[i].str()<<endl;
     }
 }
+
 void printdata2(){
     for(int i=0; i<Vuelos.size(); ++i){
         cout << Vuelos[i].str()<<endl;
     }
+}
+
+void printdataDate(int dia,int mes,int ano){
+    string word="";
+    int counter = 0;
+    for(int i=0; i<Vuelos.size(); ++i){
+        if(Vuelos[i].getFecha().getDia()==dia&&Vuelos[i].getFecha().getMes() == mes&&Vuelos[i].getFecha().getYear() == ano &&Vuelos[i].getAsientos()<120){
+            if (counter==9){
+                word +=Vuelos[i].str()+"\n\n";
+                counter =0;
+            }
+            else{
+                word +=Vuelos[i].str()+"\n";
+                counter++;
+            }
+        }
+    }
+    cout<<word<<endl;
 }
 //Funciones Pasajero
 bool existeUsuario(string user){
@@ -299,6 +318,41 @@ int loginVuelo(){
     return -1;
 }
 
+int loginVueloDate(int idia,int imes,int anoi){
+    Fecha Fecha;
+    RelojD Hora;
+    string sDestino;
+    string sAerolinea;
+    int dia,mes,ano,hora,minuto;
+
+    dia = idia;
+    mes = imes;
+    ano = anoi;
+
+    Fecha.setDia(dia);
+    Fecha.setMes(mes);
+    Fecha.setYear(ano);
+    
+    cout<<"Para seleccionar el vuelo ingresa los siguientes datos:"<<endl;
+    cout<<"Ingresar hora: >";cin>>hora;
+    cout<<"Ingresar minuto: >";cin>>minuto;
+
+    Hora.setHoras(hora);
+    Hora.setMinutos(minuto);
+
+    cout<<"Ingresar Aerolinea: >";cin>>sAerolinea;
+    cout<<"Ingresar Destino: >";cin>>sDestino;
+
+    for (size_t i = 0; i < Vuelos.size(); i++){
+        if (Vuelos[i].getFecha().str() == Fecha.str() && Vuelos[i].getHora().str() == Hora.str() && Vuelos[i].getAerolinea() == sAerolinea && Vuelos[i].getDestino() == sDestino){
+            return i;
+        }   
+    }
+    cout<<"Vuelo no registrado"<<endl;
+    return -1;
+    
+}
+
 //Funciones Vuelos
 void crearVuelo(){
     Vuelo Vuelo;
@@ -351,81 +405,79 @@ void crearVuelo(){
 }
 
 //Menus
-    int menuPasajeros(){
-        int iOpcion;
-        cout<<"*** Menu de clientes ***"<<
-        "\n1) Crear un nuevo usuario "<<
-        "\n*** Metodos Modificadores ***"<<
-        "\n2) Cambiar nombre "<<
-        "\n3) Cambiar celular "<<
-        "\n4) Cambiar contrasena "<<
-        "\n*** Metodos de Acceso "<<
-        "\n5) Obtener nombre "<<
-        "\n6) Obtener celular "<<
-        "\n7) Obtener Km "<<
-        "\n8) Obtener email "<<
-        "\n9) Obtener contrasena "<<
-        "\n*** Otros Metodos *** "<<
-        "\n10) Incrementa kilometros "<<
-        "\n11) decrementa kilometros "<<
-        //"\n12) Validar Cuenta "<<
-        "\n12) Imprimir Cuentas "<<
-        "\n0) Terminar "<<
-        "\nTeclea la opcion: >";
-        cin>>iOpcion;
-        return iOpcion;
-    }
+int menuPasajeros(){
+    int iOpcion;
+    cout<<"*** Menu de clientes ***"<<
+    "\n1) Crear un nuevo usuario "<<
+    "\n*** Metodos Modificadores ***"<<
+    "\n2) Cambiar nombre "<<
+    "\n3) Cambiar celular "<<
+    "\n4) Cambiar contrasena "<<
+    "\n*** Metodos de Acceso "<<
+    "\n5) Obtener nombre "<<
+    "\n6) Obtener celular "<<
+    "\n7) Obtener Km "<<
+    "\n8) Obtener email "<<
+    "\n9) Obtener contrasena "<<
+    "\n*** Otros Metodos *** "<<
+    "\n10) Incrementa kilometros "<<
+    "\n11) decrementa kilometros "<<
+    //"\n12) Validar Cuenta "<<
+    "\n12) Imprimir Cuentas "<<
+    "\n0) Terminar "<<
+    "\nTeclea la opcion: >";
+    cin>>iOpcion;
+    return iOpcion;
+}
 
-    int menuVuelos(){
-        int iOpcion;
-        cout<<"*** Menu de vuelos ***"<<
-        "\n1) Crear un nuevo vuelo "<<
-        "\n*** Metodos Modificadores ***"<<
-        "\n2) Establecer fecha "<<
-        "\n3) Establecer hora "<<
-        "\n4) Establecer precio "<<
-        "\n5) Establecer destino "<<
-        "\n6) Establecer aerolinea "<<
-        "\n7) Establecer Km "<<
-        "\n8) Establecer Asientos "<<
-        "\n9) Dejar todos los asientos vacios "<<
-        "\n*** Metodos de Acceso *** "<<
-        "\n10) Obtener fecha "<<
-        "\n11) Obtener hora "<<
-        "\n12) Obtener precio "<<
-        "\n13) Obtener destino "<<
-        "\n14) Obtener aerolinea "<<
-        "\n15) Obtener km "<<
-        "\n16) Obtener asientos "<<
-        "\n*** Otros Metodos *** "<<
-        "\n17) Desplegar info vuelo "<<
-        "\n18) Muestra asientos disponibles "<<
-        "\n19) Incrementa Asientos "<<
-        "\n20) Decrementa Asientos "<<
-        "\n21) Reservar Asiento "<<
-        "\n22) Muestra lista de pasajeros del vuelo"<<
-        "\n23) Verificar disponibilidad asiento "<<
-        "\n24) Imprimir Vuelos "<<
-        "\n0) Terminar "<<
-        "\nTeclea la opcion: >";
-        cin>>iOpcion;
-        return iOpcion;
-    }
+int menuVuelos(){
+    int iOpcion;
+    cout<<"*** Menu de vuelos ***"<<
+    "\n1) Crear un nuevo vuelo "<<
+    "\n*** Metodos Modificadores ***"<<
+    "\n2) Establecer fecha "<<
+    "\n3) Establecer hora "<<
+    "\n4) Establecer precio "<<
+    "\n5) Establecer destino "<<
+    "\n6) Establecer aerolinea "<<
+    "\n7) Establecer Km "<<
+    "\n8) Establecer Asientos "<<
+    "\n9) Dejar todos los asientos vacios "<<
+    "\n*** Metodos de Acceso *** "<<
+    "\n10) Obtener fecha "<<
+    "\n11) Obtener hora "<<
+    "\n12) Obtener precio "<<
+    "\n13) Obtener destino "<<
+    "\n14) Obtener aerolinea "<<
+    "\n15) Obtener km "<<
+    "\n16) Obtener asientos "<<
+    "\n*** Otros Metodos *** "<<
+    "\n17) Desplegar info vuelo "<<
+    "\n18) Muestra asientos disponibles "<<
+    "\n19) Incrementa Asientos "<<
+    "\n20) Decrementa Asientos "<<
+    "\n21) Reservar Asiento "<<
+    "\n22) Muestra lista de pasajeros del vuelo"<<
+    "\n23) Verificar disponibilidad asiento "<<
+    "\n24) Imprimir Vuelos "<<
+    "\n0) Terminar "<<
+    "\nTeclea la opcion: >";
+    cin>>iOpcion;
+    return iOpcion;
+}
 
-    int menuPrincipal(){
-        int iOpcion;
-        cout<<"*** Integrador TC1033 ***"<<
-        "\n1) Clientes"<<
-        "\n2) Vuelos"<<
-        "\n0) Terminar"<<
-        "\nTeclea la opcion: >";
-        cin>>iOpcion;
-        return iOpcion;
-    }
+int menuPrincipal(){
+    int iOpcion;
+    cout<<"*** Integrador TC1033 ***"<<
+    "\n1) Clientes"<<
+    "\n2) Vuelos"<<
+    "\n0) Terminar"<<
+    "\nTeclea la opcion: >";
+    cin>>iOpcion;
+    return iOpcion;
+}
 
-
-
-
+//Acciones Pasajeros
 void pasajeros(){
     bool continueg =true;
     int option;
@@ -521,13 +573,15 @@ void pasajeros(){
         cout<<jump;
     }
 }
+
 //ACCIONES VUELOS
 void vuelos(){
+    int i9;
     bool continueg =true;
     bool continueg2 = true;
     int option,userid,fila,col;
     int vueloid,dia,mes,ano,hora,minuto,iPrecio,ikm;
-    string iDestino,Aerolinea,situation;;
+    string iDestino,Aerolinea,situation,myText;
     Fecha Fecha;
     RelojD Hora;
     bool accept = false;
@@ -617,6 +671,22 @@ void vuelos(){
                     cout<<"Deseas eliminar a todos del vuelo? (s/n) >";
                     cin>>accepting;
                     if(accepting == 's'|| accepting =='S'){
+                        //RESTAR KM A CADA PASAJERO
+                        ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
+                        i9=0;
+                        while(getline (MyReadFile3, myText)&&i9<30) {
+                            stringstream ss(myText); 
+                            string word; 
+                            ss >> word;
+                            if(stoi(word)!=-1){
+                                for(int ikmi = 0;ikmi<Vuelos[vueloid].getKilometros();ikmi++){
+                                    Pasajeros[stoi(word)].decrementakm();
+                                }
+                            }
+                            i9++;
+                        }
+                        MyReadFile3.close();
+                        //RESTAR KM A CADA PASAJERO
                         for(int i = 0;i<30;i++){
                             for(int j = 0;j<4;j++){
                                 Vuelos[vueloid].setReservaAsiento(i,j,-1);
@@ -698,14 +768,29 @@ void vuelos(){
             case 21:
                 userid = login();
                 if(userid !=-1){
-                    vueloid = loginVuelo();
+                    int india,inmes,iano;
+                    cout<<"Ingresar dia: >";cin>>india;
+                    cout<<"Ingresa mes: >";cin>>inmes;
+                    cout<<"Ingresa ano: >";cin>>iano;
+                    cout<<"\nVuelos disponibles:"<<endl;
+                    printdataDate(india,inmes,iano);
+                    cout<<endl;
+
+                    vueloid = loginVueloDate(india,inmes,iano);
+                    Vuelos[vueloid].muestraAsientosDisponibles();
+                    cout<<endl;
                     cout<<"Ingresar Fila: >";cin>>fila;
                     cout<<"Ingresar Columna: >";cin>>col;
-                    if(Vuelos[vueloid].reservarAsiento(Pasajeros[userid],userid,fila,col)){
-                        for(int i = 0;i<Vuelos[vueloid].getKilometros();i++){
-                            Pasajeros[userid].incrementaKm();
+                    if(fila ==-1&&col==-1 ||fila<0&&col<0||fila>30&&col>4){
+                        cout<<"Se cancelo la operacion de reservacion"<<endl;
+                    }
+                    else{
+                        if(Vuelos[vueloid].reservarAsiento(Pasajeros[userid],userid,fila,col)){
+                            for(int i = 0;i<Vuelos[vueloid].getKilometros();i++){
+                                Pasajeros[userid].incrementaKm();
+                            }
                         }
-                    };
+                    }
                 }
                 break;
             case 22:
@@ -736,6 +821,7 @@ void vuelos(){
         cout<<jump;
     }
 }
+
 //MAIN
 int main(){
     bool continueg = true;
