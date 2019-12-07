@@ -146,6 +146,9 @@ void filldata(){
                     string word; 
                     ss >> word;
                     Vuelo.setReservaAsiento(i,j,stoi(word));
+                    if(stoi(word)!=-1){
+                        Vuelo.derementaAsientos();
+                    }
                     j++;
                 }
                 j=0;
@@ -617,9 +620,9 @@ void vuelos(){
                         for(int i = 0;i<30;i++){
                             for(int j = 0;j<4;j++){
                                 Vuelos[vueloid].setReservaAsiento(i,j,-1);
-                                Vuelos[vueloid].derementaAsientos();
                             }
                         }
+                        Vuelos[vueloid].setAsientos(0);
                     }
                 }
                 break;
