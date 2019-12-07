@@ -1,3 +1,4 @@
+//JUAN CARLOS GARFIAS TOVAR A01652138
 #include <iostream>
 #include <string>
 #include <vector>
@@ -14,6 +15,7 @@ int nVuelos = 0;
 
 string jump="\n";
 
+//LLENA LOS OBJETOS
 void filldata(){
     //Variables Personas
     string myText,myText2;
@@ -136,8 +138,6 @@ void filldata(){
                 counter++;
             } while (ss);
             
-            
-
             ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
             int i=0,j=0;
             while (getline (MyReadFile3, myText2)&&i<30) {
@@ -145,8 +145,6 @@ void filldata(){
                 while(j<4){
                     string word; 
                     ss >> word;
-                    //cout<<word<<endl;
-                    //matPasajeros[i][j]=stoi(word);
                     Vuelo.setReservaAsiento(i,j,stoi(word));
                     j++;
                 }
@@ -161,7 +159,7 @@ void filldata(){
         }
         MyReadFile2.close();
 }
-
+//ESCRIBE EN ARCHIVOS
 void recordData(){
     string objectinfo;
     ofstream outfile;
@@ -188,36 +186,30 @@ void recordData(){
         objectinfo+=Vuelos[i].getDestino()+" ";
         objectinfo+=Vuelos[i].getAerolinea()+" ";
         objectinfo+=to_string(Vuelos[i].getKilometros())+" ";
+        objectinfo+=to_string(Vuelos[i].getAsientos())+" ";
         // write inputted data into the file.
         outfile << objectinfo << endl;
         objectinfo ="";
     }
    // close the opened file.
    outfile.close();
+
    //Asientos vuelos
+
    string wordly="";
    for (int i = 0; i < Vuelos.size(); i++){
-       outfile.open("vuelo"+to_string(i)+".txt");
+        outfile.open("vuelo"+to_string(i)+".txt", std::ofstream::out | std::ofstream::trunc);
+        outfile.close();
+   }
+   for (int i = 0; i < Vuelos.size(); i++){
+        outfile.open("vuelo"+to_string(i)+".txt");
 
         wordly=Vuelos[i].getmatPasajeros();
-        vector<string> vect;
-        istringstream ss(wordly);
-        for (string i; ss >> i;) {
-            vect.push_back(i);    
-            if (ss.peek() == ',')
-                ss.ignore();
-        }
-        for (int i = 0; i < 30; i++){
-           for (int j = 0; j < 4; j++){
-               wordly=wordly+vect[i]+" ";
-           }
-           wordly=wordly+vect[i]+"\n";
-       }
-       outfile << wordly << endl;
-       outfile.close();
+        outfile << wordly << endl;
+        outfile.close();
    }
 }
-
+//IMPRIME DATOS
 void printdata(){
     for(int i=0; i<Pasajeros.size(); ++i){
         cout << Pasajeros[i].str()<<endl;
@@ -237,6 +229,7 @@ bool existeUsuario(string user){
     }
     return false;
 }
+//CREA USUARIO
 void crearUsuario(){
     string sName,sCel,sEmail,sContra;
     int iKm;
@@ -253,6 +246,7 @@ void crearUsuario(){
         cout<<"Este usuario ya esta registrado!"<<endl;
     }
 }
+//LOGIN
 int login(){
     int userid;
     string user,password;
@@ -524,7 +518,7 @@ void pasajeros(){
         cout<<jump;
     }
 }
-
+//ACCIONES VUELOS
 void vuelos(){
     bool continueg =true;
     bool continueg2 = true;
@@ -739,7 +733,7 @@ void vuelos(){
         cout<<jump;
     }
 }
-
+//MAIN
 int main(){
     bool continueg = true;
     int suboption2;

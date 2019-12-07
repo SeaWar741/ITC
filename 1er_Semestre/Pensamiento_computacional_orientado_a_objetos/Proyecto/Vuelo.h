@@ -88,7 +88,9 @@ void Vuelo::setAsientos(int asientos){
 }
 void Vuelo::setReservaAsiento(int i,int j,int id){
     matPasajeros[i][j] = id;
-    iAsientos ++;
+    if(id !=-1){
+        iAsientos ++;
+    }
 }
 
 Fecha Vuelo::getFecha(){
@@ -118,16 +120,16 @@ int Vuelo::getAsientos(){
 string Vuelo::getmatPasajeros(){
     string word="";
     for (int i = 0; i < 30; i++){
-        for(int j=0;j<4;i++){
-            if(i<29){
-                word+=to_string(matPasajeros[i][j])+",";
+        for (int j = 0; j < 4; j++){
+            if(j==3){
+                word = word +to_string(matPasajeros[i][j])+"\n";
             }
             else{
-                word+=to_string(matPasajeros[i][j]);
+                word = word +to_string(matPasajeros[i][j])+" ";
             }
         }
+        
     }
-    
     return word;
 }
 
