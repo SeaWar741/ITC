@@ -27,6 +27,7 @@ public:
     void setDestino(string);
     void setAerolinea(string);
     void setKilometros(int);
+    void setAsientos(int);
     void setReservaAsiento(int,int,int);
 
     Fecha getFecha();
@@ -36,12 +37,13 @@ public:
     string getAerolinea();
     int getKilometros();
     int getPasajero(int,int);
+    int getAsientos();
 
     string str();
     void muestraAsientosDisponibles();
     void incrementaAsientos();
     void derementaAsientos();
-    void reservarAsiento(Pasajero,int,int,int);
+    bool reservarAsiento(Pasajero,int,int,int);
     void muestraListaPasajeros(vector <Pasajero>);
     bool asientoDisponible(int,int);
 };
@@ -80,8 +82,12 @@ void Vuelo::setAerolinea(string sAerolineai){
 void Vuelo::setKilometros(int iKmi){
     iKm = iKmi;
 }
+void Vuelo::setAsientos(int asientos){
+    iAsientos=asientos;
+}
 void Vuelo::setReservaAsiento(int i,int j,int id){
     matPasajeros[i][j] = id;
+    iAsientos ++;
 }
 
 Fecha Vuelo::getFecha(){
@@ -105,9 +111,12 @@ int Vuelo::getKilometros(){
 int Vuelo::getPasajero(int i,int j){
     return matPasajeros[i][j];
 }
+int Vuelo::getAsientos(){
+    return iAsientos;
+}
 
 string Vuelo::str(){ 
-    return fecha.str()+"|"+hora.str()+"|"+sAerolinea+"|"+sDestino+"|"+to_string(iPrecio);
+    return fecha.str()+"|"+hora.str()+"|"+sAerolinea+"|"+sDestino+"|$"+to_string(iPrecio)+"|No. Pasajeros:"+to_string(iAsientos);
 }
 void Vuelo::muestraAsientosDisponibles(){
     for (int i = 0; i < 30; i++){
@@ -128,11 +137,13 @@ void Vuelo::incrementaAsientos(){
 void Vuelo::derementaAsientos(){
     iAsientos --;
 }
-void Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
+bool Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
     if (asientoDisponible(i,j)){
         setReservaAsiento(i,j,id);
         cout<<pass.getName()<<", se reservo con exito el asiento!"<<endl;
+        return true;
     }
+    return false;
 }
 void Vuelo::muestraListaPasajeros(vector <Pasajero> Pasajeros){ /*Arreglar*/
     int counter = 0;
