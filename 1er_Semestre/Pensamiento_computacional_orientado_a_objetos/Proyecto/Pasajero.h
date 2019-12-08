@@ -97,6 +97,7 @@ bool Pasajero::validarCuenta(string sEmaili,string sContrai){
         return false;
     }
 }
+
 bool Pasajero::existeUsuario(string sEmaili){
     if (sEmaili == sEmail){
         return true;
