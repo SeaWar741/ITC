@@ -1,21 +1,27 @@
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//| Autor: Juan Carlos Garfias Tovar
+//| Matricula: A01652138
+//| Fecha de creacion/modificacion: 30/12/2019
+//| Descripcion: Objeto RelojD
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 #include <iostream>
 #include <string>
 using namespace std;
 
 class RelojD{
 private:
-    int iHr,iMin;
+    int iHr,iMin;//atributos privados
 public:
-    RelojD();
+    RelojD();//constructor
     RelojD(int,int);
 
-    void setHoras(int);
+    void setHoras(int);//metodos set
     void setMinutos(int);
 
-    int getHora();
+    int getHora();//metodos get
     int getMin();
 
-    void incementaMinutos();
+    void incementaMinutos();//otros metodos
     string str();
 };
 

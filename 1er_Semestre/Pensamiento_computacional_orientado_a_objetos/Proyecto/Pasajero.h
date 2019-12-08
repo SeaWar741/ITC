@@ -1,28 +1,34 @@
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//| Autor: Juan Carlos Garfias Tovar
+//| Matricula: A01652138
+//| Fecha de creacion/modificacion: 30/12/2019
+//| Descripcion: Objeto Pasajero
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 #include <iostream>
 #include <string>
 using namespace std;
 
 class Pasajero{
 private:
-    string sName,sCel,sEmail,sContra;
+    string sName,sCel,sEmail,sContra;//atributos privados
     int iKm;
 public:
-    Pasajero();
+    Pasajero();//constructores
     Pasajero(string,string,string,string,int);
 
-    void setName(string);
+    void setName(string);//metodos set
     void setCel(string);
     void setEmail(string);
     void setPassword(string);
     void setKm(int);
 
-    string getName();
+    string getName();//metodos get
     string getCel();
     string getEmail();
     string getPassword();
     int getKm();
 
-    string str();
+    string str();//otros metodos
     void incrementaKm();
     void decrementakm();
     bool validarCuenta(string,string);
@@ -78,7 +84,7 @@ int Pasajero::getKm(){
 
 string Pasajero::str(){
     //sName,sCel,sEmail,sContra;int iKm;
-    return "Pasajero: "+sName+" Celular: "+sCel+"   Email: "+sEmail+"   Contrasena: "+sContra+"   Kilometros: "+to_string(iKm);
+    return "|Pasajero: "+sName+" |Celular: "+sCel+" |Email: "+sEmail+" |Contrasena: "+sContra+" |Kilometros: "+to_string(iKm);
 }
 void Pasajero::incrementaKm(){
     iKm++;

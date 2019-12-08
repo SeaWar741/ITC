@@ -1,4 +1,9 @@
-//JUAN CARLOS GARFIAS TOVAR A01652138
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//| Autor: Juan Carlos Garfias Tovar
+//| Matricula: A01652138
+//| Fecha de creacion/modificacion: 30/12/2019
+//| Descripcion: Programa para gestion de vuelos y pasajeros
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,7 +21,13 @@ vector<Vuelo> Vuelos; //Vector con todos los vuelos
 string jump="\n"; //String para simplificar salto de linea
 int nVuelos = 0; //Contador de numero de vuelos
 
-//LLENA LOS OBJETOS
+//Nombre:filldata
+//Descripcion: Metodo para llenar los objetos y vectores
+//              
+//Entrada:
+//          
+//Salida:
+//
 void filldata(){
     //Variables Personas
     string myText,myText2;
@@ -34,136 +45,141 @@ void filldata(){
     int counter2=0;
     int matPasajeros[30][4];
     //Personas
-        ifstream MyReadFile("pasajeros.txt");
-        while (getline (MyReadFile, myText)) {
-            istringstream ss(myText); 
-            do { 
-                string word; 
-                ss >> word; 
-                if(counter== 0){
-                    pasajero.setName(word);
-                }
-                else if(counter== 1){
+    //Se realiza una lectura en el archivo contenedor de pasajeros
+    ifstream MyReadFile("pasajeros.txt");
+    while (getline (MyReadFile, myText)) {//mientras que existan lineas en el archivo
+        istringstream ss(myText); 
+        do { 
+            string word; 
+            ss >> word; //se crea un string por linea y se establecen los valores del objeto
+            if(counter== 0){
+                pasajero.setName(word);
+            }
+            else if(counter== 1){
                     pasajero.setCel(word);
+            }
+            else if(counter== 2){
+                pasajero.setEmail(word);
+            }
+            else if(counter== 3){
+                pasajero.setPassword(word);
+            }
+            else if(counter== 4){
+                km = stoi(word);
+                pasajero.setKm(km);
+            }
+            counter++;
+        } while (ss);
+        Pasajeros.push_back(pasajero); //se inserta el objeto al vector
+        counter=0;
+    }
+    MyReadFile.close();
+    //Se realiza una lectura en el archivo contenedor de vuelos
+    ifstream MyReadFile2("vuelos.txt");
+    int vueloid = 0;
+    while (getline (MyReadFile2, myText)) {//mientras que existan lineas en el archivo
+        istringstream ss(myText); 
+        do { 
+            string word; 
+            ss >> word;
+            if(counter== 0){//date
+                    //12/04/2019
+                int n = word.length(); 
+  
+                // declaring character array 
+                char char_array[10 + 1]; 
+
+                strcpy(char_array, word.c_str()); //se convierte la palabra en un char array
+                string dia1(1,char_array[0]);
+                string dia2(1,char_array[1]);
+
+                string mes1(1,char_array[3]);
+                string mes2(1,char_array[4]);
+
+                string ano1(1,char_array[6]);
+                string ano2(1,char_array[7]);
+                string ano3(1,char_array[8]);
+                string ano4(1,char_array[9]);
+
+                Fecha.setDia(stoi(dia1+dia2));//se establece la fecha a partir de concatenacion de chars
+
+                Fecha.setMes(stoi(mes1+mes2));
+    
+                Fecha.setYear(stoi(ano1+ano2+ano3+ano4));
+                    
+                Vuelo.setFecha(Fecha);
+                //counter=0;
+            }
+            else if(counter== 1){//hour
+                //12:59
+                vector<int> vect;
+                istringstream ss(word);
+
+                for (int i; ss >> i;) {
+                    vect.push_back(i);    
+                    if (ss.peek() == ':')
+                        ss.ignore();
                 }
-                else if(counter== 2){
-                    pasajero.setEmail(word);
+                for (size_t i = 0; i < vect.size(); i++){
+                    if (i ==0){
+                        Hora.setHoras(vect[i]);
+                    }
+                    else if (i ==1){
+                        Hora.setMinutos(vect[i]);
+                    }
                 }
-                else if(counter== 3){
-                    pasajero.setPassword(word);
-                }
-                else if(counter== 4){
-                    km = stoi(word);
-                    pasajero.setKm(km);
-                }
-                counter++;
-            } while (ss);
-            Pasajeros.push_back(pasajero); 
-            counter=0;
-            //cout<<jump;
-        }
-        MyReadFile.close();
-//**************************************************************************************
-    //Vuelos
-        ifstream MyReadFile2("vuelos.txt");
-        int vueloid = 0;
-        while (getline (MyReadFile2, myText)) {
-            istringstream ss(myText); 
-            do { 
+                Vuelo.setHora(Hora);
+            }
+            else if(counter== 2){//price
+                Vuelo.setPrecio(stoi(word));
+            }
+            else if(counter== 3){//destino
+                Vuelo.setDestino(word);
+            }
+            else if(counter== 4){//aerolina
+                Vuelo.setAerolinea(word);
+            }
+            else if(counter== 5){//km
+                Vuelo.setKilometros(stoi(word));
+            }
+            else if(counter== 6){//km
+                Vuelo.setAsientos(stoi(word));
+            }
+            counter++;
+        } while (ss);
+            
+        ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");//se abre el archivo de los asientos con el id del vuelo
+        int i=0,j=0;
+        while (getline (MyReadFile3, myText2)&&i<30) { //mientras existan lineas y no se superen las 30 filas
+            stringstream ss(myText2); 
+            while(j<4){//se establece cada columna
                 string word; 
                 ss >> word;
-                if(counter== 0){//date
-                    //12/04/2019
-                    int n = word.length(); 
-  
-                    // declaring character array 
-                    char char_array[10 + 1]; 
-
-                    strcpy(char_array, word.c_str()); 
-                    string dia1(1,char_array[0]);
-                    string dia2(1,char_array[1]);
-
-                    string mes1(1,char_array[3]);
-                    string mes2(1,char_array[4]);
-
-                    string ano1(1,char_array[6]);
-                    string ano2(1,char_array[7]);
-                    string ano3(1,char_array[8]);
-                    string ano4(1,char_array[9]);
-
-                    Fecha.setDia(stoi(dia1+dia2));
-
-                    Fecha.setMes(stoi(mes1+mes2));
-    
-                    Fecha.setYear(stoi(ano1+ano2+ano3+ano4));
-                    
-                    Vuelo.setFecha(Fecha);
-                    //counter=0;
+                Vuelo.setReservaAsiento(i,j,stoi(word));//Se reserva el asiento
+                if(stoi(word)!=-1){
+                    Vuelo.derementaAsientos();//En caso de que este vacio se decrementan 
                 }
-                else if(counter== 1){//hour
-                    //12:59
-                    vector<int> vect;
-                    istringstream ss(word);
-
-                    for (int i; ss >> i;) {
-                        vect.push_back(i);    
-                        if (ss.peek() == ':')
-                            ss.ignore();
-                    }
-                    for (size_t i = 0; i < vect.size(); i++){
-                        if (i ==0){
-                            Hora.setHoras(vect[i]);
-                        }
-                        else if (i ==1){
-                            Hora.setMinutos(vect[i]);
-                        }
-                    }
-                    Vuelo.setHora(Hora);
-                    //counter2=0;
-                }
-                else if(counter== 2){//price
-                    Vuelo.setPrecio(stoi(word));
-                }
-                else if(counter== 3){//destino
-                    Vuelo.setDestino(word);
-                }
-                else if(counter== 4){//aerolina
-                    Vuelo.setAerolinea(word);
-                }
-                else if(counter== 5){//km
-                    Vuelo.setKilometros(stoi(word));
-                }
-                else if(counter== 6){//km
-                    Vuelo.setAsientos(stoi(word));
-                }
-                counter++;
-            } while (ss);
-            
-            ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
-            int i=0,j=0;
-            while (getline (MyReadFile3, myText2)&&i<30) {
-                stringstream ss(myText2); 
-                while(j<4){
-                    string word; 
-                    ss >> word;
-                    Vuelo.setReservaAsiento(i,j,stoi(word));
-                    if(stoi(word)!=-1){
-                        Vuelo.derementaAsientos();
-                    }
-                    j++;
-                }
-                j=0;
-                i++;
+                j++;
             }
-            MyReadFile3.close();
-            Vuelos.push_back(Vuelo); 
-            nVuelos++;
-            vueloid++;
-            counter=0;
+            j=0;
+            i++;
         }
-        MyReadFile2.close();
+        MyReadFile3.close();
+        Vuelos.push_back(Vuelo); //se inserta al vector el objeto
+        nVuelos++;
+        vueloid++;
+        counter=0;
+    }
+    MyReadFile2.close();
 }
-//ESCRIBE EN ARCHIVOS
+
+//Nombre:recordData
+//Descripcion: Metodo para sobreescribir los archivos a partir de vectores de objeto
+//              
+//Entrada:
+//          
+//Salida:
+//      Archivos de vuelo, pasajeros e individuales
 void recordData(){
     string objectinfo;
     ofstream outfile;
@@ -201,9 +217,10 @@ void recordData(){
    //Asientos vuelos
    string wordly="";
    for (int i = 0; i < Vuelos.size(); i++){
-        outfile.open("vuelo"+to_string(i)+".txt", std::ofstream::out | std::ofstream::trunc);
+        outfile.open("vuelo"+to_string(i)+".txt", std::ofstream::out | std::ofstream::trunc); //se vacia el archivo
         outfile.close();
    }
+   //se inserta los valores de la matriz del vuelo
    for (int i = 0; i < Vuelos.size(); i++){
         outfile.open("vuelo"+to_string(i)+".txt");
 
@@ -213,19 +230,39 @@ void recordData(){
    }
 }
 
-//IMPRIME DATOS
+//Nombre:printdata
+//Descripcion: Imprime todos los elementos de pasajeros
+//              
+//Entrada:
+//          
+//Salida:
+//        Pasajeros
 void printdata(){
     for(int i=0; i<Pasajeros.size(); ++i){
         cout << Pasajeros[i].str()<<endl;
     }
 }
 
+//Nombre:printdata2
+//Descripcion: Imprime todos los elementos de vuelos
+//              
+//Entrada:
+//          
+//Salida:
+//        Vuelos
 void printdata2(){
     for(int i=0; i<Vuelos.size(); ++i){
         cout << Vuelos[i].str()<<endl;
     }
 }
 
+//Nombre:printdataDate
+//Descripcion: Imprime los vuelos a partir de fecha
+//              
+//Entrada:
+//          dia,mes,ano
+//Salida:
+//        Vuelos
 void printdataDate(int dia,int mes,int ano){
     string word="";
     int counter = 0;
@@ -243,7 +280,16 @@ void printdataDate(int dia,int mes,int ano){
     }
     cout<<word<<endl;
 }
+
 //Funciones Pasajero
+
+//Nombre:existeUsuario
+//Descripcion: Verifica si existe usuario
+//              
+//Entrada:
+//          correo
+//Salida:
+//        boolean
 bool existeUsuario(string user){
     for(int i=0; i<Pasajeros.size(); ++i){
         if(Pasajeros[i].existeUsuario(user)){
@@ -252,7 +298,14 @@ bool existeUsuario(string user){
     }
     return false;
 }
-//CREA USUARIO
+
+//Nombre:crearUsuario
+//Descripcion:  Crea un usuario
+//              
+//Entrada:
+//          
+//Salida:
+//        Usuario anadido al vector 
 void crearUsuario(){
     string sName,sCel,sEmail,sContra;
     int iKm;
@@ -263,13 +316,22 @@ void crearUsuario(){
         cout<<"Ingresar Contrasena: >";cin>>sContra;
         Pasajero pasajero(sName,sCel,sEmail,sContra,0);
         Pasajeros.push_back(pasajero);
-        cout<<"Usuario Creado exitosamente!"<<endl;
+        cout<<"\nUsuario Creado exitosamente!"<<endl;
     }
     else{
-        cout<<"Este usuario ya esta registrado!"<<endl;
+        cout<<"\nEste usuario ya esta registrado!"<<endl;
     }
 }
+
 //LOGIN
+
+//Nombre:login
+//Descripcion:  Regresa la posicion en el vector a partir de credenciales
+//              
+//Entrada:
+//          
+//Salida:
+//        Posicion en el vector
 int login(){
     int userid;
     string user,password;
@@ -282,10 +344,17 @@ int login(){
             }
         }
     }
-    cout<<"Usuario no registrado"<<endl;
+    cout<<"\nUsuario no registrado"<<endl;
     return -1;
 }
 
+//Nombre:loginSC
+//Descripcion:  Regresa la posicion en el vector a partir de usuario
+//              
+//Entrada:
+//          
+//Salida:
+//        Posicion en el vector
 int loginSC(){
     int userid;
     string user;
@@ -295,11 +364,17 @@ int loginSC(){
             return i;
         }
     }
-    cout<<"Usuario no registrado"<<endl;
+    cout<<"\nUsuario no registrado"<<endl;
     return -1;
 }
 
-
+//Nombre:loginVuelo
+//Descripcion:  Regresa la posicion en el vector a partir de fecha y hora
+//              
+//Entrada:
+//          
+//Salida:
+//        Posicion en el vector
 int loginVuelo(){
     Fecha Fecha;
     RelojD Hora;
@@ -329,10 +404,17 @@ int loginVuelo(){
             return i;
         }   
     }
-    cout<<"Vuelo no registrado"<<endl;
+    cout<<"\nVuelo no registrado"<<endl;
     return -1;
 }
 
+//Nombre:loginVuelo
+//Descripcion:  Regresa la posicion en el vector a partir de fecha y hora
+//              
+//Entrada:
+//          
+//Salida:
+//        Posicion en el vector
 int loginVueloDate(int idia,int imes,int anoi){
     Fecha Fecha;
     RelojD Hora;
@@ -348,7 +430,7 @@ int loginVueloDate(int idia,int imes,int anoi){
     Fecha.setMes(mes);
     Fecha.setYear(ano);
     
-    cout<<"Para seleccionar el vuelo ingresa los siguientes datos:"<<endl;
+    cout<<"\nPara seleccionar el vuelo ingresa los siguientes datos:"<<endl;
     cout<<"Ingresar hora: >";cin>>hora;
     cout<<"Ingresar minuto: >";cin>>minuto;
 
@@ -363,12 +445,20 @@ int loginVueloDate(int idia,int imes,int anoi){
             return i;
         }   
     }
-    cout<<"Vuelo no registrado"<<endl;
+    cout<<"\nVuelo no registrado"<<endl;
     return -1;
     
 }
 
 //Funciones Vuelos
+
+//Nombre:crearVuelo
+//Descripcion:  Crea un vuelo y lo anade al vector
+//              
+//Entrada:
+//          
+//Salida:
+//        objeto tipo vuelo
 void crearVuelo(){
     Vuelo Vuelo;
     int dia,mes,ano;
@@ -420,37 +510,52 @@ void crearVuelo(){
 }
 
 //Menus
+
+//Nombre:menuPasajeros
+//Descripcion:  Regresar la opcion del menu e impresion del mismo
+//              
+//Entrada:
+//          
+//Salida:
+//        seleccion del menu
 int menuPasajeros(){
     int iOpcion;
     cout<<"------------------= Gestor de pasajeros =------------------"<<
-    "\n1) Crear un nuevo usuario "<<
+    "\n\n1) Crear un nuevo usuario "<<
     "\n\n---= Modificadores de pasajeros =----"<<
-    "\n2) Cambiar nombre "<<
+    "\n\n2) Cambiar nombre "<<
     "\n3) Cambiar celular "<<
     "\n\n4) Cambiar contrasena "<<
     "\n\n---= Acceso de informacion de pasajeros =----"<<
-    "\n5) Obtener nombre "<<
+    "\n\n5) Obtener nombre "<<
     "\n6) Obtener celular "<<
     "\n7) Obtener Km "<<
     "\n8) Obtener email "<<
     "\n9) Obtener contrasena "<<
     "\n\n---= Acciones adicionales para pasajeros =----"<<
-    "\n10) Incrementa kilometros "<<
+    "\n\n10) Incrementa kilometros "<<
     "\n11) decrementa kilometros "<<
     //"\n12) Validar Cuenta "<<
     "\n\n---= Mostrar cuentas de pasajeros =----"<<
-    "\n12) Imprimir Cuentas "<<
+    "\n\n12) Imprimir Cuentas "<<
     "\n\n---= Salir del sistema =----"<<
-    "\n0) Terminar "<<
+    "\n\n0) Terminar "<<
     "\n\nTeclea la opcion: >";
     cin>>iOpcion;
     return iOpcion;
 }
 
+//Nombre:menuVuelos
+//Descripcion:  Regresar la opcion del menu e impresion del mismo
+//              
+//Entrada:
+//          
+//Salida:
+//        seleccion del menu
 int menuVuelos(){
     int iOpcion;
     cout<<"------------------= Gestor de vuelos =------------------"<<
-    "\n1) Crear un nuevo vuelo "<<
+    "\n\n1) Crear un nuevo vuelo "<<
     "\n\n---= Modificadores de vuelos =----"<<
     "\n2) Rstablecer fecha "<<
     "\n3) Establecer hora "<<
@@ -461,7 +566,7 @@ int menuVuelos(){
     "\n8) Establecer Asientos "<<
     "\n9) Dejar todos los asientos vacios "<<
     "\n\n---= Acceso de informacion de vuelos =----"<<
-    "\n10) Obtener fecha "<<
+    "\n\n10) Obtener fecha "<<
     "\n11) Obtener hora "<<
     "\n12) Obtener precio "<<
     "\n13) Obtener destino "<<
@@ -469,7 +574,7 @@ int menuVuelos(){
     "\n15) Obtener km "<<
     "\n16) Obtener asientos "<<
     "\n\n---= Acciones adicionales para vuelos =----"<<
-    "\n17) Desplegar info vuelo "<<
+    "\n\n17) Desplegar info vuelo "<<
     "\n18) Muestra asientos disponibles "<<
     "\n19) Incrementa Asientos "<<
     "\n20) Decrementa Asientos "<<
@@ -478,14 +583,21 @@ int menuVuelos(){
     "\n23) Muestra lista de pasajeros del vuelo"<<
     "\n24) Verificar disponibilidad asiento "<<
     "\n\n---= Mostrar vuelos =----"<<
-    "\n25) Imprimir Vuelos "<<
+    "\n\n25) Imprimir Vuelos "<<
     "\n\n---= Salir del sistema =----"<<
-    "\n0) Terminar "<<
+    "\n\n0) Terminar "<<
     "\n\nTeclea la opcion: >";
     cin>>iOpcion;
     return iOpcion;
 }
 
+//Nombre:menuPrincipal
+//Descripcion:  Regresar la opcion del menu e impresion del mismo
+//              
+//Entrada:
+//          
+//Salida:
+//        seleccion del menu
 int menuPrincipal(){
     int iOpcion;
     cout<<"------------------= Control de vuelos CDMX - Aeropuerto Benito Juarez =------------------"<<
@@ -498,11 +610,19 @@ int menuPrincipal(){
 }
 
 //Acciones Pasajeros
+
+//Nombre:pasajeros
+//Descripcion:  Realiza operaciones a partir de input para pasajeros
+//              
+//Entrada:
+//          
+//Salida:
+//        
 void pasajeros(){
-    bool continueg =true;
-    int option;
-    int userid;
-    string nuser,celular,contrasena;
+    bool continueg =true; //Variable controladora para continuar loop
+    int option; //seleccion
+    int userid; //id del usuario
+    string nuser,celular,contrasena;//Variables para las credenciales de usuario
     while (continueg){
         option = menuPasajeros();
         cout<<jump;
@@ -595,17 +715,26 @@ void pasajeros(){
 }
 
 //ACCIONES VUELOS
+
+//Nombre:vuelos
+//Descripcion:  Realiza operaciones a partir de input para vuelos
+//              
+//Entrada:
+//          
+//Salida:
+//        
 void vuelos(){
     int i9,j22;//variables contadoras para caso 9 (i9) y 22(i9,j22)
-    bool continueg =true;
-    bool continueg2 = true;
-    int option,userid,fila,col,posi,posj;
-    int vueloid,dia,mes,ano,hora,minuto,iPrecio,ikm;
+    bool continueg =true;//Variable controladora para loop
+    bool continueg2 = true;//Variable controladora para loop
+    int newid;//Variable para nuevo id
+    int option,userid,fila,col,posi,posj; //Variables para posiciones y opciones
+    int vueloid,dia,mes,ano,hora,minuto,iPrecio,ikm;//Variables para objeto
     string iDestino,Aerolinea,situation,myText;
     Fecha Fecha;
     RelojD Hora;
-    bool accept = false;
-    char accepting;
+    bool accept = false; //Variable determinadora de accion
+    char accepting; //variable determinadora de accion
     while (continueg){
         option = menuVuelos();
         cout<<jump;
@@ -664,20 +793,18 @@ void vuelos(){
                 }
                 break;
             case 8:
-                int newid;
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
-                    for (int i = 0; i < 30; i++){
+                    for (int i = 0; i < 30; i++){ //se itera en toda la matriz ingresando los ids
                         for (int j = 0; j < 4; j++){
                             cout<<"Ingresa el id para fila ("<<i<<") columna "<<j<<": >";
                             cin>>newid;
                             Vuelos[vueloid].setReservaAsiento(i,j,newid);
-                            
                             cout<<endl;
-                            cout<<"Deseas seguir agregando asientos? (s/n): >";
+                            cout<<"Deseas seguir agregando asientos? (s/n): >";//se pregunta si se desea seguir anadiendo asientos
                             cin>>situation;
                             if (situation =="n"||situation=="N"){
-                                j=4;
+                                j=4;//se termina la accion
                                 i=30;
                             }
                             
@@ -689,16 +816,16 @@ void vuelos(){
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
                     cout<<"Deseas eliminar a todos del vuelo? (s/n) >";
-                    cin>>accepting;
+                    cin>>accepting;//se pregunta si se desea eliminar todos los pasajeros
                     if(accepting == 's'|| accepting =='S'){
                         ifstream MyReadFile3("vuelo"+to_string(vueloid)+".txt");
                         i9=0;
-                        while(getline (MyReadFile3, myText)&&i9<30) {
+                        while(getline (MyReadFile3, myText)&&i9<30) {//se lee el archivo, busca ids y resta kms
                             stringstream ss(myText); 
                             string word; 
                             ss >> word;
                             if(stoi(word)!=-1){
-                                for(int ikmi = 0;ikmi<Vuelos[vueloid].getKilometros();ikmi++){
+                                for(int ikmi = 0;ikmi<Vuelos[vueloid].getKilometros();ikmi++){//decrementa km a partir de cantidad del vuelo
                                     Pasajeros[stoi(word)].decrementakm();
                                 }
                             }
@@ -707,7 +834,7 @@ void vuelos(){
                         MyReadFile3.close();
                         for(int i = 0;i<30;i++){
                             for(int j = 0;j<4;j++){
-                                Vuelos[vueloid].setReservaAsiento(i,j,-1);
+                                Vuelos[vueloid].setReservaAsiento(i,j,-1); //se establecen como vacios
                             }
                         }
                         Vuelos[vueloid].setAsientos(0);
@@ -753,7 +880,7 @@ void vuelos(){
             case 16:
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
-                    cout<<"Asientos en el vuelo: "<<Vuelos[vueloid].getAsientos()<<endl;
+                    cout<<"\nAsientos en el vuelo: "<<Vuelos[vueloid].getAsientos()<<endl;
                     Vuelos[vueloid].muestraAsientosDisponibles();
                 }
                 break;
@@ -773,14 +900,14 @@ void vuelos(){
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
                     Vuelos[vueloid].incrementaAsientos();
-                    cout<<"Se elimino una reservacion de manera artificial!"<<endl;
+                    cout<<"\nSe elimino una reservacion de manera artificial!"<<endl;
                 }
                 break;
             case 20:
                 vueloid = loginVuelo();
                 if (vueloid !=-1){
                     Vuelos[vueloid].incrementaAsientos();
-                    cout<<"Se agrego una reservacion de manera artificial!"<<endl;
+                    cout<<"\nSe agrego una reservacion de manera artificial!"<<endl;
                 }
                 break;
             case 21:
@@ -797,14 +924,15 @@ void vuelos(){
                     vueloid = loginVueloDate(india,inmes,iano);
                     Vuelos[vueloid].muestraAsientosDisponibles();
                     cout<<endl;
+                    cout<<"Para cancelar ingresar -1 en fila y columna"<<endl;
                     cout<<"Ingresar Fila: >";cin>>fila;
                     cout<<"Ingresar Columna: >";cin>>col;
-                    if(fila ==-1&&col==-1 ||fila<0&&col<0||fila>30&&col>4){
-                        cout<<"Se cancelo la operacion de reservacion"<<endl;
+                    if(fila ==-1&&col==-1 ||fila<0&&col<0||fila>30&&col>4){//se verifican los asientos y en caso de salir ingresar -1
+                        cout<<"\nSe cancelo la operacion de reservacion"<<endl;
                     }
                     else{
                         if(Vuelos[vueloid].reservarAsiento(Pasajeros[userid],userid,fila,col)){
-                            for(int i = 0;i<Vuelos[vueloid].getKilometros();i++){
+                            for(int i = 0;i<Vuelos[vueloid].getKilometros();i++){//se incrementan km
                                 Pasajeros[userid].incrementaKm();
                             }
                         }
@@ -834,7 +962,7 @@ void vuelos(){
                                     for(int ikmi = 0;ikmi<Vuelos[vueloid].getKilometros();ikmi++){
                                         Pasajeros[userid].decrementakm();//Se quitan los km al pasajero
                                     }
-                                    cout<<"Se elimino su asiento en la fila "<<i9<<" columna "<<j22<<" con exito!"<<endl;
+                                    cout<<"\nSe elimino su asiento en la fila "<<i9<<" columna "<<j22<<" con exito!"<<endl;
                                 }
                                 j22++;
                             }
@@ -863,10 +991,10 @@ void vuelos(){
                 break;
             case 0:
                 continueg = false;
-                cout<<"Hasta luego!"<<endl;
+                cout<<"\nHasta luego!"<<endl;
                 break;
             default:
-                cout<<"Opcion no valida, volver a intentar"<<endl;
+                cout<<"\nOpcion no valida, volver a intentar"<<endl;
                 break;
         }
         recordData();
@@ -881,23 +1009,23 @@ int main(){
     filldata(); //se lee todos los usuarios,vuelos y se insertan en el vector
     while(continueg){
         cout<<jump;
-        int option1 = menuPrincipal();
+        int option1 = menuPrincipal();//se ejecuta el menu principal
         cout<<jump;
         switch (option1){
         case 1:
-            pasajeros();
+            pasajeros();//en caso de la seleccion de pasajeros se llama al metodo
             break;
         case 2:
-            vuelos();
+            vuelos();//en caso de la seleccion de vuelos se llama al metodo
             break;
         case 0:
             continueg = false;
             cout<<jump;
-            cout<<"Hasta luego!"<<endl;
+            cout<<"\n----------= Hasta luego! =----------"<<endl;
             break;
         default:
             cout<<jump;
-            cout<<"Opcion no valida, volver a intentar"<<endl;
+            cout<<"\nOpcion no valida, volver a intentar"<<endl;
             break;
         }
     }

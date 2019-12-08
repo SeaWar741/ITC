@@ -1,3 +1,10 @@
+
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//| Autor: Juan Carlos Garfias Tovar
+//| Matricula: A01652138
+//| Fecha de creacion/modificacion: 30/12/2019
+//| Descripcion: Objeto Vuelo
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 #include <iostream>
 #include <string>
 #include <vector>
@@ -9,7 +16,7 @@ using namespace std;
 
 
 class Vuelo{
-private:
+private: //atributos privados
     Fecha fecha;
     RelojD hora;
     int iPrecio;
@@ -18,10 +25,10 @@ private:
     int iKm,iAsientos;
     int matPasajeros[30][4];
 public:
-    Vuelo();
+    Vuelo();//constructores
     Vuelo(Fecha,RelojD,int,string,string,int);
 
-    void setFecha(Fecha);
+    void setFecha(Fecha);//metodos set
     void setHora(RelojD);
     void setPrecio(int);
     void setDestino(string);
@@ -30,7 +37,7 @@ public:
     void setAsientos(int);
     void setReservaAsiento(int,int,int);
 
-    Fecha getFecha();
+    Fecha getFecha();//metodos get
     RelojD getHora();
     int getPrecio();
     string getDestino();
@@ -40,7 +47,7 @@ public:
     int getAsientos();
     string getmatPasajeros();
 
-    string str();
+    string str();//otros metodos
     void muestraAsientosDisponibles();
     void incrementaAsientos();
     void derementaAsientos();
@@ -117,8 +124,8 @@ int Vuelo::getPasajero(int i,int j){
 int Vuelo::getAsientos(){
     return iAsientos;
 }
-string Vuelo::getmatPasajeros(){
-    string word="";
+string Vuelo::getmatPasajeros(){//regresa un string a partir de la matriz de pasajeros
+    string word=""; 
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
             if(j==3){
@@ -137,10 +144,11 @@ string Vuelo::str(){
     return fecha.str()+"|"+hora.str()+"|"+sAerolinea+"|"+sDestino+"|$"+to_string(iPrecio)+"|No. Pasajeros:"+to_string(iAsientos);
 }
 void Vuelo::muestraAsientosDisponibles(){
+    cout<<endl;
     for (int i = 0; i < 30; i++){
         for (int j = 0; j < 4; j++){
-            if(matPasajeros[i][j] !=-1){
-                cout<<"ND"<<"\t";
+            if(matPasajeros[i][j] !=-1){//muestra asientos a partir de disponibilidad
+                cout<<"ND"<<"\t";//si esta ocupado pasa a ND
             }
             else{
                 cout<<"--"<<"\t";
@@ -157,7 +165,7 @@ void Vuelo::derementaAsientos(){
 }
 bool Vuelo::reservarAsiento(Pasajero pass, int id,int i,int j){
     if (asientoDisponible(i,j)){
-        setReservaAsiento(i,j,id);
+        setReservaAsiento(i,j,id);//reserva el asiento
         cout<<pass.getName()<<", se reservo con exito el asiento!"<<endl;
         return true;
     }
@@ -170,7 +178,7 @@ void Vuelo::muestraListaPasajeros(vector <Pasajero> Pasajeros){ /*Arreglar*/
         for (int j = 0; j < 4; j++){
             if(matPasajeros[i][j] !=-1){
                 print += Pasajeros[matPasajeros[i][j]].getName()+"\n";
-                counter++;
+                counter++; //imprime la lista de pasajeros con su nombre
             }
         }
     }

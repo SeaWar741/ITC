@@ -1,23 +1,29 @@
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+//| Autor: Juan Carlos Garfias Tovar
+//| Matricula: A01652138
+//| Fecha de creacion/modificacion: 30/12/2019
+//| Descripcion: Objeto Fecha
+//|-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* 
 #include <iostream>
 #include <string>
 using namespace std;
 
 class Fecha{
 private:
-    int iDia,iMes,iYear;
+    int iDia,iMes,iYear;//Atributos privados
 public:
-    Fecha();
+    Fecha();//constructor
     Fecha(int,int,int);
 
-    void setDia(int);
+    void setDia(int);//metodos set
     void setMes(int);
     void setYear(int);
 
-    int getDia();
+    int getDia();//metodos get
     int getMes();
     int getYear();
 
-    void diaSiguiente();
+    void diaSiguiente();//otros metodos
     string str();
     int diasMes();
     string mes();
@@ -67,7 +73,7 @@ string Fecha::str(){
     }
     return day+"/"+month+"/"+to_string(iYear);//se imprime la hora y minutos
 }
-void Fecha::diaSiguiente(){
+void Fecha::diaSiguiente(){//incrementar dias
     while ((1 + iDia) > diasMes()){
         if (iMes == 12){
             iMes = 0;
@@ -77,7 +83,7 @@ void Fecha::diaSiguiente(){
     }
     iDia += 1;
 }
-int Fecha::diasMes(){
+int Fecha::diasMes(){//control de dias del mes
     int month = iMes;
 	if(month==2){
 		if((iYear%400==0) || (iYear%4==0 && iYear%100!=0))	
