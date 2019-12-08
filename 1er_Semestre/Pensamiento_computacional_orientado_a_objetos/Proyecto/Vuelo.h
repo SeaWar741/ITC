@@ -187,16 +187,16 @@ void Vuelo::muestraListaPasajeros(vector <Pasajero> Pasajeros){ /*Arreglar*/
         cout<<print<<endl;
     }
     else{
-        cout<<"No hay pasajeros registrados para el vuelo"<<endl;
+        cout<<"\nNo hay pasajeros registrados para el vuelo"<<endl;
     }
 }
 bool Vuelo::asientoDisponible(int i,int j){
     if (matPasajeros[i][j] !=-1){
-        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
+        cout<<"\nEl asiento de la fila "<<i<<" columna "<<j<<" se encuentra ocupado"<<endl;
         return false;
     }
     else{
-        cout<<"El asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
+        cout<<"\nEl asiento de la fila "<<i<<" columna "<<j<<" se encuentra libre"<<endl;
         return true;
     }
 }

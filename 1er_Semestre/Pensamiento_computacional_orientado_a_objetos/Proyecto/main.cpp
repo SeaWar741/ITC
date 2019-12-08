@@ -691,7 +691,7 @@ void pasajeros(){
                 userid = login();
                 if(userid!=-1){
                     Pasajeros[userid].incrementaKm();
-                    cout<<"Se han añadido km a su cuenta exitosamente!"<<endl;
+                    cout<<"Se han anadido km a su cuenta exitosamente!"<<endl;
                 }
                 break;
             case 11:
