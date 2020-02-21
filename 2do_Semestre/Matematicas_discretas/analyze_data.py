@@ -2,9 +2,12 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+#Carga Datasets
 df=pd.read_csv('Encuesta.csv')
 print(df.head())
 sns.set()
+
+#Heatmaps
 heatmap1_data = pd.pivot_table(df, values='Edad', 
                      index=['Forma'], 
                      columns='Bebida')
@@ -31,4 +34,8 @@ heatmap5_data = pd.pivot_table(df, values='Bebida',
                      index=['Forma'], 
                      columns='Costo_R')
 sns.heatmap(heatmap5_data)
+plt.show()
+
+#Analisis de distribucion normal
+df.hist()
 plt.show()
