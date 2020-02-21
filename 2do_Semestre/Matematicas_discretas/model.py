@@ -1,24 +1,26 @@
-from mpl_toolkits import mplot3d
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
-a = 0.1
-b = 0.1
+xs = np.linspace(0, 10, 100)
+zs = np.linspace(0, 10, 100)
 
-def f(x, y):
-    return (x+y)
-
-x = np.linspace(-10, 10, 15)
-y = np.linspace(-10, 10, 35)
-
-X, Y = np.meshgrid(x, y)
-Z = f(X, Y)
+X, Z = np.meshgrid(xs, zs)
+Y = 0
 
 fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.contour3D(X, Y, Z, 50, cmap='binary')
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z');
+ax = fig.add_subplot(111, projection='3d')
+ax.plot_surface(X, Y, Z)
 
+
+
+xs = np.linspace(0, 10, 100)
+zs = np.linspace(0, 10, 100)
+
+X, Z = np.meshgrid(xs, zs)
+Y = 5
+
+
+
+ax.plot_surface(X, Y, Z)
 plt.show()
