@@ -1,6 +1,3 @@
-x = linspace(-8,8,200);
-y = linspace(-8,8,200);
-[X,Y] = meshgrid(x,y);
-Z = (4-abs(X)) + (4-abs(Y));
-Z(Z < 0) = NaN;
-surf(X,Y,Z)
+z = @(x,y) 0.5*x^4+0.5*y^4; % function handle to anonymous function
+fsurf(z)
+pause(300)
