@@ -1,3 +1,15 @@
-z = @(x,y) 0.5*x^4+0.5*y^4; % function handle to anonymous function
-fsurf(z)
-pause(300)
+
+
+a=[6,6;6,9];
+b=[9,3,3;10,8,10;4,9,10];
+c=[1,2,3;4,5,6;7,8,9];
+d=[1,2,3;4,5,6;7,8,9];
+e=[4,0,0;0,0,-2;1,-2,4];
+
+det(a)
+det(b)
+det(c)
+transpose(d)
+det(e)
+inv(e)
+
