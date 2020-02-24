@@ -50,6 +50,8 @@ xx = (yy-5)/2
 yy1, zz1 = np.meshgrid(range(4), range(4))
 xx1 = (yy1-5)/(-2)
 
+print(zz1)
+
 yy2, zz2 = np.meshgrid(np.linspace(-4, 0, 4) , np.linspace(0, 4, 4))
 xx2 = (yy2+5)/2
 
@@ -59,10 +61,13 @@ yy3, zz3 = np.meshgrid(np.linspace(-4, 0, 4) , np.linspace(0, 4, 4))
 xx3 = (yy3+5)/(-2)
 
 
-yy4,xx4= np.meshgrid(np.linspace(-12, 12, 25), np.linspace(-5, 5, 11) )
-zz4 = (0.5*(xx4**4))+(0.8*(yy4**4))
+xx4,zz4 = np.meshgrid(range(4),range(4))
+yy4 = xx4*0
 
-print(yy4)
+#yy4,xx4= np.meshgrid(np.linspace(-12, 12, 25), np.linspace(-5, 5, 11) )
+#zz4 = (0.5*(xx4**4))+(0.8*(yy4**4))
+
+#print(yy4)
 
 ax = plt.subplot(projection='3d')
 ax.plot_surface(xx, yy, zz)
@@ -70,4 +75,5 @@ ax.plot_surface(xx1, yy1, zz1)
 ax.plot_surface(xx2, yy2, zz2)
 ax.plot_surface(xx3, yy3, zz3)
 ax.plot_surface(xx4, yy4, zz4)
+#ax.plot_surface(xx4, yy4, zz4)
 plt.show()
