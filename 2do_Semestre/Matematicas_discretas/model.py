@@ -40,8 +40,9 @@ plt.show()
 # Create the data.
 
 import numpy as np
+#import Tkinter
 from mayavi import mlab
-
+'''
 x1,y1,z1 = (-1.5,2,0)
 x2,y2,z2 = (1.5,2,0)
 x3,y3,z3 = (-2.5,0,0)
@@ -68,31 +69,61 @@ mlab.mesh([[x1, x2],[x3, x4],[x5, x6],[x7, x8],[x9, x10],[x11, x12]],  # | => x 
 
                  color=(0, 0, 0))  # black
 
-mlab.mesh([[x5, x6], [x7, x8]],
-                 [[y5, y6], [y7, y8]],
-                 [[z5, z6], [z7, z8]],
+mlab.mesh([[x1, x3], [x7, x9]],
+                 [[y1, y3], [y7, y9]],
+                 [[z1, z3], [z7, z9]],
                  color=(1, 0, 0))  # red
 
-mlab.mesh([[x1, x3], [x5, x7]],
-                 [[y1, y3], [y5, y7]],
-                 [[z1, z3], [z5, z7]],
+mlab.mesh([[x3, x4], [x9, x10]],
+                 [[y3, y4], [y9, y10]],
+                 [[z3, z4], [z9, z10]],
                  color=(0, 0, 1))  # blue
 
-mlab.mesh([[x1, x2], [x5, x6]],
-                 [[y1, y2], [y5, y6]],
-                 [[z1, z2], [z5, z6]],
+mlab.mesh([[x4, x5], [x10, x11]],
+                 [[y4, y5], [y10, y11]],
+                 [[z4, z5], [z10, z11]],
                  color=(1, 1, 0))  # yellow
 
-mlab.mesh([[x2, x4], [x6, x8]],
-                 [[y2, y4], [y6, y8]],
-                 [[z2, z4], [z6, z8]],
+mlab.mesh([[x5, x6], [x11, x12]],
+                 [[y5, y6], [y11, y12]],
+                 [[z5, z6], [z11, z12]],
                  color=(1, 1, 1))  # white
 
-mlab.mesh([[x3, x4], [x7, x8]],
-                 [[y3, y4], [y7, y8]],
-                 [[z3, z4], [z7, z8]],
+mlab.mesh([[x6, x2], [x12, x8]],
+                 [[y6, y2], [y12, y8]],
+                 [[z6, z2], [z12, z8]],
                  color=(1, 0, 1))  # pink
 
+mlab.mesh([[x2, x1], [x8, x7]],
+                 [[y2, y1], [y8, y7]],
+                 [[z2, z1], [z8, z7]],
+                 color=(1, 1, 0))  # yellow
 
+
+#test con modelo ply
+
+'''
+vaso = 'Hexagonal.ply';
+
+mlab.pipeline.surface(mlab.pipeline.open(vaso))
 
 mlab.show()
+
+from mpl_toolkits.mplot3d import Axes3D
+import matplotlib.pyplot as plt
+import numpy as np
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+us = np.linspace(0, 2 * np.pi, 7)
+zs = np.linspace(0, 10, 2)
+
+us, zs = np.meshgrid(us, zs)
+
+xs = 10 * np.cos(us)
+ys = 10 * np.sin(us)
+ax.plot_surface(xs, ys, zs, color='b')
+
+plt.show()
+plt.savefig("hexagon.png")
