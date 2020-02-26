@@ -1,7 +1,9 @@
-import numpy as np
-import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
+import mpl_toolkits.mplot3d.art3d as art3d
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.patches import Circle
+from tkinter import *
 #0.5*x^4+0.5y^4
 '''
 x=np.arange(16)
@@ -44,6 +46,9 @@ ax.set_zlabel('z');
 
 plt.show()
 '''
+
+#hexagonal
+'''
 yy, zz = np.meshgrid(range(4), range(4))
 xx = (yy-5)/2
 
@@ -76,4 +81,32 @@ ax.plot_surface(xx2, yy2, zz2)
 ax.plot_surface(xx3, yy3, zz3)
 ax.plot_surface(xx4, yy4, zz4)
 #ax.plot_surface(xx4, yy4, zz4)
+plt.show()
+'''
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+
+# Scatter graph
+N = 100
+X = np.random.uniform(-1, 1, N)
+Y = np.random.uniform(-1, 1, N)
+Z = np.random.uniform(-2, 2, N)
+ax.scatter(X, Y, Z)
+
+# Cylinder
+x=np.linspace(-1, 1, 100)
+z=np.linspace(-2, 2, 100)
+Xc, Zc=np.meshgrid(x, z)
+Yc = np.sqrt(1-Xc**2)
+
+# Draw parameters
+rstride = 20
+cstride = 10
+ax.plot_surface(Xc, Yc, Zc, alpha=0.2, rstride=rstride, cstride=cstride)
+ax.plot_surface(Xc, -Yc, Zc, alpha=0.2, rstride=rstride, cstride=cstride)
+
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_zlabel("Z")
 plt.show()
