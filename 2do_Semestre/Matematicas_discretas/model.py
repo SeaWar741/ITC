@@ -130,16 +130,25 @@ def vaso_hexagonal_ply():
 
     mlab.show()
 
-#0.5*x^4+0.5y^4 --> exterior
-#0.8x^4+0.8y^4+0.5 --> interior
-x = np.outer(np.linspace(-12, 12, 10), np.ones(10))
-print(x)
-y = x.copy().T # transpose
-z = 0.5*x**4+0.5*y**4
+def vaso_alto():
+    #0.5*x^4+0.5y^4 --> exterior
+    #0.8x^4+0.8y^4+0.5 --> interior
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1, projection='3d')
 
-fig = plt.figure()
-ax = plt.axes(projection='3d')
+    u = np.linspace(-1, 12, 60)
+    v = np.linspace(0, 2*np.pi, 60)
+    
+    U, V = np.meshgrid(u, v)
+    X1 = (U**0.4 + 3)*np.cos(V)
+    Y1 = (U**0.4 + 3)*np.sin(V)
+    Z1 = U
+    X2 = (U**0.5 + 3)*np.cos(V)
+    Y2 = (U**0.5 + 3)*np.sin(V)
+    Z2 = U
 
-ax.plot_surface(x, y, z,cmap='viridis', edgecolor='none')
-ax.set_title('Surface plot')
-plt.show()
+    ax.plot_surface(X1, Y1, Z1, alpha=0.3, color='red', rstride=6, cstride=12)
+    ax.plot_surface(X2, Y2, Z2, alpha=0.3, color='blue', rstride=6, cstride=12)
+    plt.show()
+
+vaso_alto()
