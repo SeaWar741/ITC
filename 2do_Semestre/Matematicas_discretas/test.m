@@ -12,3 +12,11 @@ for row = 1: rows
   end
 end
 disp(A)
+
+syms s t
+r = 2 + sin(7*s + 5*t);
+x = r*cos(s)*sin(t);
+y = r*sin(s)*sin(t);
+z = r*cos(t);
+ezsurf(x, y, z, [0, 2*pi, 0, pi])
+title('Parametric surface')
