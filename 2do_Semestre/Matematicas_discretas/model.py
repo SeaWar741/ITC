@@ -153,7 +153,7 @@ def vaso_grueso():
     plt.show()
 
 def vaso_grueso_ply():
-    vaso = "Alto.ply"
+    vaso = "Grueso.ply"
 
     mlab.pipeline.surface(mlab.pipeline.open(vaso))
 
@@ -180,6 +180,13 @@ def vaso_alto():
     ax.plot_surface(X2, Y2, Z2, alpha=0.3, color='blue', rstride=6, cstride=12)
     plt.show()
 
+def vaso_alto_ply():
+    vaso = "Alto.ply"
+
+    mlab.pipeline.surface(mlab.pipeline.open(vaso))
+
+    mlab.show()
+
 def menu():
     continuation = True
     while continuation == True:
@@ -192,6 +199,7 @@ def menu():
             vaso_grueso_ply()
         if selection == 3:
             vaso_alto()
+            vaso_alto_ply()
         else:
             continuation == False
 
