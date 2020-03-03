@@ -169,11 +169,11 @@ def vaso_alto():
     v = np.linspace(0, 2*np.pi, 60)
     
     U, V = np.meshgrid(u, v)
-    X1 = (0.05*U**4 + 0.5*U**4)*np.cos(V)
-    Y1 = (0.05*U**4 + 0.5*U**4)*np.sin(V)
+    X1 = (7*U+1)*np.cos(V)
+    Y1 = (-.7*U)*np.sin(V)
     Z1 = U
-    X2 = (0.08*U**4+0.8*U**4+0.5)*np.cos(V)
-    Y2 = (0.08*U**4+0.8*U**4+0.5)*np.sin(V)
+    X2 = (7*U+1)*np.cos(V)
+    Y2 = (-.7*U)*np.sin(V)
     Z2 = U
 
     ax.plot_surface(X1, Y1, Z1, alpha=0.3, color='red', rstride=6, cstride=12)
