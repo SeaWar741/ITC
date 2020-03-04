@@ -1,8 +1,15 @@
 import numpy as np
+import scipy.integrate as integrate
+import scipy.special as special
 from mayavi import mlab
 from tkinter import *
 from mpl_toolkits import mplot3d
 import matplotlib.pyplot as plt
+
+rho_cristal = 2.49 #g/cm^3
+rho_poli = 1.18 #g/cm^3 Polimetilmetacrilato
+rho_polie = 0.970 #gm/cm^3 Polietileno de alta densidad Plastico de semilla de aguacate
+
 
 def vaso_hexagonal():
     #parte superior
@@ -186,6 +193,13 @@ def vaso_alto_ply():
     mlab.pipeline.surface(mlab.pipeline.open(vaso))
 
     mlab.show()
+
+def volumen():
+    #aqui se calcula
+    return 1
+def costo(densidad):
+    result = integrate.quad(lambda x:special.jv(2.5,x),0,4.5)
+    return result
 
 def menu():
     continuation = True
