@@ -19,7 +19,7 @@ void loop() {
   Serial.print("Temperatura: ");          //Se imprime la palabra " Temperatura: "
   Serial.print(temp);              //Se imprime el valor obtenido por el sensor    
   Serial.println(" *C ");                 //en grados Celsius
-  if(temp >=28){
+  if(temp >=12){
     digitalWrite(relay, HIGH);
     digitalWrite(led,LOW);
   }

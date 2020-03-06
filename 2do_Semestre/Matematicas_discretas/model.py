@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 rho_cristal = 2.49 #g/cm^3
 rho_poli = 1.18 #g/cm^3 Polimetilmetacrilato
 rho_polie = 0.970 #gm/cm^3 Polietileno de alta densidad Plastico de semilla de aguacate
+rho_acero = 7.8 #gm/cm^3 Acero inoxidable
 
 
 def vaso_hexagonal():
@@ -203,6 +204,7 @@ def costo(densidad):
 
 def menu():
     continuation = True
+    print(costo(30))
     while continuation == True:
         selection = int(input("ingesa seleccion >"))
         if selection == 1:
