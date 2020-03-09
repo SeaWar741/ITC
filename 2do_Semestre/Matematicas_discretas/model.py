@@ -195,11 +195,36 @@ def vaso_alto_ply():
 
     mlab.show()
 
-def volumen():
-    #aqui se calcula
-    return 1
-def costo(densidad):
-    result = integrate.quad(lambda x:special.jv(2.5,x),0,4.5)
+def volumen(selection):
+    if selection == 1:
+        #prisma hexagono pequeño/base
+        perimetro1= 5.22*6
+        apotema1 = 4.819
+        area1 = (perimetro1*apotema1)/2
+        #prisma hexagono grande/superior
+        perimetro2= 6.25*6
+        apotema2 = 6.26
+        area2 = (perimetro2*apotema2)/2
+        #paredes pequeñas
+        v1=0.05*0.1*4.5*6
+        v2=0.5*0.1*13*6
+        result = area1+area2-(v1+v2)
+    elif selection == 2:
+        volumen_ex = np.pi*integrate.quad(lambda x:(0.5*x**4)**2,0,15)
+        volumen_in = np.pi*integrate.quad(lambda x:(0.5*x**4+1)**2,0,15)
+        result = volumen_ex-volumen_in
+    elif selection == 3:
+        volumen_ex = np.pi*integrate.quad(lambda x:((x**2)/42.9)**2,0,7.5)
+        volumen_in = np.pi*integrate.quad(lambda x:(((x**2)/42.9)+1)**2,0,7.5)
+        result = volumen_ex-volumen_in
+    return result
+
+def costo(material,densidad,volumen):
+    masa = densidad*volumen
+    if material == 1:
+        result = masa*rho_cristal*0.06
+    elif material ==2:
+        result = masa*rho_polie*0.19
     return result
 
 def menu():
