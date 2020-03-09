@@ -1,5 +1,6 @@
 import numpy as np
 import scipy.integrate as integrate
+
 import scipy.special as special
 from mayavi import mlab
 from tkinter import *
@@ -195,6 +196,7 @@ def vaso_alto_ply():
 
     mlab.show()
 
+
 def volumen(selection):
     if selection == 1:
         #prisma hexagono pequeño/base
@@ -229,7 +231,7 @@ def costo(material,densidad,volumen):
 
 def menu():
     continuation = True
-    print(costo(30))
+
     while continuation == True:
         selection = int(input("ingesa seleccion >"))
         if selection == 1:
@@ -243,5 +245,5 @@ def menu():
             vaso_alto_ply()
         else:
             continuation == False
-
+        print(volumen(selection))
 menu()
