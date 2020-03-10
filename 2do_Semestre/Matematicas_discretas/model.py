@@ -12,7 +12,10 @@ rho_polie = 0.970 #gm/cm^3 Polietileno de alta densidad Plastico de semilla de a
 rho_acero = 7.8 #gm/cm^3 Acero inoxidable
 
 selections =[0,0,0,0]
-
+    #material, forma, funcion
+characteristics =[0,0,0]
+    #volumen, costo
+result=[0.0,0.0]
 
 def vaso_hexagonal():
     #parte superior
@@ -228,12 +231,11 @@ def volumen(selection):
         result = volumen_ex
     return result
 
-def costo(material,densidad,volumen):
-    masa = densidad*volumen
+def costo(material,volumen):
     if material == 1:
-        result = masa*rho_cristal*0.06
+        result = volumen*rho_cristal*0.06
     elif material ==2:
-        result = masa*rho_polie*0.19
+        result = volumen*rho_polie*0.19
     return result
 
 def menu():
@@ -256,22 +258,41 @@ def menu():
         '''
         print(volumen(selection))
 
+def biodegradable():
+    selections[0]=1
+def vidrio():
+    selections[0]=0
 
+def alto():
+    selections[1]=0
+    selections[2]=0
+def ovalado():
+    selections[1]=0
+    selections[2]=1
+def hexagono():
+    selections[1]=1
+    selections[2]=0
+def otro():
+    selections[1]=1
+    selections[2]=1
 
-def gui():
+def enfriar():
+    selections[3]=0
+def sinfuncion():
+    selections[3]=1
+
+def ventana1():
     root = tk.Tk()
-    root.title('Equipo #6')
+    root.title('Seleccion material')
     #root.iconbitmap()
     root.configure(background='#CBFFD1')    
 
-    vaso1 = tk.Button(root,bg= '#FF9F1C', text='Vaso 1', padx=20,pady=10, command = vaso_hex)
-    vaso2 = tk.Button(root,bg= '#21BAAA', text='Vaso 2', padx=20,pady=10, command = vaso_a)
-    vaso3 = tk.Button(root,bg= '#6ec0ff', text='Vaso 3', padx=20,pady=10, command = vaso_g)
+    option1 = tk.Button(root,bg= '#FF9F1C', text='Biodegradable', padx=20,pady=10, command = biodegradable)
+    option2 = tk.Button(root,bg= '#21BAAA', text='Vidrio', padx=20,pady=10, command = vidrio)
 
-    vaso1.grid(row=0, padx=20,pady=50, column=0)
-    vaso2.grid(row=0, padx=20,pady=50, column=1)
-    vaso3.grid(row=0, padx=20,pady=50, column=2)
-
+    option1.grid(row=0, padx=20,pady=50, column=0)
+    option2.grid(row=0, padx=20,pady=50, column=1)
+    
     screen_Width = root.winfo_screenwidth()
     screen_Height = root.winfo_screenheight()
     
@@ -284,5 +305,148 @@ def gui():
 
     root.mainloop()
 
-menu()
+def ventana2():
+    root = tk.Tk()
+    root.title('Forma')
+    #root.iconbitmap()
+    root.configure(background='#CBFFD1')    
+
+    option1 = tk.Button(root,bg= '#FF9F1C', text='Alto', padx=20,pady=10, command = alto)
+    option2 = tk.Button(root,bg= '#21BAAA', text='Ovalado', padx=20,pady=10, command = ovalado)
+    option3 = tk.Button(root,bg= '#6ec0ff', text='Hexagono', padx=20,pady=10, command = hexagono)
+    option4 = tk.Button(root,bg= '#6ec0ff', text='Hexagono', padx=20,pady=10, command = otro)
+
+    option1.grid(row=0, padx=20,pady=50, column=0)
+    option2.grid(row=0, padx=20,pady=50, column=1)
+    option3.grid(row=0, padx=20,pady=50, column=3)
+    option4.grid(row=0, padx=20,pady=50, column=4)
+    
+    screen_Width = root.winfo_screenwidth()
+    screen_Height = root.winfo_screenheight()
+    
+    window_Width = 450
+    window_Height = 160
+
+    x = (screen_Width - window_Width)/2
+    y = (screen_Height - window_Height)/2
+    root.geometry("%dx%d+%d+%d" % (window_Width,window_Height,x,y))
+
+    root.mainloop()
+
+def ventana3():
+    root = tk.Tk()
+    root.title('Funcion')
+    #root.iconbitmap()
+    root.configure(background='#CBFFD1')    
+
+    option1 = tk.Button(root,bg= '#FF9F1C', text='Enfriar', padx=20,pady=10, command = alto)
+    option2 = tk.Button(root,bg= '#21BAAA', text='Sin Funcion', padx=20,pady=10, command = ovalado)
+   
+    option1.grid(row=0, padx=20,pady=50, column=0)
+    option2.grid(row=0, padx=20,pady=50, column=1)
+    
+    screen_Width = root.winfo_screenwidth()
+    screen_Height = root.winfo_screenheight()
+    
+    window_Width = 450
+    window_Height = 160
+
+    x = (screen_Width - window_Width)/2
+    y = (screen_Height - window_Height)/2
+    root.geometry("%dx%d+%d+%d" % (window_Width,window_Height,x,y))
+
+    root.mainloop()
+
+def resultado():
+    characteristics =[0,0,0]
+    p = selections[0]
+    r = selections[1]
+    s = selections[2]
+    q = selections[3]
+    if(p==1 and r == 0 and s ==0 and q ==0):
+        characteristics[0]=1
+        characteristics[1]=1
+        characteristics[2]=1
+    elif(p==1 and r == 0 and s ==0 and q ==1):
+        characteristics[0]=1
+        characteristics[1]=1
+        characteristics[2]=2
+    elif(p==1 and r == 0 and s ==1 and q ==0):
+        characteristics[0]=1
+        characteristics[1]=2
+        characteristics[2]=1
+    elif(p==1 and r == 0 and s ==1 and q ==1):
+        characteristics[0]=1
+        characteristics[1]=2
+        characteristics[2]=2
+    elif(p==1 and r == 1 and s ==0 and q ==0):
+        characteristics[0]=1
+        characteristics[1]=3
+        characteristics[2]=1
+    elif(p==1 and r == 1 and s ==0 and q ==1):
+        characteristics[0]=1
+        characteristics[1]=3
+        characteristics[2]=2
+    elif(p==1 and r == 1 and s ==1 and q ==0):
+        characteristics[0]=1
+        characteristics[1]=4
+        characteristics[2]=1
+    elif(p==1 and r == 1 and s ==1 and q ==1):
+        characteristics[0]=1
+        characteristics[1]=4
+        characteristics[2]=2
+    elif(p==0 and r == 0 and s ==0 and q ==0):
+        characteristics[0]=2
+        characteristics[1]=1
+        characteristics[2]=1
+    elif(p==0 and r == 0 and s ==0 and q ==1):
+        characteristics[0]=2
+        characteristics[1]=1
+        characteristics[2]=2
+    elif(p==0 and r == 0 and s ==1 and q ==0):
+        characteristics[0]=2
+        characteristics[1]=2
+        characteristics[2]=1
+    elif(p==0 and r == 0 and s ==1 and q ==1):
+        characteristics[0]=2
+        characteristics[1]=2
+        characteristics[2]=2
+    elif(p==0 and r == 1 and s ==0 and q ==0):
+        characteristics[0]=2
+        characteristics[1]=3
+        characteristics[2]=1
+    elif(p==0 and r == 1 and s ==0 and q ==1):
+        characteristics[0]=2
+        characteristics[1]=3
+        characteristics[2]=2
+    elif(p==0 and r == 1 and s ==1 and q ==0):
+        characteristics[0]=2
+        characteristics[1]=4
+        characteristics[2]=1
+    elif(p==0 and r == 1 and s ==1 and q ==1):
+        characteristics[0]=2
+        characteristics[1]=4
+        characteristics[2]=2
+    else:
+        characteristics[0]=-1
+        characteristics[1]=-1
+        characteristics[2]=-1
+    
+
+    if(characteristics[1]!=4):
+        volumen = volumen(characteristics[1])
+        result[0]=volumen
+        result[1]=costo(characteristics[0],volumen)
+    else:
+        result[0]=-1
+        result[1]=-1
+    
+
+def gui():
+    ventana1()
+    ventana2()
+    ventana3()
+    print(selections)
+
+gui()
 
