@@ -1,24 +1,35 @@
+import math  
 import numpy as np
 import sympy as sym
 from mayavi import mlab
 import tkinter as tk
-import math  
-from mpl_toolkits import mplot3d
 import matplotlib.pyplot as plt
+from mpl_toolkits import mplot3d
+
 
 rho_cristal = 2.49 #g/cm^3
 rho_poli = 1.18 #g/cm^3 Polimetilmetacrilato
 rho_polie = 0.970 #gm/cm^3 Polietileno de alta densidad Plastico de semilla de aguacate
 rho_acero = 7.8 #gm/cm^3 Acero inoxidable
 
-selections =[0,0,0,0]
-    #material, forma, funcion
-characteristics =[0,0,0]
-    #volumen, costo
-result=[0.0,0.0]
+selections =[0,0,0,0]#guardar valores binarios
+
+                #material, forma, funcion
+characteristics =[0,        0,      0]
+
+        #volumen,   costo
+result=[0.0,        0.0]
 
 glass_a = [" ND "," ND "]
 
+background='#D8D9DE'
+btn1='#FE4365'
+btn2='#FC9D9A'
+btn3='#F9CDAD'
+btn4='#C8C8A9'
+
+
+#plots
 def vaso_hexagonal():
     #parte superior
     x1,y1,z1 = (-1.5,2,2.5)
@@ -202,7 +213,10 @@ def vaso_alto_ply():
 
     mlab.show()
 
+
+#costo y volumen
 def volumen(selection):
+    resulting= 0
     x = sym.Symbol('x')
     if selection == 1:
         #prisma hexagono pequeño/base
@@ -218,27 +232,32 @@ def volumen(selection):
         #paredes pequeñas
         v1=0.05*0.1*4.5*6
         v2=0.5*0.1*13*6
-        result = volumen1+volumen2-(v1+v2)
+        resulting = volumen1+volumen2-(v1+v2)
     elif selection == 2:
         f=((x/0.5)**(1/4))**2
         f2=((x-1/0.5)**(1/4))**2
         volumen_ex = sym.integrate(math.pi*(f),(x,0,15))
         #volumen_in = sym.integrate(math.pi*(f2),(x,0,15))
-        result = volumen_ex
+        resulting = volumen_ex
     elif selection == 3:
         f1=((4.29*x)**(1/2))**2
         f2=((4.29*x-1)**(1/2))**2
         volumen_ex = sym.integrate(math.pi*(f1),(x,0,7.5))
         #volumen_in = sym.integrate(math.pi*(f2),(x,0,7.5))
-        result = volumen_ex
-    return result
+        resulting = volumen_ex
+    return resulting
 
 def costo(material,volumen):
+    resulting = 0
     if material == 1:
-        result = volumen*rho_cristal*0.06
+        resulting = volumen*rho_cristal*0.06
     elif material ==2:
-        result = volumen*rho_polie*0.19
-    return result
+        resulting = volumen*rho_polie*0.19
+    return resulting
+
+
+#funciones activadores
+
 
 def biodegradable():
     selections[0]=1
@@ -263,72 +282,91 @@ def enfriar():
 def sinfuncion():
     selections[3]=1
 
+#funcones de seleccion
+def vaso_selection():
+    if(characteristics[0]==1):
+        glass_a[0]="Biodegradable"
+    elif(characteristics[0]==2):
+        glass_a[0]="Vidrio"
+    else:
+        glass_a[0]="No hay disponible"
+    
+    if(characteristics[1]==1):
+        glass_a[1]="Alto"
+    elif(characteristics[1]==2):
+        glass_a[1]="Ovalado"
+    elif(characteristics[1]==3):
+        glass_a[1]="Hexagono"
+    else:
+        glass_a[1]="No hay disponible"
+
+#interpretador
 def resultado():
     p = selections[0]
     r = selections[1]
     s = selections[2]
     q = selections[3]
-    if(p==1 and r == 0 and s ==0 and q ==0):
+    if(p==1 and r == 0 and s ==0 and q ==0):#1
         characteristics[0]=1
         characteristics[1]=1
         characteristics[2]=1
-    elif(p==1 and r == 0 and s ==0 and q ==1):
+    elif(p==1 and r == 0 and s ==0 and q ==1):#2
         characteristics[0]=1
         characteristics[1]=1
         characteristics[2]=2
-    elif(p==1 and r == 0 and s ==1 and q ==0):
+    elif(p==1 and r == 0 and s ==1 and q ==0):#3
         characteristics[0]=1
         characteristics[1]=2
         characteristics[2]=1
-    elif(p==1 and r == 0 and s ==1 and q ==1):
+    elif(p==1 and r == 0 and s ==1 and q ==1):#4
         characteristics[0]=1
         characteristics[1]=2
         characteristics[2]=2
-    elif(p==1 and r == 1 and s ==0 and q ==0):
+    elif(p==1 and r == 1 and s ==0 and q ==0):#5
         characteristics[0]=1
         characteristics[1]=3
         characteristics[2]=1
-    elif(p==1 and r == 1 and s ==0 and q ==1):
+    elif(p==1 and r == 1 and s ==0 and q ==1):#6
         characteristics[0]=1
         characteristics[1]=3
         characteristics[2]=2
-    elif(p==1 and r == 1 and s ==1 and q ==0):
+    elif(p==1 and r == 1 and s ==1 and q ==0):#67
         characteristics[0]=1
         characteristics[1]=4
         characteristics[2]=1
-    elif(p==1 and r == 1 and s ==1 and q ==1):
+    elif(p==1 and r == 1 and s ==1 and q ==1):#8
         characteristics[0]=1
         characteristics[1]=4
         characteristics[2]=2
-    elif(p==0 and r == 0 and s ==0 and q ==0):
+    elif(p==0 and r == 0 and s ==0 and q ==0):#9
         characteristics[0]=2
         characteristics[1]=1
         characteristics[2]=1
-    elif(p==0 and r == 0 and s ==0 and q ==1):
+    elif(p==0 and r == 0 and s ==0 and q ==1):#10
         characteristics[0]=2
         characteristics[1]=1
         characteristics[2]=2
-    elif(p==0 and r == 0 and s ==1 and q ==0):
+    elif(p==0 and r == 0 and s ==1 and q ==0):#11
         characteristics[0]=2
         characteristics[1]=2
         characteristics[2]=1
-    elif(p==0 and r == 0 and s ==1 and q ==1):
+    elif(p==0 and r == 0 and s ==1 and q ==1):#12
         characteristics[0]=2
         characteristics[1]=2
         characteristics[2]=2
-    elif(p==0 and r == 1 and s ==0 and q ==0):
+    elif(p==0 and r == 1 and s ==0 and q ==0):#13
         characteristics[0]=2
         characteristics[1]=3
         characteristics[2]=1
-    elif(p==0 and r == 1 and s ==0 and q ==1):
+    elif(p==0 and r == 1 and s ==0 and q ==1):#14
         characteristics[0]=2
         characteristics[1]=3
         characteristics[2]=2
-    elif(p==0 and r == 1 and s ==1 and q ==0):
+    elif(p==0 and r == 1 and s ==1 and q ==0):#15
         characteristics[0]=2
         characteristics[1]=4
         characteristics[2]=1
-    elif(p==0 and r == 1 and s ==1 and q ==1):
+    elif(p==0 and r == 1 and s ==1 and q ==1):#16
         characteristics[0]=2
         characteristics[1]=4
         characteristics[2]=2
@@ -344,15 +382,18 @@ def resultado():
     else:
         result[0]=-1
         result[1]=-1
-    
+    vaso_selection()
+
+
+#ventanas
 def ventana1():
     root = tk.Tk()
     root.title('Seleccion material')
-    #root.iconbitmap()
-    root.configure(background='#CBFFD1')    
+    root.iconbitmap('vaso.ico')
+    root.configure(background=background)    
 
-    option1 = tk.Button(root,bg= '#FF9F1C', text='Biodegradable', padx=20,pady=10, command = biodegradable)
-    option2 = tk.Button(root,bg= '#21BAAA', text='Vidrio', padx=20,pady=10, command = vidrio)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Biodegradable', padx=20,pady=10, command = biodegradable)
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Vidrio', padx=20,pady=10, command = vidrio)
 
     option1.grid(row=0, padx=20,pady=50, column=0)
     option2.grid(row=0, padx=20,pady=50, column=1)
@@ -360,7 +401,7 @@ def ventana1():
     screen_Width = root.winfo_screenwidth()
     screen_Height = root.winfo_screenheight()
     
-    window_Width = 450
+    window_Width = 550
     window_Height = 160
 
     x = (screen_Width - window_Width)/2
@@ -372,13 +413,13 @@ def ventana1():
 def ventana2():
     root = tk.Tk()
     root.title('Forma')
-    #root.iconbitmap()
-    root.configure(background='#CBFFD1')    
+    root.iconbitmap('vaso.ico')
+    root.configure(background=background)  
 
-    option1 = tk.Button(root,bg= '#FF9F1C', text='Alto', padx=20,pady=10, command = alto)
-    option2 = tk.Button(root,bg= '#21BAAA', text='Ovalado', padx=20,pady=10, command = ovalado)
-    option3 = tk.Button(root,bg= '#6ec0ff', text='Hexagono', padx=20,pady=10, command = hexagono)
-    option4 = tk.Button(root,bg= '#6ec0ff', text='Hexagono', padx=20,pady=10, command = otro)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Alto', padx=20,pady=10, command = alto)
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Ovalado', padx=20,pady=10, command = ovalado)
+    option3 = tk.Button(root,bg= btn3,fg='white', text='Hexagono', padx=20,pady=10, command = hexagono)
+    option4 = tk.Button(root,bg= btn4,fg='white', text='Otro', padx=20,pady=10, command = otro)
 
     option1.grid(row=0, padx=20,pady=50, column=0)
     option2.grid(row=0, padx=20,pady=50, column=1)
@@ -388,7 +429,7 @@ def ventana2():
     screen_Width = root.winfo_screenwidth()
     screen_Height = root.winfo_screenheight()
     
-    window_Width = 450
+    window_Width = 550
     window_Height = 160
 
     x = (screen_Width - window_Width)/2
@@ -400,11 +441,11 @@ def ventana2():
 def ventana3():
     root = tk.Tk()
     root.title('Funcion')
-    #root.iconbitmap()
-    root.configure(background='#CBFFD1')    
+    root.iconbitmap('vaso.ico')
+    root.configure(background=background)    
 
-    option1 = tk.Button(root,bg= '#FF9F1C', text='Enfriar', padx=20,pady=10, command = alto)
-    option2 = tk.Button(root,bg= '#21BAAA', text='Sin Funcion', padx=20,pady=10, command = ovalado)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Enfriar', padx=20,pady=10, command = enfriar)
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Sin Funcion', padx=20,pady=10, command = sinfuncion)
    
     option1.grid(row=0, padx=20,pady=50, column=0)
     option2.grid(row=0, padx=20,pady=50, column=1)
@@ -412,7 +453,7 @@ def ventana3():
     screen_Width = root.winfo_screenwidth()
     screen_Height = root.winfo_screenheight()
     
-    window_Width = 450
+    window_Width = 550
     window_Height = 160
 
     x = (screen_Width - window_Width)/2
@@ -421,54 +462,63 @@ def ventana3():
 
     root.mainloop()
 
-def vaso_selection():
-    if(characteristics[0]==1):
-        glass[0]=="Biodegradable"
-    elif(characteristics[0]==2):
-        glass[0]=="Vidrio"
-    else:
-        glass[0]=="No hay disponible"
+def ventana_alt():
+    root = tk.Tk()
+    root.title('No hay vaso dispoible')
+    root.iconbitmap('vaso.ico')
+    root.configure(background=background)    
+   
+    T = tk.Text(root, height=2, width=30)
+    T.pack()
+    T.insert(tk.END, "Vaso no disponible")
     
-    if(characteristics[1]==1):
-        glass[1]=="Alto"
-    elif(characteristics[1]==1):
-        glass[1]=="Ovalado"
-    elif(characteristics[1]==1):
-        glass[1]=="Hexagono"
-    else:
-        glass[1]=="No hay disponible"
+   
+    T.grid(row=0, padx=20,pady=50, column=0)
+   
+    
+    
+    screen_Width = root.winfo_screenwidth()
+    screen_Height = root.winfo_screenheight()
+    
+    window_Width = 550
+    window_Height = 160
+
+    x = (screen_Width - window_Width)/2
+    y = (screen_Height - window_Height)/2
+    root.geometry("%dx%d+%d+%d" % (window_Width,window_Height,x,y))
+
+    root.mainloop()
 
 def ver_vaso():
-    if selections[1] == 1:
+    if characteristics[1] == 3:
         vaso_hexagonal()
         vaso_hexagonal_ply()
-    if selections[1] == 2:
-
+    elif characteristics[1] == 2:
+        vaso_grueso()
         vaso_grueso_ply()
-    if selections[1] == 3:
-        vaso_alto()
+    elif characteristics[1] == 1:
         vaso_alto_ply()
     else:
         print("vaso no disponible")
+        ventana_alt()
 
 def ventana4():
     root = tk.Tk()
     root.title('Funcion')
     resultado()
-    #root.iconbitmap()
-    print(selections) #ya
+    root.iconbitmap('vaso.ico')
     print(characteristics)
     print(result)
-    print(glass)
+    print(glass_a)
 
     vaso_selection()
 
-    root.configure(background='#CBFFD1')    
+    root.configure(background=background)      
     T = tk.Text(root, height=2, width=30)
     T.pack()
-    T.insert(tk.END, "Material: "+glass[0]+"\nForma: "+str(glass[1])+"\nVolumen: "+str(result[0])+"\nCosto por unidad: $"+str(result[1]))
+    T.insert(tk.END, "Material: "+glass_a[0]+"\nForma: "+str(glass_a[1])+"\nVolumen: "+str(result[0])+"\nCosto por unidad: $"+str(result[1]))
     
-    option1 = tk.Button(root,bg= '#FF9F1C', text='Ver vaso', padx=20,pady=10, command = ver_vaso)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Ver vaso', padx=20,pady=10, command = ver_vaso)
    
     T.grid(row=0, padx=20,pady=50, column=0)
     option1.grid(row=0, padx=20,pady=50, column=1)
