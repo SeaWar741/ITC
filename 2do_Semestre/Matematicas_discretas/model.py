@@ -259,28 +259,38 @@ def costo(material,volumen):
 #funciones activadores
 
 
-def biodegradable():
+def biodegradable(root):
     selections[0]=1
-def vidrio():
+    root.destroy()
+
+def vidrio(root):
     selections[0]=0
-
-def alto():
+    root.destroy()
+    
+def alto(root):
     selections[1]=0
     selections[2]=0
-def ovalado():
+    root.destroy()
+
+def ovalado(root):
     selections[1]=0
     selections[2]=1
-def hexagono():
+    root.destroy()
+def hexagono(root):
     selections[1]=1
     selections[2]=0
-def otro():
+    root.destroy()
+def otro(root):
     selections[1]=1
     selections[2]=1
+    root.destroy()
 
-def enfriar():
+def enfriar(root):
     selections[3]=0
-def sinfuncion():
+    root.destroy()
+def sinfuncion(root):
     selections[3]=1
+    root.destroy()
 
 #funcones de seleccion
 def vaso_selection():
@@ -392,8 +402,8 @@ def ventana1():
     root.iconbitmap('vaso.ico')
     root.configure(background=background)    
 
-    option1 = tk.Button(root,bg= btn1,fg='white', text='Biodegradable', padx=20,pady=10, command = biodegradable)
-    option2 = tk.Button(root,bg= btn2,fg='white', text='Vidrio', padx=20,pady=10, command = vidrio)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Biodegradable', padx=20,pady=10, command = lambda:biodegradable(root))
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Vidrio', padx=20,pady=10, command = lambda:vidrio(root))
 
     option1.grid(row=0, padx=20,pady=50, column=0)
     option2.grid(row=0, padx=20,pady=50, column=1)
@@ -416,9 +426,9 @@ def ventana2():
     root.iconbitmap('vaso.ico')
     root.configure(background=background)  
 
-    option1 = tk.Button(root,bg= btn1,fg='white', text='Alto', padx=20,pady=10, command = alto)
-    option2 = tk.Button(root,bg= btn2,fg='white', text='Ovalado', padx=20,pady=10, command = ovalado)
-    option3 = tk.Button(root,bg= btn3,fg='white', text='Hexagono', padx=20,pady=10, command = hexagono)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Alto', padx=20,pady=10, command = lambda:alto(root))
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Ovalado', padx=20,pady=10, command = lambda:ovalado(root))
+    option3 = tk.Button(root,bg= btn3,fg='white', text='Hexagono', padx=20,pady=10, command = lambda:hexagono(root))
     option4 = tk.Button(root,bg= btn4,fg='white', text='Otro', padx=20,pady=10, command = otro)
 
     option1.grid(row=0, padx=20,pady=50, column=0)
@@ -444,8 +454,8 @@ def ventana3():
     root.iconbitmap('vaso.ico')
     root.configure(background=background)    
 
-    option1 = tk.Button(root,bg= btn1,fg='white', text='Enfriar', padx=20,pady=10, command = enfriar)
-    option2 = tk.Button(root,bg= btn2,fg='white', text='Sin Funcion', padx=20,pady=10, command = sinfuncion)
+    option1 = tk.Button(root,bg= btn1,fg='white', text='Enfriar', padx=20,pady=10, command = lambda:enfriar(root))
+    option2 = tk.Button(root,bg= btn2,fg='white', text='Sin Funcion', padx=20,pady=10, command = lambda:sinfuncion(root))
    
     option1.grid(row=0, padx=20,pady=50, column=0)
     option2.grid(row=0, padx=20,pady=50, column=1)
