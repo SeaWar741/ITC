@@ -1,17 +1,17 @@
-import numpy as np
-import sympy as sym
-from mayavi import mlab
 import tkinter as tk
-import math  
+import numpy as np
+import scipy.integrate as integrate
+import scipy.special as special
+from mayavi import mlab
 from mpl_toolkits import mplot3d
 import matplotlib.pyplot as plt
+
 
 rho_cristal = 2.49 #g/cm^3
 rho_poli = 1.18 #g/cm^3 Polimetilmetacrilato
 rho_polie = 0.970 #gm/cm^3 Polietileno de alta densidad Plastico de semilla de aguacate
-rho_acero = 7.8 #gm/cm^3 Acero inoxidable
+rho_acero = 7.8 #gm/cm^3 Acero inoxidable2
 
-selections =[0,0,0,0]
 
 
 def vaso_hexagonal():
@@ -52,11 +52,8 @@ def vaso_hexagonal():
                         mode="axes", color=(1, 1, 1))
     '''
     mlab.mesh([[x1, x2],[x3, x4],[x5, x6],[x7, x8],[x9, x10],[x11, x12]],  # | => x coordinate
-
                     [[y1, y2],[y3, y4],[y5, y6],[y7, y8],[y9, y10],[y11, y12]],  # | => y coordinate
-
                     [[z1, z2],[z3, z4],[z5, z6],[z7, z8],[z9, z10],[z11, z12]],  # | => z coordinate
-
                     color=(0, 0, 0))  # black
     '''
     mlab.mesh([[x1, x3], [x7, x9]],
@@ -94,11 +91,8 @@ def vaso_hexagonal():
                         mode="axes", color=(1, 1, 1))
     '''
     mlab.mesh([[x1a, x2a],[x3a, x4a],[x5a, x6a],[x7a, x8a],[x9a, x10a],[x11a, x12a]],  # | => x coordinate
-
                     [[y1a, y2a],[y3a, y4a],[y5, y6a],[y7, y8a],[y9, y10a],[y11a, y12a]],  # | => y coordinate
-
                     [[z1a, z2a],[z3a, z4a],[z5a, z6a],[z7a, z8a],[z9a, z10a],[z11a, z12a]],  # | => z coordinate
-
                     color=(0, 0, 0))  # black
     '''
     mlab.mesh([[x1a, x3a], [x7a, x9a]],
@@ -197,51 +191,31 @@ def vaso_alto_ply():
 
     mlab.show()
 
-def volumen(selection):
-    x = sym.Symbol('x')
-    if selection == 1:
-        #prisma hexagono pequeño/base
-        perimetro1= 5.22*6
-        apotema1 = 4.819
-        area1 = (perimetro1*apotema1)/2
-        volumen1 = area1*13
-        #prisma hexagono grande/superior
-        perimetro2= 6.25*6
-        apotema2 = 6.26
-        area2 = (perimetro2*apotema2)/2
-        volumen2 = area2*13
-        #paredes pequeñas
-        v1=0.05*0.1*4.5*6
-        v2=0.5*0.1*13*6
-        result = volumen1+volumen2-(v1+v2)
-    elif selection == 2:
-        f=((x/0.5)**(1/4))**2
-        f2=((x-1/0.5)**(1/4))**2
-        volumen_ex = sym.integrate(math.pi*(f),(x,0,15))
-        #volumen_in = sym.integrate(math.pi*(f2),(x,0,15))
-        result = volumen_ex
-    elif selection == 3:
-        f1=((4.29*x)**(1/2))**2
-        f2=((4.29*x-1)**(1/2))**2
-        volumen_ex = sym.integrate(math.pi*(f1),(x,0,7.5))
-        #volumen_in = sym.integrate(math.pi*(f2),(x,0,7.5))
-        result = volumen_ex
+def volumen():
+    #aqui se calcula
+    return 1
+
+def costo(densidad):
+    result = integrate.quad(lambda x:special.jv(2.5,x),0,4.5)
     return result
 
-def costo(material,densidad,volumen):
-    masa = densidad*volumen
-    if material == 1:
-        result = masa*rho_cristal*0.06
-    elif material ==2:
-        result = masa*rho_polie*0.19
-    return result
+def vaso_hex():
+    vaso_hexagonal()
+    vaso_hexagonal_ply()
+
+def vaso_a():
+    vaso_alto()
+    vaso_alto_ply()
+
+def vaso_g():
+    vaso_grueso()
+    vaso_grueso_ply()
 
 def menu():
     continuation = True
-
+    print(costo(30))
     while continuation == True:
         selection = int(input("ingesa seleccion >"))
-        '''
         if selection == 1:
             vaso_hexagonal()
             vaso_hexagonal_ply()
@@ -253,8 +227,6 @@ def menu():
             vaso_alto_ply()
         else:
             continuation == False
-        '''
-        print(volumen(selection))
 
 
 
@@ -284,5 +256,4 @@ def gui():
 
     root.mainloop()
 
-menu()
-
+gui();
