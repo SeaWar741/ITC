@@ -28,11 +28,11 @@ def gauss_seidel(A,B,tolera,X,iteramax=100):
 
 # Programa de prueba #######
 # INGRESO
-A = np.array([[3,-0.1,-0.2],
-              [0.1,7,-0.3],
-              [0.3,-0.2,10]])
+A = np.array([[1,1,1],
+              [1,-1,1],
+              [2,3,-5]])
 
-B = np.array([7.85,-19.3,71.4])
+B = np.array([7,3,2])
 
 tolera = 0.00001
 
