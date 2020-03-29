@@ -135,11 +135,11 @@ figure(7)
 
 rectangle('Position',[2 4 1 1.2],'Curvature',[1,1],'FaceColor','r','EdgeColor',[0 0 1]);
 rectangle('Position',[4 4 1 1.2],'Curvature',[1,1],'FaceColor','b','EdgeColor',[1 0 0]);
-rectangle('Position',[6 4 0.5 0.6],'Curvature',[1,1],'FaceColor','r','EdgeColor',[0 0 1]);
+rectangle('Position',[6 4 0.5 0.6],'Curvature',[1,1],'FaceColor','k','EdgeColor',[0 0 1]);
 
-rectangle('Position',[2 2 0.5 0.6],'Curvature',[1,1],'FaceColor','r','EdgeColor',[0 0 1]);
-rectangle('Position',[4 1 0.5 0.6],'Curvature',[1,1],'FaceColor','b','EdgeColor',[1 0 0]);
-rectangle('Position',[6 6 0.5 0.6],'Curvature',[1,1],'FaceColor','r','EdgeColor',[0 0 1]);
+rectangle('Position',[2 2 0.5 0.6],'Curvature',[1,1],'FaceColor','g','EdgeColor',[0 0 1]);
+rectangle('Position',[4 1 0.5 0.6],'Curvature',[1,1],'FaceColor','y','EdgeColor',[1 0 0]);
+rectangle('Position',[6 6 0.5 0.6],'Curvature',[1,1],'FaceColor','c','EdgeColor',[0 0 1]);
 
 axis([0 8 0 8])
 axis square %define la proporcion cuadrada
