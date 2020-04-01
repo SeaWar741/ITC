@@ -41,14 +41,14 @@ for(i in 1:length(dataFile[[1]])){
     }
 }
 # <-----------PORCENTAJE----------->
-cat("Porcentaje de A:", (vtrCount[1] * 100) / total)
-cat("Porcentaje de C:", (vtrCount[2] * 100) / total)
-cat("Porcentaje de G:", (vtrCount[3] * 100) / total)
-cat("Porcentaje de T:", (vtrCount[4] * 100) / total)
-cat("Porcentaje de A:", (vtrCount[1] * 100) / total)
+print(cat("Porcentaje de A:", (vtrCount[1] * 100) / total))
+print(cat("Porcentaje de C:", (vtrCount[2] * 100) / total))
+print(cat("Porcentaje de G:", (vtrCount[3] * 100) / total))
+print(cat("Porcentaje de T:", (vtrCount[4] * 100) / total))
+print(cat("Porcentaje de A:", (vtrCount[1] * 100) / total))
 
 # <-----------REPETICIONES----------->
-cat("Repeticiones de A:", vtrRep[1])
-cat("Repeticiones de C:", vtrRep[2])
-cat("Repeticiones de G:", vtrRep[3])
-cat("Repeticiones de T:", vtrRep[4])
+print(cat("Repeticiones de A:", vtrRep[1]))
+print(cat("Repeticiones de C:", vtrRep[2]))
+print(cat("Repeticiones de G:", vtrRep[3]))
+print(cat("Repeticiones de T:", vtrRep[4]))

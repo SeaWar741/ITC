@@ -1,0 +1,137 @@
+<deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
+  <configuration file="D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\primer_entregable.prj" location="D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico" name="primer_entregable" target="target.ezdeploy.standalone" target-name="Application Compiler">
+    <param.appname>Simulador_de_campo_electrico</param.appname>
+    <param.icon />
+    <param.icons />
+    <param.version>1.0</param.version>
+    <param.authnamewatermark>Juan Carlos Garfias</param.authnamewatermark>
+    <param.email>a01652138@itesm.mx</param.email>
+    <param.company>Instituto Tecnológico de Monterrey</param.company>
+    <param.summary>Simulador de campo electrico para cargas puntuales</param.summary>
+    <param.description>Juan Carlos Garfias A01652138
+Ricardo Arriaga A01570553
+Karla Olvera A01379097
+Hernán Salinas A01570409
+Javier Banegas A00827812</param.description>
+    <param.screenshot>C:\Users\Juan Ca\Desktop\App.PNG</param.screenshot>
+    <param.guid />
+    <param.installpath.string>\Instituto Tecnológico de Monterrey\Simulador_de_campo_electrico\</param.installpath.string>
+    <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
+    <param.logo />
+    <param.install.notes />
+    <param.target.install.notes />
+    <param.intermediate>${PROJECT_ROOT}\primer_entregable\for_testing</param.intermediate>
+    <param.files.only>${PROJECT_ROOT}\primer_entregable\for_redistribution_files_only</param.files.only>
+    <param.output>${PROJECT_ROOT}\primer_entregable\for_redistribution</param.output>
+    <param.logdir>${PROJECT_ROOT}\primer_entregable</param.logdir>
+    <param.enable.clean.build>false</param.enable.clean.build>
+    <param.user.defined.mcr.options />
+    <param.target.type>subtarget.standalone</param.target.type>
+    <param.support.packages />
+    <param.web.mcr>true</param.web.mcr>
+    <param.package.mcr>false</param.package.mcr>
+    <param.no.mcr>false</param.no.mcr>
+    <param.web.mcr.name>MyAppInstaller_web</param.web.mcr.name>
+    <param.package.mcr.name>MyAppInstaller_mcr</param.package.mcr.name>
+    <param.no.mcr.name>MyAppInstaller_app</param.no.mcr.name>
+    <param.windows.command.prompt>true</param.windows.command.prompt>
+    <param.create.log>false</param.create.log>
+    <param.log.file />
+    <param.native.matlab>false</param.native.matlab>
+    <param.checkbox>false</param.checkbox>
+    <param.example />
+    <param.help.text>Syntax 
+	  -? 
+	 
+ Input Arguments 
+	 -?  print help on how to use the application 
+	 input arguments 
+ Description 
+ 	 Juan Carlos Garfias A01652138
+Ricardo Arriaga A01570553
+Karla Olvera A01379097
+Hernán Salinas A01570409
+Javier Banegas A00827812</param.help.text>
+    <unset>
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.guid />
+      <param.installpath.string />
+      <param.installpath.combo />
+      <param.logo />
+      <param.install.notes />
+      <param.target.install.notes />
+      <param.intermediate />
+      <param.files.only />
+      <param.output />
+      <param.logdir />
+      <param.enable.clean.build />
+      <param.user.defined.mcr.options />
+      <param.target.type />
+      <param.support.packages />
+      <param.web.mcr />
+      <param.package.mcr />
+      <param.no.mcr />
+      <param.web.mcr.name />
+      <param.package.mcr.name />
+      <param.no.mcr.name />
+      <param.windows.command.prompt />
+      <param.create.log />
+      <param.log.file />
+      <param.native.matlab />
+      <param.checkbox />
+      <param.example />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\primer_entregable.mlapp</file>
+    </fileset.main>
+    <fileset.resources />
+    <fileset.package />
+    <fileset.depfun />
+    <build-deliverables>
+      <file location="${PROJECT_ROOT}\primer_entregable\for_testing" name="readme.txt" optional="true">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\primer_entregable\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\primer_entregable\for_testing" name="Simulador_de_campo_electrico.exe" optional="false">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\primer_entregable\for_testing\Simulador_de_campo_electrico.exe</file>
+      <file location="${PROJECT_ROOT}\primer_entregable\for_testing" name="splash.png" optional="false">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\primer_entregable\for_testing\splash.png</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>D:\Program Files\Matlab\R2019b</root>
+      <toolboxes>
+        <toolbox name="matlabcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
