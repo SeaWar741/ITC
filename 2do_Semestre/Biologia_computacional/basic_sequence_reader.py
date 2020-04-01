@@ -29,6 +29,7 @@ for record in SeqIO.parse('TTN.fasta', 'fasta'):
 print("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\nTCF7L2:")
 for record in SeqIO.parse('TCF7L2.fasta', 'fasta'):
     X = ProteinAnalysis(str(record.seq))
+    print(X)
     print('\nResults for record: {} ###'.format(record.id))
     print(X.count_amino_acids()['A']) 
     print(X.count_amino_acids()['E']) 
