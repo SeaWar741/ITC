@@ -29,7 +29,7 @@ for record in SeqIO.parse('TTN.fasta', 'fasta'):
 print("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\nTCF7L2:")
 for record in SeqIO.parse('TCF7L2.fasta', 'fasta'):
     X = ProteinAnalysis(str(record.seq))
-    print(X)
+    
     print('\nResults for record: {} ###'.format(record.id))
     print(X.count_amino_acids()['A']) 
     print(X.count_amino_acids()['E']) 
@@ -49,3 +49,39 @@ for record in SeqIO.parse('TCF7L2.fasta', 'fasta'):
     print(epsilon_prot[0])   
     print(epsilon_prot[1]) 
     composition1 = X.count_amino_acids()
+
+def maxRepeating(str): 
+    l = len(str) 
+    count = 0
+    # Find the maximum repeating  
+    # character starting from str[i] 
+    res = str[0] 
+    for i in range(l):    
+        cur_count = 1
+        for j in range(i + 1, l): 
+      
+            if (str[i] != str[j]): 
+                break
+            cur_count += 1
+        # Update result if required 
+        if cur_count > count : 
+            count = cur_count 
+            res = str[i] 
+    return res 
+
+print("\nRepetitions TTN")
+with open('TTN.fasta','r') as file:
+    data = file.read()
+    for x in sorted(set(data)):
+        i = 1;
+        while x*i in data:
+            i+=1
+        print(x,"-",i)
+print("\nRepetitions TCF7L2")
+with open('TCF7L2.fasta','r') as file:
+    data = file.read()
+    for x in sorted(set(data)):
+        i = 1;
+        while x*i in data:
+            i+=1
+        print(x,"-",i)
