@@ -44,8 +44,7 @@ read_genome <-function(dataFile){
         vtrCount[4] = vtrCount[4] + 1
         vtrRep[4] = checkRep(dataFile[[1]][i], i, vtrRep[4], dataFile)
       }
-      print(vtrCount)
-      print(vtrRep)
+
   }
   # <-----------PORCENTAJE----------->
   print(cat("Porcentaje de A:", ((vtrCount[1] * 100) / total), "\n"))
@@ -66,5 +65,5 @@ tc77l2 = read.fasta("TCF7L2.fasta", strip.desc = TRUE)
 
 print("SECUENCIA TTN:")
 read_genome(ttn)
-print("\nSECUENCIA TCF7L2:")
+print("SECUENCIA TCF7L2:")
 read_genome(tcf7l2)

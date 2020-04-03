@@ -1,8 +1,6 @@
 from Bio import SeqIO
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
 
-composition1 = {}
-
 print("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*\nTTN")
 for record in SeqIO.parse('TTN.fasta', 'fasta'):
     X = ProteinAnalysis(str(record.seq))
@@ -69,6 +67,7 @@ def maxRepeating(str):
             res = str[i] 
     return res 
 
+
 print("\nRepetitions TTN")
 with open('TTN.fasta','r') as file:
     data = file.read()
@@ -77,6 +76,7 @@ with open('TTN.fasta','r') as file:
         while x*i in data:
             i+=1
         print(x,"-",i)
+
 print("\nRepetitions TCF7L2")
 with open('TCF7L2.fasta','r') as file:
     data = file.read()
