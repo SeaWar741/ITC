@@ -87,3 +87,63 @@ print(x[8])
 print(x[0])#no se puede, regresa vector null
 print(x[-1])#regresa vector sin el primer elemento
 print(x[-1][8])
+print(x[-c(1,3,5)])
+print(x)
+print(x[-c(-1,-3,-5)])#solo puede eliminar o seleccionar, no se pueden mezclar
+
+print(x[c(1,1,1,1,1,1,2,2,2,2,2,3,4,5)])
+
+x<- 1:5
+names(x)<-c("A","B","C","D","E") #en R no se llama diccionario, se llama vector nombrado
+print(x)
+print(x[4])
+print(x["E"])
+
+print(x[x>3])
+print(x>3)
+
+print(x[x>3&x<5])
+print(x[x>=3&x<5])
+
+y<-c(1,3,5)
+print(y)
+y<-c(1,3,5,7)
+print(y)
+print(x)
+print(x[x%in%y])
+print(x[y%in%x])
+print(y%in%x)
+print(y%in%x)
+
+#matrices
+m <- matrix(c(1:9),nrow=3,ncol=3,byrow=FALSE,dimnames=list(c("ROW1","ROW2","ROW3"),c("COL1","COL2","COL3")))
+print(m)
+print(m[2,2])
+print(m[1,3])
+print(m[1,])#regresa columna
+print(m[,3])#regresa fila
+
+#arrays
+arry <- array(1:24,dim=c(3,4,2))
+print(arry)
+
+#Dataframes--> permite tener diferentes tipos de dato
+
+#listas pueden combinarse
+l<-list(c(1,5,3),matrix(1:6,nrow=3),c("Hello","world"))
+print(l)
+print(l[[2]][,2])
+print(l[2])
+print(l[2:3])
+print(l[[2]][3])
+print(l[[2]])
+
+#ploteo
+x<-c(1:20)^2
+plot(x,type="p")
+plot(x,type="b")
+plot(x,type="o",pch=1:3,col=1:5)
+x<-rep(1:5,times=c(5,4,3,2,10))
+print(table(x))
+hist(x)
+hist(rnorm(10000))
