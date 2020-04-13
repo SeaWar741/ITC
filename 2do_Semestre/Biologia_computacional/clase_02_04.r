@@ -170,3 +170,5 @@ x<-sample(x)
 print(x)
 table(x)
 print(table(x*2))
+
+print(x*2)
