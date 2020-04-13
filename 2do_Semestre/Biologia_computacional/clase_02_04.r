@@ -147,3 +147,16 @@ x<-rep(1:5,times=c(5,4,3,2,10))
 print(table(x))
 hist(x)
 hist(rnorm(10000))
+
+gender <-(c("machote","feminista","machote","feminista","feminista"))
+print(gender)#no sale entre comillas es factor
+class(gender)
+gender.char<-(c("machote","feminista","machote","feminista","feminista"))
+print(class(gender.char))
+print(gender)
+print(as.integer(gender)) #te permite representarlo como numero
+
+L<-list(c(1,5,3),matrix(1:6,nrow=3),c("Hello","World"))
+
+v = list(bob=c(2,3,5),john=c("aa","bb"))
+print(v)
