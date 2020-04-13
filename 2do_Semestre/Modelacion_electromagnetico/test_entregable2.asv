@@ -1,11 +1,11 @@
 clear;
 puntos = 25;%numero de puntos en la malla
-cargas=[2,-2];%dos cargas de diferentes signos
-radio = 0.2;%radio de las cargas
+cargas=[2,2,2,2,2,-2,-2,-2,-2,-2];%dos cargas de diferentes signos
+radio = 4;%radio de las cargas
 
 %Definir la posicion de las cargas
-xcargas=[-0.5,0.5];
-ycargas=[0,0];
+xcargas=[-2,-1,0,1,2,-2,-1,0,1,2];
+ycargas=[0,0,0,0,0,5,5,5,5,5];
 
 
 epsilon = 8.854e-12;%Escribir el valor de epsilon
@@ -13,11 +13,11 @@ epsilon = 8.854e-12;%Escribir el valor de epsilon
 k = 1/(4 * pi * epsilon);
 
 %Dimensiones de la grafica
-minx= -1.5;
-maxx=1.5;
+minx= -2;
+maxx=2;
 
-maxy = 1.5;
-miny= -1.5;
+maxy = 5;
+miny= 0;
 
 %campo electrico
 campoex = zeros(puntos);
@@ -34,7 +34,7 @@ y =linspace(miny,maxy,puntos);%estos son vectores
 %crear un for que recorra las cargas para poder obtener el calculo de campo
 %electrico
 
-for i=1:2
+for i=1:10
     dx = xpuntosmalla-xcargas(i);%obtiene distancias
     dy = ypuntosmalla-ycargas(i);%obtiene distancias
     
@@ -47,11 +47,12 @@ for i=1:2
     
 end
 
-
+for i=1:length(xcargas)
+    
 
 
 campoe_total = sqrt(campoex.^2+campoey.^2);
-disp(campoe_total);
+
 
 %graficar
 quiver(xpuntosmalla,ypuntosmalla,campoex./campoe_total,campoey./campoe_total);%se aplica normalizacion
