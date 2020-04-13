@@ -1,11 +1,11 @@
 clear;
-puntos = 35;%numero de puntos en la malla
+puntos = 55;%numero de puntos en la malla
 cargas=[2,2,2,2,2,-2,-2,-2,-2,-2];%dos cargas de diferentes signos
 radio = 4;%radio de las cargas
 
 %Definir la posicion de las cargas
 xcargas=[-2,-1,0,1,2,-2,-1,0,1,2];
-ycargas=[0,0,0,0,0,10,10,10,10,10];
+ycargas=[0,0,0,0,0,15,15,15,15,15];
 
 
 epsilon = 8.854e-12;%Escribir el valor de epsilon
@@ -46,14 +46,8 @@ for i=1:10
     campoey=campoey+k.*cargas(i).*dy./r3;
     
 end
-hold on
-for i=1:length(xcargas)
-    x = xcargas(i);
-    y = ycargas(i);
-    disp(x)
-    disp(y)
-    rectangle('Position',[x-0.5 y-0.5 1 1.2],'Curvature',[1,1],'FaceColor','b');
-end
+
+
 
 campoe_total = sqrt(campoex.^2+campoey.^2);
 
@@ -61,6 +55,13 @@ campoe_total = sqrt(campoex.^2+campoey.^2);
 %graficar
 quiver(xpuntosmalla,ypuntosmalla,campoex./campoe_total,campoey./campoe_total);%se aplica normalizacion
 hold on
+for i=1:length(xcargas)
+    x = xcargas(i);
+    y = ycargas(i);
+    disp(x)
+    disp(y)
+    %rectangle('Position',[x-0.5 y-0.5 1 1.2],'Curvature',[1,1],'FaceColor','b');
+end
 %usar rectangulo, usando la posicion con radio
 %axis para el tamaño de la grafica}
 %para el nombre de la carga, poner sobre el rectangulo, usar text
