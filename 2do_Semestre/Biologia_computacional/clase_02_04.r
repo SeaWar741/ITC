@@ -160,3 +160,13 @@ L<-list(c(1,5,3),matrix(1:6,nrow=3),c("Hello","World"))
 
 v = list(bob=c(2,3,5),john=c("aa","bb"))
 print(v)
+
+
+#sample --> shuffle
+
+x =c(rep(1,5),rep(2,3),rep(3,2))
+print(x)
+x<-sample(x)
+print(x)
+table(x)
+print(table(x*2))
