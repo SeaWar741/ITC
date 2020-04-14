@@ -60,7 +60,7 @@ for i=1:length(xcargas)
     y = ycargas(i);
     disp(x)
     disp(y)
-    %rectangle('Position',[x-0.5 y-0.5 1 1.2],'Curvature',[1,1],'FaceColor','b');
+    rectangle('Position',[x-0.5 y-0.5 1 1.2],'Curvature',[1,1],'FaceColor','b');
 end
 %usar rectangulo, usando la posicion con radio
 %axis para el tamaño de la grafica}
