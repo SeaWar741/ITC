@@ -25,7 +25,7 @@ tic
    N = 1001;
 
 % Number of charges
-   NQ = 10;
+   NQ = 100;
    
 % Charge   
    Q0 = 10e-6;

@@ -17,5 +17,6 @@ Courses:
 - MATLAB
 - C++
 - Java
+- R
 
 Undergrad duration: 08/2019-06/2023
