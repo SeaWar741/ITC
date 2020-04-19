@@ -1,4 +1,4 @@
-%Juan Carlos Garfias Tovar
+%Juan Carlos Garfias Tovar A01652138
 
 syms x
 
@@ -33,7 +33,7 @@ tiledlayout(2,2);
 
 nexttile
 [r,xi,iter] = NewtonR(f1,fdx1,x1,error);
-
+disp("Funcion 1:");
 fprintf('El valor de y =%d\n',r)
 fprintf('El valor de x =%d\n',xi)
 fprintf('Las iteraciones son =%d\n',iter)
@@ -50,7 +50,7 @@ disp("--------------------------------------------")
 
 nexttile
 [r,xi,iter] = NewtonR(f2,fdx2,x2,error);
-
+disp("Funcion 2:");
 fprintf('El valor de y =%d\n',r)
 fprintf('El valor de x =%d\n',xi)
 fprintf('Las iteraciones son =%d\n',iter)
@@ -67,7 +67,7 @@ disp("--------------------------------------------")
 
 nexttile
 [r,xi,iter] = NewtonR(f3,fdx3,x3,error);
-
+disp("Funcion 3:");
 fprintf('El valor de y =%d\n',r)
 fprintf('El valor de x =%d\n',xi)
 fprintf('Las iteraciones son =%d\n',iter)
@@ -84,7 +84,7 @@ disp("--------------------------------------------")
 
 nexttile
 [r,xi,iter] = NewtonR(f4,fdx4,x4,error);
-
+disp("Funcion 4:");
 fprintf('El valor de y =%d\n',r)
 fprintf('El valor de x =%d\n',xi)
 fprintf('Las iteraciones son =%d\n',iter)

@@ -1,3 +1,4 @@
+%Juan Carlos Garfias Tovar A01652138
 %metodo newton raphson
 function [r,xi,iter] = NewtonR(f,fdx,xi,error)
     iter = 0;
