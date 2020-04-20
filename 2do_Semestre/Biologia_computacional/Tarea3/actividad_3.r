@@ -1,15 +1,13 @@
+#se importa la libreria
 library(RISmed)
-#query con las palabras
-#search <- EUtilsSummary("hepatitis[Ti] AND (virus[Ti] AND child[TI])")
+#vector para almacenar palabras para query
 title_list <-vector()
-
+#variable para continuar añadiendo palabras a query
 continue <- TRUE
 cat("\n\n -----------------------------------------------------------------------\n") 
 cat("|Abraham Cepeda,Juan Carlos Garfias,Lucas Eduardo Idígoras y Vanina Sada|\n")
 cat(" -----------------------------------------------------------------------\n") 
-
 cat("\n\n")
-
 cat("\n-----------------------------------------------------------------------------------------------------------------------\n")
 cat("########  ##     ## ########  ##     ## ######## ########      ######  ########    ###    ########   ######  ##     ## \n")
 cat("##     ## ##     ## ##     ## ###   ### ##       ##     ##    ##    ## ##         ## ##   ##     ## ##    ## ##     ## \n")
@@ -21,31 +19,35 @@ cat("##         #######  ########  ##     ## ######## ########      ######  ####
 cat("\n-----------------------------------------------------------------------------------------------------------------------\n\n")
 
 selection <- readline(prompt="Deseas realizar busqueda manual o default? (M/D): ")
-if(tolower(selection) == "m"){
-    while (continue){
+if(tolower(selection) == "m"){ #si selecciona m --> manual
+    while (continue){ #mientras que continue sea positivo preguntar palabras
         title <- readline(prompt="Titulo: ")
         add <- readline(prompt="Quieres añadir otro elemento a busqueda? (S/N):")
         title_list <- c(title_list, tolower(title))
-        if(tolower(add) !="s"){
+        if(tolower(add) !="s"){ #opcion para romper añadiendo mas palabras
             continue<-FALSE
         }
     }
-    for(i in 1:length(title_list)){
+    for(i in 1:length(title_list)){#for loop que hace append de strings para formato de query
         if(i != (length(title_list))){
-            title_list[i] <- paste(title_list[i],"[Ti] AND ", sep = " ", collapse = NULL)
+            title_list[i] <- paste(title_list[i],"[Ti] AND ", sep = "", collapse = NULL)
         }else{
-            title_list[i] <- paste(title_list[i],"[Ti]", sep = " ", collapse = NULL)
+            title_list[i] <- paste(title_list[i],"[Ti]", sep = "", collapse = NULL)
         }
     }
-    search <-paste(title_list, collapse = '')
+    query <-paste(title_list, collapse = '') 
+    search <- EUtilsSummary(query)#se realiza la query
 }else{
-    search <- EUtilsSummary("Coronavirus[Ti] AND Covid19[Ti]")
+    #search <- EUtilsSummary("Coronavirus[Ti] AND Covid19[Ti]")
+    search <- EUtilsSummary("hepatitis[Ti] AND (virus[Ti] AND child[TI])") #se realiza query default
 }
-records <- EUtilsGet(search)
+records <- EUtilsGet(search)#se busca todos los articulos
+#se crea dataframe con todos los articulos, abstracts y pids
 df <-data.frame('Title'=ArticleTitle(records), 'Abstract'=AbstractText(records), 'PID'=ArticleId(records))
 
 cat("\n-----------------------------------------------------------------------------------------------------------------------\n")
 cat("\nCOMENZANDO BUSQUEDA")
+#animacion de cargando
 for(i in 1:5){
     Sys.sleep(0.6)
     if(i!=5){
