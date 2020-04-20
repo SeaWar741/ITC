@@ -63,6 +63,10 @@ for(i in 1:nrow(df)){
     words <-toString(df[i,2])
     text <-paste(text, words, sep = "")
 }
+for(i in 1:nrow(df)){
+    words <-toString(df[i,1])
+    text <-paste(text, words, sep = "")
+}
 #Se guardan los abstracts concatenados como txt
 fileConn<-file("research.txt")
 writeLines(text, fileConn)
