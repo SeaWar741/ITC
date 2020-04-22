@@ -55,8 +55,8 @@ plot(x2,y2)
 %Funcion 3
 x3 = 0:0.1:2;
 
-Xi3=0;
-Xd3=2;
+Xi3=0.2;
+Xd3=3;
 Tolerancia3=10^-10;
 
 f3 = @(x)x.*log(x);
