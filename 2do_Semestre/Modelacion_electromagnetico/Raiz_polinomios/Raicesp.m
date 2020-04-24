@@ -19,5 +19,4 @@ function r = Raicesp(a)
             a = nuevaa;
         end    
     end
-    
 end
