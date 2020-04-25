@@ -20,7 +20,8 @@ Afterwards the program executes calculations to graph and determine the electric
 - MATLAB R2019b + <br/>
 - For exe: MATLAB Runtime
 
-### Academic document(only explains physics for two charges, extrapolation of the formula works by substitution of values to array of charges)
+### Academic documents
+[Documents](https://github.com/SeaWar741/ITC/tree/master/2do_Semestre/Modelacion_electromagnetico/Simulador_de_campo_electrico_Equipo_5/Documentos)
 
 ### Team
 - Juan Carlos Garfias 
@@ -28,3 +29,6 @@ Afterwards the program executes calculations to graph and determine the electric
 - Karla Olvera 
 - Hernán Salinas 
 - Javier Banegas 
+
+### Installer
+[Download exe](https://github.com/SeaWar741/ITC/raw/master/2do_Semestre/Modelacion_electromagnetico/Simulador_de_campo_electrico_Equipo_5/Instalador/Installer_simulador_de_campo_electrico.exe)
