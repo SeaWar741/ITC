@@ -64,7 +64,7 @@ for(i in 1:length(dataNew[[1]])){
 #colnames(dataNew)<-colnames(df)
 write.csv(dataNew,"Averages_Comparison.csv", row.names = TRUE)
 
-#Plotting
+#Plotting t test
 par(mfrow=c(2,2))
 hist(dataNew$X1)
 hist(dataNew$X2)
@@ -75,3 +75,18 @@ hist(pvalues$Pvalues)
 barplot(pvalues$Pvalues)
 
 plot(dataNew$X2,c(1:length(dataNew$X2)))
+
+#hypergeometric-test
+  #phyper(q, m, n, k, lower.tail = TRUE, log.p = FALSE)
+
+  #x, q vector of quantiles representing the number of white balls drawn
+  #without replacement from an urn which contains both black and white
+  #balls.
+
+  #m the number of white balls in the urn.
+
+  #n the number of black balls in the urn.
+
+  #k the number of balls drawn from the urn.
+
+  #https://www.stat.auckland.ac.nz/~ihaka/787/lectures-quantiles.pdf
