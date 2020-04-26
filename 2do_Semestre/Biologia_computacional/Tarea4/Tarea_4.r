@@ -71,10 +71,14 @@ hist(dataNew$X2)
 boxplot(young)
 boxplot(old)
 
-hist(pvalues$Pvalues)
-barplot(pvalues$Pvalues)
+x11() 
+hist(dataNew$X1, col=rgb(1,0,0,0.5))
+hist(dataNew$X2, col=rgb(0,0,1,0.5), add=T)
 
-plot(dataNew$X2,c(1:length(dataNew$X2)))
+#hist(pvalues$Pvalues)
+#barplot(pvalues$Pvalues)
+
+#plot(dataNew$X2,c(1:length(dataNew$X2)))
 
 #hypergeometric-test
   #phyper(q, m, n, k, lower.tail = TRUE, log.p = FALSE)
