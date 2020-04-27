@@ -4,7 +4,8 @@
 #Saber si las listas de genes son comparables. Para esto puedes hacer una gráfica (scatter) comparando los ranqueos de los genes (un método en el eje X y otro en Y).
 #Ver cuáles vías de señalización están alteradas de acuerdo a cada método y compararlas.
 
-library(gtools)
+library(gtools)S
+library(dplyr)
 
 load("TCGA_COADREAD_comp_data.RData", verbose = TRUE)
 df <- data.frame(tcga_coadread)
@@ -13,9 +14,11 @@ type <- as.vector(type[,1])
 yindex <- vector()
 oindex <- vector()
 
+#conteo de tipos de cancer
 nyoung<-0
 nold<-0
 
+#recoleccion de indices
 counter1 =1
 counter2 =1
 for(i in 1:length(type)){
@@ -41,56 +44,49 @@ for(i in 1:nrow(df)){
   pvalues[i,1]<-(t.test(df[i,yindex],df[i,oindex])$p.value)
 }
 colnames(pvalues)<-c("Pvalues")
-write.csv(pvalues,"pvalues.csv", row.names = TRUE)
+rownames(pvalues)<-rownames(df)
+#write.csv(pvalues,"pvalues.csv", row.names = TRUE)
 
 #Getting mean graphs
 type <- data.frame(tcga_coadread_class)
-dataNew <- data.frame(matrix(0, nrow = length(df[[1]]), ncol = 2))
+Averages <- data.frame(matrix(0, nrow = length(df[[1]]), ncol = 2))
 countYoung <- 0
 countOld <- 0
 for (i in 1:length(df)) {
   if(type[[1]][i] == "Young"){
-    dataNew[[1]] = dataNew[[1]] +  df[[i]]
+    Averages[[1]] = Averages[[1]] +  df[[i]]
     countYoung <- countYoung + 1
   } else{
-    dataNew[[2]] = dataNew[[2]] +  df[[i]]
+    Averages[[2]] = Averages[[2]] +  df[[i]]
     countOld <- countOld + 1
   }
 } 
-for(i in 1:length(dataNew[[1]])){
-  dataNew[[1]][i] = dataNew[[1]][i]/countYoung
-  dataNew[[2]][i] = dataNew[[2]][i]/countOld
+for(i in 1:length(Averages[[1]])){
+  Averages[[1]][i] = Averages[[1]][i]/countYoung
+  Averages[[2]][i] = Averages[[2]][i]/countOld
 }
-#colnames(dataNew)<-colnames(df)
-write.csv(dataNew,"Averages_Comparison.csv", row.names = TRUE)
+colnames(Averages)<-c("Young","Old")
+rownames(Averages)<-rownames(df)
+#write.csv(Averages,"Averages_Comparison.csv", row.names = TRUE)
+
+#Filtrado de amonoacidos con el valor de significancia
+different_aminoacids <-subset(pvalues,Pvalues<0.05) #significance value
+#write.csv(different_aminoacids,"different_aminoacids.csv", row.names = TRUE)
+
+#print(different_aminoacids[order(different_aminoacids$Pvalues),])
 
 #Plotting t test
 par(mfrow=c(2,2))
-hist(dataNew$X1)
-hist(dataNew$X2)
+hist(Averages$Young,col=rgb(1,0,0,0.5))
+hist(Averages$Old,col=rgb(0,0,1,0.5))
 boxplot(young)
 boxplot(old)
-
 x11() 
-hist(dataNew$X1, col=rgb(1,0,0,0.5))
-hist(dataNew$X2, col=rgb(0,0,1,0.5), add=T)
+hist(Averages$Young, col=rgb(1,0,0,0.5))
+hist(Averages$Old, col=rgb(0,0,1,0.5), add=T)
+x11()
+par(mfrow=c(2,2))
+hist(different_aminoacids$Pvalues)
+boxplot(different_aminoacids$Pvalues)
+barplot(different_aminoacids$Pvalues)
 
-#hist(pvalues$Pvalues)
-#barplot(pvalues$Pvalues)
-
-#plot(dataNew$X2,c(1:length(dataNew$X2)))
-
-#hypergeometric-test
-  #phyper(q, m, n, k, lower.tail = TRUE, log.p = FALSE)
-
-  #x, q vector of quantiles representing the number of white balls drawn
-  #without replacement from an urn which contains both black and white
-  #balls.
-
-  #m the number of white balls in the urn.
-
-  #n the number of black balls in the urn.
-
-  #k the number of balls drawn from the urn.
-
-  #https://www.stat.auckland.ac.nz/~ihaka/787/lectures-quantiles.pdf
