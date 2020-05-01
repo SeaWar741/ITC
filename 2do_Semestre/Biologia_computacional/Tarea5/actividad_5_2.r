@@ -63,8 +63,8 @@ barplot(sort(table(cosmic$AA.Mutation),decreasing=T))
 
 #mutaciones en mas de 1000 muestras
 cat("\n\nMutaciones en mas de 1000 muestras\n")
-cosmic[c(5174, 5177, 615, 19968, 5175, 19970),c(1,2,4,6,7,9,16,17,19:21)]
-print(cosmic[c(5174, 5177, 615, 19968, 5175, 19970),c(1,2,4,6,7,9,16,17,19:21)])
+cosmic[c(30181556,26806567,27502118),c(1,2,4,6,7,9,16,17,19:21)]
+print(cosmic[c(30181556,26806567,27502118),c(1,2,4,6,7,9,16,17,19:21)])
 
 #mutacion presente en gnomAD
 cat("\n\nMutacion presente en gnomAD\n")
@@ -73,5 +73,5 @@ print(gnomAD[which(gnomAD$Position == 25398284),c(1:5,9,10,12,14:16)])
 
 #mutaciones mas frecuentes en gnomAD y en cosmic
 cat("\n\nMutacion presente en gnomAD y en cosmic\n")
-cosmic[which(cosmic$start %in% c(2362777,25362854,25368462))[1],]
-print(cosmic[which(cosmic$start %in% c(2362777,25362854,25368462))[1],])
+cosmic[which(cosmic$start %in% c(30181556,26806567,27502118))[1],]
+print(cosmic[which(cosmic$start %in% c(30181556,26806567,27502118))[1],])
