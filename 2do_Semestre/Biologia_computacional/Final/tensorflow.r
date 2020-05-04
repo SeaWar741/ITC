@@ -1,8 +1,9 @@
 library(tidyverse)
 library(keras)
 library(dplyr)
+library(ggplot2)
 library(RColorBrewer)
-
+library(animation)
 
 load("TCGA_COADREAD_comp_data.RData", verbose = FALSE)
 df <- data.frame(tcga_coadread)
@@ -70,11 +71,11 @@ Sys.sleep(10)
 #Clustering Young
 set.seed(2345)
 #par(mfrow=c(2,7))
-kmeans.ani(df, 2)
-df_cluster <- kmeans(df, 2)
+kmeans.ani(young, 3)
+young_cluster <- kmeans(young, 3)
 
 kmean_withinss <- function(k) {
-    cluster <- kmeans(df, k)
+    cluster <- kmeans(young, k)
     return (cluster$tot.withinss)
 }
 print("Total within clusters sum of squares")
