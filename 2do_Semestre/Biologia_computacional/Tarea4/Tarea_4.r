@@ -4,7 +4,7 @@
 #Saber si las listas de genes son comparables. Para esto puedes hacer una gráfica (scatter) comparando los ranqueos de los genes (un método en el eje X y otro en Y).
 #Ver cuáles vías de señalización están alteradas de acuerdo a cada método y compararlas.
 
-library(gtools)S
+library(gtools)
 library(dplyr)
 
 load("TCGA_COADREAD_comp_data.RData", verbose = TRUE)

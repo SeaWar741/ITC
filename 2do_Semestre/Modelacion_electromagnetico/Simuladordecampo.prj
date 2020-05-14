@@ -1,6 +1,6 @@
 <deployment-project plugin="plugin.ezdeploy" plugin-version="1.0">
   <configuration build-checksum="929311761" file="D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo.prj" location="D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico" name="Simuladordecampo" preferred-package-location="D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo\for_redistribution" preferred-package-type="package.type.exe" target="target.ezdeploy.standalone" target-name="Application Compiler">
-    <param.appname>Simulador_de_campo_electrico</param.appname>
+    <param.appname>Simulador de campo eléctrico</param.appname>
     <param.icon />
     <param.icons />
     <param.version>1.0</param.version>
@@ -13,7 +13,7 @@
 Profesores:Isidra Espinosa Velazquez,Nadia Fernanda Pérez Goytia,Raúl G. Salinas</param.description>
     <param.screenshot>${PROJECT_ROOT}\splashcreen2.png</param.screenshot>
     <param.guid />
-    <param.installpath.string>\Tec de Monterrey\Simulador_de_campo_electrico\</param.installpath.string>
+    <param.installpath.string>\Tec de Monterrey\Simulador de campo eléctrico\</param.installpath.string>
     <param.installpath.combo>option.installpath.programfiles</param.installpath.combo>
     <param.logo />
     <param.install.notes />
@@ -82,8 +82,8 @@ Profesores:Isidra Espinosa Velazquez,Nadia Fernanda Pérez Goytia,Raúl G. Salin
       <file>${PROJECT_ROOT}\Label.png</file>
     </fileset.depfun>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\Simuladordecampo\for_testing" name="Simulador_de_campo_electrico.exe" optional="false">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo\for_testing\Simulador_de_campo_electrico.exe</file>
       <file location="${PROJECT_ROOT}\Simuladordecampo\for_testing" name="readme.txt" optional="true">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo\for_testing\readme.txt</file>
+      <file location="${PROJECT_ROOT}\Simuladordecampo\for_testing" name="Simulador de campo eléctrico.exe" optional="false">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo\for_testing\Simulador de campo eléctrico.exe</file>
       <file location="${PROJECT_ROOT}\Simuladordecampo\for_testing" name="splash.png" optional="false">D:\Ubuntu\Tec\ITC2\ITC\2do_Semestre\Modelacion_electromagnetico\Simuladordecampo\for_testing\splash.png</file>
     </build-deliverables>
     <workflow />
