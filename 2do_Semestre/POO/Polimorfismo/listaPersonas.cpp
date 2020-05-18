@@ -66,6 +66,9 @@ int main(){
 
                 // COMPLETAR: Muestra la lista de personas
                 // cada persona tiene que mostrarse usando su propia version del muestraDatos
+                for (int i = 0; i < cantPersonas; i++){
+                    Personas[i]->muestraDatos();
+                }
 
                 break;
             }
@@ -78,6 +81,12 @@ int main(){
 
                 // COMPLETAR: Muestra la lista de personas cuya edad cae en el rango especificado
                 // cada persona tiene que mostrarse usando su propia version del muestraDatos
+                for (int i = 0; i < cantPersonas; i++){
+                    int age = Personas[i]->getEdad();
+                    if (age >= edadIni && age <= edadFin){
+                        Personas[i]->muestraDatos();
+                    }
+                }
             }
             break;
         }
