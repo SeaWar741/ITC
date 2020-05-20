@@ -1,5 +1,8 @@
+#ifndef CtaBanc_h
+#define CtaBanc_h
 
 using namespace std;
+
 class CtaBanc{
 public:
     CtaBanc();
@@ -9,7 +12,7 @@ public:
     void setSaldo(double s) { saldo = s; };
     double getSaldo() { return saldo; };
     void deposita(double cant);
-    bool retira(double cant);  // se debe redefinir en la clase Cuenta comision
+    virtual bool retira(double cant);  // se debe redefinir en la clase Cuenta comision
     virtual void mostrar();           // se debe redefinir en la clase Cuenta comision
 protected:
     int numCuenta;
@@ -45,3 +48,4 @@ void CtaBanc::mostrar(){
     cout << "Cuenta: " << numCuenta << "\t";
     cout << "Saldo: " << saldo << endl;
 }
+#endif

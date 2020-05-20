@@ -5,7 +5,9 @@
 //    CtaBanc:: mostrar();
 //    cout <<"Comision: " << comision << endl;
 
-#include <iostream>
+#ifndef CtaComision_h
+#define CtaComision_h
+
 #include "CtaBanc.h"
 
 class CtaComision : public CtaBanc{
@@ -20,7 +22,7 @@ public:
 
     void setComision(double c);
 
-    void mostrar();
+     void mostrar();
 
     bool retira(double);
 };
@@ -55,3 +57,4 @@ void CtaComision::mostrar(){
     CtaBanc::mostrar();
     cout << "Comision: " << comision << endl;
 }
+#endif
