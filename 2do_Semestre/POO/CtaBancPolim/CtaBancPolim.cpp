@@ -12,22 +12,22 @@ int main(){
     double saldoI, com, dinero;
     char opcion;
 
-    cout << "Cuantas cuentas bancarias hay? ";
+    //cout << "Cuantas cuentas bancarias hay? ";
     cin >> sizeCtas;
 
     CtaBanc *listaCtas[sizeCtas];
 
     for (int c = 0; c < sizeCtas; c++){
-        cout << "quieres una cuenta bancaria regular o con comision? (b/c) ";
+        //cout << "quieres una cuenta bancaria regular o con comision? (b/c) ";
         cin >> tipoCta;
-        cout << "Numero de cuenta? ";
+        //cout << "Numero de cuenta? ";
         cin >> numCta;
 
-        cout << "Saldo inicial? ";
+        //cout << "Saldo inicial? ";
         cin >> saldoI;
 
         if (tipoCta == 'c'){
-            cout << "Comision por hacer retiro? ";
+            //cout << "Comision por hacer retiro? ";
             cin >> com;
             listaCtas[c] = new CtaComision(numCta,saldoI,com);
         }
@@ -41,20 +41,20 @@ int main(){
     }
 
     do{
-        cout << "Menu de opciones " << endl;
-        cout << endl;
-        cout << "a) depositar " << endl;
-        cout << "b) retirar " << endl;
-        cout << "c) consultar saldo " << endl;
-        cout << "d) terminar " << endl;
-        cout << "opcion ->";
+        //cout << "Menu de opciones " << endl;
+        //cout << endl;
+        //cout << "a) depositar " << endl;
+        //cout << "b) retirar " << endl;
+        //cout << "c) consultar saldo " << endl;
+        //cout << "d) terminar " << endl;
+        //cout << "opcion ->";
         cin >> opcion;
 
         switch (opcion){
             case 'a':{
-                cout << "teclea el numero de cuenta ";
+                //cout << "teclea el numero de cuenta ";
                 cin >> numCta;
-                cout << "cuando vas a depositar? ";
+                //cout << "cuando vas a depositar? ";
                 cin >> dinero;
 
                 // COMPLETA
@@ -69,9 +69,9 @@ int main(){
             }
 
             case 'b':{
-                cout << "teclea el numero de cuenta ";
+                //cout << "teclea el numero de cuenta ";
                 cin >> numCta;
-                cout << "cuando vas a retirar? ";
+                //cout << "cuando vas a retirar? ";
                 cin >> dinero;
 
                 // COMPLETA
@@ -90,7 +90,7 @@ int main(){
                 break; 
             }
             case 'c':{
-                cout << "teclea el numero de cuenta ";
+                //cout << "teclea el numero de cuenta ";
                 cin >> numCta;
 
                 // COMPLETA
