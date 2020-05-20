@@ -44,7 +44,7 @@ void CtaComision::setComision(double c){
 }
 
 bool CtaComision::retira(double cant){
-    if (saldo >= cant){
+    if (saldo >= cant+comision){
         saldo -= (cant + comision);
         return true;
     }
