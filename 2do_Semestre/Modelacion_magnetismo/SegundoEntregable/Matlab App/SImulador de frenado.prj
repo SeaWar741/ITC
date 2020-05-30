@@ -1,0 +1,65 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="2803218239" file="C:\Users\juanc\Desktop\ITC-master\2do_Semestre\Modelacion_magnetismo\SegundoEntregable\SImulador de frenado.prj" location="C:\Users\juanc\Desktop\ITC-master\2do_Semestre\Modelacion_magnetismo\SegundoEntregable" name="SImulador de frenado" target="target.mlapps" target-name="Package App">
+    <param.appname>SImulador de frenado</param.appname>
+    <param.authnamewatermark>Juan Carlos Garfias Tovar</param.authnamewatermark>
+    <param.email>a01652138@itesm.mx</param.email>
+    <param.company>Tec de Monterrey</param.company>
+    <param.icon>${PROJECT_ROOT}\SImulador de frenado_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\SImulador de frenado_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\SImulador de frenado_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\SImulador de frenado_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Simulación computacional de caída de un dipolo magnético frenado por un
+anillo de corriente</param.summary>
+    <param.description>Juan Carlos Garfias Tovar, A01652138
+Bo Hyeon Cha, A01023804
+Francisco Zamora Treviño, A01570484
+(ITESM, 2020)</param.description>
+    <param.screenshot>C:\Users\juanc\AppData\Local\Temp\tpf07caf02_d462_4dea_b7a1_912f62e47ff4.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>90d26d21-4118-4635-bb7f-654943147a60</param.guid>
+    <unset>
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\Segundo.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\juanc\Desktop\ITC-master\2do_Semestre\Modelacion_magnetismo" name="SegundoEntregable" optional="false">C:\Users\juanc\Desktop\ITC-master\2do_Semestre\Modelacion_magnetismo\SegundoEntregable</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2020a</root>
+      <toolboxes />
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
