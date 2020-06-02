@@ -1,18 +1,22 @@
-#include <iostream>
-using namespace std;
 #ifndef Video_h
 #define Video_h
 
+#include <iostream>
+#include <vector>
+#include <string>
+using namespace std;
+
+
 class Video{
-private:
-    int id;
-    bool adult;
-    string language;
-    float duration;
-    string title;
-    string description;
-    string genre;
-    float rating;
+protected:
+    int id;//identificador
+    bool adult;//pelicula para mayores de 18
+    string language;//idioma original
+    float duration;//duracion en minutos
+    string title;//titulo del video
+    string description;//descripcion del video
+    string genre;//genero del video
+    float rating;//calificacion del video
 public:
     Video();
     Video(int,bool,string,float,string,string,string,float);

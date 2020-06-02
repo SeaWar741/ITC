@@ -1,0 +1,3 @@
+tipo    id  adult   language    duration    title   description genre   rating  companies   releasedate
+tipo    id  adult   language    duration    title   description genre   rating  stitle  season  chapter airdate chapterDescription
+tipo    id  title   network     rating  runtime

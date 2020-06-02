@@ -1,19 +1,55 @@
-#include <iostream>
-using namespace std;
 #ifndef Pelicula_h
 #define Pelicula_h
-class Pelicula{
+
+#include "Video.h"
+
+class Pelicula : public Video{
 private:
-    string productionCompanies[5];
-    string releaseDate;
+    vector<string> productionCompanies;//compañias productoras
+    string releaseDate;//fecha de estreno
 public:
     Pelicula();
-    Pelicula();
+    Pelicula(int,bool,string,float,string,string,string,float,vector<string>,string);
+    
+    void setProductionCompanies(vector<string> companies){productionCompanies=companies;};
+    void setReleaseDate(string date){releaseDate = date;};
+    
+    vector<string> getProductionCompanies(){return productionCompanies;};
+    string getReleaseDate(){return releaseDate;};
+    
+    void mostrar();
 };
 
-Pelicula::Pelicula(){
+Pelicula::Pelicula() : Video(){
+    vector<string> companies(1);//se crea un vector de un elemento
+    companies[0] = "";//el primer elemento es un string vacio
+    productionCompanies = companies;
+    releaseDate = "";
 }
 
-Pelicula::Pelicula(){
+Pelicula::Pelicula(int iid,bool iadult,string ilanguage,float iduration,string ititle,string idescription,string igenre,float irating,vector<string> companies,string date) : Video(iid, iadult, ilanguage, iduration, ititle, idescription, igenre, irating){
+    productionCompanies = companies;
+    releaseDate = date;
+}
+void Pelicula::mostrar(){
+    cout<<"ID: "<<id<<endl;
+    cout<<"Pelicula: "<<title<<endl;
+    cout<<"Fecha de estreno: "<<releaseDate<<endl;
+    cout<<"+18: "<<adult<<endl;
+    cout<<"Idioma: "<<language<<endl;
+    cout<<"Duracion: "<<duration<<" minutos"<<endl;
+    cout<<"Genero: "<<genre<<endl;
+    cout<<"Rating: "<<rating<<endl;
+    cout<<"Productores: ";
+    //se itera para mostrar en forma de lista todos los productores
+    for(int i = 0;i<productionCompanies.size();i++){
+        if(i != productionCompanies.size()){
+            cout<<productionCompanies[i]<<",";
+        }else{
+            cout<<productionCompanies[i]<<endl;
+        }
+    }
+    cout<<"Descripcion: "<<description<<endl;
+    
 }
 #endif
