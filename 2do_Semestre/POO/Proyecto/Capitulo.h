@@ -1,8 +1,6 @@
 #ifndef Capitulo_h
 #define Capitulo_h
 
-#include "Video.h"
-
 class Capitulo : public Video{
 private:
     string stitle;//titulo de la serie a la que pertenece
@@ -14,11 +12,13 @@ public:
     Capitulo();
     Capitulo(string,int,bool,string,float,string,string,string,float,int,int,string,string);
     
+    void setSTitle(string ti){stitle = ti;};
     void setSeason(int s){season = s;};
     void setChapter(int c){chapter = c;};
     void setAirDate(string d){airDate = d;};
     void setChapterDescription(string des){chapterDescription = des;};
 
+    string getSTitle(){return stitle;};
     int getSeason(){return season;};
     int getChapter(){return chapter;};
     string getAirDate(){return airDate;};

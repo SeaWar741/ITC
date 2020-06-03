@@ -21,8 +21,7 @@ public:
 };
 
 Pelicula::Pelicula() : Video(){
-    vector<string> companies(1);//se crea un vector de un elemento
-    companies[0] = "";//el primer elemento es un string vacio
+    vector<string> companies;//se crea un vector de un elemento
     productionCompanies = companies;
     releaseDate = "";
 }
@@ -43,10 +42,10 @@ void Pelicula::mostrar(){
     cout<<"Productores: ";
     //se itera para mostrar en forma de lista todos los productores
     for(int i = 0;i<productionCompanies.size();i++){
-        if(i != productionCompanies.size()){
-            cout<<productionCompanies[i]<<",";
-        }else{
+        if(i == productionCompanies.size()-1){
             cout<<productionCompanies[i]<<endl;
+        }else{
+            cout<<productionCompanies[i]<<",";
         }
     }
     cout<<"Descripcion: "<<description<<endl;

@@ -38,7 +38,8 @@ public:
     string getDescription(){return description;};
     string getGenre(){return genre;};
     float getRating(){return rating;};
-    virtual void mostrar();
+    
+    virtual void mostrar(){cout<<"hola"<<endl;};
 };
 
 Video::Video(){
