@@ -44,12 +44,18 @@ Capitulo::Capitulo(string ti,int iid,bool iadult,string ilanguage,float iduratio
 }
 
 void Capitulo::mostrar(){
+    string ad = "";
+    if(adult){
+        ad = "Si";
+    }else{
+        ad = "No";
+    }
     cout<<"ID: "<<id<<endl;
     cout<<"Temporada: "<<season<<endl;
     cout<<"No. capitulo: "<<chapter<<endl;
     cout<<"Titulo del capitulo: "<<title<<endl;
-    cout<<"Fecha de estreno:"<<airDate;
-    cout<<"+18 :"<<adult<<endl;
+    cout<<"Fecha de estreno:"<<airDate<<endl;
+    cout<<"+18: "<<ad<<endl;
     cout<<"Idioma: "<<language<<endl;
     cout<<"Duracion: "<<duration<<endl;
     cout<<"Genero: "<<genre<<endl;

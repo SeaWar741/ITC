@@ -1,7 +1,6 @@
 //Juan Carlos Garfias Tovar, A01652138
 #include <iostream>
 #include <fstream>
-
 #include <sstream>
 #include <iomanip>
 #include <algorithm>
@@ -11,19 +10,20 @@
 #include "Pelicula.h"
 #include "Capitulo.h"
 #include "Serie.h"
+
 using namespace std;
 
-vector<Video *> videos;
-vector<Serie *> series;
+vector<Video *> videos; //vector de apuntadores para videos(peliculas/capitulos)
+vector<Serie *> series; //vector de apuntadores para series
 
-vector<int> indexP;
-vector<int> indexC;
+vector<int> indexP; //indices de peliculas
+vector<int> indexC; //indices de capitulos
 
-int cPeliculas = 0;
-int cCapitulos = 0;
-int cSeries = 0;
+int cPeliculas = 0; //cantidad de peliculas
+int cCapitulos = 0; //cantidad de capitulos
+int cSeries = 0;    //cantidad de series
 
-//Funciones helper
+/*FUNCIONES HELPER */
 bool to_bool(std::string str) {
     std::transform(str.begin(), str.end(), str.begin(), ::tolower);
     std::istringstream is(str);
@@ -48,8 +48,6 @@ int search(string arr[], int n, string x) {
     return -1; 
 } 
 
-
-
 //obtener posiciones de los capitulos de la serie
 vector<int> positionsSerie(string title){
     vector<int> pos;
@@ -67,6 +65,8 @@ vector<int> positionsSerie(string title){
     return pos;
 }
 
+
+/*LECTURA DE DATOS */
 //leer datos de los archivos TSV 👍
 void fetchData(){
     //variables generales
@@ -93,7 +93,7 @@ void fetchData(){
     //variables series
     string network;//cadena o televisora
     string runtime;//duracion de la serie en años
-    vector<Capitulo> capitulos;
+    vector<Video *> capitulos;
 
     //Movies
     ifstream myFile;
@@ -206,7 +206,7 @@ void fetchData(){
                 airDate = line;
                 break;
             case 13:
-                chapterDescription = line.substr(0, line.size()-1);;
+                chapterDescription = line.substr(0, line.size()-1);
                 videos.push_back(new Capitulo(stitle,id,adult,language,duration,title,description,genre,rating,season,chapter,airDate,chapterDescription));
                 cCapitulos++;
                 counter = 0;
@@ -220,7 +220,7 @@ void fetchData(){
 
     //Series-----------------------------------------------------------------------------------------------------
     myFile.open("./Data/series.txt");
-    counter = 1;
+    counter = 0;
 
     while(myFile.good()){
         string line;
@@ -228,6 +228,8 @@ void fetchData(){
         //cout<<line<<endl;
         //tipo	id	title	network	rating	runtime
         switch (counter){
+            case 0:
+                break;
             case 1:
                 id = stoi(line);
                 break;
@@ -241,10 +243,19 @@ void fetchData(){
                 rating = stof(line);
                 break;
             case 5:
-                runtime = line;
+                runtime = line.substr(0, line.size()-1);
+                for(auto i: indexC){
+                    if(Capitulo* v = dynamic_cast<Capitulo*>(videos[i-1])) {
+                        //se hace sobre carga con un cast dinamico para pasar de clase base a clase hija capitulo
+                        if(v->getSTitle() == title){
+                            capitulos.push_back(videos[i-1]);
+                        }
+                    }
+                }
                 series.push_back(new Serie(id,title,network,runtime,rating,capitulos));
-                counter = 1;
                 cSeries++;
+                capitulos.clear();
+                counter = 0;
             default:
                 break;
         }
@@ -254,16 +265,16 @@ void fetchData(){
 }
 
 
-
+/*REQUISITOS MINIMOS*/
 //mostrar todas las peliculas👍
 void mostrarPeliculas(){
-     for(auto i: indexP){
+    for(auto i: indexP){
         videos[i-1]->mostrar();
         cout<<endl;
     }
 }
 
-//mostrar todas las series 
+//mostrar todas las series 👍
 void mostrarSeries(){
     for(int i = 0; i<series.size();i++){
         series[i]->mostrar();
@@ -281,7 +292,7 @@ void mostrarPorCalificacion(float rating){
     }
 }
 
-//mostrar todos los videos de cierto genero ingresado por el usuario
+//mostrar todos los videos de cierto genero ingresado por el usuario👍
 void mostrarPorGenero(string genre){
     for(int i = 0; i <videos.size();i++){
         if(videos[i]->getGenre() == genre){
@@ -291,20 +302,19 @@ void mostrarPorGenero(string genre){
     }
 }
 
-//funcion para mostrar los episodios de una serie a partir del input del usuario 
+//funcion para mostrar los episodios de una serie a partir del input del usuario👍
 void mostrarEpisodios(string serie){
-    vector<int> chapters = positionsSerie(serie);
-    cout<<endl;
-    for(int i = 0;i<chapters.size();i++){
-        videos[chapters[i]]->mostrar();
-        cout<<endl;
-    }
-    if(chapters.size() == 0){
-        cout<<"No se encontraron coincidencias"<<endl;
+    for(auto i: series){
+        if(i->getTitle() == serie){
+            for(auto i: i->getCapitulos()){
+                i->mostrar();
+                cout<<endl;
+            }
+        }
     }
 }
 
-//Funcion para mostrar las peliculas con cierta calificacion ingresada por el usuario 
+//Funcion para mostrar las peliculas con cierta calificacion ingresada por el usuario  👍
 void mostrarPeliculasPorCalificacion(float rating){
     for(int i = 0;i<videos.size();i++){
         if(find(indexP.begin(), indexP.end(),i+1)!= indexP.end()){
@@ -316,13 +326,22 @@ void mostrarPeliculasPorCalificacion(float rating){
     }
 }
 
+
+/*FUNCIONES EXTRA*/
+void searchVideo(string title){
+    for(auto i:videos){
+        if(i->getTitle() == title){
+            i->mostrar();
+            cout<<endl;
+        }
+    }
+}
+
+
 int main(){
     cout<<endl;
     fetchData();
-    cout<<"Cantidad de Peliculas: "<<cPeliculas<<endl;
-    cout<<"Cantidad de Series: "<<cSeries<<endl;
-    cout<<"Cantidad de Capitulos: "<<cCapitulos<<endl<<endl;
+    
     cout<<"-----------------------------------------------------------------------"<<endl;
-    mostrarPeliculasPorCalificacion(8.5); //no funciona, verificar
     return 0;
 }

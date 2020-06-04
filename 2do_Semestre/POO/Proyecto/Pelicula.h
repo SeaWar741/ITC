@@ -31,10 +31,16 @@ Pelicula::Pelicula(int iid,bool iadult,string ilanguage,float iduration,string i
     releaseDate = date;
 }
 void Pelicula::mostrar(){
+    string ad;
+    if(adult){
+        ad = "Si";
+    }else{
+        ad = "No";
+    }
     cout<<"ID: "<<id<<endl;
     cout<<"Pelicula: "<<title<<endl;
     cout<<"Fecha de estreno: "<<releaseDate;
-    cout<<"+18: "<<adult<<endl;
+    cout<<"+18: "<<ad<<endl;
     cout<<"Idioma: "<<language<<endl;
     cout<<"Duracion: "<<duration<<" minutos"<<endl;
     cout<<"Genero: "<<genre<<endl;
@@ -42,10 +48,12 @@ void Pelicula::mostrar(){
     cout<<"Productores: ";
     //se itera para mostrar en forma de lista todos los productores
     for(int i = 0;i<productionCompanies.size();i++){
-        if(i == productionCompanies.size()-1){
-            cout<<productionCompanies[i]<<endl;
-        }else{
-            cout<<productionCompanies[i]<<",";
+        if(productionCompanies[i]!="-"){
+            if(i == productionCompanies.size()-1){
+                cout<<productionCompanies[i]<<endl;
+            }else{
+                cout<<productionCompanies[i]<<",";
+            }
         }
     }
     cout<<"Descripcion: "<<description<<endl;

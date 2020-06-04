@@ -1,4 +1,4 @@
-1	Chernobyl 	HBO	9.4	70
-2	Freaks and Geeks	Apatow productions	8.8	44
-3	Limitless	CBS	7.7	42
-4	The Midnight Gospel 	Netflix	8.3	31
+s	1	Chernobyl 	HBO	9.4	70
+s	2	Freaks and Geeks	Apatow productions	8.8	44
+s	3	Limitless	CBS	7.7	42
+s	4	The Midnight Gospel	Netflix	8.3	31
