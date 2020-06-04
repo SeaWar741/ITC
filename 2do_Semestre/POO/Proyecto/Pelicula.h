@@ -33,7 +33,7 @@ Pelicula::Pelicula(int iid,bool iadult,string ilanguage,float iduration,string i
 void Pelicula::mostrar(){
     cout<<"ID: "<<id<<endl;
     cout<<"Pelicula: "<<title<<endl;
-    cout<<"Fecha de estreno: "<<releaseDate<<endl;
+    cout<<"Fecha de estreno: "<<releaseDate;
     cout<<"+18: "<<adult<<endl;
     cout<<"Idioma: "<<language<<endl;
     cout<<"Duracion: "<<duration<<" minutos"<<endl;

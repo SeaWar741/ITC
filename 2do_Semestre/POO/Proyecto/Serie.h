@@ -51,7 +51,7 @@ void Serie::mostrar(){
     cout<<"Titulo de la serie: "<<title<<endl;
     cout<<"Rating: "<<rating<<endl;
     cout<<"Network: "<<network<<endl;
-    cout<<"Duracion de la serie: "<<runtime<<endl;
+    cout<<"Duracion promedio de los capitulos: "<<runtime<<endl;
     int i;
     //se cuenta la cantidad de capitulos de la serie
     for(i=0;i<capitulos.size();i++){

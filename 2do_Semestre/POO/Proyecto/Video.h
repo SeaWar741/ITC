@@ -39,7 +39,7 @@ public:
     string getGenre(){return genre;};
     float getRating(){return rating;};
     
-    virtual void mostrar(){cout<<"hola"<<endl;};
+    virtual void mostrar(){cout<<" "<<endl;};
 };
 
 Video::Video(){
