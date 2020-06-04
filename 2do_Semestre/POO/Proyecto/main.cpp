@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <random>
 
+#include <vector>
+#include <string>
+
 #include "Pelicula.h"
 #include "Capitulo.h"
 #include "Serie.h"
@@ -20,6 +23,7 @@ vector<Serie *> series; //vector de apuntadores para series
 
 vector<int> indexP; //indices de peliculas
 vector<int> indexC; //indices de capitulos
+vector<string> generos; //vector con los generos dispoibles del catalogo
 
 int cPeliculas = 0; //cantidad de peliculas
 int cCapitulos = 0; //cantidad de capitulos
@@ -74,6 +78,7 @@ void textTitle(string txt){
     string color4 = "\033[0m";
     cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4<<endl;
 }
+
 //funcion para numeros de menus👍🟩
 void numb(string txt){
     char esc_char = 27; 
@@ -81,11 +86,72 @@ void numb(string txt){
     string color4 = "\033[0m";
     cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4;
 }
+
 //funcion para bold👍🟩
 void bold(string txt){
     char esc_char = 27; 
     cout << esc_char << "[1m" <<txt <<esc_char <<"[0m";
 }
+
+//Verificar int del menu como iput
+int verifyMenu(){
+    int a;
+    bold("Ingresar seleccion >");cin>>a;
+    while(1){
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');cout<<endl;
+        textTitle("La entrada no es valida");cout<<endl<<endl;
+        bold("Ingresar seleccion >");cin>>a;
+    }
+    if(!cin.fail())
+        break;
+    }
+return a;
+}
+
+//Verificar float como input
+float verifyRating(){
+  float a;
+    bold("|Calificacion minima: >");cin>>a;
+    while(1){
+    if(cin.fail()){
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+        textTitle("La entrada no es valida");cout<<endl;
+        cout<<endl<<endl;
+        bold("|---------------------------------------|");cout<<endl;
+        bold("|Calificacion minima: >");cin>>a;
+    }
+    if(!cin.fail())
+        break;
+    }
+return a;  
+}
+
+//hacer string lowercase
+void lowercase(string data){
+    std::for_each(data.begin(), data.end(), [](char & c){
+	    c = ::tolower(c);
+    });
+}
+
+//hacer que cada primer letra del input se vuelva mayuscula
+void capitalize(string &str){
+	bool check;
+	check=false;		
+	for(int i=0;i<str.length();i++){
+		if(check==false && (str.at(i)>='a' && str.at(i)<='z')  )//verificar si es nueva la palabra
+			str.at(i)=str.at(i)+'A'-'a';
+		
+		if((str.at(i)>='a' && str.at(i)<='z') || (str.at(i)>='A' && str.at(i)<='Z') )
+			check=true;							//verifica vacio		
+		else 									//verifica si esta en el abecedario
+			check=false;							//itera y cambia el caso dependiendo de la condicion
+	}
+}
+
 
 
 /*LECTURA DE DATOS */
@@ -168,6 +234,7 @@ void fetchData(){
             case 12:
                 releaseDate = line.substr(0, line.size()-1);;
                 videos.push_back(new Pelicula(id,adult,language,duration,title,description,genre,rating,productionCompanies,releaseDate));
+                generos.push_back(genre);
                 productionCompanies.clear();
                 cPeliculas++;
                 counter = 0;
@@ -230,6 +297,7 @@ void fetchData(){
             case 13:
                 chapterDescription = line.substr(0, line.size()-1);
                 videos.push_back(new Capitulo(stitle,id,adult,language,duration,title,description,genre,rating,season,chapter,airDate,chapterDescription));
+                generos.push_back(genre);
                 cCapitulos++;
                 counter = 0;
                 break;
@@ -450,7 +518,7 @@ void mostrarAleatoria(){
     cout<<endl;
 }
 
-//mensaje de bienvenida 👍
+//mensaje de bienvenida 👍🟩
 void home(){
 std::cout<<"\x1B[33m" <<R"(
 
@@ -466,22 +534,34 @@ textTitle("---------------------------------------------------------------------
 textTitle("Bienvenid@ a Garflix, la mejor plataforma de streaming gratuita!");cout<<endl;
 bold("> Cantidad de Peliculas: ");cout<<cPeliculas<<endl;
 bold("> Cantidad de Series: ");cout<<cSeries<<endl;
-bold("> Cantidad de capitulos: ");cout<<cCapitulos<<endl<<endl;
+bold("> Cantidad de capitulos: ");cout<<cCapitulos<<endl;
+bold("> Generos disponibles en el catalogo: ");cout<<endl;
+
+sort(generos.begin(), generos.end());
+
+auto iter = unique(generos.begin(), generos.end());
+
+generos.erase(iter, generos.end());
+
+for (const auto &s : generos){
+    cout<<s<<" ";
+}
+cout<<endl<<endl;
 textTitle("------------------------------------------------------------------------------------");cout<<endl;
 }
 
-
+//mensaje de despedida 👍🟩
 void bye(){
     cout<<endl<<endl<<endl<<endl;
     textTitle("----------------------------------------------");cout<<endl;
-    textTitle("Hasta Luego!");cout<<endl;
+    textTitle("                 Hasta Luego!");cout<<endl;
     textTitle("----------------------------------------------");cout<<endl;
     cout<<endl;
 }
 
 
 /*MENU DE OPERACION*/
-//Menu de peliculas
+//Menu de peliculas👍🟩
 void menuPelis(){
     bool continue1 = true;
     int selection1;
@@ -494,7 +574,7 @@ void menuPelis(){
         numb("3)");cout<<"Mostrar peliculas por calificacion"<<endl;
         numb("4)");cout<<"Buscar peliculas por genero"<<endl;
         numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
-        bold("Ingresar seleccion >");cin>>selection1;
+        selection1 = verifyMenu();
         switch (selection1){
         case 0:
             continue1 = false;
@@ -505,6 +585,8 @@ void menuPelis(){
             bold("|Titulo de la pelicula: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             searchPelicula(query);
             cout<<endl;
             break;
@@ -517,7 +599,7 @@ void menuPelis(){
         case 3:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            rating = verifyRating();
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarPeliculasPorCalificacion(rating);
@@ -529,6 +611,8 @@ void menuPelis(){
             bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             mostrarPeliculasPorGenero(query);
             cout<<endl;
             break;
@@ -541,7 +625,7 @@ void menuPelis(){
     }    
 }
 
-//menu series
+//menu series👍🟩
 void menuSeries(){
     bool continue1 = true;
     int selection1;
@@ -556,7 +640,7 @@ void menuSeries(){
         numb("5)");cout<<"Mostrar capitulos de una serie"<<endl;
         numb("6)");cout<<"Buscar capitulos por genero"<<endl;
         numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
-        bold("Ingresar seleccion >");cin>>selection1;
+        selection1 = verifyMenu();
         switch (selection1){
         case 0:
             continue1 = false;
@@ -567,6 +651,8 @@ void menuSeries(){
             bold("|Titulo de la serie: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             searchSerie(query);
             cout<<endl;
             break;
@@ -579,7 +665,7 @@ void menuSeries(){
         case 3:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            rating = verifyRating();
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarSeriesPorCalificacion(rating);
@@ -588,7 +674,7 @@ void menuSeries(){
         case 4:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            rating = verifyRating();
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarCapitulosPorCalificacion(rating);
@@ -609,6 +695,8 @@ void menuSeries(){
             bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             mostrarCapitulosPorGenero(query);
             cout<<endl;
             break;
@@ -621,6 +709,7 @@ void menuSeries(){
     }    
 }
 
+//menu videos👍🟩
 void menuVideos(){
    bool continue1 = true;
     int selection1;
@@ -633,7 +722,7 @@ void menuVideos(){
         numb("3)");cout<<"Mostrar videos por calificacion"<<endl;
         numb("4)");cout<<"Buscar videos por genero"<<endl;
         numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
-        bold("Ingresar seleccion >");cin>>selection1;
+        selection1 = verifyMenu();
         switch (selection1){
         case 0:
             continue1 = false;
@@ -644,6 +733,8 @@ void menuVideos(){
             bold("|Titulo del video: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             searchVideo(query);
             cout<<endl;
             break;
@@ -668,6 +759,8 @@ void menuVideos(){
             bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             mostrarPorGenero(query);
             cout<<endl;
             break;
@@ -680,7 +773,7 @@ void menuVideos(){
     }     
 }
 
-//Menu principal
+//Menu principal👍🟩
 void menu(){
     bool continue1 = true;
     int selection1;
@@ -695,7 +788,7 @@ void menu(){
         numb("5)");cout<<"Series"<<endl;
         numb("6)");cout<<"Todos los videos"<<endl;
         numb("0)");cout<<"Salir"<<endl<<endl;
-        bold("Ingresar seleccion >");cin>>selection1;
+        selection1 = verifyMenu();
         switch (selection1){
         case 0:
             bye();
@@ -707,6 +800,8 @@ void menu(){
             bold("|Titulo del video: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            lowercase(query);
+            capitalize(query);
             searchVideo(query);
             cout<<endl;
             searchSerie(query);
@@ -745,12 +840,11 @@ void menu(){
     }
 }
 
-
+/*MAIN DEL CODIGO*/
 int main(){
-    srand(time(NULL)); //numeros random constantemente
+    srand(time(NULL)); //numeros random constantemente generados
     fetchData();//se hace un fetch a los datos de los txt
     home(); //mensaje de bienvenida
-    cout<<endl;
     menu();//Menu
     return 0;
 }

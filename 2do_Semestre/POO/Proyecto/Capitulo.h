@@ -62,12 +62,12 @@ void Capitulo::mostrar(){
     cout <<color1<< esc_char << "[1m" <<"Temporada: "<< esc_char << "[0m" <<color2<<season<<endl;
     cout <<color1<< esc_char << "[1m" <<"No. capitulo: "<< esc_char << "[0m" <<color2<<chapter<<endl;
     cout <<color1<< esc_char << "[1m" <<"Titulo del capitulo: "<< esc_char << "[0m" <<color2<<title<<endl;
+    cout <<color1<< esc_char << "[1m" <<"Rating: "<< esc_char << "[0m" <<color2<<rating<<endl;
     cout <<color1<< esc_char << "[1m" <<"Fecha de estreno:"<< esc_char << "[0m" <<color2<<airDate<<endl;
     cout <<color1<< esc_char << "[1m" <<"+18: "<< esc_char << "[0m" <<color2<<ad<<endl;
     cout <<color1<< esc_char << "[1m" <<"Idioma: "<< esc_char << "[0m" <<color2<<language<<endl;
     cout <<color1<< esc_char << "[1m" <<"Duracion: "<< esc_char << "[0m" <<color2<<duration<<endl;
     cout <<color1<< esc_char << "[1m" <<"Genero: "<< esc_char << "[0m" <<color2<<genre<<endl;
-    cout <<color1<< esc_char << "[1m" <<"Rating: "<< esc_char << "[0m" <<color2<<rating<<endl;
     cout <<color1<< esc_char << "[1m" <<"Descripcion: "<< esc_char << "[0m" <<color2<<description<<endl;
 }
 #endif
