@@ -67,6 +67,26 @@ vector<int> positionsSerie(string title){
     return pos;
 }
 
+//funcion para titulos de menus
+void textTitle(string txt){
+    char esc_char = 27; 
+    string color3 = "\x1B[31m";
+    string color4 = "\033[0m";
+    cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4<<endl;
+}
+//funcion para numeros de menus
+void numb(string txt){
+    char esc_char = 27; 
+    string color3 = "\x1B[31m";
+    string color4 = "\033[0m";
+    cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4;
+}
+//funcion para bold
+void bold(string txt){
+    char esc_char = 27; 
+    cout << esc_char << "[1m" <<txt <<esc_char <<"[0m";
+}
+
 
 /*LECTURA DE DATOS */
 //leer datos de los archivos TSV 👍
@@ -268,7 +288,7 @@ void fetchData(){
 
 
 /*REQUISITOS MINIMOS*/
-//mostrar todas las peliculas👍
+//mostrar todas las peliculas👍🟩
 void mostrarPeliculas(){
     for(auto i: indexP){
         videos[i-1]->mostrar();
@@ -276,7 +296,7 @@ void mostrarPeliculas(){
     }
 }
 
-//mostrar todas las series 👍
+//mostrar todas las series 👍🟩
 void mostrarSeries(){
     for(int i = 0; i<series.size();i++){
         series[i]->mostrar();
@@ -284,7 +304,7 @@ void mostrarSeries(){
     }
 }
 
-//mostrar videos por calificacion a partir del input del usuario👍
+//mostrar videos por calificacion a partir del input del usuario👍🟩
 void mostrarPorCalificacion(float rating){
     for(int i = 0;i<videos.size();i++){
         if(videos[i]->getRating() >= rating){
@@ -294,7 +314,7 @@ void mostrarPorCalificacion(float rating){
     }
 }
 
-//mostrar todos los videos de cierto genero ingresado por el usuario👍
+//mostrar todos los videos de cierto genero ingresado por el usuario👍🟩
 void mostrarPorGenero(string genre){
     for(int i = 0; i <videos.size();i++){
         if(videos[i]->getGenre() == genre){
@@ -304,7 +324,7 @@ void mostrarPorGenero(string genre){
     }
 }
 
-//funcion para mostrar los episodios de una serie a partir del input del usuario👍
+//funcion para mostrar los episodios de una serie a partir del input del usuario👍🟩
 void mostrarEpisodios(string serie){
     for(auto i: series){
         if(i->getTitle() == serie){
@@ -316,7 +336,7 @@ void mostrarEpisodios(string serie){
     }
 }
 
-//Funcion para mostrar las peliculas con cierta calificacion ingresada por el usuario  👍
+//Funcion para mostrar las peliculas con cierta calificacion ingresada por el usuario  👍🟩
 void mostrarPeliculasPorCalificacion(float rating){
     for(int i = 0;i<videos.size();i++){
         if(find(indexP.begin(), indexP.end(),i+1)!= indexP.end()){
@@ -332,7 +352,7 @@ void mostrarPeliculasPorCalificacion(float rating){
 /*FUNCIONES EXTRA*/
 
 //busquedas
-//Buscar un video en general 👍
+//Buscar un video en general 👍 
 void searchVideo(string title){
     for(auto i:videos){
         if(i->getTitle() == title){
@@ -342,7 +362,7 @@ void searchVideo(string title){
     }
 }
 
-//Buscar una pelicula en especifico 👍
+//Buscar una pelicula en especifico 👍🟩
 void searchPelicula(string title){
     for(auto i: indexP){
         if(videos[i-1]->getTitle() == title){
@@ -352,7 +372,7 @@ void searchPelicula(string title){
     }
 }
 
-//buscar una serie en especifico 👍
+//buscar una serie en especifico 👍🟩
 void searchSerie(string title){
     for(auto i: series){
         if(i->getTitle() == title){
@@ -362,7 +382,7 @@ void searchSerie(string title){
     }
 }
 
-//mostrar series por calificacion 👍
+//mostrar series por calificacion 👍🟩
 void mostrarSeriesPorCalificacion(float rating){
     for(auto i:series){
         if(i->getRating()>=rating){
@@ -372,7 +392,7 @@ void mostrarSeriesPorCalificacion(float rating){
     }
 }
 
-//mostrar capitulos por calificacion👍
+//mostrar capitulos por calificacion👍🟩
 void mostrarCapitulosPorCalificacion(float rating){
     for(int i = 0;i<videos.size();i++){
         if(videos[i]->getRating() >= rating){
@@ -382,12 +402,35 @@ void mostrarCapitulosPorCalificacion(float rating){
     }
 }
 
-//mostrar por genero
-void mostrarPorGeneroPeliculas(string genre){
+//mostrar peliculas por genero 👍🟩
+void mostrarPeliculasPorGenero(string genre){
+    for(auto i: indexP){
+        if(videos[i-1]->getGenre() == genre){
+            videos[i-1]->mostrar();
+            cout<<endl;
+        }
+    }
+}
 
+//mostrar capitulos por genero 👍🟩
+void mostrarCapitulosPorGenero(string genre){
+    for(auto i: indexC){
+        if(videos[i-1]->getGenre() == genre){
+            videos[i-1]->mostrar();
+            cout<<endl;
+        }
+    }
+}
+
+//mostrar todos los videos 👍🟩
+void mostrarVideos(){
+    for(auto i: videos){
+        i->mostrar();
+    }
 }
 
 //Extras
+//mostrar una recomendacion de peliculas/series de alta calidad(rating)👍🟩
 void mostrarRecomendacion(){
     vector<int> highRating;
     for(int i = 0;i<videos.size();i++){
@@ -400,8 +443,11 @@ void mostrarRecomendacion(){
     cout<<endl;
 }
 
+//mostrar una recomendacion aleatoria👍🟩
 void mostrarAleatoria(){
-
+    int num = rand() % (videos.size()-1) + 1;
+    videos[num]->mostrar();
+    cout<<endl;
 }
 
 //mensaje de bienvenida 👍
@@ -415,31 +461,294 @@ std::cout<<"\x1B[33m" <<R"(
 ╚██████╔╝██║  ██║██║  ██║██║     ███████╗██║██╔╝ ██╗
  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝╚═╝  ╚═╝
                                                     
-)"<<"\033[0m" << '\n';
-                                              
-//<<"\x1B[33m"     <<"\033[0m"
+)"<<"\033[0m" << '\n';   
+textTitle("------------------------------------------------------------------------------------");cout<<endl;
+textTitle("Bienvenid@ a Garflix, la mejor plataforma de streaming gratuita!");cout<<endl;
+bold("Cantidad de Peliculas: ");cout<<cPeliculas<<endl;
+bold("Cantidad de Series: ");cout<<cSeries<<endl;
+bold("Cantidad de capitulos: ");cout<<cCapitulos<<endl;
+textTitle("------------------------------------------------------------------------------------");cout<<endl;
 }
 
 
 void bye(){
-
+    cout<<endl<<endl<<endl<<endl;
+    textTitle("----------------------------------------------");cout<<endl;
+    textTitle("Hasta Luego!");cout<<endl;
+    textTitle("----------------------------------------------");cout<<endl;
+    cout<<endl<<endl<<endl<<endl;
 }
 
+
+
 /*MENU DE OPERACION*/
+//Menu de peliculas
+void menuPelis(){
+    bool continue1 = true;
+    int selection1;
+    float rating;
+    string query;
+    while (continue1){
+        textTitle("-------=Menu Peliculas=--------");
+        numb("1)");cout<<"Buscar una pelicula especifica"<<endl;
+        numb("2)");cout<<"Ver catalogo de peliculas"<<endl;
+        numb("3)");cout<<"Mostrar peliculas por calificacion"<<endl;
+        numb("4)");cout<<"Buscar peliculas por genero"<<endl;
+        numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
+        bold("Ingresar seleccion >");cin>>selection1;
+        switch (selection1){
+        case 0:
+            continue1 = false;
+            break;
+        case 1:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Titulo de la pelicula: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            searchPelicula(query);
+            cout<<endl;
+            break;
+        case 2:
+            cout<<endl<<endl;
+            textTitle("-------=Catalogo de peliculas=--------");cout<<endl;
+            mostrarPeliculas();
+            cout<<endl;
+            break;
+        case 3:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarPeliculasPorCalificacion(rating);
+            cout<<endl;
+            break;
+        case 4:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarPeliculasPorGenero(query);
+            cout<<endl;
+            break;
+        default:
+            cout<<endl<<endl;
+            textTitle("-------|||¡¡OPCION NO VALIDA!!|||-------");
+            cout<<endl<<endl;
+            break;
+        }
+    }    
+}
+
+//menu series
+void menuSeries(){
+    bool continue1 = true;
+    int selection1;
+    float rating;
+    string query;
+    while (continue1){
+        textTitle("-------=Menu Series=--------");
+        numb("1)");cout<<"Buscar una serie especifica"<<endl;
+        numb("2)");cout<<"Ver catalogo de Series"<<endl;
+        numb("3)");cout<<"Mostrar series por calificacion"<<endl;
+        numb("4)");cout<<"Mostrar capitulos por calificacion"<<endl;
+        numb("5)");cout<<"Mostrar capitulos de una serie"<<endl;
+        numb("6)");cout<<"Buscar capitulos por genero"<<endl;
+        numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
+        bold("Ingresar seleccion >");cin>>selection1;
+        switch (selection1){
+        case 0:
+            continue1 = false;
+            break;
+        case 1:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Titulo de la serie: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            searchSerie(query);
+            cout<<endl;
+            break;
+        case 2:
+            cout<<endl<<endl;
+            textTitle("-------=Catalogo de series=--------");cout<<endl;
+            mostrarSeries();
+            cout<<endl;
+            break;
+        case 3:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarSeriesPorCalificacion(rating);
+            cout<<endl;
+            break;
+        case 4:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarCapitulosPorCalificacion(rating);
+            cout<<endl;
+            break;
+         case 5:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Titulo de la serie: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarEpisodios(query);
+            cout<<endl;
+            break;   
+        case 6:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarCapitulosPorGenero(query);
+            cout<<endl;
+            break;
+        default:
+            cout<<endl<<endl;
+            textTitle("-------|||¡¡OPCION NO VALIDA!!|||-------");
+            cout<<endl<<endl;
+            break;
+        }
+    }    
+}
+
+void menuVideos(){
+   bool continue1 = true;
+    int selection1;
+    float rating;
+    string query;
+    while (continue1){
+        textTitle("-------=Menu Videos=--------");
+        numb("1)");cout<<"Buscar un video especifico"<<endl;
+        numb("2)");cout<<"Ver catalogo de videos"<<endl;
+        numb("3)");cout<<"Mostrar videos por calificacion"<<endl;
+        numb("4)");cout<<"Buscar videos por genero"<<endl;
+        numb("0)");cout<<"Regresar a menu principal"<<endl<<endl;
+        bold("Ingresar seleccion >");cin>>selection1;
+        switch (selection1){
+        case 0:
+            continue1 = false;
+            break;
+        case 1:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Titulo del video: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            searchVideo(query);
+            cout<<endl;
+            break;
+        case 2:
+            cout<<endl<<endl;
+            textTitle("-------=Catalogo de videos=--------");cout<<endl;
+            mostrarVideos();
+            cout<<endl;
+            break;
+        case 3:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Calificacion minima: >");cin>>rating;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarPorCalificacion(rating);
+            cout<<endl;
+            break;
+        case 4:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            mostrarPorGenero(query);
+            cout<<endl;
+            break;
+        default:
+            cout<<endl<<endl;
+            textTitle("-------|||¡¡OPCION NO VALIDA!!|||-------");
+            cout<<endl<<endl;
+            break;
+        }
+    }     
+}
+
+//Menu principal
 void menu(){
-    
+    bool continue1 = true;
+    int selection1;
+    string query;
+    while (continue1){    
+        textTitle("-------=Menu Principal=--------");
+        numb("1)");cout<<"Busqueda"<<endl;
+        numb("2)");cout<<"Recomendacion aleatoria"<<endl;
+        numb("3)");cout<<"Recomendacion de los expertos"<<endl;
+        numb("4)");cout<<"Peliculas"<<endl;
+        numb("5)");cout<<"Series"<<endl;
+        numb("6)");cout<<"Todos los videos"<<endl;
+        numb("0)");cout<<"Salir"<<endl<<endl;
+        bold("Ingresar seleccion >");cin>>selection1;
+        switch (selection1){
+        case 0:
+            bye();
+            continue1 = false;
+            break;
+        case 1:
+            cout<<endl<<endl;
+            bold("|---------------------------------------|");cout<<endl;
+            bold("|Titulo del video: >");cin>>query;cout<<endl;
+            bold("|---------------------------------------|");cout<<endl<<endl<<endl;
+            textTitle("-------=Resultados de busqueda=--------");cout<<endl;
+            searchVideo(query);
+            cout<<endl;
+            break;
+        case 2:
+            cout<<endl<<endl;
+            textTitle("-------=Nuestra recomendacion=--------");cout<<endl;
+            mostrarAleatoria();
+            cout<<endl;
+            break;
+        case 3:
+            cout<<endl<<endl;
+            textTitle("-------=Recomendacion de expertos=--------");cout<<endl;
+            mostrarRecomendacion();
+            cout<<endl;
+            break;
+        case 4:
+            cout<<endl<<endl;
+            menuPelis();
+            break;
+        case 5:
+            cout<<endl<<endl;
+            menuSeries();
+            break;
+        case 6:
+            cout<<endl<<endl;
+            menuVideos();
+            break;
+        default:
+            cout<<endl<<endl;
+            textTitle("-------|||¡¡OPCION NO VALIDA!!|||-------");
+            cout<<endl<<endl;
+            break;
+        }
+    }
 }
 
 
 int main(){
-    srand(time(NULL));
-    //
+    srand(time(NULL)); //numeros random constantemente
+    fetchData();//se hace un fetch a los datos de los txt
+    home(); //mensaje de bienvenida
     cout<<endl;
-    fetchData();
-    
-    //home();
-    cout<<"-----------------------------------------------------------------------"<<endl;
-    mostrarRecomendacion();
-
+    menu();//Menu
     return 0;
 }
