@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <cctype>
 #include <typeinfo>
+#include <stdlib.h>
+#include <random>
 
 #include "Pelicula.h"
 #include "Capitulo.h"
@@ -328,6 +330,9 @@ void mostrarPeliculasPorCalificacion(float rating){
 
 
 /*FUNCIONES EXTRA*/
+
+//busquedas
+//Buscar un video en general 👍
 void searchVideo(string title){
     for(auto i:videos){
         if(i->getTitle() == title){
@@ -337,11 +342,104 @@ void searchVideo(string title){
     }
 }
 
+//Buscar una pelicula en especifico 👍
+void searchPelicula(string title){
+    for(auto i: indexP){
+        if(videos[i-1]->getTitle() == title){
+            videos[i-1]->mostrar();
+            cout<<endl;
+        }
+    }
+}
+
+//buscar una serie en especifico 👍
+void searchSerie(string title){
+    for(auto i: series){
+        if(i->getTitle() == title){
+            i->mostrar();
+             cout<<endl;
+        }
+    }
+}
+
+//mostrar series por calificacion 👍
+void mostrarSeriesPorCalificacion(float rating){
+    for(auto i:series){
+        if(i->getRating()>=rating){
+            i->mostrar();
+            cout<<endl;
+        }
+    }
+}
+
+//mostrar capitulos por calificacion👍
+void mostrarCapitulosPorCalificacion(float rating){
+    for(int i = 0;i<videos.size();i++){
+        if(videos[i]->getRating() >= rating){
+            videos[i]->mostrar();
+            cout<<endl;
+        }
+    }
+}
+
+//mostrar por genero
+void mostrarPorGeneroPeliculas(string genre){
+
+}
+
+//Extras
+void mostrarRecomendacion(){
+    vector<int> highRating;
+    for(int i = 0;i<videos.size();i++){
+        if(videos[i]->getRating() >= 8.5){
+            highRating.push_back(videos[i]->getId());
+        }
+    }
+    int num = rand() % (highRating.size()-1) + 1;
+    videos[highRating[num]]->mostrar();
+    cout<<endl;
+}
+
+void mostrarAleatoria(){
+
+}
+
+//mensaje de bienvenida 👍
+void home(){
+std::cout<<"\x1B[33m" <<R"(
+
+ ██████╗  █████╗ ██████╗ ███████╗██╗     ██╗██╗  ██╗
+██╔════╝ ██╔══██╗██╔══██╗██╔════╝██║     ██║╚██╗██╔╝
+██║  ███╗███████║██████╔╝█████╗  ██║     ██║ ╚███╔╝ 
+██║   ██║██╔══██║██╔══██╗██╔══╝  ██║     ██║ ██╔██╗ 
+╚██████╔╝██║  ██║██║  ██║██║     ███████╗██║██╔╝ ██╗
+ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝╚═╝  ╚═╝
+                                                    
+)"<<"\033[0m" << '\n';
+                                              
+//<<"\x1B[33m"     <<"\033[0m"
+}
+
+
+void bye(){
+
+}
+
+/*MENU DE OPERACION*/
+void menu(){
+    
+}
+
 
 int main(){
+    srand(time(NULL));
+    //
     cout<<endl;
     fetchData();
     
+    //home();
     cout<<"-----------------------------------------------------------------------"<<endl;
+    mostrarRecomendacion();
+
     return 0;
 }

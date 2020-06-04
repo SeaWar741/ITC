@@ -51,17 +51,23 @@ Serie::Serie(int iid,string ti,string net,string run,float ra,vector<Video *> ca
 }
 
 void Serie::mostrar(){
-    cout<<"ID: "<<id<<endl;
-    cout<<"Titulo de la serie: "<<title<<endl;
-    cout<<"Rating: "<<rating<<endl;
-    cout<<"Network: "<<network<<endl;
+    char esc_char = 27;
+    string color3 = "\x1B[31m";
+    string color4 = "\033[0m";
+
+    string color1 = "\x1B[36m";
+    string color2 = "\033[0m"; 
+    cout <<color3<< esc_char << "[1m" <<"ID: "<< esc_char << "[0m" <<color4<<id<<endl;
+    cout <<color1<< esc_char << "[1m" <<"Titulo de la serie: "<< esc_char << "[0m" <<color2<<title<<endl;
+    cout <<color1<< esc_char << "[1m" <<"Rating: "<< esc_char << "[0m" <<color2<<rating<<endl;
+    cout <<color1<< esc_char << "[1m" <<"Network: "<< esc_char << "[0m" <<color2<<network<<endl;
     int i;
     //se cuenta la cantidad de capitulos de la serie
     for(i=0;i<capitulos.size();i++){
         i++;
     }
-    cout<<"Cantidad de capitulos: "<<i<<endl;
-    cout<<"Duracion promedio de los capitulos: "<<runtime;
+    cout <<color1<< esc_char << "[1m" <<"Cantidad de capitulos: "<< esc_char << "[0m" <<color2<<i<<endl;
+    cout <<color1<< esc_char << "[1m" <<"Duracion promedio de los capitulos: "<< esc_char << "[0m" <<color2<<runtime;
 }
 
 #endif
