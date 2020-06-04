@@ -25,7 +25,7 @@ int cPeliculas = 0; //cantidad de peliculas
 int cCapitulos = 0; //cantidad de capitulos
 int cSeries = 0;    //cantidad de series
 
-/*FUNCIONES HELPER */
+/*FUNCIONES HELPER */ //👍🟩
 bool to_bool(std::string str) {
     std::transform(str.begin(), str.end(), str.begin(), ::tolower);
     std::istringstream is(str);
@@ -34,7 +34,7 @@ bool to_bool(std::string str) {
     return b;
 }
 
-//busqueda adelante/atras/contraccion
+//busqueda adelante/atras/contraccion 👍🟩
 int search(string arr[], int n, string x) { 
     int front = 0, back = n - 1; 
     while (front <= back) { 
@@ -50,7 +50,7 @@ int search(string arr[], int n, string x) {
     return -1; 
 } 
 
-//obtener posiciones de los capitulos de la serie
+//obtener posiciones de los capitulos de la serie 👍🟩
 vector<int> positionsSerie(string title){
     vector<int> pos;
     int front = 0, back = videos.size() - 1; 
@@ -67,21 +67,21 @@ vector<int> positionsSerie(string title){
     return pos;
 }
 
-//funcion para titulos de menus
+//funcion para titulos de menus👍🟩
 void textTitle(string txt){
     char esc_char = 27; 
     string color3 = "\x1B[31m";
     string color4 = "\033[0m";
     cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4<<endl;
 }
-//funcion para numeros de menus
+//funcion para numeros de menus👍🟩
 void numb(string txt){
     char esc_char = 27; 
     string color3 = "\x1B[31m";
     string color4 = "\033[0m";
     cout <<color3<< esc_char << "[1m" <<txt <<esc_char <<"[0m" <<color4;
 }
-//funcion para bold
+//funcion para bold👍🟩
 void bold(string txt){
     char esc_char = 27; 
     cout << esc_char << "[1m" <<txt <<esc_char <<"[0m";
@@ -89,7 +89,7 @@ void bold(string txt){
 
 
 /*LECTURA DE DATOS */
-//leer datos de los archivos TSV 👍
+//leer datos de los archivos TSV 👍🟩
 void fetchData(){
     //variables generales
     int id;//identificador
@@ -352,7 +352,7 @@ void mostrarPeliculasPorCalificacion(float rating){
 /*FUNCIONES EXTRA*/
 
 //busquedas
-//Buscar un video en general 👍 
+//Buscar un video en general 👍🟩
 void searchVideo(string title){
     for(auto i:videos){
         if(i->getTitle() == title){
@@ -464,9 +464,9 @@ std::cout<<"\x1B[33m" <<R"(
 )"<<"\033[0m" << '\n';   
 textTitle("------------------------------------------------------------------------------------");cout<<endl;
 textTitle("Bienvenid@ a Garflix, la mejor plataforma de streaming gratuita!");cout<<endl;
-bold("Cantidad de Peliculas: ");cout<<cPeliculas<<endl;
-bold("Cantidad de Series: ");cout<<cSeries<<endl;
-bold("Cantidad de capitulos: ");cout<<cCapitulos<<endl;
+bold("> Cantidad de Peliculas: ");cout<<cPeliculas<<endl;
+bold("> Cantidad de Series: ");cout<<cSeries<<endl;
+bold("> Cantidad de capitulos: ");cout<<cCapitulos<<endl<<endl;
 textTitle("------------------------------------------------------------------------------------");cout<<endl;
 }
 
@@ -476,9 +476,8 @@ void bye(){
     textTitle("----------------------------------------------");cout<<endl;
     textTitle("Hasta Luego!");cout<<endl;
     textTitle("----------------------------------------------");cout<<endl;
-    cout<<endl<<endl<<endl<<endl;
+    cout<<endl;
 }
-
 
 
 /*MENU DE OPERACION*/
@@ -503,7 +502,7 @@ void menuPelis(){
         case 1:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Titulo de la pelicula: >");cin>>query;cout<<endl;
+            bold("|Titulo de la pelicula: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             searchPelicula(query);
@@ -527,7 +526,7 @@ void menuPelis(){
         case 4:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarPeliculasPorGenero(query);
@@ -565,7 +564,7 @@ void menuSeries(){
         case 1:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Titulo de la serie: >");cin>>query;cout<<endl;
+            bold("|Titulo de la serie: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             searchSerie(query);
@@ -598,7 +597,7 @@ void menuSeries(){
          case 5:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Titulo de la serie: >");cin>>query;cout<<endl;
+            bold("|Titulo de la serie: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarEpisodios(query);
@@ -607,7 +606,7 @@ void menuSeries(){
         case 6:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarCapitulosPorGenero(query);
@@ -642,7 +641,7 @@ void menuVideos(){
         case 1:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Titulo del video: >");cin>>query;cout<<endl;
+            bold("|Titulo del video: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             searchVideo(query);
@@ -666,7 +665,7 @@ void menuVideos(){
         case 4:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Genero: >");cin>>query;cout<<endl;
+            bold("|Genero: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             mostrarPorGenero(query);
@@ -686,7 +685,8 @@ void menu(){
     bool continue1 = true;
     int selection1;
     string query;
-    while (continue1){    
+    while (continue1){
+        cout<<endl;    
         textTitle("-------=Menu Principal=--------");
         numb("1)");cout<<"Busqueda"<<endl;
         numb("2)");cout<<"Recomendacion aleatoria"<<endl;
@@ -704,10 +704,12 @@ void menu(){
         case 1:
             cout<<endl<<endl;
             bold("|---------------------------------------|");cout<<endl;
-            bold("|Titulo del video: >");cin>>query;cout<<endl;
+            bold("|Titulo del video: >");cin.ignore(256,'\n');getline(cin, query);cout<<endl;
             bold("|---------------------------------------|");cout<<endl<<endl<<endl;
             textTitle("-------=Resultados de busqueda=--------");cout<<endl;
             searchVideo(query);
+            cout<<endl;
+            searchSerie(query);
             cout<<endl;
             break;
         case 2:
