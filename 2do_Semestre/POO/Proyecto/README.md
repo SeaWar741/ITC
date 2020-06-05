@@ -2,7 +2,7 @@
 
 Garflix is ​​a movies, series and chapters consultation platform created in c ++ as a project for Object Oriented Programming (TC1030.4).
 
-### **Challenge**
+### **Challenge** 💻
 In recent years, video on demand streaming services have proliferated, for example Netflix, Disney, DC, among others. Some of them specialize in the volume of videos they provide to their users while others have challenged themselves to show only videos from their own brand. A limited version to support a future provider of this type of service must be developed.
 
 
@@ -19,7 +19,7 @@ This project seeks to show mastery of
 - Pointers
 - Among others
 
-### The project has the following functionalities:
+### **The project has the following functionalities📲:**
 
 - Video search
 - Criticism-based recommendations
@@ -42,14 +42,14 @@ Because this program uses ASCII and terminal color codes, compatibility is limit
 - C ++ 11
 - Run in full screen
 
-### **Run the program**
+### **Run the program** 🔨
 
 Exectute the following code in the terminal:
 
     g ++ project.cpp -o main && ./main
 
 ### **To download**
-To download the project, click [here] (http://example.com "Title").
+To download the project, click [here](https://github.com/SeaWar741/ITC/raw/master/2do_Semestre/POO/Proyecto/ProyectoGarflix.zip "Download"). ⬅
 
 Then unzip the program and execute command.
 
