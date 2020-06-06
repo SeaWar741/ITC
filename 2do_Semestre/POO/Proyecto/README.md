@@ -12,7 +12,7 @@ In recent years, video on demand streaming services have proliferated, for examp
 
 ### **Objective**
 This project seeks to show mastery of
-- Lessons
+- Classes
 - Inheritance
 - Polymorphism
 - Composition
