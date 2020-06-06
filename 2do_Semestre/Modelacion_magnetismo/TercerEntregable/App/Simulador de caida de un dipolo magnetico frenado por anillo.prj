@@ -1,0 +1,72 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="3127554542" file="C:\Users\juanc\Documents\Ubuntu\ITC\2do_Semestre\Modelacion_magnetismo\TercerEntregable\Simulador de caida de un dipolo magnetico frenado por anillo.prj" location="C:\Users\juanc\Documents\Ubuntu\ITC\2do_Semestre\Modelacion_magnetismo\TercerEntregable" name="Simulador de caida de un dipolo magnetico frenado por anillo" target="target.mlapps" target-name="Package App">
+    <param.appname>Simulador de caida de un dipolo magnetico frenado por anillo</param.appname>
+    <param.authnamewatermark>Juan Carlos Garfias Tovar</param.authnamewatermark>
+    <param.email>a01652138@itesm.mx</param.email>
+    <param.company>Tec de Monterrey</param.company>
+    <param.icon>${PROJECT_ROOT}\Simulador de caida de un dipolo magnetico frenado por anillo_resources\icon_24.png</param.icon>
+    <param.icons>
+      <file>${PROJECT_ROOT}\Simulador de caida de un dipolo magnetico frenado por anillo_resources\icon_48.png</file>
+      <file>${PROJECT_ROOT}\Simulador de caida de un dipolo magnetico frenado por anillo_resources\icon_24.png</file>
+      <file>${PROJECT_ROOT}\Simulador de caida de un dipolo magnetico frenado por anillo_resources\icon_16.png</file>
+    </param.icons>
+    <param.summary>Simulador de caida de un dipolo magnetico frenado por un anillo</param.summary>
+    <param.description>&lt;b&gt;|Modelación computacional de sistemas electromagnéticos| &lt;/b&gt;
+Equipo: Juan Carlos Garfias Tovar, A01652138,
+Bo Hyeon Cha, A01023804, 
+Francisco Zamora Treviño, A01570484 
+(ITESM, 2020)</param.description>
+    <param.screenshot>C:\Users\juanc\AppData\Local\Temp\tpcf18378e_dcdf_4138_9aab_c03d9c990403.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>${PROJECT_ROOT}</param.output>
+    <param.guid>87bac787-5708-48a2-b8b0-aae6a537a5b3</param.guid>
+    <unset>
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\Tercer.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\juanc\Documents\Ubuntu\ITC\2do_Semestre\Modelacion_magnetismo" name="TercerEntregable" optional="false">C:\Users\juanc\Documents\Ubuntu\ITC\2do_Semestre\Modelacion_magnetismo\TercerEntregable</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>C:\Program Files\MATLAB\R2020a</root>
+      <toolboxes>
+        <toolbox name="neuralnetwork" />
+      </toolboxes>
+      <toolbox>
+        <neuralnetwork>
+          <enabled>true</enabled>
+        </neuralnetwork>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
