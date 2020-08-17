@@ -62,18 +62,18 @@ int factorial(int n){
 //comienza poniendo 1 de manera centrada y va aumentando hasta lograr formar la piramide
 //con espacios y caracteres
 void patronCaracteres(int n, int original, char txt){
-    if( n <= 0){
-        throw runtime_error("El numero debe de ser un entero positivo");
-    }
-    patronCaracteres(n-1, original,txt); 
+  if( n <= 0){
+    return;
+  }
+  patronCaracteres(n-1, original,txt); 
 
-    for(int i = 0; i < (original -n); i++){
-        cout<<" ";
-    }
-    for(int i = 0; i< n; i++){
-        cout<<txt<<" ";
-    }
-    cout<<endl;
+  for(int i = 0; i < (original -n); i++){
+    cout<<" ";
+  }
+  for(int i = 0; i< n; i++){
+    cout<<txt<<" ";
+  }
+  cout<<endl;
 }
 
 //nuevos ejercicios
@@ -174,12 +174,10 @@ int main(){
     }catch(runtime_error& e){
         cout<<e.what()<<endl;
     }
-    try{ 
-        cout<<"Patron Caracteres: "<<endl;
-        patronCaracteres(6,6, '*');
-    }catch(runtime_error& e){
-        cout<<e.what()<<endl;
-    }
+
+    cout<<"Patron Caracteres: "<<endl;
+    patronCaracteres(6,6, '*');
+
     
     //nuevos ejercicios
     cout<<"Fibonacci: "<<endl;

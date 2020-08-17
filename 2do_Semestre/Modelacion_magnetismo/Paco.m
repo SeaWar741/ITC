@@ -1,11 +1,36 @@
-
 t0 = 0;
-tf = 40;
+tf = 50;
 t = [t0,tf]; %tiempo
 zdata = [1,0]; % Cae de 10m con una velocidad de 0m/s (inicial)
 [t,z] = ode45(@fall, t, zdata);
- plot(t,z(:,1));
- 
+figure()
+plot(t,z(:,1));
+
+hold on;
+
+disp(z);
+%Ajuste
+p = polyfit(t,z(:,1),12);
+yy = polyval(p,t);
+
+plot(t,yy);
+disp(" ");
+disp(num2str(mse(z(:,1) - yy) ));
+
+%derivada 1 velocidad
+figure()
+d1 = polyder(p);
+yy2 = polyval(d1,t);
+plot(t,yy2);
+
+%derivada 2 aceclearcion
+figure()
+d2 = polyder(d1);
+yy3 = polyval(d2,t);
+plot(t,yy3);
+
+
+
 function sistema = fall(t,z)
 %     Z siendo un vector con los intervalos de Z inicial y diferencial de Z en ese punto,
 %     requerido asi por ODE45
