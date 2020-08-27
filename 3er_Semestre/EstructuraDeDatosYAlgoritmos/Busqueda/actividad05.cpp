@@ -115,14 +115,15 @@ void print(vector<T> list){
 }
 
 int main(){
-    vector <string> files = {"01.in","02.in","03.in","04.in"};
+    vector <string> files = {"01","02","03","04"};
     char unique;
+    string input="";
     for (auto i : files){
-        ifstream file("./Inputs/"+i);
+        ifstream file("./Inputs/"+i+".in");
         string content;
         
         int counter = 0;
-        cout<<i<<endl;
+        cout<<i<<".in"<<endl;
         while(file >> content) {
             if(counter != 0){
                 //cout<<"-------------------------------------------"<<endl;
@@ -145,6 +146,12 @@ int main(){
                     sequential(v,unique);
                     binarySearch(v,unique);
                     cout<<unique<<" "<<seq<<" "<<unique<<" "<<binary<<endl;
+                    
+                    input += unique+" "+to_string(seq)+" "+unique+" "+to_string(binary)+"\n";
+                    ofstream out("./Outputs/"+i+".out");
+                    out << input;
+                    out.close();
+
                 }catch(runtime_error& e){
                     cout<<e.what()<<endl;
                 }
