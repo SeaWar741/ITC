@@ -1,78 +1,78 @@
-ax_size()6 V 2
-vector larger than max_size()2 B 1
-_size()8 X 2
-ector larger than max_size()2 C 2
-ize()0 Z 0
-:vector larger than max_size()0 A 0
-r larger than max_size()0 G 0
-vector larger than max_size()0 B 0
-x_size()0 W 0
-:vector larger than max_size()0 A 3
-vector larger than max_size()2 B 3
-ector larger than max_size()4 C 1
-ctor larger than max_size()6 D 2
-tor larger than max_size()8 E 4
-or larger than max_size()10 F 3
-r larger than max_size()12 G 3
- larger than max_size()14 H 1
-larger than max_size()16 I 4
-arger than max_size()18 J 3
-70 a 6
-72 b 6
-74 c 6
-76 d 6
-78 e 6
-80 f 6
-basic_string::_M_construct null not valid82 g 6
-asic_string::_M_construct null not valid84 h 6
-sic_string::_M_construct null not valid86 i 6
-ic_string::_M_construct null not valid88 j 6
-c_string::_M_construct null not valid90 k 6
-_string::_M_construct null not valid92 l 5
-string::_M_construct null not valid94 m 4
-tring::_M_construct null not valid96 n 5
-ring::_M_construct null not valid98 o 3
-ing::_M_construct null not valid100 p 5
-ng::_M_construct null not valid102 q 4
-g::_M_construct null not valid104 r 5
-::_M_construct null not valid106 s 2
-:_M_construct null not valid108 t 5
-_M_construct null not valid110 u 4
-M_construct null not valid112 v 5
-_construct null not valid114 w 3
-construct null not valid116 x 5
-onstruct null not valid118 y 4
-nstruct null not valid120 z 5
-:vector larger than max_size()14 A 2
-vector larger than max_size()16 B 6
-ector larger than max_size()18 C 6
-ctor larger than max_size()20 D 6
-tor larger than max_size()22 E 6
-or larger than max_size()24 F 6
-r larger than max_size()26 G 6
- larger than max_size()28 H 6
-larger than max_size()30 I 5
-arger than max_size()32 J 4
-rger than max_size()34 K 5
-ger than max_size()36 L 3
-er than max_size()38 M 5
-r than max_size()40 N 4
- than max_size()42 O 5
-than max_size()44 P 2
-han max_size()46 Q 5
-an max_size()48 R 4
-n max_size()50 S 5
- max_size()52 T 3
-max_size()54 U 5
-ax_size()56 V 4
-x_size()58 W 5
-_size()60 X 0
-size()62 Y 6
-ize()64 Z 6
-NTO UNICO0 # 5
-d::vector larger than max_size()10 ? 4
-CO6 * 3
-TO UNICO2 $ 4
-::vector larger than max_size()12 @ 5
-O UNICO4 % 5
-O8 + 5
+--------------------------------6 V 2
+ersion adaptada ------------------------------------2 B 1
+------------------------------8 X 2
+rsion adaptada ------------------------------------2 C 2
+----------------------------0 Z 0
+Version adaptada ------------------------------------0 A 0
+n adaptada ------------------------------------0 G 0
+ersion adaptada ------------------------------------0 B 0
+-------------------------------0 W 0
+Version adaptada ------------------------------------0 A 3
+ersion adaptada ------------------------------------2 B 3
+rsion adaptada ------------------------------------4 C 1
+sion adaptada ------------------------------------6 D 2
+ion adaptada ------------------------------------8 E 4
+on adaptada ------------------------------------10 F 3
+n adaptada ------------------------------------12 G 3
+ adaptada ------------------------------------14 H 1
+adaptada ------------------------------------16 I 4
+daptada ------------------------------------18 J 3
+---------------------70 a 6
+--------------------72 b 6
+-------------------74 c 6
+------------------76 d 6
+-----------------78 e 6
+----------------80 f 6
+---------------82 g 6
+--------------84 h 6
+-------------86 i 6
+------------88 j 6
+-----------90 k 6
+----------92 l 5
+---------94 m 4
+--------96 n 5
+-------98 o 3
+------100 p 5
+-----102 q 4
+----104 r 5
+---106 s 2
+--108 t 5
+-110 u 4
+112 v 5
+Version adaptada: 114 w 3
+ersion adaptada: 116 x 5
+rsion adaptada: 118 y 4
+sion adaptada: 120 z 5
+Version adaptada ------------------------------------14 A 2
+ersion adaptada ------------------------------------16 B 6
+rsion adaptada ------------------------------------18 C 6
+sion adaptada ------------------------------------20 D 6
+ion adaptada ------------------------------------22 E 6
+on adaptada ------------------------------------24 F 6
+n adaptada ------------------------------------26 G 6
+ adaptada ------------------------------------28 H 6
+adaptada ------------------------------------30 I 5
+daptada ------------------------------------32 J 4
+aptada ------------------------------------34 K 5
+ptada ------------------------------------36 L 3
+tada ------------------------------------38 M 5
+ada ------------------------------------40 N 4
+da ------------------------------------42 O 5
+a ------------------------------------44 P 2
+ ------------------------------------46 Q 5
+------------------------------------48 R 4
+-----------------------------------50 S 5
+----------------------------------52 T 3
+---------------------------------54 U 5
+--------------------------------56 V 4
+-------------------------------58 W 5
+------------------------------60 X 0
+-----------------------------62 Y 6
+----------------------------64 Z 6
+----------------------------- Version adaptada ------------------------------------0 # 5
+- Version adaptada ------------------------------------10 ? 4
+---------------------- Version adaptada ------------------------------------6 * 3
+---------------------------- Version adaptada ------------------------------------2 $ 4
+ Version adaptada ------------------------------------12 @ 5
+--------------------------- Version adaptada ------------------------------------4 % 5
+--------------------- Version adaptada ------------------------------------8 + 5

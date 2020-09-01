@@ -118,6 +118,41 @@ T uniqueValue(vector<T> v){
     }        
 }
 
+//--------------------------------------Algoritmos adaptados--------------------------------------
+
+template<class T> //realiza una busqueda de dos en dos hasta encontrar par diferente siendo el elemento impar
+void sequentialFind(vector<T> list,int &comparisons){
+    int iterator =0;
+    for(int i =0;i<list.size()&& iterator ==0;i++){
+        comparisons++;
+        if(list[i]!= list[i+1]&&list[i]!=list[i-1]){
+            cout<<list[i]<<" "<<comparisons;
+            iterator =1;
+        }
+    }
+}
+
+template<class T>
+void binaryFind(vector<T> list,int &comparisons){//realiza una busqueda de los extremos y el centro cortando indices a partir de posicion
+    int left =0;
+    int right=list.size()-1;
+    int iterator=0;
+    int middle;
+
+    while (left <=right && iterator ==0){
+        if((right+left)/2 % 2!=0){
+            middle = (right + left)/ 2 + 1;
+        }
+        else{
+            middle = (right+left)/2;
+        }
+        comparisons++;
+        list[middle] == list[middle + 1] ? left = middle + 2: (list[middle] == list[middle - 1]) ? right = middle - 2 : iterator = 1;
+    }
+    cout<< list[middle]<<" "<<comparisons<<endl;
+}
+
+//--------------------------------------Funciones extra--------------------------------------
 
 //O(n)
 //Imprimir vector
@@ -130,6 +165,9 @@ void print(vector<T> list){
 }
 
 int main(){
+
+    //nota: se deshabilito la funcion de crear archivos output debido a posibles problemas con compilador
+
     vector <string> files = {"01","02","03","04"};//vector con los nombres de archivos a evaluar
     char unique; //char para el valor unico
     string input="";//string para escribir en el txt
@@ -141,31 +179,67 @@ int main(){
         cout<<i<<".in"<<endl;
         while(file >> content) {//mientras existan lineas se lee
             if(counter != 0){//si no es la primera linea se ejecuta
-                //cout<<"-------------------------------------------"<<endl;
+
                 vector<char> v(content.begin(), content.end());//se pasa el string a un vector de chars
-                //cout<<endl<<"Original:"<<endl;
-                //print(v);
-                //cout<<"Ordenado:"<<endl;
+
                 v =insertion(v);//se ordenan por insertion sort
                 //print(v);
                 try{ //se trata de evaluar lo siguiente
                     unique = uniqueValue(v);//se busca el valor unico (aqui puede suceder el error si no hay)
-                    /*
-                    cout<<"Unico:"<<endl;
-                    cout<<uniqueValue(v)<<endl;
-                    cout<<"Sequential search:"<<endl;
-                    cout<<sequential(v,uniqueValue(v))<<endl;
-                    cout<<"Binary search:"<<endl;
-                    cout<<binarySearch(v,uniqueValue(v))<<endl;
-                    */
+                
                     sequential(v,unique);//se ejecuta sequential sort
                     binarySearch(v,unique);//se ejecuta binary search
                     cout<<unique<<" "<<seq<<" "<<unique<<" "<<binary<<endl; //se imprime las comparaciones necesarias
                     
-                    input += unique+" "+to_string(seq)+" "+unique+" "+to_string(binary)+"\n"; //se a;ade al string del .out el output
-                    ofstream out("./Outputs/"+i+".out");//se crea un archivo en el directorio
-                    out << input;//se inserta el string en el ofstream
-                    out.close();//se cierra el archivo
+                    //input += unique+" "+to_string(seq)+" "+unique+" "+to_string(binary)+"\n"; //se a;ade al string del .out el output
+                    //ofstream out("./Outputs/"+i+".out");//se crea un archivo en el directorio
+                    //out << input;//se inserta el string en el ofstream
+                    //out.close();//se cierra el archivo
+
+                }catch(runtime_error& e){
+                    cout<<e.what()<<endl;//en caso de error se menciona que no hay unico
+                }
+            }
+            
+            counter++;//se suma el counter
+
+        }
+        cout<<endl<<endl;//para crear separacion
+
+    }
+
+    cout<<endl<<endl<<"----------------------------------------- Version adaptada ------------------------------------"<<endl;
+
+    for (auto i : files){// para cada string del vector
+        ///----------------------------------------- Version adaptada ------------------------------------
+
+        cout<<endl<<"Version adaptada: "<<endl;
+
+        ifstream file("./Inputs/"+i+".in");//se abre el archivo y se lee
+        string content;
+        
+        int counter = 0;//no se cuenta la primer linea ya que se lee hasta terminar las lineas del txt
+        cout<<i<<".in"<<endl;
+        while(file >> content) {//mientras existan lineas se lee
+            if(counter != 0){//si no es la primera linea se ejecuta
+
+                vector<char> v(content.begin(), content.end());//se pasa el string a un vector de chars
+
+                v =insertion(v);//se ordenan por insertion sort
+                //print(v);
+                try{ //se trata de evaluar lo siguiente
+                    
+                    int comp = 0;
+
+                    sequentialFind(v,comp);
+                    comp = 0;
+                    cout<<" ";     
+                    binaryFind(v,comp);
+                    
+                    //input += unique+" "+to_string(seq)+" "+unique+" "+to_string(binary)+"\n"; //se a;ade al string del .out el output
+                    //ofstream out("./Outputs/"+i+".out");//se crea un archivo en el directorio
+                    //out << input;//se inserta el string en el ofstream
+                    //out.close();//se cierra el archivo
 
                 }catch(runtime_error& e){
                     cout<<e.what()<<endl;//en caso de error se menciona que no hay unico
@@ -177,32 +251,6 @@ int main(){
         }
         cout<<endl<<endl;//para crear separacion
     }
-    
 
-    /*
-    ifstream file("01.in");
-    string content;
-    
-    int counter = 0;
-    while(file >> content) {
-        if(counter != 0){
-            cout<<"-------------------------------------------"<<endl;
-            vector<char> v(content.begin(), content.end());
-            cout<<endl<<"Original:"<<endl;
-            print(v);
-            cout<<"Ordenado:"<<endl;
-            v =insertion(v);
-            print(v);
-            cout<<"Unico:"<<endl;
-            cout<<uniqueValue(v)<<endl;
-            cout<<"Sequential search:"<<endl;
-            cout<<sequential(v,uniqueValue(v))<<endl;
-            cout<<"Binary search:"<<endl;
-            cout<<binarySearch(v,uniqueValue(v))<<endl;
-        }
-        counter++;
-
-    }
-    */
     return 0;
 }
