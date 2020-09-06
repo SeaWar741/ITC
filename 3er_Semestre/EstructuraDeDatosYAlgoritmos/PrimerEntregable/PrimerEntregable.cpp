@@ -55,7 +55,7 @@ int main(){
         string errorString = "";
 
         int i =0;
-        while(getline(file,line)){
+        while(getline(file,line)&& i <6){
             words = split(line," ");
             //print(words);
             RegistryEntry entry;
@@ -67,7 +67,12 @@ int main(){
             entry.second = stoi(time[2]);
             entry.ip = words[3];
             for (int i = 4; i < words.size(); i++){
-                errorString+=words[i];
+                if(i !=4 && i !=words.size()){
+                    errorString= errorString+ " " + words[i];
+                }
+                else{
+                    errorString+=words[i];
+                };
             }
             
             entry.error = errorString;
