@@ -229,13 +229,15 @@ void mergeSort(vector<T> &list,int left,int right){
 //Binary Search implementation for upper date query
 int lowerIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
     int low,high,mid;
+    int result = -1;
     low = 0;
     high = list.size();
     while (low<=high){
         mid = (low+high)/2;
         //if(list[mid] ==value){
         if(list[mid].dateIsEqual(value)){
-            return mid;
+            result =mid;
+            high = mid-1;
         }
         else if(list[mid].dateIsMinor(value)){
             low = mid+1;
@@ -243,6 +245,10 @@ int lowerIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
         else{
             high = mid - 1;
         }
+    }
+
+    if(result != -1){
+        return result;
     }
     
     string newMonth;
@@ -268,12 +274,14 @@ int lowerIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
 int upperIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
     int low,high,mid;
     low = 0;
+    int result = -1;
     high = list.size();
     while (low<=high){
         mid = (low+high)/2;
         //if(list[mid] ==value){
         if(list[mid].dateIsEqual(value)){
-            return mid;
+            result =mid;
+            low = mid+1;
         }
         else if(list[mid].dateIsMinor(value)){
             low = mid+1;
@@ -282,6 +290,11 @@ int upperIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
             high = mid - 1;
         }
     }
+
+    if(result != -1){
+        return result;
+    }
+
     string newMonth;
     int newDay;
 
