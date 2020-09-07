@@ -1,15 +1,26 @@
 //Juan Carlos Garfias Tovar, A01652138
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
 #include <vector>
+#include <cctype>
+#include <stdio.h>
 #include <map>
+
+#include <unistd.h> // for sleep()
 
 
 using namespace std;
 
-map<string, int> months; 
+map<string, int> months;
+map<int, string> monthsReversed;
 
+int monthDuration[12] = {31,28,29,31,30,31,30,31,31,30,30,31};
+
+//--------------------------------Super helper functions------------------------------
+
+
+//--------------------------------Struct declaration---------------------------------
 struct RegistryEntry{
     string month;
     int day;
@@ -18,8 +29,32 @@ struct RegistryEntry{
     int second;
     string ip;
     string error;
+    
+    bool dateIsEqual(RegistryEntry const & entry) const {
+        if(months[month] == months[entry.month] && day==entry.day){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    bool dateIsMinor(RegistryEntry const & entry) const{
+        if(months[month] < months[entry.month]){
+            return true;
+        }
+        if(months[month] == months[entry.month] && day < entry.day){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+
 };
 
+//-----------------------------Struct helper functions---------------------------------
 void populateMonths(){
     months.insert(pair<string, int>("Jan", 1)); 
     months.insert(pair<string, int>("Feb", 2)); 
@@ -35,32 +70,22 @@ void populateMonths(){
     months.insert(pair<string, int>("Dic", 12));
 }
 
+void populateMonthsReversed(){ //
+    for (auto i=months.begin(); i!=months.end(); ++i)
+    monthsReversed[i->second] = i->first;
+}
+
 void printEntry(RegistryEntry entry){
-    cout<<entry.month<<"|"<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<endl;
-    //<<"<<entry.ip<<"| "<<entry.error<<endl;
+    //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
+    cout<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<<endl;
 }
 
 void printEntries(vector<RegistryEntry> list){
+    cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
     for (int i = 0; i < list.size(); i++){
         printEntry(list[i]);
     }
     
-}
-
-vector<string> split(string str, string token){
-    vector<string>result;
-    while(str.size()){
-        int index = str.find(token);
-        if(index!=string::npos){
-            result.push_back(str.substr(0,index));
-            str = str.substr(index+token.size());
-            if(str.size()==0)result.push_back(str);
-        }else{
-            result.push_back(str);
-            str = "";
-        }
-    }
-    return result;
 }
 
 bool isEarlier(RegistryEntry &first, RegistryEntry &last){
@@ -85,6 +110,56 @@ bool isEarlier(RegistryEntry &first, RegistryEntry &last){
         return false;
     }
 }
+
+vector<string> split(string str, string token){
+    vector<string>result;
+    while(str.size()){
+        int index = str.find(token);
+        if(index!=string::npos){
+            result.push_back(str.substr(0,index));
+            str = str.substr(index+token.size());
+            if(str.size()==0)result.push_back(str);
+        }else{
+            result.push_back(str);
+            str = "";
+        }
+    }
+    return result;
+}
+
+string toLowerCase(string str) {
+
+    int str_len = str.length();
+
+    string final_str = "";
+
+    for(int i=0; i<str_len; i++) {
+
+        char character = str[i];
+
+        if(character>=65 && character<=92) {
+
+            final_str += (character+32);
+
+        } else {
+
+            final_str += character;
+
+        }
+
+    }
+
+    return final_str;
+
+}
+
+string monthFormater(string txt){
+    string txtMod = toLowerCase(txt);
+    txtMod[0] = toupper(txtMod[0]);
+    return txtMod;
+}
+
+//-------------------------------------Sort functions---------------------------------
 
 //Merge Sort
 template <class T>
@@ -139,32 +214,93 @@ void mergeSort(vector<T> &list,int left,int right){
 }
 
 
+//-------------------------------------Search functions---------------------------------
+
 //O(log n)
-//Binary Search
-template<class T>
-int binarySearch(vector<T> list,T value){
+//Binary Search implementation for upper date query
+int lowerIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
     int low,high,mid;
     low = 0;
     high = list.size();
     while (low<=high){
         mid = (low+high)/2;
-        if(list[mid]==value){
+        //if(list[mid] ==value){
+        if(list[mid].dateIsEqual(value)){
             return mid;
         }
-        else if(list[mid]<value){
+        else if(list[mid].dateIsMinor(value)){
             low = mid+1;
         }
         else{
             high = mid - 1;
         }
     }
-    return -1;
+    
+    string newMonth;
+    int newDay;
+
+    if(value.day<=monthDuration[months[value.month]-1]){
+        newMonth = value.month;
+        newDay = value.day+1;
+    }
+    else{
+        newMonth = monthsReversed[months[value.month]+1];
+        newDay = 1;
+    }    
+
+    RegistryEntry lower{ newMonth,newDay,0,0,0,"",""};
+
+    return lowerIndexQuery(list,lower);
 }
 
 
+//O(log n)
+//Binary Search implementation for lower date query
+int upperIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
+    int low,high,mid;
+    low = 0;
+    high = list.size();
+    while (low<=high){
+        mid = (low+high)/2;
+        //if(list[mid] ==value){
+        if(list[mid].dateIsEqual(value)){
+            return mid;
+        }
+        else if(list[mid].dateIsMinor(value)){
+            low = mid+1;
+        }
+        else{
+            high = mid - 1;
+        }
+    }
+    string newMonth;
+    int newDay;
+
+    if(value.day<=monthDuration[months[value.month]-1] && (value.day-1)>0){
+        newMonth = value.month;
+        newDay = value.day-1;
+    }
+    else{
+        newMonth = monthsReversed[months[value.month]-1];
+        newDay = monthDuration[months[newMonth]-1];
+    }    
+    //cout<<newMonth<<" "<<newDay<<endl;
+    RegistryEntry upper{ newMonth,newDay,0,0,0,"",""};
+
+    return upperIndexQuery(list,upper);
+}
 
 
-// utility functions
+//
+//Query result from two binary search
+void queryDates(vector<RegistryEntry> &list, int lower, int upper){
+    for(int i = lower; i <=upper;i++){
+        printEntry(list[i]);
+    }
+}
+
+
+//-------------------------------------utility functions---------------------------------
 void print(vector<string> list){
     for (int i = 0; i < list.size(); i++){
         cout<<list[i]<<endl;
@@ -172,10 +308,109 @@ void print(vector<string> list){
     cout<<endl;
 }
 
+void optionMenu(){
+    cout<<endl;
+    cout<<"1) Display full database"<<endl;
+    cout<<"2) Search events by date"<<endl;
+    cout<<"3) Exit"<<endl<<endl;
+}
 
-//main programm
+
+void fetchQuery(vector<RegistryEntry> &list){
+
+    string lowerMonth,upperM;
+    int lowerDay,upperDay;
+
+    cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
+    lowerMonth = monthFormater(lowerMonth);
+    cout<<"Ingresa el dia del mes inicial >";cin>>lowerDay;
+
+    cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
+    upperM = monthFormater(upperM);
+    cout<<"Ingresa el dia del mes final >";cin>>upperDay;
+    
+
+    cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
+
+    RegistryEntry lower{lowerMonth,lowerDay,0,0,0," "," "};
+
+    RegistryEntry upper{upperM,upperDay,0,0,0," "," "};
+    
+    int lowerIndex = lowerIndexQuery(list,lower);
+
+    int upperIndex = upperIndexQuery(list,upper);
+    
+    queryDates(list,lowerIndex,upperIndex);
+    
+}
+
+
+
+void menu(vector <RegistryEntry> list){
+    cout<<endl<<endl;
+    cout<<"8888      w 8          8    8               w       "<<endl;
+    cout<<"8www .d88 w 8 .d88b .d88    8    .d8b. .d88 w 8d8b. "<<endl;
+    cout<<"8    8  8 8 8 8.dP' 8  8    8    8' .8 8  8 8 8P Y8 "<<endl;
+    cout<<"8    `Y88 8 8 `Y88P `Y88    8888 `Y8P' `Y88 8 8   8 "<<endl;
+    cout<<"                                       wwdP         "<<endl;
+    cout<<"888b.            w       w               "<<endl;
+    cout<<"8  .8 .d88b .d88 w d88b w8ww 8d8b Yb  dP "<<endl;
+    cout<<"8wwK' 8.dP' 8  8 8 `Yb.  8   8P    YbdP  "<<endl;
+    cout<<"8  Yb `Y88P `Y88 8 Y88P  Y8P 8      dP   "<<endl;
+    cout<<"            wwdP                   dP    "<<endl<<endl<<endl;
+
+    cout<<"Loading database ";
+    
+    /*
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    */
+
+    cout<<endl;
+
+    cout<<endl<<"SUCCESS: "<<list.size()<<" registries have been loaded "<<endl<<endl;
+
+    bool continues = true;
+    int selection;
+    string lowerMonth,upperMonth;
+    int saveQuery;
+
+
+    while(continues){
+        optionMenu();
+        cout<<"Selection >";
+        cin>>selection;
+        cout<<endl;
+        switch (selection){
+            case 1:
+                printEntries(list);
+                break;
+            case 2:
+                fetchQuery(list);
+                break;
+            case 3:
+                continues=false;
+                break;
+            default:
+                cout<<endl<<"OPCION NO VALIDA"<<endl<<endl;
+                break;
+        }
+    }
+    cout<<endl<<"FAILED LOGIN REGISTRY | TERMINATED SUCCESSFULLY"<<endl;
+}
+
+//-------------------------------------main program---------------------------------
 int main(){
     populateMonths();
+    populateMonthsReversed();
 
     ifstream file("./bitacora.txt");
     vector <RegistryEntry> entries;
@@ -187,7 +422,7 @@ int main(){
         string errorString = "";
 
         int i =0;
-        while(getline(file,line)&& i<=20){
+        while(getline(file,line) && i<=20){
             words = split(line," ");
             //print(words);
             RegistryEntry entry;
@@ -218,15 +453,28 @@ int main(){
         file.close();
     }
 
-    cout<<endl<<"UnSortedList"<<endl;
+    //cout<<endl<<"UnSortedList"<<endl;
     //printEntries(entries);
 
-    cout<<endl<<"Sorted entries"<<endl;
+    //cout<<endl<<"Sorted entries"<<endl; DONE
 
     mergeSort(entries,0,entries.size()-1);
 
-    printEntries(entries);
-    
+    //printEntries(entries);
 
+    //cout<<endl<<"Query process"<<endl;
+
+    //RegistryEntry lower{"Aug",1,0,0,0,"",""};
+    //RegistryEntry upper{"Oct",9,0,0,0,"",""};
+
+    //int lowerIndex = lowerIndexQuery(entries,lower);
+    //int upperIndex = upperIndexQuery(entries,upper);
+
+    //cout<<lowerIndex<<endl;
+    //cout<<upperIndex<<endl;
+
+    //queryDates(entries,lowerIndex,upperIndex);
+
+    menu(entries);
     return 0;
 }
