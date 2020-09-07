@@ -340,16 +340,36 @@ void fetchQuery(vector<RegistryEntry> &list){
 
     string lowerMonth,upperM,save,fetched;
     int lowerDay,upperDay;
+    bool continues = false;
 
-    cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
-    lowerMonth = monthFormater(lowerMonth);
-    cout<<"Ingresa el dia del mes inicial >";cin>>lowerDay;
+    while(!continues){
+        cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
+        lowerMonth = monthFormater(lowerMonth);
+        cout<<"Ingresa el dia del mes inicial >";cin>>lowerDay;
 
-    cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
-    upperM = monthFormater(upperM);
-    cout<<"Ingresa el dia del mes final >";cin>>upperDay;
+        cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
+        upperM = monthFormater(upperM);
+        cout<<"Ingresa el dia del mes final >";cin>>upperDay;
+
+        if(months.find(lowerMonth) == months.end() && months.find(upperM) == months.end()) {
+            cout<<endl<<"INVALID INPUT"<<endl<<endl;
+        }
+        else{
+            if(months[lowerMonth]<=months[upperM]){
+                if( (lowerDay >0 && lowerDay<31) || (upperDay > 0 && lowerDay<31) ){
+                    continues = true;
+                }
+                else{
+                    cout<<endl<<"INVALID INPUT, VERIFY MONTH AND DESIRED DATES"<<endl<<endl;
+                }
+            }
+            else{
+                cout<<endl<<"INVALID INPUT, VERIFY MONTH AND DESIRED DATES"<<endl<<endl;
+            }            
+        }
+    }
     
-    cout<<"Would you like to save the result on a file (yes/no) >";cin>>save;
+    cout<<endl<<"Would you like to save the result on a file (yes/no) >";cin>>save;
 
     save = toLowerCase(save);
 
@@ -359,19 +379,29 @@ void fetchQuery(vector<RegistryEntry> &list){
 
     RegistryEntry upper{upperM,upperDay,0,0,0," "," "};
     
-    int lowerIndex = lowerIndexQuery(list,lower);
+    try{
+        if(months[lower.month]>=months[list[0].month] && months[upper.month]<=months[list[list.size()-1].month]){
+            int lowerIndex = lowerIndexQuery(list,lower);
 
-    int upperIndex = upperIndexQuery(list,upper);
-    
-    fetched = queryDates(list,lowerIndex,upperIndex);
-    cout<<fetched<<endl;
+            int upperIndex = upperIndexQuery(list,upper);
+        
+            
+            fetched = queryDates(list,lowerIndex,upperIndex);
+            
+            cout<<fetched<<endl;
 
-    if(save == "yes"){
-        ofstream out(str+".txt");
-        out << fetched;
-        out.close();
+            if(save == "yes"){
+            ofstream out(str+".txt");
+            out << fetched;
+            out.close();
+            }
+        }
+        else{
+            cout<<"QUERY COULDNT BE PERFORMED TIME FRAME NOT AVAILABLE"<<endl<<endl;
+        }
+    }catch(const exception& e){
+        cout<<"QUERY COULDNT BE PERFORMED"<<endl<<endl;
     }
-    
 }
 
 
@@ -452,7 +482,7 @@ int main(){
         string errorString = "";
 
         int i =0;
-        while(getline(file,line) && i<=20){
+        while(getline(file,line)/* && i<=20*/){
             words = split(line," ");
             //print(words);
             RegistryEntry entry;
