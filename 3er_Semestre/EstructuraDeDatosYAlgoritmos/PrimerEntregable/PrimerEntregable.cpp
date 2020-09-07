@@ -1,10 +1,14 @@
+//Juan Carlos Garfias Tovar, A01652138
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <vector>
+#include <map>
 
 
 using namespace std;
+
+map<string, int> months; 
 
 struct RegistryEntry{
     string month;
@@ -16,8 +20,31 @@ struct RegistryEntry{
     string error;
 };
 
+void populateMonths(){
+    months.insert(pair<string, int>("Jan", 1)); 
+    months.insert(pair<string, int>("Feb", 2)); 
+    months.insert(pair<string, int>("Mar", 3)); 
+    months.insert(pair<string, int>("Apr", 4)); 
+    months.insert(pair<string, int>("May", 5)); 
+    months.insert(pair<string, int>("Jun", 6)); 
+    months.insert(pair<string, int>("Jul", 7));
+    months.insert(pair<string, int>("Aug", 8)); 
+    months.insert(pair<string, int>("Sep", 9)); 
+    months.insert(pair<string, int>("Oct", 10)); 
+    months.insert(pair<string, int>("Nov", 11)); 
+    months.insert(pair<string, int>("Dic", 12));
+}
+
 void printEntry(RegistryEntry entry){
-    cout<<entry.month<<"|"<<entry.day<<"|"<<entry.hour<<"|"<<entry.minute<<"|"<<entry.second<<"|"<<entry.ip<<"|"<<entry.error<<endl;
+    cout<<entry.month<<"|"<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<endl;
+    //<<"<<entry.ip<<"| "<<entry.error<<endl;
+}
+
+void printEntries(vector<RegistryEntry> list){
+    for (int i = 0; i < list.size(); i++){
+        printEntry(list[i]);
+    }
+    
 }
 
 vector<string> split(string str, string token){
@@ -36,6 +63,108 @@ vector<string> split(string str, string token){
     return result;
 }
 
+bool isEarlier(RegistryEntry &first, RegistryEntry &last){
+    if(months[first.month]>months[last.month]){
+        //cout<<"comparison"<<endl;
+        return true;
+    }
+    if(months[first.month]==months[last.month] && first.day>last.day){
+        return true;
+    }
+    if(months[first.month]==months[last.month] && first.day==last.day&& first.hour>last.hour){
+        return true;
+    }
+    if(months[first.month]==months[last.month] && first.day==last.day&& first.hour==last.hour && first.minute>last.minute){
+        return true;
+    }
+    if(months[first.month]==months[last.month] && first.day==last.day&& first.hour==last.hour && first.minute==last.minute && first.second>last.second){
+        return true;
+    }
+    else{
+        //cout<<"comparison failed"<<endl;
+        return false;
+    }
+}
+
+//Merge Sort
+template <class T>
+void merge(vector<T> &list,int left,int middle,int right){
+    int i = 0, j =0;
+    int counter =left;
+    vector<T> vectorLeft, vectorRight;
+
+    //Copy to new vectors
+    for(int iter1 = left; iter1 <= middle; iter1++){
+        vectorLeft.push_back(list[iter1]);
+    }
+    for(int iter2 = middle+1; iter2 <= right; iter2++){
+        vectorRight.push_back(list[iter2]);
+    }
+
+    //
+    while(i < (middle-left+1) && j < (right-middle)){
+        //if(vectorLeft[i] > vectorRight[j]){
+        if(isEarlier(vectorLeft[i],vectorRight[j])){ ///Key comparison
+            list[counter] = vectorRight[j];
+            j++;   
+        } else{
+            list[counter] = vectorLeft[i];
+            i++;
+        }
+        counter++;
+    }
+
+    //
+    while(i < (middle - left + 1)){
+        list[counter] = vectorLeft[i];
+        counter++;
+        i++;
+    }
+    while(j < (right-middle)){
+        list[counter] = vectorRight[j];
+        counter++;
+        j++;
+    }
+}
+
+template<class T>
+void mergeSort(vector<T> &list,int left,int right){
+    if(left<right){
+        int middle = left + (right-left)/2;
+        mergeSort(list,left,middle);
+        mergeSort(list,middle+1,right);
+
+        merge(list,left,middle,right);
+    }
+}
+
+
+//O(log n)
+//Binary Search
+template<class T>
+int binarySearch(vector<T> list,T value){
+    int low,high,mid;
+    low = 0;
+    high = list.size();
+    while (low<=high){
+        mid = (low+high)/2;
+        if(list[mid]==value){
+            return mid;
+        }
+        else if(list[mid]<value){
+            low = mid+1;
+        }
+        else{
+            high = mid - 1;
+        }
+    }
+    return -1;
+}
+
+
+
+
+// utility functions
 void print(vector<string> list){
     for (int i = 0; i < list.size(); i++){
         cout<<list[i]<<endl;
@@ -43,7 +172,10 @@ void print(vector<string> list){
     cout<<endl;
 }
 
+
+//main programm
 int main(){
+    populateMonths();
 
     ifstream file("./bitacora.txt");
     vector <RegistryEntry> entries;
@@ -55,7 +187,7 @@ int main(){
         string errorString = "";
 
         int i =0;
-        while(getline(file,line)&& i <6){
+        while(getline(file,line)&& i<=20){
             words = split(line," ");
             //print(words);
             RegistryEntry entry;
@@ -86,9 +218,14 @@ int main(){
         file.close();
     }
 
-    for (int i = 0; i < entries.size(); i++){
-        printEntry(entries[i]);
-    }
+    cout<<endl<<"UnSortedList"<<endl;
+    //printEntries(entries);
+
+    cout<<endl<<"Sorted entries"<<endl;
+
+    mergeSort(entries,0,entries.size()-1);
+
+    printEntries(entries);
     
 
     return 0;
