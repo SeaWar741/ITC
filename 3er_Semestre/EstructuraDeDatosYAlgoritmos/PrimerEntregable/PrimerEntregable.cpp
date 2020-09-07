@@ -5,6 +5,8 @@
 #include <vector>
 #include <cctype>
 #include <stdio.h>
+#include <sstream>
+#include <ctime>
 #include <map>
 
 #include <unistd.h> // for sleep()
@@ -78,6 +80,13 @@ void populateMonthsReversed(){ //
 void printEntry(RegistryEntry entry){
     //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
     cout<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<<endl;
+}
+
+string stringEntry(RegistryEntry entry){
+    //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
+    stringstream ss;
+    ss<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<< "\n";
+    return ss.str();
 }
 
 void printEntries(vector<RegistryEntry> list){
@@ -293,10 +302,12 @@ int upperIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
 
 //
 //Query result from two binary search
-void queryDates(vector<RegistryEntry> &list, int lower, int upper){
+string queryDates(vector<RegistryEntry> &list, int lower, int upper){
+    string dates = "";
     for(int i = lower; i <=upper;i++){
-        printEntry(list[i]);
+        dates = dates + (stringEntry(list[i]));
     }
+    return dates;
 }
 
 
@@ -317,8 +328,17 @@ void optionMenu(){
 
 
 void fetchQuery(vector<RegistryEntry> &list){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
 
-    string lowerMonth,upperM;
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    strftime(buffer,sizeof(buffer),"%d-%m-%Y %H-%M-%S",timeinfo);
+    std::string str(buffer);
+
+    string lowerMonth,upperM,save,fetched;
     int lowerDay,upperDay;
 
     cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
@@ -329,6 +349,9 @@ void fetchQuery(vector<RegistryEntry> &list){
     upperM = monthFormater(upperM);
     cout<<"Ingresa el dia del mes final >";cin>>upperDay;
     
+    cout<<"Would you like to save the result on a file (yes/no) >";cin>>save;
+
+    save = toLowerCase(save);
 
     cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
 
@@ -340,7 +363,14 @@ void fetchQuery(vector<RegistryEntry> &list){
 
     int upperIndex = upperIndexQuery(list,upper);
     
-    queryDates(list,lowerIndex,upperIndex);
+    fetched = queryDates(list,lowerIndex,upperIndex);
+    cout<<fetched<<endl;
+
+    if(save == "yes"){
+        ofstream out(str+".txt");
+        out << fetched;
+        out.close();
+    }
     
 }
 
@@ -453,28 +483,9 @@ int main(){
         file.close();
     }
 
-    //cout<<endl<<"UnSortedList"<<endl;
-    //printEntries(entries);
-
-    //cout<<endl<<"Sorted entries"<<endl; DONE
-
     mergeSort(entries,0,entries.size()-1);
 
-    //printEntries(entries);
-
-    //cout<<endl<<"Query process"<<endl;
-
-    //RegistryEntry lower{"Aug",1,0,0,0,"",""};
-    //RegistryEntry upper{"Oct",9,0,0,0,"",""};
-
-    //int lowerIndex = lowerIndexQuery(entries,lower);
-    //int upperIndex = upperIndexQuery(entries,upper);
-
-    //cout<<lowerIndex<<endl;
-    //cout<<upperIndex<<endl;
-
-    //queryDates(entries,lowerIndex,upperIndex);
-
     menu(entries);
+
     return 0;
 }
