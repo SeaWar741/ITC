@@ -14,19 +14,21 @@
 
 using namespace std;
 
-map<string, int> months;
-map<int, string> monthsReversed;
+map<string, int> months; //map para los codigos de mes y numero de mes
+map<int, string> monthsReversed; //mapa con key value invertidas al map original
 
-int monthDuration[12] = {31,28,29,31,30,31,30,31,31,30,30,31};
+int monthDuration[12] = {31,28,29,31,30,31,30,31,31,30,30,31}; //duracion maxima de cada mes
 
 //--------------------------------Super helper functions------------------------------
 
+//Fncion para imprimir linea
 void line(){
     cout<<"----------------------------------------------------"<<endl;
 }
 
+//Funcion de efecto de loading
 void loading(){
-    sleep(1);
+    sleep(1);//duerme cada segundo y hace cout de un punto
     std::cout << "." << std::flush;
     sleep(1);
     std::cout << "." << std::flush;
@@ -39,6 +41,8 @@ void loading(){
 }
 
 //--------------------------------Struct declaration---------------------------------
+
+//Estructura de datos de registro
 struct RegistryEntry{
     string month;
     int day;
@@ -48,6 +52,7 @@ struct RegistryEntry{
     string ip;
     string error;
     
+    //Funcion para verificar igualdades de fecha
     bool dateIsEqual(RegistryEntry const & entry) const {
         if( (months[month] == months[entry.month] && day==entry.day) && hour == entry.hour){
             return true;
@@ -57,6 +62,7 @@ struct RegistryEntry{
         }
     }
 
+    //Funcion para verificar menor fecha y hora
     bool dateIsMinor(RegistryEntry const & entry) const{
         if(months[month] < months[entry.month]){
             return true;
@@ -72,6 +78,7 @@ struct RegistryEntry{
         }
     }
 
+    //Funcion para verificar menor hora
     bool hourIsMinor(RegistryEntry const & entry) const{
         if(hour<=entry.hour){
             return true;
@@ -81,6 +88,7 @@ struct RegistryEntry{
         }
     }
 
+    //Funcion para verificar mayors hora
     bool hourIsMajor(RegistryEntry const & entry) const{
         if(hour>=entry.hour){
             return true;
@@ -90,6 +98,7 @@ struct RegistryEntry{
         }
     }
 
+    //Funcion para verificar igualdad de hora
     bool hourIsEqual(RegistryEntry const & entry) const{
         if(hour == entry.hour){
             return true;
@@ -98,9 +107,12 @@ struct RegistryEntry{
             return false;
         }
     }
+
 };
 
 //-----------------------------Struct helper functions---------------------------------
+
+//Funcion para llenar valores del map de meses
 void populateMonths(){
     months.insert(pair<string, int>("Jan", 1)); 
     months.insert(pair<string, int>("Feb", 2)); 
@@ -116,16 +128,19 @@ void populateMonths(){
     months.insert(pair<string, int>("Dic", 12));
 }
 
+//Funcion para invertir key y value de mapa de meses
 void populateMonthsReversed(){ //
     for (auto i=months.begin(); i!=months.end(); ++i)
     monthsReversed[i->second] = i->first;
 }
 
+//Funcion para desplegar entry 
 void printEntry(RegistryEntry entry){
     cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
     //cout<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<<endl;
 }
 
+//Funcion para convertir en string un entry formateado
 string stringEntry(RegistryEntry entry){
     //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
     stringstream ss;
@@ -134,6 +149,7 @@ string stringEntry(RegistryEntry entry){
     return ss.str();
 }
 
+//Funcion para imprimir todas las entries de logs
 void printEntries(vector<RegistryEntry> list){
     cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
     for (int i = 0; i < list.size(); i++){
@@ -142,6 +158,7 @@ void printEntries(vector<RegistryEntry> list){
     
 }
 
+//Funcion para ver si una entry es previa a otra
 bool isEarlier(RegistryEntry &first, RegistryEntry &last){
     if(months[first.month]>months[last.month]){
         //cout<<"comparison"<<endl;
@@ -165,6 +182,8 @@ bool isEarlier(RegistryEntry &first, RegistryEntry &last){
     }
 }
 
+//O(n)
+//Funcion para dividir string por token o separador
 vector<string> split(string str, string token){
     vector<string>result;
     while(str.size()){
@@ -181,6 +200,8 @@ vector<string> split(string str, string token){
     return result;
 }
 
+//O(n)
+//Funcion para pasar a lowercase string
 string toLowerCase(string str) {
 
     int str_len = str.length();
@@ -207,15 +228,17 @@ string toLowerCase(string str) {
 
 }
 
+//Funcion para formatear el string de una fecha para ser valido
 string monthFormater(string txt){
     string txtMod = toLowerCase(txt);
-    txtMod[0] = toupper(txtMod[0]);
+    txtMod[0] = toupper(txtMod[0]);//se hace uppercase la primer letra
     return txtMod;
 }
 
 //-------------------------------------Sort functions---------------------------------
 
-//Merge Sort
+//Funcion merge para merge sort a 
+//partir de comparasion con fechas
 template <class T>
 void merge(vector<T> &list,int left,int middle,int right){
     int i = 0, j =0;
@@ -233,7 +256,7 @@ void merge(vector<T> &list,int left,int middle,int right){
     //
     while(i < (middle-left+1) && j < (right-middle)){
         //if(vectorLeft[i] > vectorRight[j]){
-        if(isEarlier(vectorLeft[i],vectorRight[j])){ ///Key comparison
+        if(isEarlier(vectorLeft[i],vectorRight[j])){ ///Key comparison by date
             list[counter] = vectorRight[j];
             j++;   
         } else{
@@ -256,6 +279,8 @@ void merge(vector<T> &list,int left,int middle,int right){
     }
 }
 
+//O(nlogn)
+//Merge Sort
 template<class T>
 void mergeSort(vector<T> &list,int left,int right){
     if(left<right){
@@ -357,8 +382,7 @@ int upperIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
     return upperIndexQuery(list,upper);
 }
 
-
-//
+//O(n)
 //Query result from two binary search
 string queryDates(vector<RegistryEntry> &list, int lower, int upper){
     string dates = "";
@@ -370,6 +394,9 @@ string queryDates(vector<RegistryEntry> &list, int lower, int upper){
 
 
 //-------------------------------------utility functions---------------------------------
+
+//O(m)
+//Funcion para imprimir lista completa
 void print(vector<string> list){
     for (int i = 0; i < list.size(); i++){
         cout<<list[i]<<endl;
@@ -377,6 +404,7 @@ void print(vector<string> list){
     cout<<endl;
 }
 
+//Funcion para desplegar menu
 void optionMenu(){
     cout<<endl;
     cout<<"1) Display full database"<<endl;
@@ -384,17 +412,17 @@ void optionMenu(){
     cout<<"3) Exit"<<endl<<endl;
 }
 
-
+//Funcion para hacer query de una fecha
 void fetchQuery(vector<RegistryEntry> &list){
     time_t rawtime;
-    struct tm * timeinfo;
+    struct tm * timeinfo; //Se obtiene la fecha actual del sistema y se formatea para nombre de archivo
     char buffer[80];
 
     time (&rawtime);
     timeinfo = localtime(&rawtime);
 
     strftime(buffer,sizeof(buffer),"%d-%m-%Y %H-%M-%S",timeinfo);
-    std::string str(buffer);
+    std::string str(buffer); //fecha a un string
 
     string lowerMonth,upperM,save,fetched;
     int lowerDay,upperDay,inputHourLower,inputHourUpper;
@@ -404,14 +432,14 @@ void fetchQuery(vector<RegistryEntry> &list){
         cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
         lowerMonth = monthFormater(lowerMonth);
         cout<<"Ingresa el dia del mes inicial >";
-        while(!(cin>>lowerDay)){
+        while(!(cin>>lowerDay)){ //evitar loops por input
             cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
             cout<<endl<<"Ingresa el dia del mes inicial >";
             cin.clear();
             cin.ignore(123,'\n');
         }
         cout<<"Ingresa la hora >";
-        while(!(cin>>inputHourLower)){
+        while(!(cin>>inputHourLower)){ //evitar loops por input
             cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
             cout<<endl<<"Ingresa la hora >";
             cin.clear();
@@ -421,14 +449,14 @@ void fetchQuery(vector<RegistryEntry> &list){
         cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
         upperM = monthFormater(upperM);
         cout<<"Ingresa el dia del mes final >";
-        while(!(cin>>upperDay)){
+        while(!(cin>>upperDay)){ //evitar loops por input
             cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
             cout<<"Ingresa el dia del mes final >";
             cin.clear();
             cin.ignore(123,'\n');
         }
         cout<<"Ingresa la hora >";
-        while(!(cin>>inputHourUpper)){
+        while(!(cin>>inputHourUpper)){ //evitar loops por input
             cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
             cout<<"Ingresa la hora >";
             cin.clear();
@@ -437,10 +465,10 @@ void fetchQuery(vector<RegistryEntry> &list){
 
 
         if(months.find(lowerMonth) == months.end() && months.find(upperM) == months.end()) {
-            cout<<endl<<"INVALID INPUT"<<endl<<endl;
+            cout<<endl<<"INVALID INPUT"<<endl<<endl; //Si no se encuenrta en el rango de lista niega query
         }
         else{
-            if(months[lowerMonth]<=months[upperM]){
+            if(months[lowerMonth]<=months[upperM]){ //si los meses son un frame direccional de menor a mayor realiza query
                 if( (lowerDay >0 && lowerDay<31) || (upperDay > 0 && lowerDay<31) ){
                     continues = true;
                 }
@@ -460,21 +488,22 @@ void fetchQuery(vector<RegistryEntry> &list){
 
     cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
 
-    RegistryEntry lower{lowerMonth,lowerDay,inputHourLower,0,0," "," "};
+    RegistryEntry lower{lowerMonth,lowerDay,inputHourLower,0,0," "," "}; //crea una entrada lower con parameters input 
 
-    RegistryEntry upper{upperM,upperDay,inputHourUpper,0,0," "," "};
+    RegistryEntry upper{upperM,upperDay,inputHourUpper,0,0," "," "};//crea una entrada upper con parameters input 
 
     try{
         if(months[lower.month]>=months[list[0].month] && months[upper.month]<=months[list[list.size()-1].month]){
-            int lowerIndex = lowerIndexQuery(list,lower);
+            //verifica viabilidad de query a partir del rango
+            int lowerIndex = lowerIndexQuery(list,lower);//realiza binary search para encontrar primer occurance en lista
 
-            int upperIndex = upperIndexQuery(list,upper);
+            int upperIndex = upperIndexQuery(list,upper);//realiza binary search para encontrar final occurance de lista
             
-            fetched = queryDates(list,lowerIndex,upperIndex);
+            fetched = queryDates(list,lowerIndex,upperIndex); //realiza query de entries
             
-            cout<<fetched<<endl;
+            cout<<fetched<<endl; //imprime query
 
-            if(save == "yes"){
+            if(save == "yes"){ //si se dijo yes se guarda output en log file con fecha y hora como nombre
                 ofstream out(str+".txt");
                 out << fetched;
                 out.close();
@@ -502,14 +531,15 @@ void menu(vector <RegistryEntry> list){
     cout<<"8  Yb `Y88P `Y88 8 Y88P  Y8P 8      dP   "<<endl;
     cout<<"            wwdP                   dP    "<<endl<<endl<<endl;
 
-    line();
+    line(); //estilo
 
     cout<<endl<<"Loading database ";
     
-    loading();
+    loading();//animacion
 
     cout<<endl;
 
+    //se imprimen datos del registry
     cout<<endl<<"SUCCESS: "<<list.size()<<" registries have been loaded "<<endl<<endl;
     cout<<"ENTRIES: ("<<list[0].month<<" - "<<list[list.size()-1].month<<")"<<endl<<endl;
     line();
@@ -523,26 +553,26 @@ void menu(vector <RegistryEntry> list){
     while(continues){
         optionMenu();
         cout<<"Selection >";
-        while(!(cin>>selection)){
+        while(!(cin>>selection)){//Evitar loop input
             cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
             cout<<"Selection >";
             cin.clear();
             cin.ignore(123,'\n');
         }
         cout<<endl;
-        switch (selection){
+        switch (selection){//switch para la opcion 
             case 1:
-                printEntries(list);
+                printEntries(list);//imprimir registry ordenado
                 cout<<endl;
                 line();
                 break;
             case 2:
-                fetchQuery(list);
+                fetchQuery(list);//realizar query
                 cout<<endl;
                 line();
                 break;
             case 3:
-                continues=false;
+                continues=false; //cerrar programa
                 break;
             default:
                 cout<<endl;
@@ -560,23 +590,23 @@ void menu(vector <RegistryEntry> list){
 
 //-------------------------------------main program---------------------------------
 int main(){
-    populateMonths();
+    populateMonths();//se llenan los meses
     populateMonthsReversed();
 
-    ifstream file("./bitacora.txt");
-    vector <RegistryEntry> entries;
+    ifstream file("./bitacora.txt"); //abre el archivo
+    vector <RegistryEntry> entries; //vector para registry
 
     if(file.is_open()){
         string line;
-        vector<string> words;
-        vector<string> time;
-        string errorString = "";
+        vector<string> words; //vector para almacenar palabras de entry
+        vector<string> time;    //vector para el tiempo
+        string errorString = "";    //string para el error
 
         int i =0;
-        while(getline(file,line)/* && i<=20*/){
+        while(getline(file,line)/* && i<=20*/){ //Se leen todos las entries por linea
             words = split(line," ");
             //print(words);
-            RegistryEntry entry;
+            RegistryEntry entry; //se crea entry y se hace split de elementos para llener el struct
             entry.month = words[0];
             entry.day = stoi(words[1]);
             time = split(words[2],":");
@@ -584,7 +614,7 @@ int main(){
             entry.minute = stoi(time[1]);
             entry.second = stoi(time[2]);
             entry.ip = words[3];
-            for (int i = 4; i < words.size(); i++){
+            for (int i = 4; i < words.size(); i++){ //todos los elementos posteriores son parte del error de login
                 if(i !=4 && i !=words.size()){
                     errorString= errorString+ " " + words[i];
                 }
@@ -594,7 +624,7 @@ int main(){
             }
             
             entry.error = errorString;
-            entries.push_back(entry);
+            entries.push_back(entry);//se inserta en vector
             errorString = "";
             words.clear();
             time.clear();
@@ -604,7 +634,7 @@ int main(){
         file.close();
     }
 
-    mergeSort(entries,0,entries.size()-1);
+    mergeSort(entries,0,entries.size()-1); //se ordenan las entries
 
     menu(entries);
 
