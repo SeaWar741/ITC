@@ -21,6 +21,22 @@ int monthDuration[12] = {31,28,29,31,30,31,30,31,31,30,30,31};
 
 //--------------------------------Super helper functions------------------------------
 
+void line(){
+    cout<<"----------------------------------------------------"<<endl;
+}
+
+void loading(){
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+    sleep(1);
+    std::cout << "." << std::flush;
+}
 
 //--------------------------------Struct declaration---------------------------------
 struct RegistryEntry{
@@ -106,14 +122,15 @@ void populateMonthsReversed(){ //
 }
 
 void printEntry(RegistryEntry entry){
-    //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
-    cout<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<<endl;
+    cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
+    //cout<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<<endl;
 }
 
 string stringEntry(RegistryEntry entry){
     //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
     stringstream ss;
-    ss<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<< "\n";
+    //ss<<entry.month<<"| "<<entry.day<<"| "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<"| "<<entry.ip<<"| "<<entry.error<< "\n";
+    ss<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<< "\n";
     return ss.str();
 }
 
@@ -386,13 +403,38 @@ void fetchQuery(vector<RegistryEntry> &list){
     while(!continues){
         cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
         lowerMonth = monthFormater(lowerMonth);
-        cout<<"Ingresa el dia del mes inicial >";cin>>lowerDay;
-        cout<<"Ingresa la hora >";cin>>inputHourLower;
+        cout<<"Ingresa el dia del mes inicial >";
+        while(!(cin>>lowerDay)){
+            cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
+            cout<<endl<<"Ingresa el dia del mes inicial >";
+            cin.clear();
+            cin.ignore(123,'\n');
+        }
+        cout<<"Ingresa la hora >";
+        while(!(cin>>inputHourLower)){
+            cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
+            cout<<endl<<"Ingresa la hora >";
+            cin.clear();
+            cin.ignore(123,'\n');
+        }
 
         cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
         upperM = monthFormater(upperM);
-        cout<<"Ingresa el dia del mes final >";cin>>upperDay;
-        cout<<"Ingresa la hora >";cin>>inputHourUpper;
+        cout<<"Ingresa el dia del mes final >";
+        while(!(cin>>upperDay)){
+            cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
+            cout<<"Ingresa el dia del mes final >";
+            cin.clear();
+            cin.ignore(123,'\n');
+        }
+        cout<<"Ingresa la hora >";
+        while(!(cin>>inputHourUpper)){
+            cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
+            cout<<"Ingresa la hora >";
+            cin.clear();
+            cin.ignore(123,'\n');
+        }
+
 
         if(months.find(lowerMonth) == months.end() && months.find(upperM) == months.end()) {
             cout<<endl<<"INVALID INPUT"<<endl<<endl;
@@ -427,18 +469,15 @@ void fetchQuery(vector<RegistryEntry> &list){
             int lowerIndex = lowerIndexQuery(list,lower);
 
             int upperIndex = upperIndexQuery(list,upper);
-
-            //cout<<inputHourLower<<" "<<inputHourUpper<<endl;
-            //cout<<lowerIndex<<" "<<upperIndex<<endl;
             
             fetched = queryDates(list,lowerIndex,upperIndex);
             
             cout<<fetched<<endl;
 
             if(save == "yes"){
-            ofstream out(str+".txt");
-            out << fetched;
-            out.close();
+                ofstream out(str+".txt");
+                out << fetched;
+                out.close();
             }
         }
         else{
@@ -448,7 +487,6 @@ void fetchQuery(vector<RegistryEntry> &list){
         cout<<"QUERY COULDNT BE PERFORMED"<<endl<<endl;
     }
 }
-
 
 
 void menu(vector <RegistryEntry> list){
@@ -464,24 +502,17 @@ void menu(vector <RegistryEntry> list){
     cout<<"8  Yb `Y88P `Y88 8 Y88P  Y8P 8      dP   "<<endl;
     cout<<"            wwdP                   dP    "<<endl<<endl<<endl;
 
-    cout<<"Loading database ";
+    line();
+
+    cout<<endl<<"Loading database ";
     
-    /*
-    sleep(1);
-    std::cout << "." << std::flush;
-    sleep(1);
-    std::cout << "." << std::flush;
-    sleep(1);
-    std::cout << "." << std::flush;
-    sleep(1);
-    std::cout << "." << std::flush;
-    sleep(1);
-    std::cout << "." << std::flush;
-    */
+    loading();
 
     cout<<endl;
 
     cout<<endl<<"SUCCESS: "<<list.size()<<" registries have been loaded "<<endl<<endl;
+    cout<<"ENTRIES: ("<<list[0].month<<" - "<<list[list.size()-1].month<<")"<<endl<<endl;
+    line();
 
     bool continues = true;
     int selection;
@@ -492,24 +523,39 @@ void menu(vector <RegistryEntry> list){
     while(continues){
         optionMenu();
         cout<<"Selection >";
-        cin>>selection;
+        while(!(cin>>selection)){
+            cout<<endl<<"ERROR: INVALID INPUT"<<endl<<endl;
+            cout<<"Selection >";
+            cin.clear();
+            cin.ignore(123,'\n');
+        }
         cout<<endl;
         switch (selection){
             case 1:
                 printEntries(list);
+                cout<<endl;
+                line();
                 break;
             case 2:
                 fetchQuery(list);
+                cout<<endl;
+                line();
                 break;
             case 3:
                 continues=false;
                 break;
             default:
+                cout<<endl;
+                line();
                 cout<<endl<<"OPCION NO VALIDA"<<endl<<endl;
+                line();
                 break;
         }
     }
-    cout<<endl<<"FAILED LOGIN REGISTRY | TERMINATED SUCCESSFULLY"<<endl;
+    cout<<endl;
+    line();
+    cout<<endl<<"FAILED LOGIN REGISTRY | TERMINATED SUCCESSFULLY"<<endl<<endl;
+    line();
 }
 
 //-------------------------------------main program---------------------------------
@@ -564,3 +610,4 @@ int main(){
 
     return 0;
 }
+
