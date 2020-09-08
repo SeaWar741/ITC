@@ -53,6 +53,23 @@ struct RegistryEntry{
         }
     }
 
+    bool hourIsMinor(RegistryEntry const & entry) const{
+        if(hour<=entry.hour){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    bool hourIsMajor(RegistryEntry const & entry) const{
+        if(hour>=entry.hour){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 };
 
@@ -352,17 +369,19 @@ void fetchQuery(vector<RegistryEntry> &list){
     std::string str(buffer);
 
     string lowerMonth,upperM,save,fetched;
-    int lowerDay,upperDay;
+    int lowerDay,upperDay,inputHourLower,inputHourUpper;
     bool continues = false;
 
     while(!continues){
         cout<<"Ingresa las primeras 3 letras del mes inicial >";cin>>lowerMonth;
         lowerMonth = monthFormater(lowerMonth);
         cout<<"Ingresa el dia del mes inicial >";cin>>lowerDay;
+        cout<<"Ingresa la hora >";cin>>inputHourLower;
 
         cout<<endl<<"Ingresa las primeras 3 letras del mes final >";cin>>upperM;
         upperM = monthFormater(upperM);
         cout<<"Ingresa el dia del mes final >";cin>>upperDay;
+        cout<<"Ingresa la hora >";cin>>inputHourUpper;
 
         if(months.find(lowerMonth) == months.end() && months.find(upperM) == months.end()) {
             cout<<endl<<"INVALID INPUT"<<endl<<endl;
@@ -388,9 +407,9 @@ void fetchQuery(vector<RegistryEntry> &list){
 
     cout<<endl<<"-----------=Query Result=-----------"<<endl<<endl;
 
-    RegistryEntry lower{lowerMonth,lowerDay,0,0,0," "," "};
+    RegistryEntry lower{lowerMonth,lowerDay,inputHourLower,0,0," "," "};
 
-    RegistryEntry upper{upperM,upperDay,0,0,0," "," "};
+    RegistryEntry upper{upperM,upperDay,inputHourUpper,0,0," "," "};
     
     try{
         if(months[lower.month]>=months[list[0].month] && months[upper.month]<=months[list[list.size()-1].month]){
