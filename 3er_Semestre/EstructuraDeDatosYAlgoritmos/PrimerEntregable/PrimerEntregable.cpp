@@ -33,7 +33,7 @@ struct RegistryEntry{
     string error;
     
     bool dateIsEqual(RegistryEntry const & entry) const {
-        if(months[month] == months[entry.month] && day==entry.day){
+        if( (months[month] == months[entry.month] && day==entry.day) && hour == entry.hour){
             return true;
         }
         else{
@@ -46,6 +46,9 @@ struct RegistryEntry{
             return true;
         }
         if(months[month] == months[entry.month] && day < entry.day){
+            return true;
+        }
+        if(months[month] == months[entry.month] && day == entry.day && hour < entry.hour){
             return true;
         }
         else{
@@ -71,6 +74,14 @@ struct RegistryEntry{
         }
     }
 
+    bool hourIsEqual(RegistryEntry const & entry) const{
+        if(hour == entry.hour){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 };
 
 //-----------------------------Struct helper functions---------------------------------
@@ -253,7 +264,7 @@ int lowerIndexQuery(vector<RegistryEntry> &list,RegistryEntry &value){
         mid = (low+high)/2;
         //if(list[mid] ==value){
         if(list[mid].dateIsEqual(value)){
-            result =mid;
+            result = mid;
             high = mid-1;
         }
         else if(list[mid].dateIsMinor(value)){
@@ -410,13 +421,15 @@ void fetchQuery(vector<RegistryEntry> &list){
     RegistryEntry lower{lowerMonth,lowerDay,inputHourLower,0,0," "," "};
 
     RegistryEntry upper{upperM,upperDay,inputHourUpper,0,0," "," "};
-    
+
     try{
         if(months[lower.month]>=months[list[0].month] && months[upper.month]<=months[list[list.size()-1].month]){
             int lowerIndex = lowerIndexQuery(list,lower);
 
             int upperIndex = upperIndexQuery(list,upper);
-        
+
+            //cout<<inputHourLower<<" "<<inputHourUpper<<endl;
+            //cout<<lowerIndex<<" "<<upperIndex<<endl;
             
             fetched = queryDates(list,lowerIndex,upperIndex);
             
