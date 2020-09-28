@@ -55,9 +55,9 @@ void LinkedList<T>::addFirst(T datain){
 //O(n)
 template<class T>
 void LinkedList<T>::addLast(T datain){
-    if(isEmpty()){
+    if(isEmpty()){//si esta vacio crea un head node a partir del data in
         head = new Node<T>(datain);
-    } else{
+    } else{//si no itera hasta encontrar el ultimo elemento e insertarlo mientras que next no sea null
         Node<T> *aux = head;
         while(aux->next != NULL){
             aux = aux->next;
@@ -72,17 +72,17 @@ void LinkedList<T>::addLast(T datain){
 //O(n)
 template<class T>
 bool LinkedList<T>::deleteData(T data){
-    if(!isEmpty()){
+    if(!isEmpty()){//mientras que no este vacio
         Node<T> *aux = head;
-        if(aux->data == data){
-            head = aux->next;
+        if(aux->data == data){//va buscando hasta encontrar el mismo data
+            head = aux->next;//cambia el next y reduce de size
             size--;
             cout << "DELETED"<<endl;
             return true;
         }
         Node<T> *auxF = head;
         int count = 0;
-        while(count < size){
+        while(count < size){ //itera hasta encontrarlo y hace que el aux sea el next para mover los elementos hasta encontrar el data
             if(aux->data == data){
                 auxF->next = aux->next;
                 delete aux;
@@ -107,7 +107,7 @@ bool LinkedList<T>::deleteAt(int index){
     if(!isEmpty() && index <= size && index > 0){
         int count = 1;
         Node<T> *aux = head;
-        if(index == count){
+        if(index == count){//se encarga de buscar en el rango hasta encontrar el indice adecuado y hacer delete
             head = aux->next;
             size--;
             cout <<endl<<"DELETED"<<endl;
@@ -138,7 +138,7 @@ bool LinkedList<T>::deleteAt(int index){
 //O(n)
 template<class T>
 T LinkedList<T>::getData(int index){
-    if(!isEmpty() && index > 0 && index <= size){
+    if(!isEmpty() && index > 0 && index <= size){//itera hasta encontrar el nodo adecuado
         int counter = 1;
         Node<T> *aux = head;
         while(counter <= size){
@@ -158,7 +158,7 @@ T LinkedList<T>::getData(int index){
 //O(n)
 template<class T>
 bool LinkedList<T>::updateAt(int index, T datain){
-    if(!isEmpty() && index > 0 && index <= size){
+    if(!isEmpty() && index > 0 && index <= size){//busca en el nodo y reemplaza el data por data in
         int count = 1;
         Node<T> *aux = head;
         while(count <= size){
@@ -180,7 +180,7 @@ bool LinkedList<T>::updateAt(int index, T datain){
 //updates data from given data
 //O(n)
 template<class T>
-bool LinkedList<T>::updateData(T data, T datain){
+bool LinkedList<T>::updateData(T data, T datain){//se mueve hasta encontrar el nodo con el data igual al input y reemplaza
     if(!isEmpty()){
         Node<T> *aux = head;
         int count = 1;
@@ -202,7 +202,7 @@ bool LinkedList<T>::updateData(T data, T datain){
 //Find index by input data
 //O(n)
 template<class T>
-int LinkedList<T>::findData(T data){
+int LinkedList<T>::findData(T data){//busca de manera iterativa el data comparando data de nodos
     if(!isEmpty()){
         Node<T> *aux = head;
         int count = 1;
@@ -226,7 +226,7 @@ template<class T>
 void LinkedList<T>::print(){
     Node<T> *aux = head;
     if(size > 0){
-        for(int i = 0; i < size; i++){
+        for(int i = 0; i < size; i++){//imprime de manera iterativa
             cout << aux->data << " ";
             aux = aux->next;
         }

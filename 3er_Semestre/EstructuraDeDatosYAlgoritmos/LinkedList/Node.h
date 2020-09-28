@@ -1,7 +1,7 @@
 //Juan Carlos Garfias Tovar, A01652138
 template<class T>
 struct Node{
-    T data;
+    T data;//contiene un data y un apuntador como indice al siguiente nodo, conectandolos entre si
     Node<T> *next;
     Node(T data);
     Node(T data,Node<T> *next);
