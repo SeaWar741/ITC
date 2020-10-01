@@ -30,7 +30,13 @@ void menu(){
     cout<<"6) updateData"<<endl;
     cout<<"7) getData"<<endl;
     cout<<"8) findData"<<endl;
-    cout<<"9) EXIT"<<endl;
+    cout<<"9) insertAt"<<endl;
+    cout<<"10) clear"<<endl;
+    cout<<"11) sort"<<endl;
+    cout<<"12) duplicate"<<endl;
+    cout<<"13) removeDuplicates"<<endl;
+    cout<<"14) reverse"<<endl;
+    cout<<"15) EXIT"<<endl;
     cout<<"------------------------"<<endl;
 }
 
@@ -74,7 +80,7 @@ int main(){
             }
             break;
         case 4:
-            cout<<endl<<"Ingresar indice (1 en adelante)>";cin>>index;cout<<endl;
+            cout<<endl<<"Ingresar indice (1 en adelante) >";cin>>index;cout<<endl;
             if(inLimits(index,1,lista.getSize())){//si esta en el limite realizar operacion
                 try{
                     lista.deleteAt(index);
@@ -87,9 +93,9 @@ int main(){
             }
             break;
         case 5:
-            cout<<endl<<"Ingresar indice (1 en adelante)>";cin>>index;cout<<endl;
+            cout<<endl<<"Ingresar indice (1 en adelante) >";cin>>index;cout<<endl;
             if(inLimits(index,1,lista.getSize())){//si esta en el limite realizar operacion
-                cout<<endl<<"Ingresar valor a actualizar>";cin>>val;cout<<endl;
+                cout<<endl<<"Ingresar valor a actualizar >";cin>>val;cout<<endl;
                 try{
                     lista.updateAt(index, val);
                 } catch(runtime_error& e){
@@ -110,7 +116,7 @@ int main(){
                 }
             break;
         case 7:
-            cout<<endl<<"Ingresar indice (1 en adelante)>";cin>>index;cout<<endl;
+            cout<<endl<<"Ingresar indice (1 en adelante) >";cin>>index;cout<<endl;
             if(inLimits(index,1,lista.getSize())){//si esta en el limite realizar operacion
                 try{
                     cout << "Valor en el indice: " <<  lista.getData(index)<<endl;
@@ -120,7 +126,7 @@ int main(){
             }
             break;
         case 8:
-            cout<<endl<<"Ingresar valor a encontrar>";cin>>val;cout<<endl;
+            cout<<endl<<"Ingresar valor a encontrar >";cin>>val;cout<<endl;
             try{
                 cout << "Indice del valor: " << lista.findData(val);
             } catch(runtime_error& e){
@@ -128,6 +134,52 @@ int main(){
             }
             break;
         case 9:
+            cout<<endl<<"Ingresar indice (1 en adelante) >";cin>>index;cout<<endl;
+            cout<<endl<<"Ingresar valor deseado >";cin>>val;cout<<endl;
+            if(inLimits(index,1,lista.getSize())){//si esta en el limite realizar operacion
+                try{
+                    lista.insertAt(index,val);
+                } catch(runtime_error& e){
+                    cout << e.what();
+                }
+            }
+            break;
+        case 10:
+            lista.clear();
+            break;
+        case 11: //arreglar
+            try{
+               lista.sort();
+               cout<<endl<<"Lista ordenada!"<<endl;
+            } catch(runtime_error& e){
+                cout << e.what();
+            }
+            break;
+        case 12:
+            try{
+               lista.duplicate();
+               cout<<endl<<"Lista duplicada!"<<endl;
+            } catch(runtime_error& e){
+                cout << e.what();
+            }
+            break;
+        case 13:
+            try{
+               lista.removeDuplicates();
+               cout<<endl<<"Duplicados removidos!"<<endl;
+            } catch(runtime_error& e){
+                cout << e.what();
+            }
+            break;
+        case 14:
+            try{
+               lista.reverse();
+               cout<<endl<<"Lista invertida!"<<endl;
+            } catch(runtime_error& e){
+                cout << e.what();
+            }
+            break;
+        case 15:
             continues = false;
             break;
         default:
