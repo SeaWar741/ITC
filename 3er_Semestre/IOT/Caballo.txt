@@ -1,0 +1,37 @@
+CABALLO(registro,nombre,precio,genero,tipo,IDPersona,IDGranero)
+    PK(registro)
+    FK(IDPersona) references PERSONA(IDPersona)
+    FK(IDGranero) references GRANERO(IDGranero)
+
+ESMADRE(registro)
+    FK(registro) references CABALLO(registro)
+
+ESPADRE(registro)
+    FK(registro) references CABALLO(registro)
+
+PERSONA(IDPersona,primerNombre,apellidoPaterno,apellidoMaterno,telefono,direccion)
+    PK(IDPersona)
+
+IDGranero(IDGranero,nombre,IDPista)
+    PK(IDGranero)
+    FK(IDPista) references PISTA(IDPista)
+
+CALENDARIOCARRERA(IDCalendario,fecha,IDPista)
+    PK(IDCalendario)
+    FK(IDPista) references PISTA(IDPista)
+
+CARRERA(IDCarrera,folio,premio,IDCalendario)
+    PK(IDCarrera)
+    FK(IDCalendario) references CALENDARIOCARRERA(IDCalendario)
+
+ENTRADA(IDEntrada,puerta,posicionInicial,posicionFinal,registro,IDCarrera,IDPersona)
+    PK(IDEntrada)
+    FK(registro) references CABALLO(registro)
+    FK(IDCarrera) references CARRERA(IDCarrera)
+    FK(IDPersona) references PERSONA(IDPersona)
+
+TIENEOWNER(registro,IDPersona,porcentaje)
+    FK(registro) references CABALLO(registro)
+    FK(IDPersona) references PERSONA(IDPersona)
+
+

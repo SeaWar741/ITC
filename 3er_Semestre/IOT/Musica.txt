@@ -1,0 +1,40 @@
+COMPANY(companyID,nombre,ubicacion)
+    PK(companyID)
+
+CD (cdID, titulo, fecha, cantidadVenta, groupID, company)
+	PK(cdID)
+	FK(groupID) references MUSICGROUP(groupID)
+	FK(company) references COMPANY(companyID)
+
+MUSICGROUP(groupID,nombre)
+    PK(groupID)
+
+ARTISTA(artistaID,bDay,nombre,apellido)
+    PK(artistaID)
+
+FORMAPARTE(artistaID,groupID,entro,salio)
+    FK(artistaID) references ARTISTA(artistaID)
+    FK(groupID) references MUSICGROUP(groupID)
+
+CANCION(cancionID,titulo)
+    PK(cancionID)
+
+ESCRIBIR(cancionID,artistaID)
+    FK(cancionID) references CANCION(cancionID)
+    FK(artistaID) references ARTISTA(artistaID)
+
+TIENE(cdID,cancionID)
+    FK(cdID) references CD(cdID)
+    FK(cancionID) references CANCION(cancionID)
+
+ESTOPCANCION(cancionID,yearID,pos)
+    FK(cancionID) references CD(cdID)
+    FK(yearID) references YEAR(yearID)
+
+YEAR(yearID)
+    PK(yearID)
+
+ESTOPCD(yearID,cdID,pos)
+    FK(yearID) references YEAR(yearID)
+    FK(cdID) references CD(cdID)
+

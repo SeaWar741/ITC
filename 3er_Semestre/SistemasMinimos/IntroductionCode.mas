@@ -1,0 +1,13 @@
+﻿org 100
+load a
+add b
+store c
+add a
+store d
+
+Halt
+
+a, hex 23
+b, hex 2
+c, hex 0
+d, hex 0
