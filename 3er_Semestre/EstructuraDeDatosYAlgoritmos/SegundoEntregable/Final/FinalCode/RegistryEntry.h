@@ -97,9 +97,36 @@ struct RegistryEntry{
         }
     }
 
+    //sobrecarga de operador igual, permite declarar a partir de los nodos
+    void operator=(RegistryEntry &first){
+        month = first.month;
+        day = first.day;
+        hour = first.hour;
+        minute = first.minute;
+        second = first.second;
+        ip = first.ip;
+        error = first.error;
+        //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
+    }
+
+
 };
 
 //-----------------------------Struct helper functions---------------------------------
+
+RegistryEntry copy(RegistryEntry first){
+        RegistryEntry entry;
+        entry.month = first.month;
+        entry.day = first.day;
+        entry.hour = first.hour;
+        entry.minute = first.minute;
+        entry.second = first.second;
+        entry.ip = first.ip;
+        entry.error = first.error;
+        //cout<<entry.month<<" "<<entry.day<<" "<<entry.hour<<":"<<entry.minute<<":"<<entry.second<<" "<<entry.ip<<" "<<entry.error<<endl;
+        return entry;
+}
+
 
 //Funcion para llenar valores del map de meses
 void populateMonths(){

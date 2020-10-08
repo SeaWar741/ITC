@@ -4,7 +4,7 @@
 
 using namespace std;
 
-template <class T>
+
 class DLinkedList{
     private:
         struct Node* head; // global variable - pointer to head node.
@@ -12,25 +12,22 @@ class DLinkedList{
         DLinkedList();
 
         //Funciones para insertar
-        void insertAtHead(T x);
-        void insertAtTail(T x);
+        void insertAtHead(RegistryEntry x);
+        void insertAtTail(RegistryEntry x);
 
         //Funciones para sort
 
         //Funciones extra
         void print();
         void reversePrint();
-
 };
 
-template <class T>
-DLinkedList<T>::DLinkedList(){
+
+DLinkedList::DLinkedList(){
     this-> head = NULL;
 }
 
-
-template <class T>
-void DLinkedList<T>::insertAtHead(T x) {
+void DLinkedList::insertAtHead(RegistryEntry x) {
 	struct Node* newNode = GetNewNode(x);
 	if(head == NULL) {
 		head = newNode;
@@ -41,8 +38,7 @@ void DLinkedList<T>::insertAtHead(T x) {
 	head = newNode;
 }
 
-template <class T>
-void DLinkedList<T>::insertAtTail(T x) {
+void DLinkedList::insertAtTail(RegistryEntry x) {
 	struct Node* temp = head;
 	struct Node* newNode = GetNewNode(x);
 	if(head == NULL) {
@@ -54,9 +50,7 @@ void DLinkedList<T>::insertAtTail(T x) {
 	newNode->prev = temp;
 }
 
-
-template <class T>
-void DLinkedList<T>::print() {
+void DLinkedList::print() {
 	struct Node* temp = head;
 	while(temp != NULL) {
         printEntry(temp->data);
@@ -65,8 +59,8 @@ void DLinkedList<T>::print() {
 	printf("\n");
 }
 
-template <class T>
-void DLinkedList<T>::reversePrint() {
+
+void DLinkedList::reversePrint() {
 	struct Node* temp = head;
 
 	if(temp == NULL) return;

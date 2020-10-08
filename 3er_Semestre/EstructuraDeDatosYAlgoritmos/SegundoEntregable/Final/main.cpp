@@ -14,7 +14,7 @@
 using namespace std;
 
 int main() {
-	DLinkedList<RegistryEntry> entries;
+	DLinkedList entries;
 	populateMonths();//se llenan los meses
     populateMonthsReversed();
 
@@ -47,8 +47,8 @@ int main() {
             }
             
             entry.error = errorString;
-            
-			entries.insertAtTail(entry);//se inserta en vector
+			
+			//entries.insertAtTail(entry);//se inserta en vector
 
 			//printEntry(entry);
 
