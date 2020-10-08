@@ -1,0 +1,27 @@
+﻿org 000
+
+atras,input
+  storei a
+  load a
+  subt b
+  Skipcond  400//si son iguales se brinca
+
+  jump sig2
+  jump fin//iguales
+
+sig2,load a
+  add uno
+  store a
+  jump atras
+
+fin, halt
+
+
+
+
+a, hex 20//guardar de pos 20
+b, hex 30//terminar de guardar en 27
+c, hex 0
+d, hex 0
+uno, hex 1
+aa, hex 61//letra a

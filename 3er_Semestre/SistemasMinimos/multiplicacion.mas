@@ -1,0 +1,32 @@
+﻿org 000
+
+input
+store a
+input
+store b
+
+atras,load a
+
+  add c
+  store c
+
+  load b
+  subt uno
+  store b
+
+  Skipcond 400
+  jump atras
+  jump fin
+
+fin,halt
+
+
+direc, hex 50
+veces, dec 7
+dato, hex 10
+a, hex 0
+b, hex 0
+c, hex 0
+d, hex 0
+uno, hex 1
+aa, hex 61//letra a

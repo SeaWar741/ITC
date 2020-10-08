@@ -1,0 +1,38 @@
+﻿org 000
+
+sig1,load dato//almaceno el dato en cuestion de direccion
+
+storei direc
+
+load direc//actualizo la direccion donde estan los datos
+add uno//incremento y symo
+Store  direc
+
+load veces //cargar 
+subt uno//resta uno
+store veces//lo guarda
+
+skipcond 400 /si el acumulador es cero, se brinca una instruccion
+
+jump sig1
+jump fin
+
+fin,halt
+
+
+/store a
+/store b
+/store c
+/store d
+/halt
+
+direc,hex 50
+veces, dec 7
+
+
+dato,hex ff
+a, hex 0
+b, hex 0
+c, hex 0
+d, hex 0
+uno, hex 1
