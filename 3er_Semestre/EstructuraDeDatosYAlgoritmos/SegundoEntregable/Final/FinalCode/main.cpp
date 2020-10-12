@@ -298,6 +298,7 @@ struct Node* binarySearch(Node *head, RegistryEntry &value){
 string search(DoublyLinkedList lista, RegistryEntry &value1, RegistryEntry &value2){
   Node* upper = binarySearch(lista.head,value1);
   Node* lower = binarySearch(lista.head,value2);
+
   //imprimir lista
   Node * temp = upper;
 
@@ -396,9 +397,10 @@ void fetchQuery(DoublyLinkedList &list){
     RegistryEntry upper{upperM,upperDay,inputHourUpper,0,0," "," "};//crea una entrada upper con parameters input 
 
     try{
-        if(months[lower.month]>=months["Jun"] && months[upper.month]<=months["Dec"]){
+        //if(months[lower.month]>=months["Jun"] && months[upper.month]<=months["Dec"]){
             //verifica viabilidad de query a partir del rango
             
+            //cout<<"Hola?"<<endl;
             fetched = search(list,upper,lower); //realiza query de entries
             
             cout<<fetched<<endl; //imprime query
@@ -408,10 +410,10 @@ void fetchQuery(DoublyLinkedList &list){
                 out << fetched;
                 out.close();
             }
-        }
-        else{
+        //}
+        //else{
             //cout<<"QUERY COULDNT BE PERFORMED TIME FRAME NOT AVAILABLE"<<endl<<endl;
-        }
+        //}
     }catch(const exception& e){
         cout<<"QUERY COULDNT BE PERFORMED"<<endl<<endl;
     }

@@ -1,19 +1,24 @@
+
+//struct node
+//contiene un next y un data
 template<class T>
 struct Node{
-    T data;//contiene un data y un apuntador como indice al siguiente nodo, conectandolos entre si
+    T data;
     Node<T> *next;
     Node(T data);
     Node(T data,Node<T> *next);
 };
 
-//constructor for only data
+//constructor con data
+//le asigna el dato y le pone null como apuntador a next
 template <class T>
 Node<T>::Node(T data){
     this->data = data;
     next = NULL;
 }
 
-//constructor data and next 
+//constructor con apuntador y data
+//asigna data y next como apuntador
 template <class T>
 Node<T>::Node(T data, Node<T> *next){
     this->data = data;
