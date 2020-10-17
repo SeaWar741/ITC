@@ -2,20 +2,20 @@
 
 sig1,load dato//almaceno el dato en cuestion de direccion
 
-storei direc
+    storei direc
 
-load direc//actualizo la direccion donde estan los datos
-add uno//incremento y symo
-Store  direc
+    load direc//actualizo la direccion donde estan los datos
+    add uno//incremento y symo
+    Store  direc
 
-load veces //cargar 
-subt uno//resta uno
-store veces//lo guarda
+    load veces //cargar 
+    subt uno//resta uno
+    store veces//lo guarda
 
-skipcond 400 /si el acumulador es cero, se brinca una instruccion
+    skipcond 400 /si el acumulador es cero, se brinca una instruccion
 
-jump sig1
-jump fin
+    jump sig1
+    jump fin
 
 fin,halt
 

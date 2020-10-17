@@ -1,0 +1,27 @@
+//Juan Carlos Garfias Tovar, A01652138
+inicio, Input
+	store dato
+   	storei indice
+    load indice
+    add uno
+    store indice
+    load dato
+    Skipcond 400
+    load dato
+    Output
+    load length
+	Add uno
+    Store length
+    load dato
+    Skipcond 400
+    jump inicio
+    jump sigue
+    
+sigue,load length
+	Output
+	halt
+
+dato, hex 0
+uno, hex 1
+length, hex 0
+indice, hex 100

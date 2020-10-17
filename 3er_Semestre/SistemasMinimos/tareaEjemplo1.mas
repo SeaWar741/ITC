@@ -1,0 +1,30 @@
+//Juan Carlos Garfias Tovar, A01652138
+load Addr
+Store Next
+Load Num
+Subt one
+Store Ctr
+Loop, Load Sum
+	AddI Next
+    Store Sum
+    Load Next
+    Add one
+    Store Next
+    Load Ctr
+    Subt one
+    Store Ctr
+    Skipcond 000
+    Jump Loop
+    Halt
+    
+Addr, Hex 117
+Next, Hex 0
+Num, Dec 5
+Sum, Dec 0
+Ctr, Hex 0
+one, Dec 1
+Dec 10
+Dec 15
+Dec 20
+Dec 25
+Dec 30

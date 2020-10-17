@@ -1,0 +1,42 @@
+//Juan Carlos Garfias Tovar, A01652138
+//•	Realiza un programa que tome una serie de cinco localidades de memoria,
+//y a cada una sume un valor, la primera 1, la segunda 2, etc.
+
+initialStep, Input
+	Store value
+    LoadI position
+    Add value
+	StoreI position
+    Load counter
+    Subt one
+    Store counter
+    Skipcond 400
+    Jump initialStep
+
+Load counter2
+Add one
+Store counter2
+
+moveToDirection, Load counter2
+	Store counter
+    LoadI position
+    Output
+    Load position
+    Add one
+    Store position
+    Load counter3
+    Subt one
+    Store counter3
+    Skipcond 400
+    Jump initialStep
+    halt
+
+
+/Vars
+one, hex 1
+value, hex 0
+position, hex 100//initial value
+counter, hex 1 / cantidad de values
+counter2, hex 1 /
+counter3, hex 5
+

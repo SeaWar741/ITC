@@ -1,0 +1,199 @@
+//Juan Carlos Garfias Tovar, A01652138
+// Y=X-2*A-3*B-4*C
+getNumbers, input
+	Store x
+    input
+    store a
+    input
+    store b
+    input
+    store c
+    jump restaUno
+
+sigue,halt
+
+//paso 1
+restaUno,load x
+	Subt dos
+    store y    
+	jump loop
+
+//paso 2--------------------------------------
+/ check if Y is negative, if -ve negate Y and set negative flag
+Load a
+Skipcond 000
+Jump nonneg
+
+Subt a
+Subt a
+Store a
+Clear
+Add one
+Store negflag
+Clear
+Jump loop
+
+nonneg,  Clear
+         Store negflag
+         / check if Y is zero, if it is, then we jump to halt
+         Load a
+         Skipcond 400
+         Jump loop / false
+         Jump resultMultiplicaA / true
+
+/ Loop for performing iterative addition
+loop,    Load result
+         Add y
+         Store result
+
+         Load a
+         Subt one
+         Store a
+	
+         Skipcond 400 / have we completed the multiplication?
+         Jump loop / no; repeat loop
+         / yes, so exit the loop
+
+/ check for negative flag, if it is set, negate the result
+Load negflag
+Skipcond 800
+Jump resultMultiplicaA
+
+/ negate result
+Load result
+Subt result
+Subt result
+Store result
+/ run the next three instructions, which halts the program
+
+/ Output result to user then halt program
+resultMultiplicaA,    Load result
+         Subt tres
+         store result
+         jump loop2
+
+//---------------------------------------------
+//paso 3--------------------------------------
+//---------------------------------------------
+Load b
+Skipcond 000
+Jump nonneg2
+
+Subt b
+Subt b
+Store b
+Clear
+Add one
+Store negflag2
+Clear
+Jump loop2
+
+nonneg2, Clear
+         Store negflag2
+         / check if Y is zero, if it is, then we jump to halt
+         Load b
+         Skipcond 400
+         Jump loop2 / false
+         Jump resultMultiplicaB / true
+
+/ Loop for performing iterative addition
+loop2,   Load result2
+         Add result
+         Store result2
+
+         Load b
+         Subt one
+         Store b
+	
+         Skipcond 400 / have we completed the multiplication?
+         Jump loop2 / no; repeat loop
+         / yes, so exit the loop
+
+/ check for negative flag, if it is set, negate the result
+Load negflag2
+Skipcond 800
+Jump resultMultiplicaB
+
+/ negate result
+Load result2
+Subt result2
+Subt result2
+Store result2
+/ run the next three instructions, which halts the program
+
+/ Output result to user then halt program
+resultMultiplicaB,    Load result2
+         Subt cuatro
+         store result2
+         Jump loop3
+//---------------------------------------------
+//paso 4--------------------------------------
+//---------------------------------------------
+Load c
+Skipcond 000
+Jump nonneg3
+
+Subt c
+Subt c
+Store c
+Clear
+Add one
+Store negflag3
+Clear
+Jump loop3
+
+nonneg3, Clear
+         Store negflag3
+         / check if Y is zero, if it is, then we jump to halt
+         Load c
+         Skipcond 400
+         Jump loop3 / false
+         Jump resultMultiplicaC / true
+
+/ Loop for performing iterative addition
+loop3,   Load result3
+         Add result2
+         Store result3
+
+         Load c
+         Subt one
+         Store c
+	
+         Skipcond 400 / have we completed the multiplication?
+         Jump loop3 / no; repeat loop
+         / yes, so exit the loop
+
+/ check for negative flag, if it is set, negate the result
+Load negflag3
+Skipcond 800
+Jump resultMultiplicaC
+
+/ negate result
+Load result3
+Subt result3
+Subt result3
+Store result3
+/ run the next three instructions, which halts the program
+
+/ Output result to user then halt program
+resultMultiplicaC,    Load result3
+         Output
+         halt
+
+
+//vars-----------------------------------------
+one,dec 1
+x, dec 0 /valor userasa
+dos, dec 2 /2
+a, dec 0 /valor user
+tres, dec 3
+b, dec 0/valor temp
+cuatro, dec 4
+c, dec 0/ valor user
+y, dec 0/resultado1
+negflag, DEC 0
+negflag2, DEC 0
+negflag3, DEC 0
+result, DEC 0//resultado multiplicacion 1
+result2, DEC 0/resultado2
+result3, DEC 0/resultado2

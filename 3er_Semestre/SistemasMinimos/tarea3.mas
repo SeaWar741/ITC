@@ -1,0 +1,33 @@
+//Juan Carlos Garfias Tovar, A01652138
+//•	Realiza un programa que invierta 4 localidades de memoria.
+
+start, load a
+    store tempA
+    load b
+    store tempB
+    load c
+    store tempC
+    load d
+    store tempD
+    jump invert
+
+invert,load tempA
+    store d
+    load tempB
+    store c
+    load tempC
+    store b
+    load tempD
+    store a
+    halt
+
+
+a, hex 100
+b, hex 101
+c, hex 102
+d, hex 103
+
+tempA, hex 110
+tempB, hex 111
+tempC, hex 112
+tempD, hex 113

@@ -1,0 +1,78 @@
+//Juan Carlos Garfias Tovar, A01652138
+//Y=5*(A-B+C)
+getNumbers, input
+	Store a
+    input
+    store b
+    input
+    store c
+    jump operacionParentesis
+
+operacionParentesis, load a
+    Subt b
+    store result
+    add c
+    store result
+
+/ check if Y is negative, if -ve negate Y and set negative flag
+Load cinco
+Skipcond 000
+Jump nonneg
+
+Subt cinco
+Subt cinco
+Store cinco
+Clear
+Add one
+Store negflag
+Clear
+Jump loop
+
+nonneg,  Clear
+         Store negflag
+         / check if cinco is zero, if it is, then we jump to halt
+         Load cinco
+         Skipcond 400
+         Jump loop / false
+         Jump halt / true
+
+/ Loop for performing iterative addition
+loop,    Load result2
+         Add result
+         Store result2
+
+         Load cinco
+         Subt one
+         Store cinco
+	
+         Skipcond 400 / have we completed the multiplication?
+         Jump loop / no; repeat loop
+         / yes, so exit the loop
+
+/ check for negative flag, if it is set, negate the result2
+Load negflag
+Skipcond 800
+Jump halt
+
+/ negate result2
+Load result2
+Subt result2
+Subt result2
+Store result2
+/ run the next three instructions, which halts the program
+
+/ Output result2 to user then halt program
+halt,    Load result2
+         Output	
+         Halt
+
+
+//vars-----------------------------------------
+cinco, dec 5
+a, dec 0
+b, dec 0
+c, dec 0
+one, DEC 1
+negflag, DEC 0
+result, dec 0
+result2, dec 0

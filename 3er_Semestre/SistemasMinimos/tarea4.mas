@@ -1,0 +1,38 @@
+//Juan Carlos Garfias Tovar, A01652138
+//•	Realiza un programa que tome la primera localidad de memoria de una secuencia de 6 números, 
+//llenando las restantes cinco con en valor de la anterior más uno.
+
+start,Input
+	store dato
+   	storei indice
+    load datos
+    subt uno
+    store datos
+    load indice
+    add uno
+    store indice
+    jump inicio
+
+inicio, load dato
+    add uno
+    store dato
+    load dato
+    storei indice
+    load indice
+    add uno
+    store indice
+    load datos
+    subt uno
+    store datos
+    load datos
+    Skipcond 400
+    jump inicio
+    jump sigue
+    
+sigue,halt
+
+dato, hex 0
+uno, hex 1 
+length, hex 0
+indice, hex 100
+datos, hex 6

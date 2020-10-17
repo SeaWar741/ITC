@@ -1,0 +1,17 @@
+//Juan Carlos Garfias Tovar, A01652138
+If, Load X
+	Subt Y
+    Skipcond 01
+    Jump Else
+Then, Load X
+	Add X
+    Store X
+    Jump Endif
+Else, Load Y
+	Subt X
+    Store Y
+Endif, Output
+	Halt
+
+X, Dec 12
+Y, Dec 20
