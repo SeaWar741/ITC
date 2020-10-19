@@ -1,0 +1,29 @@
+//Juan Carlos Garfias Tovar, A01652138
+
+org 100
+
+sumar, input
+    store inValue //valor temporal dado por el input
+    load value//se carga donde sera el valor final
+    add inValue //se suma el valor del input
+    store value //se guarda el valor mas el input
+    load counter
+    subt uno //se le resta uno al counter
+    store counter
+    load counter
+    skipcond 400 //si es igual a 0 salta a display
+    jump sumar //regresa y hace la operacion de sumar
+    jump display
+    
+    
+
+display, load value
+    output//carga el valor y lo imprime
+    halt
+
+    
+//Variables 
+counter, dec 50 //contador de los 50 valores
+uno, dec 1 
+value, dec 0 //valor final
+inValue, dec 0  //valor temporal por input

@@ -1,0 +1,65 @@
+//Juan Carlos Garfias Tovar, A01652138
+
+saveData, load z //se define donde guardar los input direccion
+	add savedValues
+    store y //suma de z y savedValues
+    load savedValues
+    add one
+    store savedValues //se suma uno a la cantidad de inputs
+    Input
+	storei y
+    load counter //para ver cuantos faltan
+    Subt one
+    Store counter
+    Skipcond 400
+    jump saveData
+
+load counter
+add ten
+store counter
+load savedValues
+Subt one
+store savedValues
+
+sumValues, load z //suma valores iniciales
+	add savedValues
+    store y
+    load sum
+    addi y
+    store sum
+    load savedValues
+    Subt one
+    store savedValues
+    load counter
+    Subt one
+    store counter
+    Skipcond 400 //cuando el counter sea igual a 0 se completa la suma de valores
+    jump sumValues
+
+getAverage, load average //obtener media
+	add one
+    store average
+    load sum
+    Subt ten
+    store sum
+    Skipcond 000 //evalua si es menor a cero
+    jump getAverage
+    
+
+load average //se carga el promedio
+Subt one //se le resta uno
+store average //se guarda y se muestra el valor
+Output
+Halt
+
+y, dec 0
+counter, dec 10
+average, dec 0
+savedValues, dec 0 //numero de valores ingresados 
+one, dec 1
+ten, dec 10
+sum, dec 0
+z, hex 100 //direccion en memoria donde se realizan los indirects
+zero, dec 0
+
+counterTop, dec 50
