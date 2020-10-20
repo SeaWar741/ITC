@@ -26,10 +26,13 @@ public:
 	void inOrder(Node<T> *aux);
 	void postOrder(Node<T>* aux);
 	void levelByLevel();
+	void visit(int selection);
 
 
 	int height(Node<T>* node);
+	int getHeight();
 	void ancestors(T data);
+	int whatLevelAmI(T data);
 
 	int countChildren(Node<T>* aux);
 	void printTree(Node<T> *node, int level);
@@ -275,6 +278,14 @@ int BinarySearchTree<T>::height(Node<T> *node){
 }
 
 template <class T>
+int BinarySearchTree<T>::getHeight(){
+	Node<T>  *aux = root;
+	int h = height(root);
+	return h;
+
+}
+
+template <class T>
 void BinarySearchTree<T>::ancestors(T data){
 	if(!isEmpty()){
 		Node<T>  *aux = root;
@@ -314,4 +325,49 @@ void BinarySearchTree<T>::ancestors(T data){
 	}else{
 		cout<<"EL ARBOL ESTA VACIO"<<endl;
 	}
+}
+
+
+template <class T>
+int BinarySearchTree<T>::whatLevelAmI(T data){
+	if(!isEmpty()){
+		Node<T> *aux = root;
+		int count = 0;
+		while (aux != NULL){
+			if(aux->data == data){
+                return count;
+            }
+            count++;
+            aux->data > data ? aux = aux->left : aux = aux->right;
+		}	
+	}
+	throw runtime_error("Binary tree is empty\n");
+}
+
+template <class T>
+void BinarySearchTree<T>::visit(int selection){
+	if(!isEmpty()){
+		switch (selection){
+			case 1:
+				cout << "Preorder: ";
+            	preOrder(root);
+				break;
+			case 2:
+				cout << "Inorder: ";
+				inOrder(root);
+				break;
+			case 3:
+				cout << "Postorder: ";
+				postOrder(root);
+				break;
+			case 4:
+				cout << "Level by level: ";
+				levelByLevel();
+				break;
+			default:
+				cout <<"Seleccion invalida"<<endl;
+				break;
+		}
+	}
+	
 }

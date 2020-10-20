@@ -1,12 +1,12 @@
 #ifndef Stack_h
 #define Stack_h
 
-#include "Node.h"
+#include "Node2.h"
 
 template<class T>
 class Stack{
 private:
-    Node<T>* top;
+    Node2<T>* top;
     int size;
 public:
     Stack();
@@ -27,7 +27,7 @@ Stack<T>::Stack() {
 
 template<class T>
 void Stack<T>::push(T data) {
-    top = new Node<T>(data,top);
+    top = new Node2<T>(data,top);
     size++;
 }
 
@@ -35,7 +35,7 @@ template<class T>
 T Stack<T>::pop() {
     T data;
     if (!isEmpty()) {
-        Node<T>* aux = top;
+        Node2<T>* aux = top;
         data = aux->data;
         top = aux->next;
         delete aux;
@@ -61,7 +61,7 @@ int Stack<T>::getSize() {
 template<class T>
 void Stack<T>::clear() {
     while (top != NULL) {
-        Node<T>* aux = top;
+        Node2<T>* aux = top;
         top = aux->next;
         delete aux;
     }
@@ -70,7 +70,7 @@ void Stack<T>::clear() {
 
 template<class T>
 void Stack<T>::print() {
-    Node<T>* aux = top;
+    Node2<T>* aux = top;
     while (aux != NULL) {
         cout << aux->data << " ";
         aux = aux->next;

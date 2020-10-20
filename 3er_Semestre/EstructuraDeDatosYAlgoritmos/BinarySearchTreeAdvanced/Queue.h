@@ -1,13 +1,13 @@
 #ifndef Queue_h
 #define Queue_h
 
-#include "Node.h"
+#include "Node2.h"
 
 template<class T>
 class Queue{
 private:
-    Node<T>* head;
-    Node<T>* tail;
+    Node2<T>* head;
+    Node2<T>* tail;
     int size;
 public:
     Queue();
@@ -30,7 +30,7 @@ Queue<T>::Queue() {
 
 template<class T>
 void Queue<T>::enqueue(T data) {
-    Node<T>* aux = new Node<T>(data);
+    Node2<T>* aux = new Node2<T>(data);
     if (isEmpty()) {
         head = aux;
         tail = aux;
@@ -45,7 +45,7 @@ template<class T>
 T Queue<T>::dequeue() {
     T data;
     if (!isEmpty()) {
-        Node<T>* aux = head;
+        Node2<T>* aux = head;
         data = aux->data;
         head = aux->next;
         delete aux;
@@ -82,7 +82,7 @@ int Queue<T>::getSize() {
 template<class T>
 void Queue<T>::clear() {
     while (head != NULL) {
-        Node<T>* aux = head;
+        Node2<T>* aux = head;
         head = aux->next;
         delete aux;
     }
@@ -92,7 +92,7 @@ void Queue<T>::clear() {
 
 template<class T>
 void Queue<T>::print() {
-    Node<T>* aux = head;
+    Node2<T>* aux = head;
     while (aux != NULL) {
         cout << aux->data << " ";
         aux = aux->next;
