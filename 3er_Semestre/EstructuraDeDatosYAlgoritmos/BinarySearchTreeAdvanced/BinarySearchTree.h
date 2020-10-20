@@ -1,6 +1,9 @@
 //Juan Carlos Garfias Tovar, A01652138
 #include <iostream>
 #include "Node.h"
+#include "Queue.h"
+#include "Stack.h"
+
 using namespace std;
 
 //clase Binary search tree
@@ -19,7 +22,14 @@ public:
 	void insert(T data);
 	void deletes(T data);
 
+	void preOrder(Node<T> *aux);
+	void inOrder(Node<T> *aux);
+	void postOrder(Node<T>* aux);
+	void levelByLevel();
 
+
+	int height(Node<T>* node);
+	void ancestors(T data);
 
 	int countChildren(Node<T>* aux);
 	void printTree(Node<T> *node, int level);
@@ -199,5 +209,109 @@ void BinarySearchTree<T>::print(){
 	}
 	else{
 		cout<<endl<<"Tree is empty"<<endl<<endl;
+	}
+}
+
+//Avanzado-----------------------------------------
+
+template<class T>
+void BinarySearchTree<T>::preOrder(Node<T> *aux){
+	if(aux!=NULL){
+		cout<<aux->data<<" ";
+		preOrder(aux->left);
+		preOrder(aux->right);
+	}
+}
+
+template <class T>
+void BinarySearchTree<T>::inOrder(Node<T>* aux){
+	if(aux!=NULL){
+		inOrder(aux->left);
+		cout<<aux->data<<" ";
+		inOrder(aux->right);
+	}
+}
+
+template <class T>
+void BinarySearchTree<T>::postOrder(Node<T>* aux){
+	if(aux!=NULL){
+		postOrder(aux->left);
+		postOrder(aux->right);
+		cout<<aux->data<<" ";
+	}
+}
+
+template <class T>
+void BinarySearchTree<T>::levelByLevel(){
+	if(!isEmpty()){
+		Queue<Node<T>*> queue;
+		queue.enqueue(root);
+		while (!queue.isEmpty()){
+			Node<T> *aux = queue.dequeue();
+			cout<<aux->data<<" ";
+			if(aux->left !=NULL){
+				queue.enqueue(aux->left);
+			}
+			if(aux->right !=NULL){
+				queue.enqueue(aux->right);
+			}
+		}
+		
+	}
+}
+
+template <class T>
+int BinarySearchTree<T>::height(Node<T> *node){
+	int h = 0;
+	int l,r;
+	if(node != NULL){
+		h++;
+		l = height(node->left);
+		r = height(node->right);
+		(l>r)? h+=l:h+=r;
+	}
+	return h;
+
+}
+
+template <class T>
+void BinarySearchTree<T>::ancestors(T data){
+	if(!isEmpty()){
+		Node<T>  *aux = root;
+		Stack<T> stack;
+		if(aux->data !=data){
+			bool notFound = false;
+			while (aux->data != data && !notFound){
+				stack.push(aux->data);
+				if(data<-aux->data){
+					if(aux->left == NULL){
+						notFound = true;
+					}else{
+						aux = aux->left;
+					}
+				}else{
+					if(aux->right == NULL){
+						notFound = true;
+					}else{
+						aux = aux->right;
+					}
+				}
+			}
+			if(!notFound){
+				while (!stack.isEmpty()){
+					try{
+						T data = stack.pop();
+						cout<<data<<" ";
+					}catch(runtime_error& e){
+						cout<<e.what()<<endl;
+					}
+				}
+				
+			}else{
+				cout<<"No tiene ancestros"<<endl;
+			}
+		}
+	}else{
+		cout<<"EL ARBOL ESTA VACIO"<<endl;
 	}
 }
