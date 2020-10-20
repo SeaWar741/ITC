@@ -61,6 +61,7 @@ int BinarySearchTree<T>::countChildren(Node<T>* aux){
 //find
 //Funcion para verificar si el dato se encuentra en el binary tree
 //itera en el arbol y regresa un valor booleano
+//O(N)
 template<class T>
 bool BinarySearchTree<T>::find(T data){
 	Node<T> *aux = root;
@@ -80,6 +81,7 @@ bool BinarySearchTree<T>::find(T data){
 //funcion para insertar en el arbol el valor dado
 //hace add al valor al checar en que rama debe de ir y de que nodo
 //debe de ser hijo
+//O(N)
 template<class T>
 void BinarySearchTree<T>::insert(T data){
     if(!isEmpty()){
@@ -112,6 +114,7 @@ void BinarySearchTree<T>::insert(T data){
 //checa que este presente y que no este vacia
 // una vez realizado esto mueve los nodos dependiendo del valor
 //convirtiendo algun nodo en padre de otros
+//O(N2)
 template<class T>
 void BinarySearchTree<T>::deletes(T data){
 	if(isEmpty() ){
@@ -187,6 +190,7 @@ void BinarySearchTree<T>::deletes(T data){
 //printTree
 //Funcion para imprimir el arbol
 //lo hace de manera horizontal, toma el nodo y el nivel
+//O(N)
 template<class T>
 void BinarySearchTree<T>::printTree(Node<T> *node, int level){
     if(node != NULL){
@@ -202,6 +206,7 @@ void BinarySearchTree<T>::printTree(Node<T> *node, int level){
 //print
 //Funcion para imprimir el arbol de manera completa
 //lo hace de manera horizontal
+//O(N)s
 template<class T>
 void BinarySearchTree<T>::print(){
 	if(!isEmpty()){
@@ -217,6 +222,14 @@ void BinarySearchTree<T>::print(){
 
 //Avanzado-----------------------------------------
 
+//preorder
+//despliega los datos del nodo en modo
+/*
+1. Visita la raíz.
+2. Atraviesa el subárbol izquierdo, es decir, llama a Preorder (subárbol izquierdo)
+3. Atraviesa el subárbol derecho, es decir, llama a Preorder (subárbol derecho)
+*/
+//O(N)
 template<class T>
 void BinarySearchTree<T>::preOrder(Node<T> *aux){
 	if(aux!=NULL){
@@ -226,6 +239,14 @@ void BinarySearchTree<T>::preOrder(Node<T> *aux){
 	}
 }
 
+//inOrder
+//despliega los datos del nodo
+/*
+1. Atraviesa el subárbol izquierdo, es decir, llama a Inorder (subárbol izquierdo)
+2. Visite la raíz.
+3. Atraviesa el subárbol derecho, es decir, llama a Inorder (subárbol derecho)
+*/
+//O(N)
 template <class T>
 void BinarySearchTree<T>::inOrder(Node<T>* aux){
 	if(aux!=NULL){
@@ -235,6 +256,14 @@ void BinarySearchTree<T>::inOrder(Node<T>* aux){
 	}
 }
 
+//postOrder
+//despliega los datos del nodo
+/*
+1. Atraviesa el subárbol izquierdo, es decir, llama a Postorder (subárbol izquierdo)
+2. Atraviesa el subárbol derecho, es decir, llama a Postorder (subárbol derecho)
+3. Visite la raíz.
+*/
+//O(N)
 template <class T>
 void BinarySearchTree<T>::postOrder(Node<T>* aux){
 	if(aux!=NULL){
@@ -244,6 +273,9 @@ void BinarySearchTree<T>::postOrder(Node<T>* aux){
 	}
 }
 
+//level by level
+//despliega los datos del nodo por nivel
+//O(n^2)
 template <class T>
 void BinarySearchTree<T>::levelByLevel(){
 	if(!isEmpty()){
@@ -263,6 +295,9 @@ void BinarySearchTree<T>::levelByLevel(){
 	}
 }
 
+//height
+//itera de manera recursiva sobre el arbol
+//O(log n)
 template <class T>
 int BinarySearchTree<T>::height(Node<T> *node){
 	int h = 0;
@@ -277,6 +312,9 @@ int BinarySearchTree<T>::height(Node<T> *node){
 
 }
 
+//getHeight
+//usado para llavar a la funcion recursiva
+//O(1)
 template <class T>
 int BinarySearchTree<T>::getHeight(){
 	Node<T>  *aux = root;
@@ -285,6 +323,9 @@ int BinarySearchTree<T>::getHeight(){
 
 }
 
+//ancestors
+//funcion para obtener los ancestros de un dato
+//O(N)
 template <class T>
 void BinarySearchTree<T>::ancestors(T data){
 	if(!isEmpty()){
@@ -327,7 +368,9 @@ void BinarySearchTree<T>::ancestors(T data){
 	}
 }
 
-
+//whatLevelAmI
+//funcion para obtener el nivel donde te encuentras en un dato
+//O(N)
 template <class T>
 int BinarySearchTree<T>::whatLevelAmI(T data){
 	if(!isEmpty()){
@@ -344,6 +387,9 @@ int BinarySearchTree<T>::whatLevelAmI(T data){
 	throw runtime_error("Binary tree is empty\n");
 }
 
+//visit
+//funcion para llamar a los metodos de recorrido
+//O(1)
 template <class T>
 void BinarySearchTree<T>::visit(int selection){
 	if(!isEmpty()){

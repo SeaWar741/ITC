@@ -20,6 +20,7 @@ void menu(){
     cout<<endl;
 }
 
+//funcion para llenar el arbol binario con datos iniciales
 void initializer(BinarySearchTree<int> &tree){
     tree.insert(10);
     tree.insert(5);
@@ -97,6 +98,7 @@ int main(){
             cout<<"------------------------------------"<<endl<<endl; 
         }
     }
+    cout<<"-----------------------"<<endl;
     cout<<endl<<endl<<"GRACIAS POR USAR BST TESTER!"<<endl<<endl;
     return 0;
 }
