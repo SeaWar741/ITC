@@ -72,9 +72,9 @@ void PriorityQueue<T>::downSort(int index){
             if(s2> size){ //se comparan pos
                 max = s1;
             }else{ //se comparan los datos de los indices
-                heap[s1]>heap[s2] ? max = s1: max = s2; 
+                heap[s1].major(heap[s2]) ? max = s1: max = s2; 
             }
-            if(heap[max] > heap[pos] ){ //se hace swap si es mayor
+            if(heap[max].major(heap[pos]) ){ //se hace swap si es mayor
                 swap(pos,max);
                 pos = max;
             }else{

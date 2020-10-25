@@ -9,7 +9,7 @@
 #include <ctime>
 #include "PriorityQueue.h"
 #include "RegistryEntry.h"
-#include "IPRegistry.h"
+//#include "IPRegistry.h"
 #include "DoublyLinkedList.h"
 using namespace std;
 
@@ -29,6 +29,10 @@ void HeapSort(DoublyLinkedList<T>& list, string order ){
     }
     
 }
+
+//exists
+
+
 
 //O(n)
 //Funcion para dividir string por token o separador
@@ -92,27 +96,38 @@ int main(){
 
             IPRegistry ipreg;
             IPRegistry ipreg2;
+
             ipreg.ip = ipString[0];
             
-            /*
-            if(lista.findData(ipreg)>=0){
-                tempIp = lista.getData(lista.findData(ipreg)).ip;
-                tempFrequency = lista.getData(lista.findData(ipreg)).frequency++;
+
+
+            if(lista.existsIn(ipreg)){
+                
+                
+                int pos = lista.getIndex(ipreg);
+                tempIp = lista.getData(pos).ip;
+                tempFrequency = lista.getData(pos).frequency;
+                tempFrequency++;
+                
                
-                ipreg2.ip = tempIp;
+                ipreg2.ip = ipString[0];
                 ipreg2.frequency = tempFrequency;
-                lista.updateData(lista.getData(lista.findData(ipreg,ipreg2)));
+                lista.updateData(ipreg,ipreg2);
+                
+                
+                //cout<<"updated"<<endl;
             }
             else{
                 ipreg.ip = ipString[0];
-                ipreg.frequency = 0;
+                ipreg.frequency = 1;
                 lista.addLast(ipreg);
+                //cout<<"inserted"<<endl;
             }
-            */
-            lista.addLast(ipreg);
 
             entry.error = errorString;
-            //entries.push_back(entry);//se inserta en vector
+            entries.push_back(entry);//se inserta en vector
+            
+
             errorString = "";
             words.clear();
             time.clear();
@@ -120,9 +135,14 @@ int main(){
             i++;
         }
         file.close();
-        //lista.print();
-    }
+        cout<<lista.getSize()<<endl;
+        lista.sort();
+        lista.print();
 
+        HeapSort(lista,"descending");
+        lista.print();
+
+    }
 
     return 0;
 }

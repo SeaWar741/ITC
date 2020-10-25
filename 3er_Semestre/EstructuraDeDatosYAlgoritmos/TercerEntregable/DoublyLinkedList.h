@@ -3,6 +3,7 @@
 
 #include "NodeD.h"
 #include "Queue.h"
+#include "IPRegistry.h"
 
 using namespace std;
 
@@ -36,6 +37,8 @@ public:
     void printReverse();
     bool isEmpty();
     int getSize();
+    bool existsIn(IPRegistry registry);
+    int getIndex(IPRegistry registry);
 };
 
 template<class T>
@@ -221,6 +224,7 @@ T DoublyLinkedList<T>::getData(int index) {
                 aux = aux->prev;
                 i--;
             }
+            
         }
     }
     throw out_of_range("Invalid position");
@@ -367,9 +371,11 @@ int DoublyLinkedList<T>::findData(T data) {
     while (posI <= posF && !found) {
         if (data < getData(posM)) {
             posF = posM - 1;
+            
         } else {
             if (data > getData(posM)) {
                 posI = posM + 1;
+                
             } else {
                 if (data == getData(posM)) {
                     found = true;
@@ -377,11 +383,13 @@ int DoublyLinkedList<T>::findData(T data) {
             }
         }
         posM = (posI + posF) / 2;
+        
     }
     if (found) {
         return posM;
     } else {
         //throw runtime_error("Not found in list");
+        
         return -1;
     }
 }
@@ -416,6 +424,31 @@ void DoublyLinkedList<T>::print() {
         aux = aux->next;
     }
     cout << endl;
+}
+
+
+template <class T>
+bool DoublyLinkedList<T>::existsIn(IPRegistry registry){
+    NodeD<T>* aux = head;
+    for (int i=1; i<=size; i++) {
+        if(aux->data == registry){
+            return true;
+        }
+        aux = aux->next;
+    }
+    return false;
+}
+
+template <class T>
+int DoublyLinkedList<T>::getIndex(IPRegistry registry){
+    NodeD<T>* aux = head;
+    for (int i=1; i<=size; i++) {
+        if(aux->data.ip == registry.ip){
+            return i;
+        }
+        aux = aux->next;
+    }
+    return -1;
 }
 
 template<class T>
