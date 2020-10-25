@@ -10,7 +10,7 @@
 #include "PriorityQueue.h"
 #include "RegistryEntry.h"
 //#include "IPRegistry.h"
-#include "DoublyLinkedList.h"
+//#include "DoublyLinkedList.h"
 using namespace std;
 
 //HeapSort
@@ -80,6 +80,7 @@ int main(){
             entry.minute = stoi(time[1]);
             entry.second = stoi(time[2]);
             entry.ip = words[3];
+            */
             for (int i = 4; i < words.size(); i++){ //todos los elementos posteriores son parte del error de login
                 if(i !=4 && i !=words.size()){
                     errorString= errorString+ " " + words[i];
@@ -88,7 +89,7 @@ int main(){
                     errorString+=words[i];
                 };
             }
-            */
+            
 
             ipString = split(words[3],":");
             int tempFrequency;

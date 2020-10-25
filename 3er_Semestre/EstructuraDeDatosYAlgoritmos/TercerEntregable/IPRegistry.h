@@ -1,11 +1,12 @@
 #include <iostream>
-#include "DoublyLinkedList.h"
+#include "DoublyLinkedList2.h"
 using namespace std;
 
 struct IPRegistry{
     string ip;
     int frequency = 0;
-    //DoublyLinkedList<string> errors;
+    DoublyLinkedList2<Error> errors;//lista con errores de ingreso
+
     friend ostream &operator<<( ostream &output, const IPRegistry &D ) { 
         output << "{IP:"<<D.ip <<", Frequency:"<<D.frequency<<"}"<<endl;
         return output;            

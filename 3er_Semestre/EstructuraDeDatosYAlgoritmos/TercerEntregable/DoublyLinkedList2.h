@@ -1,14 +1,14 @@
-#ifndef DoublyLinkedList_h
-#define DoublyLinkedList_h
+#ifndef DoublyLinkedList2_h
+#define DoublyLinkedList2_h
 
 #include "NodeD.h"
 #include "Queue.h"
-#include "IPRegistry.h"
+#include "Error.h"
 
 using namespace std;
 
 template<class T>
-class DoublyLinkedList {
+class DoublyLinkedList2 {
 private:
     NodeD<T>* head;
     NodeD<T>* tail;
@@ -16,9 +16,9 @@ private:
     void mergeSort(int ini, int fin);
     void merge(int ini, int mid, int fin);
 public:
-    DoublyLinkedList();
+    DoublyLinkedList2();
     void operator=(initializer_list<T> list);
-    void operator=(DoublyLinkedList<T> list);
+    void operator=(DoublyLinkedList2<T> list);
     T& operator[](int index);
     void addFirst(T data);
     void addLast(T data);
@@ -37,21 +37,19 @@ public:
     void printReverse();
     bool isEmpty();
     int getSize();
-    bool existsIn(IPRegistry registry);
-    int getIndex(IPRegistry registry);
     bool existsErrorIn(Error er);
     int getErrorIndex(Error er);
 };
 
 template<class T>
-DoublyLinkedList<T>::DoublyLinkedList() {
+DoublyLinkedList2<T>::DoublyLinkedList2() {
     head = NULL;
     tail = NULL;
     size = 0;
 }
 
 template<class T>
-T& DoublyLinkedList<T>::operator[](int index) {
+T& DoublyLinkedList2<T>::operator[](int index) {
     if (index >= 1 && index <= size) {
         if (index <= size / 2) {
             NodeD<T>* aux = head;
@@ -79,18 +77,18 @@ T& DoublyLinkedList<T>::operator[](int index) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::operator=(initializer_list<T> list) {
+void DoublyLinkedList2<T>::operator=(initializer_list<T> list) {
     if (isEmpty()) {
         for (T i : list) {
             addLast(i);
         }
     } else {
-        throw runtime_error("Error: DoublyLinkedList no esta vacia");   
+        throw runtime_error("Error: DoublyLinkedList2 no esta vacia");   
     }
 }
 
 template<class T>
-void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
+void DoublyLinkedList2<T>::operator=(DoublyLinkedList2<T> list) {
     clear();
     for (int i=1; i<=list.size; i++) {
         addLast(list[i]);
@@ -99,7 +97,7 @@ void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::addFirst(T data) {
+void DoublyLinkedList2<T>::addFirst(T data) {
     if (!isEmpty()) {
         head->prev = new NodeD<T>(data, head, NULL); 
         head = head->prev;
@@ -111,7 +109,7 @@ void DoublyLinkedList<T>::addFirst(T data) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::addLast(T data) {
+void DoublyLinkedList2<T>::addLast(T data) {
     if (!isEmpty()) {
         tail->next = new NodeD<T>(data,NULL, tail);
         tail = tail->next;
@@ -123,7 +121,7 @@ void DoublyLinkedList<T>::addLast(T data) {
 }
 
 template<class T>
-bool DoublyLinkedList<T>::deleteData(T data) {
+bool DoublyLinkedList2<T>::deleteData(T data) {
     if (!isEmpty()) {
         if (head->data == data) {
             NodeD<T>* aux = head;
@@ -162,7 +160,7 @@ bool DoublyLinkedList<T>::deleteData(T data) {
 }
 
 template<class T>
-bool DoublyLinkedList<T>::deleteAt(int index) {
+bool DoublyLinkedList2<T>::deleteAt(int index) {
     if (index >= 1 && index <= size) {
         if (index == 1) {
             NodeD<T>* aux = head;
@@ -204,7 +202,7 @@ bool DoublyLinkedList<T>::deleteAt(int index) {
 }
 
 template<class T>
-T DoublyLinkedList<T>::getData(int index) {
+T DoublyLinkedList2<T>::getData(int index) {
     if (index >= 1 && index <= size) {
         if (index <= size / 2) {
             NodeD<T>* aux = head;
@@ -233,7 +231,7 @@ T DoublyLinkedList<T>::getData(int index) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::updateAt(int index, T newData) {
+void DoublyLinkedList2<T>::updateAt(int index, T newData) {
     if (index >= 1 && index <= size) {
         if (index <= size/2) {
             NodeD<T>* aux = head;
@@ -263,7 +261,7 @@ void DoublyLinkedList<T>::updateAt(int index, T newData) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::updateData(T data, T newData) {
+void DoublyLinkedList2<T>::updateData(T data, T newData) {
     NodeD<T>* aux = head;
     while(aux != NULL) {
         if (aux->data == data) {
@@ -276,7 +274,7 @@ void DoublyLinkedList<T>::updateData(T data, T newData) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::insertAt(int index, T newData) {
+void DoublyLinkedList2<T>::insertAt(int index, T newData) {
     if (index >= 1 && index <= size) {
         if (index == 1) {
             head->prev = new NodeD<T>(newData,head,NULL);
@@ -310,7 +308,7 @@ void DoublyLinkedList<T>::insertAt(int index, T newData) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::merge(int ini, int mid, int fin) {
+void DoublyLinkedList2<T>::merge(int ini, int mid, int fin) {
     Queue<T> listL;
     Queue<T> listR;
     int pos,f1,f2,i,j;
@@ -348,7 +346,7 @@ void DoublyLinkedList<T>::merge(int ini, int mid, int fin) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::mergeSort(int ini, int fin) {
+void DoublyLinkedList2<T>::mergeSort(int ini, int fin) {
     if (ini < fin) {
         int mid = (ini + fin) / 2;
         mergeSort(ini,mid);
@@ -359,12 +357,12 @@ void DoublyLinkedList<T>::mergeSort(int ini, int fin) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::sort() {
+void DoublyLinkedList2<T>::sort() {
     mergeSort(1,size);
 }
 
 template<class T>
-int DoublyLinkedList<T>::findData(T data) {
+int DoublyLinkedList2<T>::findData(T data) {
     int posI = 1;
     int posF = size;
     int posM = (posI + posF) / 2;
@@ -397,7 +395,7 @@ int DoublyLinkedList<T>::findData(T data) {
 }
 
 template<class T>
-void DoublyLinkedList<T>::duplicate() {
+void DoublyLinkedList2<T>::duplicate() {
     // NodeD<T>* aux = head;
     // while (aux != NULL) {
     //     aux->next = new NodeD<T>(aux->data,aux->next);
@@ -407,9 +405,9 @@ void DoublyLinkedList<T>::duplicate() {
 }
 
 template<class T>
-void DoublyLinkedList<T>::removeDuplicates() {
+void DoublyLinkedList2<T>::removeDuplicates() {
     // NodeD<T>* aux = head;
-    // DoublyLinkedList<T> list = *this;
+    // DoublyLinkedList2<T> list = *this;
     // clear();
     // for (int i=1; i<list.size; i++) {
     //     if (!findData(aux->data)) {
@@ -419,7 +417,7 @@ void DoublyLinkedList<T>::removeDuplicates() {
 }
 
 template<class T>
-void DoublyLinkedList<T>::print() {
+void DoublyLinkedList2<T>::print() {
     NodeD<T>* aux = head;
     for (int i=1; i<=size; i++) {
         cout << aux->data << " ";
@@ -430,31 +428,7 @@ void DoublyLinkedList<T>::print() {
 
 
 template <class T>
-bool DoublyLinkedList<T>::existsIn(IPRegistry registry){
-    NodeD<T>* aux = head;
-    for (int i=1; i<=size; i++) {
-        if(aux->data == registry){
-            return true;
-        }
-        aux = aux->next;
-    }
-    return false;
-}
-
-template <class T>
-int DoublyLinkedList<T>::getIndex(IPRegistry registry){
-    NodeD<T>* aux = head;
-    for (int i=1; i<=size; i++) {
-        if(aux->data.ip == registry.ip){
-            return i;
-        }
-        aux = aux->next;
-    }
-    return -1;
-}
-
-template <class T>
-bool DoublyLinkedList<T>::existsErrorIn(Error er){
+bool DoublyLinkedList2<T>::existsErrorIn(Error er){
     NodeD<T>* aux = head;
     for (int i=1; i<=size; i++) {
         if(aux->data == er){
@@ -466,7 +440,7 @@ bool DoublyLinkedList<T>::existsErrorIn(Error er){
 }
 
 template <class T>
-int DoublyLinkedList<T>::getErrorIndex(Error er){
+int DoublyLinkedList2<T>::getErrorIndex(Error er){
     NodeD<T>* aux = head;
     for (int i=1; i<=size; i++) {
         if(aux->data.errorType == er.errorType){
@@ -478,7 +452,7 @@ int DoublyLinkedList<T>::getErrorIndex(Error er){
 }
 
 template<class T>
-void DoublyLinkedList<T>::printReverse() {
+void DoublyLinkedList2<T>::printReverse() {
     NodeD<T>* aux = tail;
     for (int i=size; i>=1; i--) {
         cout << aux->data << " ";
@@ -488,7 +462,7 @@ void DoublyLinkedList<T>::printReverse() {
 }
 
 template<class T>
-void DoublyLinkedList<T>::clear() {
+void DoublyLinkedList2<T>::clear() {
     int i = 1;
     while (i<=size) {
         NodeD<T>* aux = head;
@@ -501,12 +475,12 @@ void DoublyLinkedList<T>::clear() {
 }
 
 template<class T>
-bool DoublyLinkedList<T>::isEmpty() {
+bool DoublyLinkedList2<T>::isEmpty() {
     return size == 0;
 }
 
 template<class T>
-int DoublyLinkedList<T>::getSize() {
+int DoublyLinkedList2<T>::getSize() {
     return size;
 }
 #endif
