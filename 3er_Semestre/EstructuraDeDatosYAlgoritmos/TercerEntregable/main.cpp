@@ -30,7 +30,8 @@ void HeapSort(DoublyLinkedList<T>& list, string order ){
     
 }
 
-//exists
+//topIps
+
 
 
 
@@ -93,26 +94,40 @@ int main(){
 
             ipString = split(words[3],":");
             int tempFrequency;
+            int tempFrequencyE;
             string tempIp;
+
+            vector<string> errorsTemp;
 
             IPRegistry ipreg;
             IPRegistry ipreg2;
 
+
+
             ipreg.ip = ipString[0];
-            
 
 
             if(lista.existsIn(ipreg)){
                 
-                
                 int pos = lista.getIndex(ipreg);
+                int posE;
                 tempIp = lista.getData(pos).ip;
                 tempFrequency = lista.getData(pos).frequency;
                 tempFrequency++;
-                
+
+
+                errorsTemp = lista.getData(pos).errors;
+                for (int i=0; i<errorsTemp.size(); i++) 
+                    cout << errorsTemp[i] << " "; 
+                cout << endl; 
+                errorsTemp.push_back(errorString);
                
                 ipreg2.ip = ipString[0];
                 ipreg2.frequency = tempFrequency;
+
+                ipreg.errors = errorsTemp;
+                
+
                 lista.updateData(ipreg,ipreg2);
                 
                 
@@ -121,6 +136,9 @@ int main(){
             else{
                 ipreg.ip = ipString[0];
                 ipreg.frequency = 1;
+                errorsTemp.push_back(errorString);
+                //cout<<errorsTemp.size()<<endl;
+                ipreg.errors = errorsTemp;
                 lista.addLast(ipreg);
                 //cout<<"inserted"<<endl;
             }
@@ -138,7 +156,7 @@ int main(){
         file.close();
         cout<<lista.getSize()<<endl;
         lista.sort();
-        lista.print();
+        //lista.print();
 
         HeapSort(lista,"descending");
         lista.print();

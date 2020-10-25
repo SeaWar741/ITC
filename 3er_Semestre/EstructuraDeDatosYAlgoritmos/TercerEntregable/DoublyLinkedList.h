@@ -39,8 +39,10 @@ public:
     int getSize();
     bool existsIn(IPRegistry registry);
     int getIndex(IPRegistry registry);
+    /*
     bool existsErrorIn(Error er);
     int getErrorIndex(Error er);
+    */
 };
 
 template<class T>
@@ -453,6 +455,7 @@ int DoublyLinkedList<T>::getIndex(IPRegistry registry){
     return -1;
 }
 
+/*
 template <class T>
 bool DoublyLinkedList<T>::existsErrorIn(Error er){
     NodeD<T>* aux = head;
@@ -477,6 +480,7 @@ int DoublyLinkedList<T>::getErrorIndex(Error er){
     return -1;
 }
 
+*/
 template<class T>
 void DoublyLinkedList<T>::printReverse() {
     NodeD<T>* aux = tail;

@@ -1,16 +1,57 @@
 #include <iostream>
-#include "DoublyLinkedList2.h"
+#include <vector>
+#include <string>
+#include <bits/stdc++.h> 
 using namespace std;
 
 struct IPRegistry{
     string ip;
     int frequency = 0;
-    DoublyLinkedList2<Error> errors;//lista con errores de ingreso
+    vector<string> errors;
 
-    friend ostream &operator<<( ostream &output, const IPRegistry &D ) { 
-        output << "{IP:"<<D.ip <<", Frequency:"<<D.frequency<<"}"<<endl;
+
+    string stringifyErrors(){
+        string output ="";
+        // Define an map 
+        map<string, int> frequencies; 
+        // Traverse vector vec check if 
+        // current element is present 
+        // or not 
+        for (int i = 0; i< errors.size(); i++) { 
+    
+            // If the current element 
+            // is not found then insert 
+            // current element with 
+            // frequency 1 
+            if (frequencies.find(errors[i]) == frequencies.end()) { 
+                frequencies[errors[i]] = 1; 
+            } 
+    
+            // Else update the frequency 
+            else { 
+                frequencies[errors[i]]++; 
+            } 
+        } 
+    
+        // Traverse the map to print the 
+        // frequency 
+        output+="{";
+        for (auto& it : frequencies) { 
+            output+= it.first + ':'+ to_string(it.second)+ ','; 
+            cout << it.first << ' '
+             << it.second << '\n'; 
+        }
+        output+="}";
+        return output; 
+    }
+
+    friend ostream &operator<<( ostream &output, IPRegistry &D ) { 
+        //string errors = D.errors.stringify();
+        output << "{IP:"<<D.ip <<", Frequency:"<<D.frequency<<", Errors:"<<D.stringifyErrors()<<"}"<<endl;
         return output;            
     }
+    
+
     bool operator <( const IPRegistry& rhs ) const{
         if(ip < rhs.ip){return true;}
         else{return false;}

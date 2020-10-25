@@ -4,6 +4,7 @@
 #include "NodeD.h"
 #include "Queue.h"
 #include "Error.h"
+#include <string> 
 
 using namespace std;
 
@@ -39,6 +40,7 @@ public:
     int getSize();
     bool existsErrorIn(Error er);
     int getErrorIndex(Error er);
+    string stringify();
 };
 
 template<class T>
@@ -449,6 +451,17 @@ int DoublyLinkedList2<T>::getErrorIndex(Error er){
         aux = aux->next;
     }
     return -1;
+}
+
+template<class T>
+string DoublyLinkedList2<T>::stringify(){
+    NodeD<T>* aux = head;
+    string output ="";
+    for (int i=1; i<=size; i++) {
+        output += aux->data.errorType+":"+to_string(aux->data.frequency)+",";
+        aux = aux->next;
+    }
+    return output;
 }
 
 template<class T>
