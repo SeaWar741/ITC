@@ -8,10 +8,13 @@
 #include <sstream>
 #include <ctime>
 #include "PriorityQueue.h"
-#include "RegistryEntry.h"
 //#include "IPRegistry.h"
 //#include "DoublyLinkedList.h"
 using namespace std;
+
+void line(){
+    cout<<"-----------------------------------------------------------------------------"<<endl;
+}
 
 //HeapSort
 //se ordena a partir de remover el top de la lista y ahace add
@@ -29,10 +32,6 @@ void HeapSort(DoublyLinkedList<T>& list, string order ){
     }
     
 }
-
-//topIps
-
-
 
 
 //O(n)
@@ -53,26 +52,110 @@ vector<string> split(string str, string token){
     return result;
 }
 
+void welcome(){
+    line();
+    std::cout<<R"(
+
+██╗██████╗     ██╗   ██╗███████╗██████╗ ██╗███████╗██╗███████╗██████╗ 
+██║██╔══██╗    ██║   ██║██╔════╝██╔══██╗██║██╔════╝██║██╔════╝██╔══██╗
+██║██████╔╝    ██║   ██║█████╗  ██████╔╝██║█████╗  ██║█████╗  ██████╔╝
+██║██╔═══╝     ╚██╗ ██╔╝██╔══╝  ██╔══██╗██║██╔══╝  ██║██╔══╝  ██╔══██╗
+██║██║          ╚████╔╝ ███████╗██║  ██║██║██║     ██║███████╗██║  ██║
+╚═╝╚═╝           ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
+                                                                      
+
+    )"<<endl;
+    line();
+}
+
+//menu
+//funcion para mostrar el menu
+void menu(){
+    cout<<endl;
+    line();
+    cout<<"1) Imprimir las IPs"<<endl;
+    cout<<"2) Mostrar las IPs con mas accesos"<<endl;
+    cout<<"3) Mostrar las IPs con menos accesos"<<endl;
+    cout<<"4) Exportar lista de IPs a JSON"<<endl;
+    cout<<"5) Salir"<<endl;
+    line();
+    cout<<endl;
+}
+
+
+
+void optionMenu(DoublyLinkedList<IPRegistry> &lista){
+    int selection;
+    bool continues = true;
+
+    ofstream out("IPLogger.json");
+    
+
+    cout<<endl;
+    welcome();
+    cout<<endl<<"Bienvenid@ a IP Verifier, donde podras conocer informacion sobre tus usuarios"<<endl;
+    cout<<"sus accesos y como entran a tu sitio!"<<endl<<endl;
+    while (continues){
+        menu();
+        cout<<"Ingresar seleccion: >";cin>>selection;
+        switch (selection){
+            case 1:
+                HeapSort(lista,"descending");
+                lista.print();
+                break;
+            case 2:
+                HeapSort(lista,"descending");
+                lista.printTop();
+                break;
+            case 3:
+                HeapSort(lista,"ascending");
+                lista.printTop();
+                break;
+            case 4:
+                out << lista.stringify();
+                out.close();
+                cout<<endl;
+                line();
+                cout<<"ARCHIVO CREADO!"<<endl;
+                line();
+                cout<<endl;
+                system("code ./data.json");
+                break;
+            case 5:
+                continues = false;
+                break;
+            default:
+                cout<<endl;
+                line();
+                cout<<"OPCION NO VALIDA"<<endl;
+                line();
+                cout<<endl;
+                break;
+        }
+    }
+    cout<<endl;
+    line();
+    cout<<"GRACIAS POR USAR IP VERIFIER"<<endl;
+    line();
+    cout<<endl;
+    
+}
+
 int main(){
     DoublyLinkedList<IPRegistry> lista;
-    populateMonths();//se llenan los meses
-    populateMonthsReversed();
 
     ifstream file("./bitacora2.txt"); //abre el archivo
-    vector <RegistryEntry> entries; //vector para registry
 
     if(file.is_open()){
         string line;
         vector<string> words; //vector para almacenar palabras de entry
-        vector<string> time;    //vector para el tiempo
         string errorString = "";    //string para el error
         vector<string> ipString;
 
         int i =0;
         while(getline(file,line)/* && i<=20*/){ //Se leen todos las entries por linea
             words = split(line," ");
-            //print(words);
-            RegistryEntry entry; //se crea entry y se hace split de elementos para llener el struct
+            //print(words);ss
             /*
             entry.month = words[0];
             entry.day = stoi(words[1]);
@@ -90,7 +173,6 @@ int main(){
                     errorString+=words[i];
                 };
             }
-            
 
             ipString = split(words[3],":");
             int tempFrequency;
@@ -98,14 +180,12 @@ int main(){
             string tempIp;
 
             vector<string> errorsTemp;
+            vector<string> portsTemp;
 
             IPRegistry ipreg;
             IPRegistry ipreg2;
 
-
-
             ipreg.ip = ipString[0];
-
 
             if(lista.existsIn(ipreg)){
                 
@@ -117,50 +197,61 @@ int main(){
 
 
                 errorsTemp = lista.getData(pos).errors;
+                portsTemp = lista.getData(pos).ports;
+                /*
                 for (int i=0; i<errorsTemp.size(); i++) 
                     cout << errorsTemp[i] << " "; 
                 cout << endl; 
+                */
                 errorsTemp.push_back(errorString);
+                portsTemp.push_back(ipString[1]);
                
+                //dar atributos a la IPRegistry
                 ipreg2.ip = ipString[0];
                 ipreg2.frequency = tempFrequency;
-
-                ipreg.errors = errorsTemp;
+                ipreg2.errors = errorsTemp;
+                ipreg2.ports = portsTemp;
                 
-
+                
                 lista.updateData(ipreg,ipreg2);
                 
-                
-                //cout<<"updated"<<endl;
             }
             else{
                 ipreg.ip = ipString[0];
                 ipreg.frequency = 1;
                 errorsTemp.push_back(errorString);
+                portsTemp.push_back(ipString[1]);
                 //cout<<errorsTemp.size()<<endl;
                 ipreg.errors = errorsTemp;
+                ipreg.ports = portsTemp;
                 lista.addLast(ipreg);
                 //cout<<"inserted"<<endl;
             }
 
-            entry.error = errorString;
-            entries.push_back(entry);//se inserta en vector
-            
-
             errorString = "";
             words.clear();
-            time.clear();
 
             i++;
         }
         file.close();
-        cout<<lista.getSize()<<endl;
+        //cout<<lista.getSize()<<endl;
         lista.sort();
-        //lista.print();
 
         HeapSort(lista,"descending");
-        lista.print();
 
+        optionMenu(lista);
+
+        /*
+
+        //lista.print();
+
+        lista.printTop();
+
+        ofstream out("IPLogger.json");
+        out << lista.stringify();
+        out.close();
+
+        */
     }
 
     return 0;

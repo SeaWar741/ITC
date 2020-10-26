@@ -39,6 +39,8 @@ public:
     int getSize();
     bool existsIn(IPRegistry registry);
     int getIndex(IPRegistry registry);
+    string stringify();
+    void printTop();
     /*
     bool existsErrorIn(Error er);
     int getErrorIndex(Error er);
@@ -90,6 +92,7 @@ void DoublyLinkedList<T>::operator=(initializer_list<T> list) {
         throw runtime_error("Error: DoublyLinkedList no esta vacia");   
     }
 }
+
 
 template<class T>
 void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
@@ -424,10 +427,34 @@ template<class T>
 void DoublyLinkedList<T>::print() {
     NodeD<T>* aux = head;
     for (int i=1; i<=size; i++) {
-        cout << aux->data << " ";
+        cout << aux->data<<endl;
         aux = aux->next;
     }
-    cout << endl;
+}
+
+template<class T>
+void DoublyLinkedList<T>::printTop() {
+    NodeD<T>* aux = head;
+    for (int i=1; i<=5; i++) {
+        cout << aux->data<<endl;
+        aux = aux->next;
+    }
+}
+
+template<class T>
+string DoublyLinkedList<T>::stringify() {
+    string output ="";
+    output+=string("{")+'\u0022'+"IP-Registry"+'\u0022'+":[";
+    NodeD<T>* aux = head;
+    for (int i=1; i<=size; i++) {
+        output+= aux->data.stringify();
+        if(i<size){
+            output+=",";
+        }
+        aux = aux->next;
+    }
+    output+="]}\n";
+    return output;
 }
 
 

@@ -2,13 +2,14 @@
 #include <vector>
 #include <string>
 #include <bits/stdc++.h> 
+#include <algorithm>
 using namespace std;
 
 struct IPRegistry{
     string ip;
     int frequency = 0;
     vector<string> errors;
-
+    vector<string> ports;
 
     string stringifyErrors(){
         string output ="";
@@ -32,25 +33,78 @@ struct IPRegistry{
                 frequencies[errors[i]]++; 
             } 
         } 
-    
+
         // Traverse the map to print the 
         // frequency 
         output+="{";
+        int counter = frequencies.size();
         for (auto& it : frequencies) { 
-            output+= it.first + ':'+ to_string(it.second)+ ','; 
-            cout << it.first << ' '
-             << it.second << '\n'; 
+            output+= '\u0022'+it.first + '\u0022'+':'+ to_string(it.second); 
+            if(counter >1){
+                output += ",";
+            }
+            counter--;
         }
         output+="}";
         return output; 
     }
 
+    string stringifyPorts(){
+        string output ="";
+        // Define an map 
+        map<string, int> frequencies; 
+        // Traverse vector vec check if 
+        // current element is present 
+        // or not 
+        for (int i = 0; i< ports.size(); i++) { 
+    
+            // If the current element 
+            // is not found then insert 
+            // current element with 
+            // frequency 1 
+            if (frequencies.find(ports[i]) == frequencies.end()) { 
+                frequencies[ports[i]] = 1; 
+            } 
+    
+            // Else update the frequency 
+            else { 
+                frequencies[ports[i]]++; 
+            } 
+        } 
+
+        // Traverse the map to print the 
+        // frequency 
+        output+="{";
+        int counter = frequencies.size();
+        for (auto& it : frequencies) { 
+            output+= '\u0022'+it.first +'\u0022'+ ": "+ to_string(it.second); 
+            if(counter >1){
+                output += ",";
+            }
+            counter--;
+        }
+        output+="}";
+        return output; 
+    }
+
+
     friend ostream &operator<<( ostream &output, IPRegistry &D ) { 
         //string errors = D.errors.stringify();
-        output << "{IP:"<<D.ip <<", Frequency:"<<D.frequency<<", Errors:"<<D.stringifyErrors()<<"}"<<endl;
+        //output << "{"<<'"'<<"IP"<<'"'<<":"<<'"'<<D.ip <<'"'<<","<<'"'<<"Ports"<<'"'<<":"<<D.stringifyPorts()<<"," <<'"'<<"Frequency"<<'"'<<":"<<D.frequency<<","<<'"'<<"Errors"<<'"'<<":"<<D.stringifyErrors()<<"}"<<endl;
+        cout<<"IP: "<<D.ip<<endl;
+        cout<<"Frequency: "<<D.frequency<<endl;
+        cout<<"Ports:"<<D.stringifyPorts()<<endl;
+        cout<<"Errors:"<<D.stringifyErrors()<<endl;
+
         return output;            
     }
     
+    string stringify(){
+        string output="";
+        string stringF= to_string(frequency);
+        output += string("{")+'"'+"IP"+'"'+":"+'"'+ip +'"'+","+'"'+"Ports"+'"'+":"+stringifyPorts()+"," +'"'+"Frequency"+'"'+":"+stringF+","+'"'+"Errors"+'"'+":"+stringifyErrors()+"}"+"\n";
+        return output;   
+    }
 
     bool operator <( const IPRegistry& rhs ) const{
         if(ip < rhs.ip){return true;}
