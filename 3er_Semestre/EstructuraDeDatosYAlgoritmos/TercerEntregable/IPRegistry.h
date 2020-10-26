@@ -1,3 +1,4 @@
+//Juan Carlos Garfias Tovar, A01652138
 #include <iostream>
 #include <vector>
 #include <string>
@@ -5,12 +6,18 @@
 #include <algorithm>
 using namespace std;
 
+//Struct IPRegistry
+//almacenar ips, frecuencia, errores y puertos
 struct IPRegistry{
     string ip;
     int frequency = 0;
     vector<string> errors;
     vector<string> ports;
 
+
+    //stringifyErrors
+    //obtener string de los errores de un map de frecuencia
+    //O(n)
     string stringifyErrors(){
         string output ="";
         // Define an map 
@@ -49,6 +56,9 @@ struct IPRegistry{
         return output; 
     }
 
+    //stringifyPorts
+    //obtener string de los errores de un map de frecuencia
+    //O(n)
     string stringifyPorts(){
         string output ="";
         // Define an map 
@@ -87,7 +97,8 @@ struct IPRegistry{
         return output; 
     }
 
-
+    //sobrecarga
+    //para cout
     friend ostream &operator<<( ostream &output, IPRegistry &D ) { 
         //string errors = D.errors.stringify();
         //output << "{"<<'"'<<"IP"<<'"'<<":"<<'"'<<D.ip <<'"'<<","<<'"'<<"Ports"<<'"'<<":"<<D.stringifyPorts()<<"," <<'"'<<"Frequency"<<'"'<<":"<<D.frequency<<","<<'"'<<"Errors"<<'"'<<":"<<D.stringifyErrors()<<"}"<<endl;
@@ -99,12 +110,16 @@ struct IPRegistry{
         return output;            
     }
     
+    //stringify
+    //para obtener string de ip
     string stringify(){
         string output="";
         string stringF= to_string(frequency);
         output += string("{")+'"'+"IP"+'"'+":"+'"'+ip +'"'+","+'"'+"Ports"+'"'+":"+stringifyPorts()+"," +'"'+"Frequency"+'"'+":"+stringF+","+'"'+"Errors"+'"'+":"+stringifyErrors()+"}"+"\n";
         return output;   
     }
+
+    //sobrecargas para mayor, menor, igual, menor o igual, mayor o igual
 
     bool operator <( const IPRegistry& rhs ) const{
         if(ip < rhs.ip){return true;}
@@ -130,6 +145,7 @@ struct IPRegistry{
         if(ip != rhs.ip){return true;}
         else{return false;}
     }
+    
     //FOR HEAP
     bool minor( const IPRegistry& rhs ) const{
         if(frequency < rhs.frequency){return true;}

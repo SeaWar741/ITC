@@ -1,3 +1,4 @@
+//Juan Carlos Garfias Tovar, A01652138
 #pragma once 
 template<class T>
 struct Node {
@@ -18,7 +19,3 @@ Node<T>::Node(T data, Node<T>* next) {
     this->data = data;
     this->next = next;
 }
-
-
-
-

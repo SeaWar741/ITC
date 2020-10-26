@@ -12,6 +12,9 @@
 //#include "DoublyLinkedList.h"
 using namespace std;
 
+//line
+//funcion para imprimir linea divisoria
+//O(1)
 void line(){
     cout<<"-----------------------------------------------------------------------------"<<endl;
 }
@@ -52,6 +55,8 @@ vector<string> split(string str, string token){
     return result;
 }
 
+//welcome()
+//imprime ascii art de bienvenida
 void welcome(){
     line();
     std::cout<<R"(
@@ -70,6 +75,7 @@ void welcome(){
 
 //menu
 //funcion para mostrar el menu
+//O(1)
 void menu(){
     cout<<endl;
     line();
@@ -83,51 +89,53 @@ void menu(){
 }
 
 
-
+//optionMenu
+//funcion para las diferentes opciones del programa
 void optionMenu(DoublyLinkedList<IPRegistry> &lista){
     int selection;
-    bool continues = true;
+    bool continues = true;//variable para el loop
 
-    ofstream out("IPLogger.json");
+    ofstream out("IPLogger.json");//nombre del archivo json de salida
     
 
     cout<<endl;
     welcome();
     cout<<endl<<"Bienvenid@ a IP Verifier, donde podras conocer informacion sobre tus usuarios"<<endl;
     cout<<"sus accesos y como entran a tu sitio!"<<endl<<endl;
-    while (continues){
+    cout<<"Se han detectado: "<<lista.getSize()<<" IPs"<<endl<<endl;
+    while (continues){//mientras que sea verdadero
         menu();
         cout<<"Ingresar seleccion: >";cin>>selection;
         switch (selection){
             case 1:
-                HeapSort(lista,"descending");
+                HeapSort(lista,"descending");//se hace un sort de la lista 
                 lista.print();
                 break;
             case 2:
-                HeapSort(lista,"descending");
+                HeapSort(lista,"descending");//se hace un sort de la lista 
                 lista.printTop();
                 break;
             case 3:
-                HeapSort(lista,"ascending");
+                HeapSort(lista,"ascending");//se hace un sort de la lista invertido
                 lista.printTop();
                 break;
             case 4:
-                out << lista.stringify();
+                out << lista.stringify();//se pasa el out a un print para insertarse en json
                 out.close();
                 cout<<endl;
                 line();
                 cout<<"ARCHIVO CREADO!"<<endl;
                 line();
                 cout<<endl;
-                system("code ./data.json");
+                system("code ./data.json");//se ejecuta comando para abrir archivo json en vscode
                 break;
             case 5:
-                continues = false;
+                continues = false;//se termina el proceso
                 break;
             default:
                 cout<<endl;
                 line();
-                cout<<"OPCION NO VALIDA"<<endl;
+                cout<<"OPCION NO VALIDA"<<endl;//opcion default
                 line();
                 cout<<endl;
                 break;
@@ -154,7 +162,7 @@ int main(){
 
         int i =0;
         while(getline(file,line)/* && i<=20*/){ //Se leen todos las entries por linea
-            words = split(line," ");
+            words = split(line," "); //divide las palabras de la linea
             //print(words);ss
             /*
             entry.month = words[0];
@@ -167,44 +175,44 @@ int main(){
             */
             for (int i = 4; i < words.size(); i++){ //todos los elementos posteriores son parte del error de login
                 if(i !=4 && i !=words.size()){
-                    errorString= errorString+ " " + words[i];
+                    errorString= errorString+ " " + words[i];//obtiene el string de error
                 }
                 else{
                     errorString+=words[i];
                 };
             }
 
-            ipString = split(words[3],":");
-            int tempFrequency;
-            int tempFrequencyE;
-            string tempIp;
+            ipString = split(words[3],":");//divide la ip del puerto
+            int tempFrequency; //frecuencia temporal de ip
+            int tempFrequencyE; //frecuencia temporal de errores
+            string tempIp; //string de la ip temporal
 
-            vector<string> errorsTemp;
-            vector<string> portsTemp;
+            vector<string> errorsTemp; //vector temporal de errores
+            vector<string> portsTemp; //vector temporal de puertos
 
-            IPRegistry ipreg;
-            IPRegistry ipreg2;
+            IPRegistry ipreg; //struct de ip temporal de entrada
+            IPRegistry ipreg2; //struct de ip temporal de salida
 
-            ipreg.ip = ipString[0];
+            ipreg.ip = ipString[0]; //se asigna ip
 
-            if(lista.existsIn(ipreg)){
+            if(lista.existsIn(ipreg)){ //si se encuentra en la lista aumentar
                 
-                int pos = lista.getIndex(ipreg);
+                int pos = lista.getIndex(ipreg); //se obtiene el indice
                 int posE;
-                tempIp = lista.getData(pos).ip;
-                tempFrequency = lista.getData(pos).frequency;
-                tempFrequency++;
+                tempIp = lista.getData(pos).ip;//se obtiene dato de ip
+                tempFrequency = lista.getData(pos).frequency; //se obtiene dato de frecuencia
+                tempFrequency++;//se aumenta en uno la frecuencia
 
 
-                errorsTemp = lista.getData(pos).errors;
-                portsTemp = lista.getData(pos).ports;
+                errorsTemp = lista.getData(pos).errors; // se obtiene el vector de errores
+                portsTemp = lista.getData(pos).ports; //se obtiene el vector de puertos
                 /*
                 for (int i=0; i<errorsTemp.size(); i++) 
                     cout << errorsTemp[i] << " "; 
                 cout << endl; 
                 */
-                errorsTemp.push_back(errorString);
-                portsTemp.push_back(ipString[1]);
+                errorsTemp.push_back(errorString); //se inserta el error en el vector
+                portsTemp.push_back(ipString[1]);  //se inserta el puerto en el vector
                
                 //dar atributos a la IPRegistry
                 ipreg2.ip = ipString[0];
@@ -213,45 +221,35 @@ int main(){
                 ipreg2.ports = portsTemp;
                 
                 
-                lista.updateData(ipreg,ipreg2);
+                lista.updateData(ipreg,ipreg2); //se reemplaza el objeto en la lista
                 
             }
-            else{
-                ipreg.ip = ipString[0];
-                ipreg.frequency = 1;
-                errorsTemp.push_back(errorString);
-                portsTemp.push_back(ipString[1]);
+            else{ //cuando no existe en la lista
+                ipreg.ip = ipString[0]; //se asigna ip
+                ipreg.frequency = 1; //se asigna frecuencia base
+                errorsTemp.push_back(errorString); //se inserta error
+                portsTemp.push_back(ipString[1]); //se inserta puerto
                 //cout<<errorsTemp.size()<<endl;
                 ipreg.errors = errorsTemp;
                 ipreg.ports = portsTemp;
-                lista.addLast(ipreg);
+                lista.addLast(ipreg); //se hace add al struct en la lista
                 //cout<<"inserted"<<endl;
             }
 
-            errorString = "";
-            words.clear();
+            errorString = ""; //reinicia valores
+            words.clear();//limpia vector temporal de la linea
 
             i++;
         }
-        file.close();
-        //cout<<lista.getSize()<<endl;
-        lista.sort();
+        file.close(); //cierra el archivo
 
-        HeapSort(lista,"descending");
+        lista.sort();//aplica un sort
 
-        optionMenu(lista);
+        HeapSort(lista,"descending");//aplica un heapsort a la lista
 
-        /*
+        optionMenu(lista); //llama al menu
 
-        //lista.print();
 
-        lista.printTop();
-
-        ofstream out("IPLogger.json");
-        out << lista.stringify();
-        out.close();
-
-        */
     }
 
     return 0;

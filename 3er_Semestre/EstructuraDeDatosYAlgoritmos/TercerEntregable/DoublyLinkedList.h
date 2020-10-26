@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//Clase doubly linked list
 template<class T>
 class DoublyLinkedList {
 private:
@@ -47,6 +48,7 @@ public:
     */
 };
 
+//constructor default
 template<class T>
 DoublyLinkedList<T>::DoublyLinkedList() {
     head = NULL;
@@ -54,10 +56,13 @@ DoublyLinkedList<T>::DoublyLinkedList() {
     size = 0;
 }
 
+//sorecarga para corchetes
+//acceder al dato por indice
+//O(n)
 template<class T>
 T& DoublyLinkedList<T>::operator[](int index) {
     if (index >= 1 && index <= size) {
-        if (index <= size / 2) {
+        if (index <= size / 2) {//va partiendo
             NodeD<T>* aux = head;
             int i = 1; // The list starts with 1
             while (aux != NULL) {
@@ -82,6 +87,9 @@ T& DoublyLinkedList<T>::operator[](int index) {
     throw out_of_range("Invalid position");
 }
 
+//sobrecarga igual
+//lista o vector a dlist
+//o(n)
 template<class T>
 void DoublyLinkedList<T>::operator=(initializer_list<T> list) {
     if (isEmpty()) {
@@ -93,7 +101,9 @@ void DoublyLinkedList<T>::operator=(initializer_list<T> list) {
     }
 }
 
-
+//sobrecarga igual
+//iguala una lista a otra
+//o(n)
 template<class T>
 void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
     clear();
@@ -103,6 +113,9 @@ void DoublyLinkedList<T>::operator=(DoublyLinkedList<T> list) {
 
 }
 
+//addFirst
+//hace add a un elemento en el inicio de la lista
+//O(1)
 template<class T>
 void DoublyLinkedList<T>::addFirst(T data) {
     if (!isEmpty()) {
@@ -115,6 +128,9 @@ void DoublyLinkedList<T>::addFirst(T data) {
     size++;
 }
 
+//addLast
+//hace add a un elemento en el final de la lista
+//O(1)
 template<class T>
 void DoublyLinkedList<T>::addLast(T data) {
     if (!isEmpty()) {
@@ -127,6 +143,9 @@ void DoublyLinkedList<T>::addLast(T data) {
     size++;
 }
 
+//deleteData
+//hace delete a un elemento a partir del dato
+//O(n)
 template<class T>
 bool DoublyLinkedList<T>::deleteData(T data) {
     if (!isEmpty()) {
@@ -166,6 +185,9 @@ bool DoublyLinkedList<T>::deleteData(T data) {
     return false;
 }
 
+//deleteAt
+//borra por indice
+//O(n)
 template<class T>
 bool DoublyLinkedList<T>::deleteAt(int index) {
     if (index >= 1 && index <= size) {
@@ -208,6 +230,10 @@ bool DoublyLinkedList<T>::deleteAt(int index) {
     return false;
 }
 
+
+//getData
+//obtiene data por indice
+//O(n)
 template<class T>
 T DoublyLinkedList<T>::getData(int index) {
     if (index >= 1 && index <= size) {
@@ -237,6 +263,9 @@ T DoublyLinkedList<T>::getData(int index) {
     throw out_of_range("Invalid position");
 }
 
+//updateAt
+//actualiza por indice
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::updateAt(int index, T newData) {
     if (index >= 1 && index <= size) {
@@ -267,6 +296,9 @@ void DoublyLinkedList<T>::updateAt(int index, T newData) {
     throw out_of_range("Invalid position");
 }
 
+//updateData
+//actualiza por dato
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::updateData(T data, T newData) {
     NodeD<T>* aux = head;
@@ -280,6 +312,9 @@ void DoublyLinkedList<T>::updateData(T data, T newData) {
     throw out_of_range("Data not found");
 }
 
+//insertAt
+//actualiza por indice
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::insertAt(int index, T newData) {
     if (index >= 1 && index <= size) {
@@ -314,6 +349,9 @@ void DoublyLinkedList<T>::insertAt(int index, T newData) {
     throw out_of_range("Invalid position");
 }
 
+//merge
+//funcion helper para sort
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::merge(int ini, int mid, int fin) {
     Queue<T> listL;
@@ -352,6 +390,9 @@ void DoublyLinkedList<T>::merge(int ini, int mid, int fin) {
     }
 }
 
+//mergeSort
+//funcion helper para sort
+//O(n log n)
 template<class T>
 void DoublyLinkedList<T>::mergeSort(int ini, int fin) {
     if (ini < fin) {
@@ -363,11 +404,17 @@ void DoublyLinkedList<T>::mergeSort(int ini, int fin) {
     }
 }
 
+//sort
+//funcion para hacer sort a la lista
+//O(n log n)
 template<class T>
 void DoublyLinkedList<T>::sort() {
     mergeSort(1,size);
 }
 
+//findData
+//funcion para buscar datos en la lsita
+//O(n)
 template<class T>
 int DoublyLinkedList<T>::findData(T data) {
     int posI = 1;
@@ -401,6 +448,10 @@ int DoublyLinkedList<T>::findData(T data) {
     }
 }
 
+
+//findData
+//funcion para buscar datos en la lsita
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::duplicate() {
     // NodeD<T>* aux = head;
@@ -423,6 +474,10 @@ void DoublyLinkedList<T>::removeDuplicates() {
     // }
 }
 
+
+//print
+//funcion para imprimir lista
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::print() {
     NodeD<T>* aux = head;
@@ -432,6 +487,8 @@ void DoublyLinkedList<T>::print() {
     }
 }
 
+//printTop
+//funcion para imprimir top 5
 template<class T>
 void DoublyLinkedList<T>::printTop() {
     NodeD<T>* aux = head;
@@ -441,6 +498,10 @@ void DoublyLinkedList<T>::printTop() {
     }
 }
 
+
+//stringify
+//funcion para convertir lista en string json
+//O(n)
 template<class T>
 string DoublyLinkedList<T>::stringify() {
     string output ="";
@@ -457,7 +518,9 @@ string DoublyLinkedList<T>::stringify() {
     return output;
 }
 
-
+//existsIn
+//funcion para verificar si existe en la lista
+//O(n)
 template <class T>
 bool DoublyLinkedList<T>::existsIn(IPRegistry registry){
     NodeD<T>* aux = head;
@@ -470,6 +533,9 @@ bool DoublyLinkedList<T>::existsIn(IPRegistry registry){
     return false;
 }
 
+//getIndex
+//funcion para obtener indice
+//O(n)
 template <class T>
 int DoublyLinkedList<T>::getIndex(IPRegistry registry){
     NodeD<T>* aux = head;
@@ -508,6 +574,10 @@ int DoublyLinkedList<T>::getErrorIndex(Error er){
 }
 
 */
+
+//printReverse
+//funcion para imprimir invertido
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::printReverse() {
     NodeD<T>* aux = tail;
@@ -518,6 +588,9 @@ void DoublyLinkedList<T>::printReverse() {
     cout << endl;
 }
 
+//clear
+//funcion para borrar lista
+//O(n)
 template<class T>
 void DoublyLinkedList<T>::clear() {
     int i = 1;
@@ -531,11 +604,17 @@ void DoublyLinkedList<T>::clear() {
     tail = NULL;
 }
 
+//clear
+//funcion para verificar si esta vacia
+//O(1)
 template<class T>
 bool DoublyLinkedList<T>::isEmpty() {
     return size == 0;
 }
 
+//getSize
+//funcion para obtener size
+//O(1)
 template<class T>
 int DoublyLinkedList<T>::getSize() {
     return size;

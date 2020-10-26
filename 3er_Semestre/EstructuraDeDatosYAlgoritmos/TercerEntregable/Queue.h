@@ -1,110 +1,136 @@
-#ifndef Queue_h
-#define Queue_h
-
+//Juan Carlos Garfias Tovar, A01652138
 #include "Node.h"
+#include <vector>
+#include <iostream>
+
 
 using namespace std;
 
+//Clase Queue
 template<class T>
 class Queue{
-private:
-    Node<T>* head;
-    Node<T>* tail;
-    int size;
-public:
-    Queue();
-    void enqueue(T Data);
-    T dequeue();
-    T front();
-    T back();
-    int getSize();
-    void clear();
-    void print();
-    bool isEmpty();
+    private:
+        Node<T> *head;
+        Node<T> *tail;
+        int index;
+        int size;
+    public:
+        Queue();
+
+        T dequeue();
+        void enqueue(T data);
+  
+        T front();
+        T back();
+        
+        int getSize() { return size; };
+        void clear();
+
+        bool isEmpty(){return size == 0;};
+        int getIndex(){return index;};
+
+        void print();
 };
 
+// constructor default
+//inserta como head y tail valores null y establece size como 0
 template<class T>
-Queue<T>::Queue() {
+Queue<T>::Queue(){
     head = NULL;
     tail = NULL;
     size = 0;
 }
 
+//dequeue
+//quita el primer del queue
+//O(1)
 template<class T>
-void Queue<T>::enqueue(T data) {
-    Node<T>* aux = new Node<T>(data);
-    if (isEmpty()) {
-        head = aux;
-        tail = aux;
-    } else {
-        tail->next = aux;
-        tail = aux;
-    }
-    size++;
-}
-
-template<class T>
-T Queue<T>::dequeue() {
-    T data;
-    if (!isEmpty()) {
-        Node<T>* aux = head;
-        data = aux->data;
-        head = aux->next;
-        delete aux;
+T Queue<T>::dequeue(){
+   if(!isEmpty()){// si no esta vacio agarra un nodo temporal igual a head
+        Node<T> *temp = head;
+        T data = temp->data;
+        head = head->next;// lo mueve y borra temp
+        delete temp;//reduce el size
         size--;
-        if (head == NULL) {
-            tail = NULL;
-        }
-        return data;
+        return data;//regresa el data 
     }
-    throw runtime_error("The Queue is empty");
+    throw runtime_error("EMPTY\n");
 }
 
+//enqueue
+//Inserta dato al queue
+//O(1)
 template<class T>
-T Queue<T>::front() {
-    if (!isEmpty()) {
+void Queue<T>::enqueue(T data){
+    if(!isEmpty()){//si no esta vacio
+        tail->next = new Node<T>(data);//pone tail como un nuevo nodo con el dato
+        tail = tail->next;//le pone tail igual al next
+        size++;//incrementa el size
+    } else{
+        head = new Node<T>(data);//si esta vacio simplemente hace add con el data
+        tail = head;//cambia el tail al head
+        size++;//incrementa el size
+    }
+}
+
+//front
+//Obtiene el valor del primer nodo agregado al Queue
+//O(1)
+template<class T>
+T Queue<T>::front(){
+    if(!isEmpty()){
         return head->data;
     }
-    throw runtime_error("The Queue is empty");
+    throw runtime_error("EMPTY\n");
 }
 
+//back
+//Obtiene el valor del último nodo agregado al Queue
+//O(n)
 template<class T>
-T Queue<T>::back() {
-    if (!isEmpty()) {
+T Queue<T>::back(){
+    if(!isEmpty()){
         return tail->data;
     }
-    throw runtime_error("The Queue is empty");
+    throw runtime_error("EMPTY\n");
 }
 
+//clear
+//metodo para borrar todos los elementos, itera y elimina cada uno
+//o(n)
 template<class T>
-int Queue<T>::getSize() {
-    return size;
-}
-
-template<class T>
-void Queue<T>::clear() {
-    while (head != NULL) {
-        Node<T>* aux = head;
-        head = aux->next;
-        delete aux;
+void Queue<T>::clear(){
+    if(!isEmpty()){
+        while(size > 0){
+            if(size > 1){
+                Node<T> *temp = head;
+                head = head->next;
+                delete temp;
+                size--;
+            } else{
+                head = tail = NULL ;
+                size--;
+            }
+        }
+        
+    } else{
+        cout << "EMPTY\n";
     }
-    size = 0;
-    tail = NULL;
 }
 
+//print
+//metodo para imprimir, manera iterativa
+//o(n)
 template<class T>
-void Queue<T>::print() {
-    Node<T>* aux = head;
-    while (aux != NULL) {
-        cout << aux->data << " ";
-        aux = aux->next;
+void Queue<T>::print(){
+    if(!isEmpty()){
+        Node<T> *temp = head;
+        while(temp != NULL){
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout<<endl;
+    } else{
+        cout << "EMPTY"<<endl;
     }
-    cout << endl;
 }
-
-
-template<class T>
-bool Queue<T>::isEmpty() {
-    return size == 0;
-}
-#endif
