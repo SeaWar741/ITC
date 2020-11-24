@@ -73,17 +73,29 @@ int main(){
                 case 3:
                     cout<<"---------------------------------------------------"<<endl;
                     if(listSelection == 1){//verificar listas
+                        cout<<"-------=Graph=-------"<<endl;
                         graph.dfs();
+                        cout<<"-------=GraphM=-------"<<endl;
+                        graphM.dfs();
                     }else{
+                        cout<<"-------=Graph=-------"<<endl;
                         graph1.dfs();
+                        cout<<"-------=GraphM=-------"<<endl;
+                        graphM1.dfs();
                     }
                     break;
                 case 4:
                     cout<<"---------------------------------------------------"<<endl;
                     if(listSelection == 1){//verificar listas
+                        cout<<"-------=Graph=-------"<<endl;
                         graph.bfs();
+                        cout<<"-------=GraphM=-------"<<endl;
+                        graphM.bfs();
                     }else{
+                        cout<<"-------=Graph=-------"<<endl;
                         graph1.bfs();
+                        cout<<"-------=GraphM=-------"<<endl;
+                        graphM1.bfs();
                     }
                     break;
                 case 5:

@@ -117,23 +117,22 @@ void GraphM<T>::print(){
 //O(n^2)
 template<class T>
 void GraphM<T>::bfs(){
-    vector<bool> status(vertices.size(),false);
+    vector<bool> status(vertices.size(), false);
     queue<T> q;
-    //agregar el primer vertice a la fila
     q.push(vertices[0]);
     status[0] = true;
-    while (!q.empty()){
-        int vertex = q.front();
-        cout<<vertices[vertex]<<" ";
+    while (!q.empty()) {
+        T vertex = q.front();
+        cout << vertex << " ";
         int pos = findVertex(vertex);
-        for(int adj = 0; adj<vertices.size();adj++){
-            if(adjMatrix[vertex][adj]){
-                if(!status[adj]){
-                    q.push(adj);
-                    status[adj] = true;
+        for(int i = 0; i < vertices.size(); i++){
+            if(adjMatrix[pos][i]){
+                if(!status[i]){
+                    q.push(vertices[i]);
+                    status[i] = true;
                 }
             }
-        }        
+        }
         q.pop();
     }
     cout<<endl;
@@ -155,14 +154,15 @@ void GraphM<T>::dfs(){
 //O(n^2)
 template<class T>
 void GraphM<T>::dfsR(T vertex,vector<bool> &status){
-    int pos= findVertex(vertex);
+    int pos = findVertex(vertex);
     if(!status[pos]){
-        cout<<vertex<<" ";
+        cout << vertex << " ";
         status[pos] = true;
-        for(int adj = 0; adj<vertices.size();adj++){
-            pos = findVertex(adj);
-            if(!status[pos]){
-                dfsR(adj,status);
+        for(int i = 0; i < vertices.size(); i++){
+            if(adjMatrix[pos][i]){
+                if(!status[i]){
+                    dfsR(vertices[i], status);
+                }
             }
         }
     }
