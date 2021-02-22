@@ -1,3 +1,4 @@
+#lang racket
 ;Juan Carlos Garfias Tovar, A01652138
 
 ;Ejercicio 1
@@ -43,6 +44,3 @@
 ;normal
 (bmi 76 1.7)
 ;obese1
-
-
-
