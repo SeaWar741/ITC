@@ -1,0 +1,6 @@
+// Caso 3
+a = 3.1416 // Este es un real llamado a
+b = 0.12345 // Este es un real llamado b
+c = -49.2320E10 // Este es un real llamado c
+d = ( 8.10 + 10.12 - a * ( b / ( d - c ) ) ) ^ 14 // Este es un real llamado d
+// Fin de Caso 3

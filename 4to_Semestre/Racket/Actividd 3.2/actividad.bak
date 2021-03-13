@@ -1,0 +1,16 @@
+#lang racket
+
+;Bohyeon Cha A01023804
+;Juan Carlos Garfias Tovar A01652138
+
+
+
+
+
+(define (next-line-it file)
+  (let ((line (read-line file 'any)))
+    (unless (eof-object? line)
+      (displayln line)
+      (next-line-it file))))
+
+(call-with-input-file "01,txt" next-line-it) 
