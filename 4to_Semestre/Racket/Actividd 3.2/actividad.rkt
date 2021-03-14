@@ -10,10 +10,25 @@
   )
 )
 
+(define (isParentesisAbre string)
+  (if(regexp-match #rx"[(]" string)
+     (display "Parentesis que abre\n")
+     (display "Otro\n")
+  )
+)
+
+(define (isParentesisCierra string)
+  (if(regexp-match #rx"[)]" string)
+     (display "Parentesis que cierra\n")
+     (display "Otro\n")
+  )
+)
+
+
 (define (isAsignacion string)
   (if(regexp-match-positions #rx"=" string)
-     (display "Asignacion")
-     (display "Otro")
+     (display "Asignacion\n")
+     (display "Otro\n")
   )
 )
 
@@ -33,13 +48,14 @@
 
 (define (isMultiplicacion string)
   (if(regexp-match-positions #rx"[*]" string)
-     (display "Multiplicacion")
-     (display "Otro")
+     (display "Multiplicacion\n")
+     (display "Otro\n")
   )
 )
 
+;este no se como hacerlo
 (define (isPotencia string)
-  (if(regexp-match-positions #rx"[{]" string)
+  (if(regexp-match-positions #rx"[/^]" string)
      (display "Potencia\n")
      (display "Otro\n")
   )
@@ -53,7 +69,7 @@
 )
 
 (define (isReal string)
-  (if(regexp-match-positions #rx"[0-9]" string)
+  (if(regexp-match #rx"[0-9].[0-9]" string)
      (display "Real\n")
      (display "Otro\n")
   )
@@ -61,7 +77,7 @@
 
 (define (iterate lst)
   (unless (empty? lst)
-    (isReal (first lst))
+    (isParentesisAbre (first lst))
     (iterate (rest lst))))
 
 
