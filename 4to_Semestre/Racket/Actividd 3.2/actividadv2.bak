@@ -13,7 +13,7 @@
 )
 
 (define (isDivision string)
-  (if(regexp-match #rx"/" string)
+  (if(regexp-match #rx"/$" string)
      ;(display "COMENTARIO\n")
      ;(display "Otro\n")
      #t
@@ -41,7 +41,7 @@
 
 
 (define (isAsignacion string)
-  (if(regexp-match-positions #rx"=" string)
+  (if(regexp-match-positions #rx"=$" string)
      ;(display "Asignacion\n")
      ;(display "Otro\n")
      #t
@@ -50,7 +50,7 @@
 )
 
 (define (isSuma string)
-  (if(regexp-match-positions #rx"[+]" string)
+  (if(regexp-match-positions #rx"[+]$" string)
      ;(display "Suma\n")
      ;(display "Otro\n")
      #t
@@ -59,7 +59,7 @@
 )
 
 (define (isResta string)
-  (if(regexp-match #rx"[-]" string)
+  (if(regexp-match #rx"[-]$" string)
      ;(display "Resta\n")
      ;(display "Otro\n")
      #t
@@ -78,7 +78,7 @@
 
 ;este no se como hacerlo
 (define (isPotencia string)
-  (if(regexp-match-positions #rx"[/^]" string)
+  (if(regexp-match-positions #rx"\\^+" string)
      ;(display "Potencia\n")
      ;(display "Otro\n")
      #t
@@ -96,7 +96,8 @@
 )
 
 (define (isReal string)
-  (if(regexp-match #rx"[0-9].[0-9]" string)
+  ;(if(regexp-match #rx"[-]?[0-9].[0-9]" string)
+  (if(regexp-match #px"[+-]?([0-9]*[.])+[0-9]+[eE]?[-+]?\\d?" string)
      ;(display "Real\n")
      ;(display "Otro\n")
      #t
@@ -105,7 +106,8 @@
 )
 
 (define (isEntero string)
-  (if(regexp-match #rx"[0-9]+[0-9]*" string)
+  ;(if(regexp-match #rx"[-]?[0-9]+[0-9]*" string)
+  (if(regexp-match #px"[1-9]\\d*[lL]?" string)
      ;(display "Entero\n")
      ;(display "Otro\n")
      #t
@@ -134,9 +136,11 @@
       [(isResta (first lst)) (display (first lst)) (display "\tResta\n")]
       [(isMultiplicacion (first lst)) (display (first lst)) (display "\tMultiplicacion\n")]
       [(isPotencia (first lst)) (display (first lst)) (display "\tPotencia\n")]
-      [(isVariable (first lst)) (display (first lst)) (display "\tVariable\n")]
       [(isReal (first lst)) (display (first lst)) (display "\tReal\n")]
       [(isEntero (first lst)) (display (first lst)) (display "\tEntero\n")]
+      [(isVariable (first lst)) (display (first lst)) (display "\tVariable\n")]
+      
+      
     )
     (if (not (isComentario (first lst)))
         (iterate (rest lst))
@@ -153,7 +157,7 @@
       (iterate (regexp-split #px" " line))
       (next-line-it file))))
 
-(call-with-input-file "02.txt" next-line-it)
+(call-with-input-file "01.txt" next-line-it)
 
 
 ;Problemas
