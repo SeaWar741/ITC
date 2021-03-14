@@ -5,8 +5,8 @@
 
 (define (isComment string)
   (if(regexp-match-positions #rx"//" string)
-     (display "COMENTARIO")
-     (display "Otro")
+     (display "COMENTARIO\n")
+     (display "Otro\n")
   )
 )
 
@@ -19,15 +19,15 @@
 
 (define (isSuma string)
   (if(regexp-match-positions #rx"[+]" string)
-     (display "Suma")
-     (display "Otro")
+     (display "Suma\n")
+     (display "Otro\n")
   )
 )
 
 (define (isResta string)
   (if(regexp-match-positions #rx"[-]" string)
-     (display "Resta")
-     (display "Otro")
+     (display "Resta\n")
+     (display "Otro\n")
   )
 )
 
@@ -40,21 +40,28 @@
 
 (define (isPotencia string)
   (if(regexp-match-positions #rx"[{]" string)
-     (display "Potencia")
-     (display "Otro")
+     (display "Potencia\n")
+     (display "Otro\n")
   )
 )
 
 (define (isVariable string)
   (if(regexp-match-positions #rx"[a-zA-Z]+" string)
-     (display "Variable")
-     (display "Otro")
+     (display "Variable\n")
+     (display "Otro\n")
+  )
+)
+
+(define (isReal string)
+  (if(regexp-match-positions #rx"[0-9]" string)
+     (display "Real\n")
+     (display "Otro\n")
   )
 )
 
 (define (iterate lst)
   (unless (empty? lst)
-    (isVariable (first lst))
+    (isReal (first lst))
     (iterate (rest lst))))
 
 
