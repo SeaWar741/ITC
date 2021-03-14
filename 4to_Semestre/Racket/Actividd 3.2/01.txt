@@ -1,5 +1,5 @@
 // Caso 1
 area = base * altura / 2
-peso = 14.5677 - (-123.104E5) // Esto es ficticio
+peso = 14.5677 - ( -123.104E5 ) // Esto es ficticio
 cantidad = pasadas ^ potencia + ( peso * area )
 // Fin de Caso 1
