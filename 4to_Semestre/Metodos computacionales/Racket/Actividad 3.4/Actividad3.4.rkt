@@ -3,18 +3,7 @@
 ;Bohyeon Cha A01023804
 ;Juan Carlos Garfias Tovar A01652138
 
-;funcion isComentario 
-;input string
-;verifica si el string tiene el simbolo de igual
-;return true or false
-(define (isComentario string)
-  (if(regexp-match #rx"/(?=/)" string)
-     ;(display "COMENTARIO\n")
-     ;(display "Otro\n")
-     #t
-     #f
-  )
-)
+;GO R Python
 
 ;funcion isDivision 
 ;input string
@@ -69,9 +58,9 @@
   )
 )
 
-;funcion isAsignacion 
+;funcion isSuma 
 ;input string
-;verifica si el string tiene el simbolo de igual
+;verifica si el string tiene el simbolo de suma
 ;return true or false
 (define (isSuma string)
   (if(regexp-match-positions #rx"[+]$" string)
@@ -158,6 +147,7 @@
   )
 )
 
+
 ;funcion isEntero 
 ;input string
 ;verifica que sea un numero positivo o negativo entero
@@ -173,27 +163,89 @@
 )
 
 
-;funcion printLine 
-;input lista
-;imprime los strings de una linea/lista
-;imprime
-(define (printLine lst)
-  (unless (empty? lst)
-    (display (first lst))
-    (display " ")
-    (printLine (rest lst))
-   )
+;funcion is if
+;input string
+;verifica que sea un if
+(define (isIf string)
+  (if(regexp-match #px"^if+$)" string)
+     ;(display "If\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is else
+;input string
+;verifica que sea un else
+(define (isElse string)
+  (if(regexp-match #px"^else+$)" string)
+     ;(display "Else\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is funcion
+;input string
+;verifica que sea una funcion
+(define (isFuncion string)
+  (if(regexp-match #px"^else+$)" string)
+     ;(display "Else\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+
+
+;funcion is equal
+;input string
+;verifica que sea un equal
+(define (isEqual string)
+  (if(regexp-match #rx"[=]+$" string)
+     ;(display "Else\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is masmas
+;input string
+;verifica que sea un masmas
+(define (isMasmas string)
+  (if(regexp-match #rx"[++]$" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is boolean
+;input string
+;verifica que sea un masmas
+(define (isBoolean string)
+  (if(regexp-match #rx"^([Tt][Rr][Uu][Ee]|[Ff][Aa][Ll][Ss][Ee])$" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
 )
 
 
 ;funcion iterate 
 ;input lista
-;imprime los strings de una linea/lista
-;return true or false
+;evalua el tipo de string y realiza la tokenizacion
+;si es comentario todo lo demas se ignora de la tokenizacion y se imprimen juntos
+;imprime los strings con su tipo
 (define (iterate lst)
-  (unless (empty? lst)
-    (cond
-      [(isComentario (first lst)) (printLine lst) (display "\tComentario\n")]
+  (unless (empty? lst) ;verifica que no este vacia
+    (cond ;aplica funcionaes condicionales para evaluar los strings
       [(isDivision (first lst)) (display (first lst)) (display "\tDivision\n")]
       [(isParentesisAbre (first lst)) (display (first lst)) (display "\tParentesis que abre\n")]
       [(isParentesisCierra (first lst)) (display (first lst)) (display "\tParentesis que cierra\n")]
@@ -206,25 +258,31 @@
       [(isReal (first lst)) (display (first lst)) (display "\tReal\n")]
       [(isEntero (first lst)) (display (first lst)) (display "\tEntero\n")]
       [(isVariable (first lst)) (display (first lst)) (display "\tVariable\n")]
-      
+      [else (display (first lst)) (display "\tError de formato\n")]
       
     )
-    (if (not (isComentario (first lst)))
-        (iterate (rest lst))
-        #f
-    )
+    (iterate (rest lst))
 
   )
 )
 
-
+;funcion next-line-it 
+;input file (nombre o path del archivo)
+;lee cada linea del archivo y la separa por espacios
+;toma esa linea y la evalua con la funcion iterate
 (define (next-line-it file)
   (let ((line (read-line file 'any)))
     (unless (eof-object? line)
       (iterate (regexp-split #px" " line))
       (next-line-it file))))
 
-
+;funcion lexerAritmetico
+;input file (nombre o path del archivo)
+;output imprime la tokenizacion 
 (define (lexerAritmetico filename)
+  (display "\nToken\tTipo\n")
   (call-with-input-file filename next-line-it)
 )
+
+(display "Bohyeon Cha & Juan Carlos Garfias\n")
+(display "Ingresar (lexerAritmetico Nombre del archivo)\n")

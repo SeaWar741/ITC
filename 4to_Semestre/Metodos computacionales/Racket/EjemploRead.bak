@@ -1,0 +1,8 @@
+#lang racket
+(define p1 (open-input-file "EjemAct3_2.txt"))
+(define dato (read p1))
+(display dato)
+(define dato2(read p1))
+(display dato2)
+(define dato3 (read p1))
+(display dato3)
