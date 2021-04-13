@@ -50,7 +50,7 @@
 ;verifica si el string tiene el simbolo de igual
 ;return true or false
 (define (isAsignacion string)
-  (if(regexp-match-positions #rx"=$" string)
+  (if(regexp-match-positions #rx"=|(<-)$" string)
      ;(display "Asignacion\n")
      ;(display "Otro\n")
      #t
@@ -127,7 +127,7 @@
 )
 
 
-;funcion isReal 
+;funcion isFloat
 ;input string
 ;verifica que sea un numero con un punto ya sea cualquier parte del string
 ;verifica si contiene e o E o no. Toma si es negativo o positivo. Verifica que solo
@@ -137,7 +137,7 @@
 (define (isReal string)
   ;(if(regexp-match #rx"[-]?[0-9].[0-9]" string)
   (if(regexp-match #px"^([+-]?(\\d*\\.)?(?!.*?\\.\\.)\\d+[eE]?[-+]?\\d*?)|^[+-]?(?!.*?\\.\\.)[0-9.]+$" string)
-     ;(display "Real\n")
+     ;(display "Float\n")
      ;(display "Otro\n")
      (if (regexp-match #px"^[^.]*$" string)
          #f
@@ -191,7 +191,7 @@
 ;input string
 ;verifica que sea una funcion
 (define (isFuncion string)
-  (if(regexp-match #px"^else+$)" string)
+  (if(regexp-match #rx"(?:(\(+([0-9]|[a-zA-Z])?\)+) )[ ( ?<![0-9])[a-zA-Z]]" string)
      ;(display "Else\n")
      ;(display "Otro\n")
      #t
@@ -205,8 +205,8 @@
 ;input string
 ;verifica que sea un equal
 (define (isEqual string)
-  (if(regexp-match #rx"[=]+$" string)
-     ;(display "Else\n")
+  (if(regexp-match #rx"(?<!=)==(?!=)" string)
+     ;(display "Igual\n")
      ;(display "Otro\n")
      #t
      #f
@@ -217,7 +217,7 @@
 ;input string
 ;verifica que sea un masmas
 (define (isMasmas string)
-  (if(regexp-match #rx"[++]$" string)
+  (if(regexp-match #px"[+]{2}" string)
      ;(display "Mas mas\n")
      ;(display "Otro\n")
      #t
@@ -236,6 +236,68 @@
      #f
   )
 )
+
+;funcion isLlaveAbre
+(define (isLlaveAbre string)
+  (if(regexp-match #rx"[[]" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion isLlaveCierra
+(define (isLlaveCierra string)
+  (if(regexp-match #rx"[]]" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is import
+(define (isImport string)
+  (if(regexp-match #rx"^import+$" string)
+     ;(display "Import\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is defFunc
+(define (isDefFunc string)
+  (if(regexp-match #rx"^func|def+$" string)
+     ;(display "Def\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is return
+(define (isReturn string)
+  (if(regexp-match #rx"^return+$" string)
+     ;(display "Return\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is end
+(define (isEnd string)
+  if(regexp-match #rx"^end+$" string)
+     ;(display "End\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+
 
 
 ;funcion iterate 
