@@ -191,7 +191,7 @@
 ;input string
 ;verifica que sea una funcion
 (define (isFuncion string)
-  (if(regexp-match #rx"(?:(\(+([0-9]|[a-zA-Z])?\)+) )[ ( ?<![0-9])[a-zA-Z]]" string)
+  (if(regexp-match #rx"[a-zA-Z]+\\([^\\)]*\\)(\\.[^\\)]*\\))?" string)
      ;(display "Else\n")
      ;(display "Otro\n")
      #t
@@ -289,7 +289,7 @@
 
 ;funcion is end
 (define (isEnd string)
-  if(regexp-match #rx"^end+$" string)
+  (if(regexp-match #rx"^end+$" string)
      ;(display "End\n")
      ;(display "Otro\n")
      #t
