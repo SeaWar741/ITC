@@ -23,7 +23,7 @@
 ;verifica si el string tiene el simbolo de parentesis abierto
 ;return true or false
 (define (isParentesisAbre string)
-  (if(regexp-match #rx"[(]" string)
+  (if(regexp-match #rx"^[(]+$" string)
      ;(display "Parentesis que abre\n")
      ;(display "Otro\n")
      #t
@@ -36,7 +36,7 @@
 ;verifica si el string tiene el simbolo de parentesis cerrado
 ;return true or false
 (define (isParentesisCierra string)
-  (if(regexp-match #rx"[)]" string)
+  (if(regexp-match #rx"^[)]+$" string)
      ;(display "Parentesis que cierra\n")
      ;(display "Otro\n")
      #t
@@ -239,7 +239,7 @@
 
 ;funcion isLlaveAbre
 (define (isLlaveAbre string)
-  (if(regexp-match #rx"[[]" string)
+  (if(regexp-match #rx"^[[]+$" string)
      ;(display "Mas mas\n")
      ;(display "Otro\n")
      #t
@@ -249,7 +249,7 @@
 
 ;funcion isLlaveCierra
 (define (isLlaveCierra string)
-  (if(regexp-match #rx"[]]" string)
+  (if(regexp-match #rx"^[]]+$" string)
      ;(display "Mas mas\n")
      ;(display "Otro\n")
      #t
@@ -269,7 +269,7 @@
 
 ;funcion is defFunc
 (define (isDefFunc string)
-  (if(regexp-match #rx"^func|def+$" string)
+  (if(regexp-match #rx"(\\s|^|[\t])func|def+$" string)
      ;(display "Def\n")
      ;(display "Otro\n")
      #t
@@ -279,7 +279,7 @@
 
 ;funcion is return
 (define (isReturn string)
-  (if(regexp-match #rx"^return+$" string)
+  (if(regexp-match #rx"(\\s|^|[\t])return+$" string)
      ;(display "Return\n")
      ;(display "Otro\n")
      #t
@@ -289,13 +289,117 @@
 
 ;funcion is end
 (define (isEnd string)
-  (if(regexp-match #rx"^end+$" string)
+  (if(regexp-match #rx"(\\s|^|[\t])end+$" string)
      ;(display "End\n")
      ;(display "Otro\n")
      #t
      #f
   )
 )
+
+;funcion is comment
+(define (isFor string)
+  (if(regexp-match #rx"for+$" string)
+     ;(display "For\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion is comment
+(define (isComment string)
+  (if(regexp-match #rx"//|#" string)
+     ;(display "Comment\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion whiteline 
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (whiteline string)
+  (if(regexp-match #rx"^\\s*$" string)
+     ;(display "Comment\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion minor 
+;input lista
+(define (isMinor string)
+  (if(regexp-match #rx"^<" string)
+     ;(display " Minor\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion minorEqual
+;input lista
+(define (isMinorEqual string)
+  (if(regexp-match #rx"^<=" string)
+     ;(display "MinorEqual\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion major 
+;input lista
+(define (isMajor string)
+  (if(regexp-match #rx"^>" string)
+     ;(display "Major\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion majorEqual
+;input lista
+(define (isMajorEqual string)
+  (if(regexp-match #rx"^>=" string)
+     ;(display "MajorEqual\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion modulus
+;input lista
+(define (isModulus string)
+  (if(regexp-match #rx"^%" string)
+     ;(display "Modulus\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+
+
+;funcion printLine 
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (printLine lst)
+  (unless (empty? lst)
+    (display (first lst))
+    (display " ")
+    (printLine (rest lst))
+   )
+)
+
+
 
 
 
@@ -308,22 +412,54 @@
 (define (iterate lst)
   (unless (empty? lst) ;verifica que no este vacia
     (cond ;aplica funcionaes condicionales para evaluar los strings
+      [(whiteline (first lst)) #f]
+      [(isComment (first lst)) (printLine lst) (display "\tComentario\n")]
+      [(isDefFunc(first lst)) (display (first lst)) (display "\tDefinicion de funcion\n")]
+      [(isFuncion (first lst)) (display (first lst)) (display "\tFuncion\n")]
+      [(isIf(first lst)) (display (first lst)) (display "\tIF\n")]
+      [(isElse(first lst)) (display (first lst)) (display "\tElse\n")]
+      [(isIf(first lst)) (display (first lst)) (display "\tIF\n")]
+      [(isBoolean(first lst)) (display (first lst)) (display "\tBoolean\n")]
+      [(isImport(first lst)) (display (first lst)) (display "\tImport\n")]
+      [(isReturn(first lst)) (display (first lst)) (display "\tReturn\n")]
+      [(isEnd(first lst)) (display (first lst)) (display "\tEnd\n")]
+      [(isFor(first lst)) (display (first lst)) (display "\tFor\n")]
+
+      [(isMinorEqual(first lst)) (display (first lst)) (display "\tMinorEqual\n")]
+      [(isMajorEqual(first lst)) (display (first lst)) (display "\tMajorEqual\n")]
+      [(isMinor(first lst)) (display (first lst)) (display "\tMinor\n")]
+      [(isMajor(first lst)) (display (first lst)) (display "\tMajor\n")]
+      
+      
       [(isDivision (first lst)) (display (first lst)) (display "\tDivision\n")]
       [(isParentesisAbre (first lst)) (display (first lst)) (display "\tParentesis que abre\n")]
       [(isParentesisCierra (first lst)) (display (first lst)) (display "\tParentesis que cierra\n")]
-      [(isParentesisCierra (first lst)) (display (first lst)) (display "\tParentesis que cierra\n")]
+
+      [(isLlaveAbre (first lst)) (display (first lst)) (display "\tLlave que abre\n")]
+      [(isLlaveCierra (first lst)) (display (first lst)) (display "\tLlave que cierra\n")]
+
+      
+      
+      [(isEqual(first lst)) (display (first lst)) (display "\tIgualIgual\n")]
       [(isAsignacion (first lst)) (display (first lst)) (display "\tAsignacion\n")]
+
+      [(isMasmas(first lst)) (display (first lst)) (display "\tMasMas\n")]
       [(isSuma (first lst)) (display (first lst)) (display "\tSuma\n")]
       [(isResta (first lst)) (display (first lst)) (display "\tResta\n")]
       [(isMultiplicacion (first lst)) (display (first lst)) (display "\tMultiplicacion\n")]
       [(isPotencia (first lst)) (display (first lst)) (display "\tPotencia\n")]
+      [(isModulus (first lst)) (display (first lst)) (display "\tModulo\n")]
       [(isReal (first lst)) (display (first lst)) (display "\tReal\n")]
       [(isEntero (first lst)) (display (first lst)) (display "\tEntero\n")]
       [(isVariable (first lst)) (display (first lst)) (display "\tVariable\n")]
       [else (display (first lst)) (display "\tError de formato\n")]
       
     )
-    (iterate (rest lst))
+    ;si no es comentario se itera si es comentario se imprime directamente
+    (if (not (isComment (first lst)))
+        (iterate (rest lst))
+        #f
+    )
 
   )
 )
@@ -341,10 +477,13 @@
 ;funcion lexerAritmetico
 ;input file (nombre o path del archivo)
 ;output imprime la tokenizacion 
-(define (lexerAritmetico filename)
+(define (lexer filename)
   (display "\nToken\tTipo\n")
   (call-with-input-file filename next-line-it)
 )
 
 (display "Bohyeon Cha & Juan Carlos Garfias\n")
-(display "Ingresar (lexerAritmetico Nombre del archivo)\n")
+(display "Ingresar (lexer Nombre del archivo)\n")
+
+
+(lexer "./Examples/Quicksort.py")
