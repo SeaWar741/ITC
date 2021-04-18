@@ -1,6 +1,14 @@
-  (display "<tbody>")
-  (display "</table>")
-  (display "</div>")
-  (display "</div>")
-  (display "</body>")
-  (display "</html>")
+ (
+ 
+ (C) (#Cálculo del número e mediante la serie infinita 1+(1/1!)+(1/2!)+(1/3!)+...)
+ (C) (#En lugar de una serie infinita haremos una serie de 17 términos  )
+ (R)(import math)  
+ (LC)(R)(print)(Par)(() (S)("número e="),math.e)  
+ print("calculando el número e con la serie")  
+ suma=0  
+ for i in range(0,18):  
+  valor=1/math.factorial(i) #recordemos que 0!=1  
+  suma+=valor  
+  print(i,valor,suma)  
+
+ )

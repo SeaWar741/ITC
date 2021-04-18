@@ -11,12 +11,14 @@
          (print-tuple (rest tuple) out)]))
 
 (define (reader filename)
-  (define out (open-output-file "testing.html"))
-  (file->lines "htmlBase.txt")
+  (define out (open-output-file "testing.html" #:exists 'replace)
+    
+   )
+  (define iistt (file->lines "htmlBase.txt"))
 
   ;(for-each display file out)
 
-  ;(print-tuple file out)
+  (print-tuple iistt out)
   
   (display "<tbody>\n" out)
   (display "</table>\n" out)
