@@ -386,6 +386,15 @@
 )
 
 
+;funcion reserved
+(define (isReserved string)
+  (if(regexp-match #rx"(\\s|^|[\t])(and|except|lambda|with|as|finally|nonlocal|while|assert|false|None|yield|break|for|not|class|from|or|continue|global|pass|def|if|raise|del|import|return|elif|in|True|else|is|try|const|var|func|type|package|chan|interface|map|struct|case|default|fallthrough|goto|range|select|switch|defer|go|repeat|function|next|TRUE|FALSE|NULL|Inf|NaN|NA|NA_integer_|NA_real_|NA_complex_|NA_character_|...)+$" string)
+     #t
+     #f
+  )
+)
+
+
 
 ;funcion printLine 
 ;input lista
@@ -437,9 +446,7 @@
 
       [(isLlaveAbre (first lst)) (display (first lst)) (display "\tLlave que abre\n")]
       [(isLlaveCierra (first lst)) (display (first lst)) (display "\tLlave que cierra\n")]
-
-      
-      
+ 
       [(isEqual(first lst)) (display (first lst)) (display "\tIgualIgual\n")]
       [(isAsignacion (first lst)) (display (first lst)) (display "\tAsignacion\n")]
 
@@ -451,6 +458,10 @@
       [(isModulus (first lst)) (display (first lst)) (display "\tModulo\n")]
       [(isReal (first lst)) (display (first lst)) (display "\tReal\n")]
       [(isEntero (first lst)) (display (first lst)) (display "\tEntero\n")]
+
+      ;reservados, hace catch si no encuentra especificamente la necesaria
+      ;[(isReserved (first lst)) (display (first lst)) (display "\tReservada\n")]
+      
       [(isVariable (first lst)) (display (first lst)) (display "\tVariable\n")]
       [else (display (first lst)) (display "\tError de formato\n")]
       
