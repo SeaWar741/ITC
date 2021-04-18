@@ -1,0 +1,4 @@
+#lang racket
+(define out (open-output-file "data"))
+(display "hello" out)
+(close-output-port out)
