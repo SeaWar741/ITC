@@ -1,48 +1,1003 @@
-<!DOCTYPE html> <html lang="es"> <head>     <meta charset="UTF-8">     <meta http-equiv="X-UA-Compatible" content="IE=edge">     <meta name="viewport" content="width=device-width, initial-scale=1.0">     <title>Resaltador de sintaxis</title>     <!-- Font Awesome -->     <link     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"     rel="stylesheet"     />     <!-- Google Fonts -->     <link     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"     rel="stylesheet"     />     <!-- MDB -->     <link     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"     rel="stylesheet"     />     <link rel="stylesheet" href="style.css"> </head> <body>     <!-- As a heading -->     <nav class="navbar navbar-dark bg-primary sticky-top">         <div class="container-fluid">         <span class="navbar-brand mb-0 h1">Resaltador de sintaxis</span>         </div>     </nav>     <div class="parent">         <div class="div1" style="display: flex;         align-items: center;">             <div >                 <h2>Bohyeon Cha & Juan Carlos Garfias Tovar</h2>             </div>                      </div>         <div class="div2">             <img                 src="./img/Go.jpg"                 class="img-fluid"                 alt=""                 width="100px"             />         </div>         <div class="div3">             <img                 src="./img/Python.jpg"                 class="img-fluid"                 alt=""                 width="100px"             />         </div>         <div class="div4">             <img                 src="./img/R.jpg"                 class="img-fluid"                 alt=""                 width="100px"             />         </div>         <div class="div5">             <table class="table table-hover">                 <thead>                     <tr>                         <th scope="col">Linea</th>                         <th scope="col">Tipo</th>                         <th scope="col">Token</th>                     </tr>                 </thead>                 <tbody><tr ><td># Python program for implementation of Quicksort Sort </td><td>Comentario
-</td></tr><tr ></tr></tr><tr ><td># This function takes last element as pivot, places </td><td>Comentario
-</td></tr><tr ><td># the pivot element at its correct position in sorted </td><td>Comentario
-</td></tr><tr ><td># array, and places all smaller (smaller than pivot) </td><td>Comentario
-</td></tr><tr ><td># to left of pivot and all greater elements to right </td><td>Comentario
-</td></tr><tr ><td># of pivot </td><td>Comentario
-</td></tr><tr ></tr></tr><tr ></tr></tr><tr ><td>def</td><td>Definicion de funcion
-</td><tr ><td>partition(arr,low,high):</td><td>Funcion
-</td></tr></tr></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ><td># index of smaller element </td><td>Comentario
-</td></tr></tr></tr></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ><td># pivot </td><td>Comentario
-</td></tr></tr></tr></tr><tr ></tr></tr><tr ><td>	for</td><td>For
-</td><tr ><tr ><tr ><tr ></tr></tr></tr></tr></tr></tr><tr ></tr></tr><tr ><td>		# If current element is smaller than or </td><td>Comentario
-</td></tr><tr ><td>		# equal to pivot </td><td>Comentario
-</td></tr><tr ><tr ><tr ><td><=</td><td>MinorEqual
-</td><tr ></tr></tr></tr></tr></tr><tr ></tr></tr><tr ><td>			# increment index of smaller element </td><td>Comentario
-</td></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ></tr></tr></tr></tr><tr ><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ></tr></tr></tr></tr></tr></tr><tr ></tr></tr><tr ><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ></tr></tr></tr></tr></tr></tr><tr ><td>	return</td><td>Return
-</td><tr ></tr></tr></tr><tr ></tr></tr><tr ><td># The main function that implements QuickSort </td><td>Comentario
-</td></tr><tr ><td># arr[] --> Array to be sorted, </td><td>Comentario
-</td></tr><tr ><td># low --> Starting index, </td><td>Comentario
-</td></tr><tr ><td># high --> Ending index </td><td>Comentario
-</td></tr><tr ></tr></tr><tr ><td># Function to do Quick sort </td><td>Comentario
-</td></tr><tr ></tr></tr><tr ></tr></tr><tr ><td>def</td><td>Definicion de funcion
-</td><tr ><tr ><tr ></tr></tr></tr></tr></tr><tr ><tr ><td>len(arr)</td><td>Funcion
-</td><tr ><td>==</td><td>IgualIgual
-</td><tr ></tr></tr></tr></tr></tr><tr ><td>		return</td><td>Return
-</td><tr ></tr></tr></tr><tr ><tr ><tr ><</td><td>Minor
-</td><tr ></tr></tr></tr></tr></tr><tr ></tr></tr><tr ><td>		# pi is partitioning index, arr[p] is now </td><td>Comentario
-</td></tr><tr ><td>		# at right place </td><td>Comentario
-</td></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ><tr ></tr></tr></tr></tr></tr></tr><tr ></tr></tr><tr ><td>		# Separately sort elements before </td><td>Comentario
-</td></tr><tr ><td>		# partition and after partition </td><td>Comentario
-</td></tr><tr ><tr ><tr ></tr></tr></tr></tr><tr ><tr ><tr ></tr></tr></tr></tr><tr ></tr></tr><tr ></tr></tr><tr ><td># Driver code to test above </td><td>Comentario
-</td></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><tr ><tr ><tr ><tr ><tr ></tr></tr></tr></tr></tr></tr></tr></tr></tr><tr ><tr ><td>=</td><td>Asignacion
-</td><tr ><td>len(arr)</td><td>Funcion
-</td></tr></tr></tr></tr><tr ><tr ><tr ></tr></tr></tr></tr><tr ><tr ><tr ></tr></tr></tr></tr><tr ><td>for</td><td>For
-</td><tr ><tr ><tr ><td>range(n):</td><td>Funcion
-</td></tr></tr></tr></tr></tr><tr ><tr ><tr ></tr></tr></tr></tr><tr ></tr></tr><tr ><td># This code is contributed by Mohit Kumra </td><td>Comentario
-</td></tr><tr ><td>#This code in improved by https://github.com/anushkrishnav </td><td>Comentario
-</td></tr><tbody>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resaltador de sintaxis</title>
+    <!-- Font Awesome -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.3.0/mdb.min.css"
+    rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- As a heading -->
+    <nav class="navbar navbar-dark bg-primary sticky-top">
+        <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Resaltador de sintaxis</span>
+        </div>
+    </nav>
+    <div class="parent">
+        <div class="div1" style="display: flex;
+        align-items: center;">
+            <div >
+                <h2>Bohyeon Cha & Juan Carlos Garfias Tovar</h2>
+            </div>
+            
+        </div>
+        <div class="div2">
+            <img
+                src="./img/Go.jpg"
+                class="img-fluid"
+                alt=""
+                width="100px"
+            />
+        </div>
+        <div class="div3">
+            <img
+                src="./img/Python.jpg"
+                class="img-fluid"
+                alt=""
+                width="100px"
+            />
+        </div>
+        <div class="div4">
+            <img
+                src="./img/R.jpg"
+                class="img-fluid"
+                alt=""
+                width="100px"
+            />
+        </div>
+        <div class="div5">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Linea</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Token</th>
+                    </tr>
+                </thead>
+                <tbody>
+<tr>
+<td>
+# Simple implementation of Selection Sort and Quicksort in R. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# Quick sort algorithm: </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 1. Select a random value from the array. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 2. Put all values less than the random in arrayLeft. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 3. Put all values greater than the random in arrayRight. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 4. If arrayLeft or arrayRight has more than 1 value, repeat the above steps on it. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 5. The sorted result is arrayLeft, random, arrayRight. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# Selection sort algorithm: </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 1. Find the smallest value in the array and move it to a result array. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 2. If there is more than 1 value remaining, repeat the above step on the rest. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# 3. The sorted result is smallest, rest. </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# Kory Becker 9/4/2015 </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+<td>
+# http://primaryobjects.com/kory-becker </td>
+<td>
+Comentario
+</td>
+</tr>
+
+<tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+function(arr)</td>
+<td>
+Definicion de funcion
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+# Find the smallest value in the list (ok sort of cheating, because we're using the highliy optimized min() function). </td>
+<td>
+Comentario
+</td>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+min(arr)</td>
+<td>
+Funcion
+</td>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+<td>
+!=</td>
+<td>
+Diferente
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+if</td>
+<td>
+IF
+</td>
+
+<tr>
+<td>
+(length(rest)</td>
+<td>
+Funcion
+</td>
+
+<tr>
+<td>
+></td>
+<td>
+Major
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+<td>
+!=</td>
+<td>
+Diferente
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+</tr>
+</tr>
+
+<tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+function(arr)</td>
+<td>
+Definicion de funcion
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+# Pick a number at random. </td>
+<td>
+Comentario
+</td>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+# Place-holders for left and right values. </td>
+<td>
+Comentario
+</td>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+c()</td>
+<td>
+Funcion
+</td>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+c()</td>
+<td>
+Funcion
+</td>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+# Move all the smaller values to the left, bigger values to the right. </td>
+<td>
+Comentario
+</td>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+!=</td>
+<td>
+Diferente
+</td>
+
+<tr>
+
+<tr>
+<td>
+function(d)</td>
+<td>
+Definicion de funcion
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+if</td>
+<td>
+IF
+</td>
+
+<tr>
+
+<tr>
+<</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+else</td>
+<td>
+Else
+</td>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+if</td>
+<td>
+IF
+</td>
+
+<tr>
+<td>
+(length(left)</td>
+<td>
+Funcion
+</td>
+
+<tr>
+<td>
+></td>
+<td>
+Major
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+quickSort(left)</td>
+<td>
+Funcion
+</td>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+if</td>
+<td>
+IF
+</td>
+
+<tr>
+<td>
+(length(right)</td>
+<td>
+Funcion
+</td>
+
+<tr>
+<td>
+></td>
+<td>
+Major
+</td>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<-</td>
+<td>
+Minor
+</td>
+
+<tr>
+<td>
+quickSort(right)</td>
+<td>
+Funcion
+</td>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+<td>
+# Finally, return the sorted values. </td>
+<td>
+Comentario
+</td>
+</tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+</tr>
+
+<tr>
+</tr>
+</tr>
+
+<tr>
+
+<tr>
+
+<tr>
+</tr>
+</tr>
+</tr>
+</tr>
+<tbody>
 </table>
 </div>
 </div>

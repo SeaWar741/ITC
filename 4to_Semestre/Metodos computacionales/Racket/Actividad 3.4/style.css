@@ -1,12 +1,12 @@
 .parent {
+    padding-top: 2rem;
     display: grid;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: repeat(5, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     }
     
-    .div1 { grid-area: 2 / 2 / 3 / 5; }
+    .div1 { grid-area: 2 / 2 / 3 / 5; padding-top: 2rem;}
     .div2 { grid-area: 2 / 5 / 3 / 6; }
     .div3 { grid-area: 2 / 6 / 3 / 7; }
     .div4 { grid-area: 2 / 7 / 3 / 8; }
