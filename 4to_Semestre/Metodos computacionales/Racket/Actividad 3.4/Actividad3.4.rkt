@@ -7,6 +7,12 @@
 
 ;GO R Python
 
+;funcion counter
+(define (contadorCreador(cont 0)(agregar 1))
+  (lambda() (set! cont (+ cont agregar)) cont)
+)
+(define contador(contadorCreador)) 
+
 ;funcion isDivision 
 ;input string
 ;verifica si el string tiene el simbolo de division
@@ -52,7 +58,7 @@
 ;verifica si el string tiene el simbolo de igual
 ;return true or false
 (define (isAsignacion string)
-  (if(regexp-match-positions #rx"=|(<-)$" string)
+  (if(regexp-match-positions #rx"=|<-$" string)
      ;(display "Asignacion\n")
      ;(display "Otro\n")
      #t
@@ -128,20 +134,73 @@
   )
 )
 
+(define (printIdentifier string out)
+        (display "<td>\n" out) 
+            (display string out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Identificador\n" out)
+        (display "</td>\n" out)   
+)
+
+(define (printIdentifierFirst string out)
+        (display "<td>\n" out) 
+          (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
+        (display "</td>\n" out)
+        (display "<td>\n" out) 
+          (display "Identificador\n" out)
+        (display "</td>\n" out)  
+)
+
+(define (evaluateIdentifier string out)
+;checar tabulacion y espacio pa excluir
+    (if (regexp-match* #rx"[ \t]" (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) #:match-select car #:gap-select? #t)
+        (printIdentifierFirst string out)
+        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
+    )
+        
+    
+)
+
 
 ;funcion isVariable 
 ;input string
 ;verifica si el string tiene caracteres, numeros y underscore. El primer caracter siempre tiene que ser letras
 ;return true or false
-(define (isVariable string)
-  (if(regexp-match-positions #rx"(?<![_0-9])[a-zA-Z]" string) 
+(define (isVariable string out)
+  (if(regexp-match-positions #rx"(?<![_0-9\\s])[a-zA-Z]+$" string) 
+    (if(regexp-match-positions #rx"(?<![_0-9\\s])[a-zA-Z]+$" string)
      ;(display "Variable\n")
      ;(display "Otro\n")
-     #t
-     #f
+    (printIdentifier string out)
+        ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
+    (evaluateIdentifier string out)
+      
+    )
+    #f
   )
 )
 
+
+(define (printNumber string out)
+        (display "no hizo caso")
+        (display "<td>\n" out) 
+            (display string out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Identificador\n" out)
+        (display "</td>\n" out)   
+)
+
+(define (evaluateNumber string out)
+        (display "<td>\n" out) 
+            (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Identificador\n" out)
+          (display "</td>\n" out)  
+        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
+)
 
 ;funcion isFloat
 ;input string
@@ -203,15 +262,42 @@
   )
 )
 
+(define (printFuncion string out)
+        (display "<td>\n" out) 
+            (display string out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Funcion\n" out)
+        (display "</td>\n" out)   
+)
+
+(define (evaluateFunction string out)
+        (display "<td>\n" out) 
+            (display (first (regexp-match* #rx"\\(|\\)|,| |\\[|\\]|\\{|\\}" string #:match-select car #:gap-select? #t)) out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Funcion\n" out)
+          (display "</td>\n" out)  
+        (iterate (rest (regexp-match* #rx"\\(|\\)|,| |\\[|\\]|\\{|\\}" string #:match-select car #:gap-select? #t)) out)
+)
+
 ;funcion is funcion
 ;input string
 ;verifica que sea una funcion
-(define (isFuncion string)
-  (if(regexp-match #rx"[a-zA-Z]+\\([^\\)]*\\)(\\.[^\\)]*\\))?" string)
-     ;(display "Else\n")
-     ;(display "Otro\n")
-     #t
-     #f
+(define (isFuncion string out)
+  (if(regexp-match #rx"[a-zA-Z]+\\(+" string)
+    (if(regexp-match #rx"[a-zA-Z]+\\([^\\)]*\\)(\\.[^\\)]*\\))?" string) ;<--- esta no se cumple
+      ;(display "Funcion\n")
+      ;(display "Otro\n")
+
+        (printFuncion string out)
+      (if(regexp-match #rx"[a-zA-Z]+\\(+" string)
+        ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
+        (evaluateFunction string out)
+        #f
+      )
+    )
+    #f
   )
 )
 
@@ -271,6 +357,27 @@
      #f
   )
 )
+
+;funcion isLlaveAbre
+(define (isCurlyBracketAbre string)
+  (if(regexp-match #rx"^[{]+$" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion isLlaveCierra
+(define (isCurlyBracketCierra string)
+  (if(regexp-match #rx"^[}]+$" string)
+     ;(display "Mas mas\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
 
 ;funcion is import
 (define (isImport string)
@@ -339,6 +446,45 @@
 (define (whiteline string)
   (if(regexp-match #rx"^\\s*$" string)
      ;(display "Comment\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion whitespace 
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (whitespace string)
+  (if(regexp-match #px"^[[:blank:]]+$"  string)
+     ;(display "Comment\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion comma 
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (isComma string)
+  (if(regexp-match #rx"^[,]+$" string)
+     ;(display "Comma\n")
+     ;(display "Otro\n")
+     #t
+     #f
+  )
+)
+
+;funcion comma 
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (isDosPuntos string)
+  (if(regexp-match #rx"^[:]+$" string)
+     ;(display "Comma\n")
      ;(display "Otro\n")
      #t
      #f
@@ -423,6 +569,7 @@
    )
 )
 
+
 ;funcion para exportar a HTML
 (define (print-tuple tuple out)
   (cond [(empty? (rest tuple))
@@ -447,6 +594,7 @@
     (display "\n<tr>\n" out)
     (cond ;aplica funcionaes condicionales para evaluar los strings
       [(whiteline (first lst)) #f]
+      [(whitespace (first lst)) #f]
       [(isComment (first lst))
               (display "<td>\n" out) 
                 (printLine lst out)
@@ -463,13 +611,7 @@
                 (display "Definicion de funcion\n" out)
               (display "</td>\n" out)
       ]
-      [(isFuncion (first lst)) 
-              (display "<td>\n" out) 
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out) 
-                (display "Funcion\n" out)
-              (display "</td>\n" out)
+      [(isFuncion (first lst) out) 
       ]
       [(isIf(first lst)) 
               (display "<td>\n" out) 
@@ -528,6 +670,15 @@
               (display "</td>\n" out)
       ]
 
+      [(isReal (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Real\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isMinorEqual(first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -544,14 +695,43 @@
                 (display "MajorEqual\n" out)
               (display "</td>\n" out)
       ]
-      [(isMinor(first lst))
-              (display "<td>\n") out 
+ 
+      [(isEqual(first lst)) 
+              (display "<td>\n" out)  
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
-                (display "Minor\n" out)
+                (display "IgualIgual\n" out)
               (display "</td>\n" out)
       ]
+
+      [(isDiferente(first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Diferente\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isMasmas(first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "MasMas\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isAsignacion (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Asignacion\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isMajor(first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -560,8 +740,43 @@
                 (display "Major\n" out)
               (display "</td>\n" out)
       ]
-              
+
+      [(isMinor(first lst))
+              (display "<td>\n" out) 
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Minor\n" out)
+              (display "</td>\n" out)
+      ]
       
+      [(isSuma (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Suma\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isResta (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Resta\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isMultiplicacion (first lst)) 
+              (display "<td>\n" out)   
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Multiplicacion\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isDivision (first lst)) 
               (display "<td>\n" out)
                 (display (first lst) out)
@@ -570,6 +785,25 @@
                 (display "Division\n" out)
               (display "</td>\n" out)
       ]
+
+      [(isPotencia (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Potencia\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isModulus (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Modulo\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isParentesisAbre (first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -595,6 +829,7 @@
                 (display "Llave que abre\n" out)
               (display "</td>\n" out)
       ]
+
       [(isLlaveCierra (first lst))
               (display "<td>\n" out)  
                 (display (first lst) out)
@@ -603,86 +838,27 @@
                 (display "Llave que cierra\n" out)
               (display "</td>\n" out)
       ]
- 
-      [(isEqual(first lst)) 
-              (display "<td>\n" out)  
+
+      [(isCurlyBracketAbre (first lst)) 
+              (display "<td>\n" out)
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
-                (display "IgualIgual\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isDiferente(first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Diferente\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isAsignacion (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Asignacion\n" out)
+                (display "Curly bracket que abre\n" out)
               (display "</td>\n" out)
       ]
 
-      [(isMasmas(first lst))
+      [(isCurlyBracketCierra (first lst))
               (display "<td>\n" out)  
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
-                (display "MasMas\n") out]
-              (display "</td>\n" out)
-      [(isSuma (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Suma\n" out)
+                (display "Curly bracket que cierra\n" out)
               (display "</td>\n" out)
       ]
-      [(isResta (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Resta\n") out]
-              (display "</td>\n" out)
-      [(isMultiplicacion (first lst)) 
-              (display "<td>\n" out)   
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Multiplicacion\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isPotencia (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Potencia\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isModulus (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Modulo\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isReal (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Real\n" out)
-              (display "</td>\n" out)
-      ]
+
+
+
       [(isEntero (first lst)) 
               (display "<td>\n" out)  
                 (display (first lst) out)
@@ -702,14 +878,27 @@
               (display "</td>\n" out)
       ]
       
-      [(isVariable (first lst)) 
-              (display "<td>\n") out 
+      [(isVariable (first lst) out) 
+      ]
+
+      [(isComma (first lst)) 
+              (display "<td>\n" out)  
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
-                (display "Variable\n" out)
+                (display "Coma\n" out)
               (display "</td>\n" out)
       ]
+      
+      [(isDosPuntos (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Dos Puntos\n" out)
+              (display "</td>\n" out)
+      ]
+
       [else 
               (display "<td>\n" out)
                 (display (first lst) out)  
@@ -717,23 +906,22 @@
               (display "<td>\n" out)
                 (display "Error de formato\n"  out)
               (display "</td>\n" out)
-      ]
-      
-    )
+      ] 
+    ) 
     ;si no es comentario se itera si es comentario se imprime directamente
     (if (not (isComment (first lst)))
         (iterate (rest lst) out)
         #f
     )
+    ;;; (display "<td>\n" out)
+    ;;; (display (contador) out)  
+    ;;; (display "</td>\n" out)
 
   )
+
+
   (display "</tr>\n" out)
 )
-
-
-
-
-
 
 
 ;funcion next-line-it 

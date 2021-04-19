@@ -65,9 +65,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Linea</th>
-                        <th scope="col">Tipo</th>
                         <th scope="col">Token</th>
+			<th scope="col">Tipo</th>
                     </tr>
                 </thead>
                 <tbody>

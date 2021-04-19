@@ -1,11 +1,3 @@
 #lang racket
-(define (isMinor string)
-  (if(regexp-match #rx"^<" string)
-     ;(display " Minor\n")
-     ;(display "Otro\n")
-     #t
-     #f
-  )
-)
-
-(isMinor "<")
+(define (ismember1? str strs) (ormap [lambda (s) (string=? s str)] strs) )
+(ismember1? "\t" '("hola","como","\t"))
