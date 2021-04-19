@@ -7,6 +7,12 @@
 
 ;GO R Python
 
+;funcion counter
+(define (contadorCreador(cont 0)(agregar 1))
+  (lambda() (set! cont (+ cont agregar)) cont)
+)
+(define contador(contadorCreador)) 
+
 ;funcion isDivision 
 ;input string
 ;verifica si el string tiene el simbolo de division
@@ -52,7 +58,7 @@
 ;verifica si el string tiene el simbolo de igual
 ;return true or false
 (define (isAsignacion string)
-  (if(regexp-match-positions #rx"=|(<-)$" string)
+  (if(regexp-match-positions #rx"=|<-$" string)
      ;(display "Asignacion\n")
      ;(display "Otro\n")
      #t
@@ -528,6 +534,15 @@
               (display "</td>\n" out)
       ]
 
+      [(isReal (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Real\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isMinorEqual(first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -544,14 +559,43 @@
                 (display "MajorEqual\n" out)
               (display "</td>\n" out)
       ]
-      [(isMinor(first lst))
-              (display "<td>\n") out 
+ 
+      [(isEqual(first lst)) 
+              (display "<td>\n" out)  
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
-                (display "Minor\n" out)
+                (display "IgualIgual\n" out)
               (display "</td>\n" out)
       ]
+
+      [(isDiferente(first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Diferente\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isMasmas(first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "MasMas\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isAsignacion (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Asignacion\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isMajor(first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -560,8 +604,43 @@
                 (display "Major\n" out)
               (display "</td>\n" out)
       ]
-              
+
+      [(isMinor(first lst))
+              (display "<td>\n" out) 
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Minor\n" out)
+              (display "</td>\n" out)
+      ]
       
+      [(isSuma (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Suma\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isResta (first lst))
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Resta\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isMultiplicacion (first lst)) 
+              (display "<td>\n" out)   
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Multiplicacion\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isDivision (first lst)) 
               (display "<td>\n" out)
                 (display (first lst) out)
@@ -570,6 +649,25 @@
                 (display "Division\n" out)
               (display "</td>\n" out)
       ]
+
+      [(isPotencia (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Potencia\n" out)
+              (display "</td>\n" out)
+      ]
+
+      [(isModulus (first lst)) 
+              (display "<td>\n" out)  
+                (display (first lst) out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "Modulo\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isParentesisAbre (first lst)) 
               (display "<td>\n" out) 
                 (display (first lst) out)
@@ -595,6 +693,7 @@
                 (display "Llave que abre\n" out)
               (display "</td>\n" out)
       ]
+
       [(isLlaveCierra (first lst))
               (display "<td>\n" out)  
                 (display (first lst) out)
@@ -603,86 +702,9 @@
                 (display "Llave que cierra\n" out)
               (display "</td>\n" out)
       ]
- 
-      [(isEqual(first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "IgualIgual\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isDiferente(first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Diferente\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isAsignacion (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Asignacion\n" out)
-              (display "</td>\n" out)
-      ]
 
-      [(isMasmas(first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "MasMas\n") out]
-              (display "</td>\n" out)
-      [(isSuma (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Suma\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isResta (first lst))
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Resta\n") out]
-              (display "</td>\n" out)
-      [(isMultiplicacion (first lst)) 
-              (display "<td>\n" out)   
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Multiplicacion\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isPotencia (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Potencia\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isModulus (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Modulo\n" out)
-              (display "</td>\n" out)
-      ]
-      [(isReal (first lst)) 
-              (display "<td>\n" out)  
-                (display (first lst) out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "Real\n" out)
-              (display "</td>\n" out)
-      ]
+
+
       [(isEntero (first lst)) 
               (display "<td>\n" out)  
                 (display (first lst) out)
@@ -703,7 +725,7 @@
       ]
       
       [(isVariable (first lst)) 
-              (display "<td>\n") out 
+              (display "<td>\n" out) 
                 (display (first lst) out)
               (display "</td>\n" out)
               (display "<td>\n" out)
@@ -717,16 +739,20 @@
               (display "<td>\n" out)
                 (display "Error de formato\n"  out)
               (display "</td>\n" out)
-      ]
-      
-    )
+      ] 
+    ) 
     ;si no es comentario se itera si es comentario se imprime directamente
     (if (not (isComment (first lst)))
         (iterate (rest lst) out)
         #f
     )
+    (display "<td>\n" out)
+    (display (contador) out)  
+    (display "</td>\n" out)
 
   )
+
+
   (display "</tr>\n" out)
 )
 
