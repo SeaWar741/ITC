@@ -1,0 +1,9 @@
+#lang racket
+(define (whiteline string)
+  (if(regexp-match #rx"^\\s*$" string)
+     ;(display "Comment\n")
+     ;(display "Otro\n")
+     "Comment"
+     #f
+  )
+)

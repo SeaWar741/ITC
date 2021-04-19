@@ -11,9 +11,7 @@
          (print-tuple (rest tuple) out)]))
 
 (define (reader filename)
-  (define out (open-output-file "testing.html" #:exists 'replace)
-    
-   )
+  (define out (open-output-file "testing.html" #:exists 'replace))
   (define iistt (file->lines "htmlBase.txt"))
 
   ;(for-each display file out)

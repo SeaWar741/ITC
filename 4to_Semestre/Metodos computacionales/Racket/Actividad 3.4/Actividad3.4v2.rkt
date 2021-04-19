@@ -401,11 +401,11 @@
 ;input lista
 ;imprime los strings de una linea/lista
 ;imprime
-(define (printLine lst out)
+(define (printLine lst)
   (unless (empty? lst)
-    (display (first lst) out)
-    (display " " out)
-    (printLine (rest lst) out)
+    (display (first lst))
+    (display " ")
+    (printLine (rest lst))
    )
 )
 
@@ -415,7 +415,7 @@
          (display (first tuple) out)]
         [else
          (display (first tuple) out)
-         (display " " out)
+         (display " ")
          (print-tuple (rest tuple) out)])
 )
 
@@ -428,273 +428,26 @@
 ;evalua el tipo de string y realiza la tokenizacion
 ;si es comentario todo lo demas se ignora de la tokenizacion y se imprimen juntos
 ;imprime los strings con su tipo
-(define (iterate lst out)
+(define (iterate lst append)
   (unless (empty? lst) ;verifica que no este vacia
     (display "<tr >" out)
     (cond ;aplica funcionaes condicionales para evaluar los strings
       [(whiteline (first lst)) #f]
       [(isComment (first lst))
-              (display "<td>" out) 
+      (display "<th>" out) 
                 (printLine lst out)
-              (display "</td>" out)
-              (display "<td>" out)
+              (display "</th>" out)
+              (display "<th>" out)
                 (display "Comentario\n" out)
-              (display "</td>" out)
-      ]
-      [(isDefFunc(first lst)) 
-              (display "<td>" out)
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Definicion de funcion\n" out)
-              (display "</td>" out)
-      ]
-      [(isFuncion (first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out) 
-                (display "Funcion\n" out)
-              (display "</td>" out)
-      ]
-      [(isIf(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "IF\n" out)
-              (display "</td>" out)
-      ]
-      [(isElse(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Else\n" out)
-              (display "</td>" out)
-      ]
-      [(isBoolean(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Boolean\n" out)
-              (display "</td>" out)
-        ]
-      [(isImport(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Import\n" out)
-              (display "</td>" out)
-      ]
-      [(isReturn(first lst)) 
-              (display "<td>" out)
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Return\n" out)
-              (display "</td>" out)
-      ]
-      [(isEnd(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "End\n" out)
-              (display "</td>" out)
-      ]
-      [(isFor(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "For\n" out)
-              (display "</td>" out)
-      ]
-
-      [(isMinorEqual(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "MinorEqual\n" out)
-              (display "</td>" out)
-      ]
-      [(isMajorEqual(first lst)) 
-              (display "<td>" out)
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "MajorEqual\n" out)
-              (display "</td>" out)
-      ]
-      [(isMinor(first lst))
-              (display "<td>") out 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Minor\n" out)
-              (display "</td>" out)
-      ]
-      [(isMajor(first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Major\n" out)
-              (display "</td>" out)
-      ]
-              
-      
-      [(isDivision (first lst)) 
-              (display "<td>" out)
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Division\n" out)
-              (display "</td>" out)
-      ]
-      [(isParentesisAbre (first lst)) 
-              (display "<td>" out) 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-              (display "Parentesis que abre\n" out)
-              (display "</td>" out)
-      ]
-      [(isParentesisCierra (first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Parentesis que cierra\n" out)
-              (display "</td>" out)
-      ]
-
-      [(isLlaveAbre (first lst)) 
-              (display "<td>" out)
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Llave que abre\n" out)
-              (display "</td>" out)
-      ]
-      [(isLlaveCierra (first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Llave que cierra\n" out)
-              (display "</td>" out)
-      ]
- 
-      [(isEqual(first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "IgualIgual\n" out)
-              (display "</td>" out)
-      ]
-      [(isAsignacion (first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Asignacion\n" out)
-              (display "</td>" out)
-      ]
-
-      [(isMasmas(first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "MasMas\n") out]
-              (display "</td>" out)
-      [(isSuma (first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Suma\n" out)
-              (display "</td>" out)
-      ]
-      [(isResta (first lst))
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Resta\n") out]
-              (display "</td>" out)
-      [(isMultiplicacion (first lst)) 
-              (display "<td>" out)   
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Multiplicacion\n" out)
-              (display "</td>" out)
-      ]
-      [(isPotencia (first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Potencia\n" out)
-              (display "</td>" out)
-      ]
-      [(isModulus (first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Modulo\n" out)
-              (display "</td>" out)
-      ]
-      [(isReal (first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Real\n" out)
-              (display "</td>" out)
-      ]
-      [(isEntero (first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Entero\n" out)
-              (display "</td>" out)
-      ]
-
-      ;reservados, hace catch si no encuentra especificamente la necesaria
-      [(isReserved (first lst)) 
-              (display "<td>" out)  
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Reservada\n" out)
-              (display "</td>" out)
-      ]
-      
-      [(isVariable (first lst)) 
-              (display "<td>") out 
-                (display (first lst) out)
-              (display "</td>" out)
-              (display "<td>" out)
-                (display "Variable\n" out)
-              (display "</td>" out)
+              (display "</th>" out)
       ]
       [else 
-              (display "<td>" out)
-                (display (first lst) out)  
-              (display "</td>" out)  
-              (display "<td>" out)
-                (display "Error de formato\n"  out)
-              (display "</td>" out)
+              (display "<th>")
+                (display (first lst))  
+              (display "</th>")  
+              (display "<th>")
+                (display "Error de formato\n" )
+              (display "</th>")
       ]
       
     )
@@ -712,15 +465,16 @@
 
 
 
-
-
 ;funcion next-line-it 
 ;input file (nombre o path del archivo)
 ;lee cada linea del archivo y la separa por espacios
 ;toma esa linea y la evalua con la funcion iterate
-(define (next-line-it file out)
-  (for ([e (in-list file)])
-    (iterate (regexp-split #px" " e) out)
+(define (next-line-it file)
+  (let ((line (read-line file 'any)))
+    (unless (eof-object? line)
+      (iterate (regexp-split #px" " line))
+      (next-line-it file)
+    )
   )
 )
 
@@ -734,12 +488,12 @@
 
   ;exportar a hmtl y lectura de archivo
   
-  ;(call-with-input-file filename next-line-it )
-  (define filelist (file->lines filename))
-  (next-line-it filelist out)
+  (call-with-input-file filename next-line-it)
+
 
   (display "<tbody>\n" out)
   (display "</table>\n" out)
+  (display "<h1>HOLA BOO</h1>\n" out)
   (display "</div>\n" out)
   (display "</div>\n" out)
   (display "</body>\n" out)
