@@ -1,0 +1,21 @@
+h1{
+    color:red;
+    font-size: 40px;
+}
+
+.especial{
+    color: blue;
+}
+
+a{
+    color: #AA6510;
+}
+
+a:hover{
+    color: #FF0000;
+    text-decoration: none;
+}
+
+#sub1{
+    color:blue;
+}
