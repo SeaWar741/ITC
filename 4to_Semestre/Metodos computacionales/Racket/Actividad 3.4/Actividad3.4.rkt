@@ -962,4 +962,4 @@
 
 
 
-(lexer "./Examples/Quicksort.go")
+(lexer "./Examples/Quicksort.py")
