@@ -26,6 +26,8 @@
   )
 )
 
+
+
 ;funcion isParentesisAbre 
 ;input string
 ;verifica si el string tiene el simbolo de parentesis abierto
@@ -143,23 +145,29 @@
         (display "</td>\n" out)   
 )
 
-(define (printIdentifierFirst string out)
-        (display "<td>\n" out) 
-          (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
-        (display "</td>\n" out)
-        (display "<td>\n" out) 
-          (display "Identificador\n" out)
-        (display "</td>\n" out)  
+(define (printIdentifierEvaluate string out)
+  (if (not (whitespace string))
+    (printIdentifier string out)
+    (display "")
+  )
+)
+
+
+(define (printFirstIdentifier string out)
+  (display "<td>\n" out) 
+            (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
+          (display "</td>\n" out)
+          (display "<td>\n" out) 
+            (display "Identificador\n" out)
+  (display "</td>\n" out)  
 )
 
 (define (evaluateIdentifier string out)
-;checar tabulacion y espacio pa excluir
-    (if (regexp-match* #rx"[ \t]" (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) #:match-select car #:gap-select? #t)
-        (printIdentifierFirst string out)
-        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
-    )
-        
-    
+        (if (not (whitespace (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t))))
+          (printFirstIdentifier string out)
+          (display "")
+        )
+        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
 )
 
 
@@ -168,39 +176,24 @@
 ;verifica si el string tiene caracteres, numeros y underscore. El primer caracter siempre tiene que ser letras
 ;return true or false
 (define (isVariable string out)
-  (if(regexp-match-positions #rx"(?<![_0-9\\s])[a-zA-Z]+$" string) 
-    (if(regexp-match-positions #rx"(?<![_0-9\\s])[a-zA-Z]+$" string)
-     ;(display "Variable\n")
-     ;(display "Otro\n")
-    (printIdentifier string out)
-        ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
-    (evaluateIdentifier string out)
-      
+  (if (not (whitespace string))
+    (if(regexp-match-positions #rx"(?<![_0-9])[a-zA-Z]" string) 
+      (if(regexp-match-positions #rx"^[a-zA-Z]+$" string)
+      ;(display "Variable\n")
+      ;(display "Otro\n")
+      (printIdentifier string out)
+          ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
+      (evaluateIdentifier string out)
+        
+      )
+      #f
     )
     #f
   )
 )
 
 
-(define (printNumber string out)
-        (display "no hizo caso")
-        (display "<td>\n" out) 
-            (display string out)
-          (display "</td>\n" out)
-          (display "<td>\n" out) 
-            (display "Identificador\n" out)
-        (display "</td>\n" out)   
-)
 
-(define (evaluateNumber string out)
-        (display "<td>\n" out) 
-            (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
-          (display "</td>\n" out)
-          (display "<td>\n" out) 
-            (display "Identificador\n" out)
-          (display "</td>\n" out)  
-        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/]" string #:match-select car #:gap-select? #t)) out)
-)
 
 ;funcion isFloat
 ;input string
@@ -457,7 +450,7 @@
 ;imprime los strings de una linea/lista
 ;imprime
 (define (whitespace string)
-  (if(regexp-match #px"^[[:blank:]]+$"  string)
+  (if(regexp-match #px"^[ \t\n\r\f]+$" string)
      ;(display "Comment\n")
      ;(display "Otro\n")
      #t
@@ -594,7 +587,14 @@
     (display "\n<tr>\n" out)
     (cond ;aplica funcionaes condicionales para evaluar los strings
       [(whiteline (first lst)) #f]
-      [(whitespace (first lst)) #f]
+      [(whitespace (first lst)) ;modificando
+              (display "<td>\n" out) 
+                (printLine lst out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "espacio\n" out)
+              (display "</td>\n" out)
+      ]
       [(isComment (first lst))
               (display "<td>\n" out) 
                 (printLine lst out)
@@ -880,7 +880,6 @@
       
       [(isVariable (first lst) out) 
       ]
-
       [(isComma (first lst)) 
               (display "<td>\n" out)  
                 (display (first lst) out)
@@ -967,4 +966,4 @@
 
 
 
-(lexer "./Examples/Quicksort.r")
+(lexer "./Examples/Quicksort.go")
