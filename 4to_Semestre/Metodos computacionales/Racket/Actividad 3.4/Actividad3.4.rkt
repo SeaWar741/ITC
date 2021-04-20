@@ -155,7 +155,7 @@
 
 (define (printFirstIdentifier string out)
   (display "<td>\n" out) 
-            (display (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
+          (display (first (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
           (display "</td>\n" out)
           (display "<td>\n" out) 
             (display "Identificador\n" out)
@@ -163,11 +163,11 @@
 )
 
 (define (evaluateIdentifier string out)
-        (if (not (whitespace (first (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t))))
+        (if (not (whitespace (first (regexp-match* #rx"(\\())[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))))
           (printFirstIdentifier string out)
           (display "")
         )
-        (iterate (rest (regexp-match* #rx"[-!$%^&*()_+|~=`{}'<>?,.\\/[ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
+        (iterate (rest (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
 )
 
 
@@ -176,13 +176,14 @@
 ;verifica si el string tiene caracteres, numeros y underscore. El primer caracter siempre tiene que ser letras
 ;return true or false
 (define (isVariable string out)
+  (display (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))
   (if (not (whitespace string))
     (if(regexp-match-positions #rx"(?<![_0-9])[a-zA-Z]" string) 
       (if(regexp-match-positions #rx"^[a-zA-Z]+$" string)
       ;(display "Variable\n")
       ;(display "Otro\n")
       (printIdentifier string out)
-          ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
+      ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
       (evaluateIdentifier string out)
         
       )
@@ -587,14 +588,7 @@
     (display "\n<tr>\n" out)
     (cond ;aplica funcionaes condicionales para evaluar los strings
       [(whiteline (first lst)) #f]
-      [(whitespace (first lst)) ;modificando
-              (display "<td>\n" out) 
-                (printLine lst out)
-              (display "</td>\n" out)
-              (display "<td>\n" out)
-                (display "espacio\n" out)
-              (display "</td>\n" out)
-      ]
+      [(whitespace (first lst)) #f]
       [(isComment (first lst))
               (display "<td>\n" out) 
                 (printLine lst out)
@@ -929,7 +923,7 @@
 ;toma esa linea y la evalua con la funcion iterate
 (define (next-line-it file out)
   (for ([e (in-list file)])
-    (iterate (regexp-split #px" " e) out)
+    (iterate (regexp-split #px"[[:space:]]+" e) out)
   )
 )
 
