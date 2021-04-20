@@ -154,16 +154,22 @@
 
 
 (define (printFirstIdentifier string out)
-  (display "<td>\n" out) 
-          (display (first (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
-          (display "</td>\n" out)
-          (display "<td>\n" out) 
-            (display "Identificador\n" out)
-  (display "</td>\n" out)  
+        (display "<td>\n" out) 
+              ; (display)
+              ;checar como arreglar para que haga recursividad y divida apropiadamente
+              
+              ;(display(regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))
+
+
+                (display (first (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t)) out)
+                (display "</td>\n" out)
+                (display "<td>\n" out) 
+                  (display "Identificador\n" out)
+        (display "</td>\n" out)  
 )
 
 (define (evaluateIdentifier string out)
-        (if (not (whitespace (first (regexp-match* #rx"(\\())[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))))
+        (if (not (whitespace (first (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))))
           (printFirstIdentifier string out)
           (display "")
         )
@@ -176,13 +182,13 @@
 ;verifica si el string tiene caracteres, numeros y underscore. El primer caracter siempre tiene que ser letras
 ;return true or false
 (define (isVariable string out)
-  (display (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))
+  ;(display (regexp-match* #rx"[-!$%^&*\\(\\)_+|~=`{}'<>?,.\\[\\][ \t\n\r\f]]" string #:match-select car #:gap-select? #t))
   (if (not (whitespace string))
     (if(regexp-match-positions #rx"(?<![_0-9])[a-zA-Z]" string) 
       (if(regexp-match-positions #rx"^[a-zA-Z]+$" string)
       ;(display "Variable\n")
       ;(display "Otro\n")
-      (printIdentifier string out)
+      (printIdentifierEvaluate string out)
       ;itera sobre el string y evalua cada elemento separado por espacio, coma o parentesis
       (evaluateIdentifier string out)
         
@@ -906,10 +912,6 @@
         (iterate (rest lst) out)
         #f
     )
-    ;;; (display "<td>\n" out)
-    ;;; (display (contador) out)  
-    ;;; (display "</td>\n" out)
-
   )
 
 
