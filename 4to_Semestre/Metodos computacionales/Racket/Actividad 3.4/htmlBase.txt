@@ -26,7 +26,7 @@
     <!-- As a heading -->
     <nav class="navbar navbar-dark bg-primary sticky-top">
         <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1">Resaltador de sintaxis</span>
+        <span class="navbar-brand mb-0 h1">Resaltador léxico</span>
         </div>
     </nav>
     <div class="parent">
@@ -65,9 +65,8 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Linea</th>
-                        <th scope="col">Tipo</th>
                         <th scope="col">Token</th>
+			<th scope="col">Tipo</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -1,0 +1,2 @@
+#lang racket
+(regexp-match* #rx"\\(|\\)|,| " "12x4x6" #:match-select car #:gap-select? #t)
