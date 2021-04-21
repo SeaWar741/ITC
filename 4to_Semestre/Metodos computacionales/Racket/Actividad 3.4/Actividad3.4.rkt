@@ -570,6 +570,54 @@
 )
 
 
+(define (evaluateEndString lst out)
+  (cond
+    [(regexp-match #rx"^(\\\\\"|\\\\\')" string)
+      #f
+    ]
+    [(regexp-match #rx"^(\\\"|\\\')" string)
+      #t
+    ]
+    [else
+      #f
+    ]
+  )
+)
+
+(define (printString lst out)
+  (unless (not (evaluateEndString lst out))
+    (display (first lst) out)
+    (display " " out)
+    (printString (rest lst) out)
+  )
+  
+)
+
+;funcion printString
+;input lista
+;imprime los strings de una linea/lista
+;imprime
+(define (printStringInit quote lst out)
+  (display quote out)
+  (printString lst out)
+)
+
+
+
+(define (evaluateString lst out)
+  (cond
+    [(regexp-match #rx"^(\\\"|\\\')" string)
+      (printStringInit (first lst) (rest lst) out)
+      #f
+    ]
+    [else
+      (iterate lst out)
+    ]
+  )
+  
+)
+
+
 ;funcion para exportar a HTML
 (define (print-tuple tuple out)
   (cond [(empty? (rest tuple))
@@ -603,6 +651,15 @@
                 (display "Comentario\n" out)
               (display "</td>\n" out)
       ]
+      [(whitespace (first lst)) ;funcion para detectar strings
+              (display "<td>\n" out) 
+                (printLine lst out)
+              (display "</td>\n" out)
+              (display "<td>\n" out)
+                (display "String\n" out)
+              (display "</td>\n" out)
+      ]
+
       [(isDefFunc(first lst)) 
               (display "<td>\n" out)
                 (display (first lst) out)
