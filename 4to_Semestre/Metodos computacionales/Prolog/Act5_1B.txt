@@ -1,0 +1,9 @@
+node(a, b, c).
+node(b, d, 0).
+node(d, 0, g).
+node(g, 0, 0).
+node(c, e, f).
+node(e, h, i).
+node(h, 0, 0).
+node(i, 0, 0).
+node(f, 0, 0).
