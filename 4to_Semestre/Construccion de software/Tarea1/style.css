@@ -53,6 +53,63 @@ body{
     display:block;
     margin:auto;
   }
+  .fila {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+  
+  .columna {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+  }
+  
+  .columna img {
+    margin-top: 8px;
+    vertical-align: middle;
+  }
+  
 
+  @media screen and (max-width: 800px) {
+    .columna {
+      flex: 50%;
+      max-width: 50%;
+    }
+  }
+  
+  @media screen and (max-width: 600px) {
+    .columna {
+      flex: 100%;
+      max-width: 100%;
+    }
+  }
 /*Media Queries*/
 
+.demo {
+  overflow: hidden;
+  background-color: rgb(255, 115, 0);
+}
+.demo a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
+}
+@media screen and (max-width: 600px) {
+  .demo a {
+     float: none;
+     width: 100%;
+  }
+}
+
+/*Fonts*/
+element {
+  --main-bg-color: brown;
+}
+h2{
+  padding-top: 1.5rem;
+  color: var(--main-bg-color);
+}

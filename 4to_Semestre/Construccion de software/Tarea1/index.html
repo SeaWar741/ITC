@@ -5,7 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Barrio&family=Bungee+Inline&family=Kavoon&family=Pacifico&family=Ruslan+Display&family=Train+One&display=swap" rel="stylesheet">
     <title>Tarea1 Juan Carlos Garfias</title>
+    
 </head>
 <body >
     <div class="navegacion">
@@ -43,7 +46,104 @@
                 <li>screen: Para pantallas</li>
                 <li>scpeech: Para lectores de pantalla (personas con discapacidad visual)</li>
             </ul>
+            <h3><strong>Las media queries y el diseño responsive</strong></h3>
+            <p>
+                El objetivo de utilizar una Media Query en una hoja de estilo CSS en nuestra página web es que se ejecute una regla o un conjunto de reglas si se cumple una condición determinada, como puede ser el ancho máximo de pantalla. 
+            </p>
+            <p>
+                De esta manera podremos, por ejemplo, realizar un diseño que tenga una columna en dispositivos móviles, dos columnas en tablets y tres columnas en ordenadores portátiles y de sobremesa.
+            </p>
+            <h3>Ejemplos:</h3>
+            <div style="text-align: center;">
+                <div class="fila" style="padding:2rem;display: flex;
+                justify-content: center;"> 
+                    <div class="columna">
+                      <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/rocks.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/falls2.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/paris.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/mist.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/paris.jpg" style="width:100%">
+                    </div>
+                    
+                    <div class="columna">
+                      <img src="https://www.w3schools.com/w3images/underwater.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/ocean.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/mountainskies.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/rocks.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/underwater.jpg" style="width:100%">
+                    </div> 
+                     
+                    <div class="columna">
+                      <img src="https://www.w3schools.com/w3images/wedding.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/rocks.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/falls2.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/paris.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/nature.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/mist.jpg" style="width:100%">
+                      <img src="https://www.w3schools.com/w3images/paris.jpg" style="width:100%">
+                    </div>
+                </div>
+            </div>
+            <div >
+                <div class = "demo"> 
+                    <a href = "#">Home</a>
+                    <a href = "#">About</a>
+                    <a href = "#">Mision</a>
+                    <a href = "#">Vision</a>
+                    <a href = "#">Videos</a>
+                    <a href = "#">Contact</a>
+                 </div>
+            </div>
+        </div>
+
+        <div id="GoogleFonts" class="contenedor" style="padding-top: 3rem;">
+            <h1>Google Fonts</h1>
+            <p>Es un directorio interactivo de uso libre bajo la aplicación que programa interfaces para fuentes de la web. Fue creado en 2010. Las fuentes estan con una licencia abierta tanto SIL y Apache permitiendo su uso libre
+                Las fuentes son subidas por Skyfonts, ADobe y Typekit.
+            </p>
+            <p>
+                Las Fuentes de Google están diseñadas para proporcionar una plataforma gratuita para usuarios con el fin de descubrir nuevas fuentes y se está utilizado extensamente, algunas de las fuentes que incluye son Lato, Raleway, y Langosta.
+            </p>
+            <p>
+               Su <strong>Misión</strong> es: "Creemos que la mejor manera de aportar personalidad y rendimiento a sitios web y productos es a través de un excelente diseño y tecnología. Nuestro objetivo es simplificar ese proceso, ofreciendo una colección intuitiva y sólida de fuentes e íconos de código abierto. Mediante el uso de nuestro extenso catálogo , puede compartir e integrar tipos e íconos en cualquier proyecto de diseño sin problemas, sin importar en qué parte del mundo se encuentre.
+            </p>
+            <img src="img/Google-fonts.png" alt="Grafica" class="imagenResponsiva">
+            <h3>Pasos para utilizarlas</h3>
+            <p>
+                Para usarlas se puede agregar las etiquetas de enlace de Google Fonts ya sea una o todas juntas en la pagina de configuración
+                o en el campo HTML del encabezado (header)
+            </p>
+            <ol>
+                <li>Navega a fonts.google.com.</li>
+                <li>En la barra de búsqueda, busca el nombre de la fuente deseada.</li>
+                <li>Haz clic en el nombre de la fuente para ver una lista completa de estilos disponibles para importar.</li>
+                <li>Haz clic en + Seleccionar este estilo junto a cada estilo que deseas importar desde esta fuente.</li>
+                <li>En el panel derecho, selecciona la pestaña Incrustar y luego selecciona @import.</li>
+                <li>Copiar el script y agregarlo a la parte superor de la hoja de estilo</li>
+            </ol>  
+            <h3>Ejemplos:</h3>
+            <div style="word-spacing: 1em; text-align: center; padding-bottom: 2rem;">        
+                <h2 style="font-family:'Pacifico', cursive; color: rgb(68, 0, 255);">
+                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                </h2>
+                <h2 style="font-family: 'Ruslan Display', cursive; color:rgb(255, 0, 119);">
+                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                </h2>
+                <h2 style="font-family: 'Barrio', cursive; color: rgb(17, 151, 192);">
+                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                </h2>
+                <h2 style="font-family: 'Train One', cursive; color: brown;">
+                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                </h2>
+                <h2 style="font-family: 'Kavoon', cursive; color: rgb(119, 187, 18);">
+                    "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+                </h2>
+            </div>
         </div>
     </div>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
