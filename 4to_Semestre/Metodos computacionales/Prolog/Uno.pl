@@ -1,3 +1,4 @@
+%Juan Carlos Garfias Tovar, A01652138
 airport(mty).
 airport(mex).
 airport(nyc).
@@ -232,6 +233,15 @@ flight(ytz, cdg).
 flight(ytz, fco).
 flight(yvr, lhr).
 
-rt(X,Y) :- flight(X,Y).
 
+rt(X,Y) :- flight(X,Y).
+%se hace la comparacion logica
+%se ejecuta en un metodo comparando los aeropuertos y vuelos
 hasconexion(X,Y) :- airport(X),airport(Y), rt(X,Y).
+
+%OUTPUT ESPERADO
+
+%hasconexion(mty, gdl).
+%true.
+%hasconexion(nyc, mex).
+%false.
