@@ -1,0 +1,92 @@
+! Configuracion router
+!---------------- No IP Look Up   ---------------
+enable
+config t
+no ip domain-lookup
+exit
+!---------------- Nombre dispositivo ------------
+config t
+hostname R3
+exit
+!---------------- Contrasena y usuario ----------
+config t
+username redes secret redes
+enable secret class
+service password-encryption
+banner motd #Authorized Access Only#
+exit
+!---------------- Logging Synchronous -----------
+config t
+line con 0
+login local
+logging synchronous 
+exit
+exit
+!---------------- Accesos Remotos ---------------
+config t
+line con 0
+line vty 0 4
+login local
+exec-timeout 5 0
+exit
+exit
+!--------------- Levantar interfaces ------------
+config t
+
+!serial (routers)
+!interface Serial0/3/0
+!description "To_RouterB_S0/3/1"
+!ip address 10.10.4.5 255.255.255.252
+!clock rate 4000000
+!no shutdown
+
+!FEthernet (switches)
+!interface FastEthernet0/0
+!description "LAN_1 1000_users"
+!ip address 10.10.12.1 255.255.252.0
+!no shutdown
+
+exit
+
+!---------------- Tablas de ruteo ---------------
+config t
+!omitir si se usa dinamico
+
+!networkid mascara nexthop(IPde interfaz vecina) 
+
+
+!ip route 10.10.8.0 255.255.252.0 10.10.4.1
+!ip route 10.10.16.0 255.255.252.0 10.10.4.6
+!ip route 10.10.4.8 255.255.255.252 10.10.4.6
+
+exit
+!---------------- Por defecto ---------------
+config t
+!generalmente en el frontera
+!0.0.0.0 0.0.0.0 nexthop(IP de interfaz)
+!ip route 10.10.4.8 255.255.255.252 10.10.4.6
+exit
+
+!---------------- RIPv2 Routing -----------------
+config t
+router rip
+version 2
+
+!passive-interface g0/1
+!La pasiva detiene actualizaciones de la interfaz
+!Inecesario para el trafico en la LAN
+
+!network 172.30.0.0
+!network 10.0.0.0
+
+no auto-summary
+
+!solo si es el frontera a internet
+default-information originate
+
+exit
+clear ip route *
+!------------------------------------------------
+copy run start
+!Final del template
+
