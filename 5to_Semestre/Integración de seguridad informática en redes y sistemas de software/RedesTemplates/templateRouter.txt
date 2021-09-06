@@ -6,7 +6,7 @@ no ip domain-lookup
 exit
 !---------------- Nombre dispositivo ------------
 config t
-hostname R3
+hostname R0
 exit
 !---------------- Contrasena y usuario ----------
 config t
@@ -30,6 +30,28 @@ login local
 exec-timeout 5 0
 exit
 exit
+!----------------- SSH --------------------------
+config t
+service password-encryption
+!
+! Recuerda tener habilitado el password de enable
+!
+ip domain-name tec.mx
+crypto key generate rsa
+
+!Copiar hasta aqui, dar enter y copiar lo siguiente
+
+!
+ip ssh time-out 60
+ip ssh authentication-retries 2
+line vty 0 15
+!
+! indicaremos que el acceso remoto sólo se llevará por ssh
+!
+transport input ssh
+exit
+exit
+
 !--------------- Levantar interfaces ------------
 config t
 
@@ -86,6 +108,28 @@ default-information originate
 
 exit
 clear ip route *
+!---------------- ACL -----------------
+!estandar lo mas cercano al destino PC0 a PC2, se hace a PC2
+config t
+ip access-list standard STND-1 
+
+!deny 10.10.10.0 0.0.0.255 
+permit any 
+exit
+
+interface X 
+ip access-group STND-1 out 
+exit
+
+!extendida lo mas cercano al origien PC0 a PC2, se hace a PC0. En la interfaz
+!se selecciona el puerto de salida, no el de la red
+ip access-list extended EXTEND-1 
+deny ip 10.10.30.0 0.0.0.255 10.10.60.0 0.0.0.255
+permit ip any any
+interface X
+ip access-group EXTEND-1 out log 
+exit
+
 !------------------------------------------------
 copy run start
 !Final del template
