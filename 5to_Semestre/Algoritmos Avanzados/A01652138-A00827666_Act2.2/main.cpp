@@ -1,10 +1,10 @@
 //Actividad 2.2 Implementación de "Sufix Array"
 //Juan Carlos Garfias Tovar, A01652138
 //Abraham Cepeda Oseguera, A00827666
-#include<iostream>
-#include<string.h>
-#include<utility>
-#include<algorithm>
+#include <iostream>
+#include <string.h>
+#include <utility>
+#include <algorithm>
 
 using namespace std;
 
@@ -59,7 +59,7 @@ class SuffixArray{
 
 SuffixArray::SuffixArray(string a){
     txt = a+'$';
-    int len = txt.length();
+    this->len = txt.length();
 
     for(int i=0;i<len;i++){
         suffixArray[i].x = txt.substr(i);
@@ -75,18 +75,12 @@ SuffixArray::SuffixArray(string a){
     for(int i=2;i<len;i++){
         suffixArray[i].longestCommonPrefix = findLongestCommonPrefixArray(suffixArray[i].x,suffixArray[i-1].x);
     }
-
-    cout<<"\nArreglo de sufijos ordenados:"<<endl;
-    for(int i=0;i<len;i++){
-        cout<<suffixArray[i].x<<" "<<suffixArray[i].d<<endl;
-    }
-    cout<<endl;
 }
 
 void SuffixArray::printArray(){
     cout<<"\nArreglo de sufijos ordenados:"<<endl;
-    for(int i=0;i<len;i++){
-        cout<<suffixArray[i].x<<" "<<suffixArray[i].d<<endl;
+    for(int i=0;i< this->len;i++){
+        cout<< this->suffixArray[i].x<<" "<< this->suffixArray[i].d<<endl;
     }
     cout<<endl;
 }
@@ -113,6 +107,6 @@ int main(){
     
 
     SuffixArray arreglo(txt); //se crea objeto de suffixArray
-    //arreglo.printArray();
+    arreglo.printArray();
     
 }
