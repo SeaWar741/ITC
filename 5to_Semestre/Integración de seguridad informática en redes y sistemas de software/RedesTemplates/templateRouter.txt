@@ -6,7 +6,7 @@ no ip domain-lookup
 exit
 !---------------- Nombre dispositivo ------------
 config t
-hostname R0
+hostname R_C
 exit
 !---------------- Contrasena y usuario ----------
 config t
@@ -104,8 +104,9 @@ version 2
 no auto-summary
 
 !solo si es el frontera a internet
-default-information originate
+!default-information originate
 
+exit
 exit
 clear ip route *
 !---------------- ACL -----------------

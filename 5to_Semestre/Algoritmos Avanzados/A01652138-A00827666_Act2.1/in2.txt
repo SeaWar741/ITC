@@ -1,0 +1,2 @@
+16
+Este es un programa de "Hash String."
