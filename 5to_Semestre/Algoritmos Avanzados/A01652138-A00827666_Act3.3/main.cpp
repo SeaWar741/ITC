@@ -9,23 +9,32 @@ using namespace std;
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
-//knapsack
+//function to solve knapsack problem using dynamic programming and bottom-up approach
 //input: peso máximo, vector de pesos, vector de valores, número de elementos
 //output: valor máximo posible
 //O(NM)
-int knapsack(int m, vector<int> weights, vector<int> values, int n){
-    vector< vector<int> > matrix(n+1, vector<int>(m+1,0));
+int knapsack(int W, vector<int> wt, vector<int> val, int n)
+{
+    //table to store results of subproblems
+    int K[n + 1][W + 1];
 
-    for(int i = 1; i < n+1; i++){
-        for(int j = 0; j < m+1; j++){
-            //if j es menor al peso en i se asigna el valor de arriba
-            //else se asigna el valor máximo entre dos valores
-            matrix[i][j] = (j < weights[i]) ? matrix[i - 1][j] : max(matrix[i - 1][j - weights[i]] + values[i], matrix[i - 1][j]);
+    //building table K[][] in bottom up manner
+    for (int i = 0; i <= n; i++)
+    {
+        for (int j = 0; j <= W; j++)
+        {
+            if (i == 0 || j == 0)
+                K[i][j] = 0;
+            else if (wt[i - 1] <= j)
+                K[i][j] = max(val[i - 1] + K[i - 1][j - wt[i - 1]], K[i - 1][j]);
+            else
+                K[i][j] = K[i - 1][j];
         }
     }
 
-    return matrix[n][m];
+    return K[n][W];
 }
+
 
 
 int main(){
