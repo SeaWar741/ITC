@@ -1,0 +1,1 @@
+{"model_type": "ForestModel", "time_stamp": "2021-11-11 23:00:10.136295", "agentpy_version": "0.1.4", "python_version": "3.7.1", "experiment": true, "scheduled_runs": 1200, "completed": true, "random": true, "record": false, "sample_size": 30, "iterations": 40, "run_time": "0:21:47.052096"}
