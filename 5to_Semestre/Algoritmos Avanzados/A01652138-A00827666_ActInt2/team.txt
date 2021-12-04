@@ -1,0 +1,2 @@
+Abraham Cepeda Oseguera, A00827666 --> Dijkstra & shortest Path
+Juan Carlos Garfias Tovar, A01652138 --> BFS & fordFulkerson
