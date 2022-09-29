@@ -22,7 +22,7 @@ weights = rand(outputDim,inputDim+1); %%% random value between 0 and 1
 
 mean1 = 0.25; %% first half of patterns have a small mean value
 mean2 = 0.75; %% second half of patterns have a large mean value
-var = 0.1;  %% variance of the Gaussian pattern distribution
+var = 0.205;  %% variance of the Gaussian pattern distribution
 input = zeros(inputDim+1,nPats);
 input(1:inputDim,1:mid) = randn(inputDim,mid)*var+mean1*ones(inputDim,mid);
 input(1:inputDim,mid+1:nPats) = randn(inputDim,mid)*var+mean2*ones(inputDim,mid);
