@@ -36,15 +36,11 @@ biases = net.biases{1};
 
 w = net.iw{1,1};
 b = net.b{1};
-disp(w);
-disp(b);
 
 net.trainParam.epochs = 10;
 
 net = train(net,p,T);
 
-disp(w);
-disp(b);
 
 y = net(ptest);
 
