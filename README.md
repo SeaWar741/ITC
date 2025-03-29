@@ -19,4 +19,4 @@ Courses:
 - Java
 - R
 
-Undergrad duration: 08/2019-06/2023
+Undergrad duration: 08/2019-12/2023
